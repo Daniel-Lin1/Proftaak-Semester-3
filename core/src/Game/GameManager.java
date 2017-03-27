@@ -1,6 +1,7 @@
 package Game;
 
 import Enums.State;
+import Player.Player;
 
 import java.io.File;
 import java.util.ArrayList;
