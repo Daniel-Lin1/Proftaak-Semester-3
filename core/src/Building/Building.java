@@ -6,6 +6,7 @@ import java.awt.*;
 
 /**
  * Created by Daniel on 26-3-2017.
+ *fgfjhgftjyftyy
  */
 public abstract class Building {
     private Point coordinate;
