@@ -15,7 +15,7 @@ allprojects {
 
     version = '1.0'
     ext {
-        appName = "DistressAndConflict"
+        appName = "DACTest"
         gdxVersion = '1.9.6'
         roboVMVersion = '2.3.0'
         box2DLightsVersion = '1.4'
@@ -49,8 +49,8 @@ project(":core") {
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
     }
 }
 
