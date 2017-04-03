@@ -33,8 +33,9 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	OrthographicCamera orthographicCamera;
 	private int OldFps = 0;
 
-	static final int VIEWPORT_WIDTH = 512;
-	static final int VIEWPORT_HEIGHT = 512;
+	static final int SCROLL_SPEED = 10;
+	static final int VIEWPORT_WIDTH = 950;
+	static final int VIEWPORT_HEIGHT = 950;
 	private OffensiveUnit unit;
 
 	public DistressAndConflict(Account user, GameManager gameManager) {
@@ -60,7 +61,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		orthographicCamera = new OrthographicCamera();
 		orthographicCamera.setToOrtho(false,VIEWPORT_WIDTH,VIEWPORT_HEIGHT);
 		orthographicCamera.update();
-		tiledMap = new TmxMapLoader().load("assets/TestMap.tmx");
+		tiledMap = new TmxMapLoader().load("assets/TestMap1.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		Gdx.input.setInputProcessor(this);
 
@@ -84,31 +85,50 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		orthographicCamera.update();
 
+		System.out.println("CamX: " + orthographicCamera.position.x);
+		System.out.printf("CamY: " + orthographicCamera.position.y);
 		//Map scroll
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			orthographicCamera.translate(-1, 0);
+			if (orthographicCamera.position.x <= orthographicCamera.viewportWidth/2){
+				System.out.println("TestXLEFT");
+			}else{
+				orthographicCamera.translate(-SCROLL_SPEED, 0);
+			}
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-			orthographicCamera.translate(1, 0);
+			if (orthographicCamera.position.x >= tiledMap.getLayers().get(0).getProperties().get("width", Integer.class) - (orthographicCamera.viewportWidth/2)){
+				System.out.printf("TextXRight");
+			}else {
+				orthographicCamera.translate(SCROLL_SPEED, 0);
+			}
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-			orthographicCamera.translate(0, 1);
+			if (orthographicCamera.position.y >= tiledMap.getLayers().get(0).getProperties().get("height", Integer.class) - (orthographicCamera.viewportHeight/2)){
+				System.out.printf("TextYUp");
+			}else {
+				orthographicCamera.translate(0, SCROLL_SPEED);
+			}
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-			orthographicCamera.translate(0, -1);
+			if (orthographicCamera.position.y <= orthographicCamera.viewportHeight/2){
+
+			}else{
+				orthographicCamera.translate(0, -SCROLL_SPEED);
+			}
 		}
 		tiledMapRenderer.setView(
 				orthographicCamera.combined
 				,0
 				,0
-				,Gdx.graphics.getWidth()*2//This works realy, really weird.
-				,Gdx.graphics.getHeight()*2);//This too
+				,tiledMap.getLayers().get(0).getProperties().get("width", Integer.class)//This works realy, really weird.
+				,tiledMap.getLayers().get(0).getProperties().get("height", Integer.class)//This too
+		);
 		tiledMapRenderer.render();
 		//stage.draw();
 		showFPS();
 
-		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
-		batch.end();
+		//batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
+		//batch.end();
 	}
 
 	@Override
@@ -120,7 +140,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	@Override
 	public boolean keyDown(int keycode) {
 		if (keycode == Input.Keys.ESCAPE){
-			Gdx.graphics.setWindowedMode(750, 750);
+			Gdx.graphics.setWindowedMode(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 		}
 		return false;
 	}
