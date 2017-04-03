@@ -100,13 +100,13 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 			}
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-			if (orthographicCamera.position.y >= tiledMap.getLayers().get(0).getProperties().get("height", Integer.class) - (orthographicCamera.viewportHeight/2)){
+			if (orthographicCamera.position.y >= tiledMap.getLayers().get(0).getProperties().get("height", Integer.class) - (orthographicCamera.viewportHeight/2-200)){
 			}else {
 				orthographicCamera.translate(0, SCROLL_SPEED);
 			}
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-			if (orthographicCamera.position.y <= orthographicCamera.viewportHeight/2){
+			if (orthographicCamera.position.y <= orthographicCamera.viewportHeight/2-200){
 
 			}else{
 				orthographicCamera.translate(0, -SCROLL_SPEED);
