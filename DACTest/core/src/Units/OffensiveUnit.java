@@ -24,7 +24,6 @@ public class OffensiveUnit extends Unit{
 
     @Override
     public boolean keyDown(int keycode) {
-        getSprite().
         return false;
     }
 
