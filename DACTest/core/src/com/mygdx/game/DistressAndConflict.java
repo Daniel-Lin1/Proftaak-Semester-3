@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import Building.UnitProducingBuilding;
+import Enums.BuildingType;
 import Enums.UnitType;
 import Player.Account;
 import Game.*;
@@ -37,6 +39,8 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	static final int VIEWPORT_WIDTH = 950;
 	static final int VIEWPORT_HEIGHT = 950;
 	private OffensiveUnit unit;
+	private UnitProducingBuilding buildingStable;
+	private UnitProducingBuilding buildingTowncenter;
 
 	public DistressAndConflict(Account user, GameManager gameManager) {
 		this.user = user;
@@ -62,49 +66,41 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		orthographicCamera.setToOrtho(false,VIEWPORT_WIDTH,VIEWPORT_HEIGHT);
 		orthographicCamera.update();
 		tiledMap = new TmxMapLoader().load("assets/TestMap1.tmx");
+
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		Gdx.input.setInputProcessor(this);
 
-		/*batch = new SpriteBatch();
-		img = new Texture(Gdx.files.internal("assets/imageToMapTestPng.png"));
-		img = new Texture(Gdx.files.internal("assets/map1.png"));
-		Map tmp = gameManager.loadMap("assets/imageToMapTestPng.png");*/
-
-		unit = new OffensiveUnit(new Point(400,400), UnitType.Knight, 1000, 1, 1, 100, 1, false);
+		batch = new SpriteBatch();
+		unit = new OffensiveUnit(new Point(48,128), UnitType.Knight, 1000, 1, 1, 100, 1, false);
+		buildingStable = new UnitProducingBuilding(new Point(32, 144), 32, 32, BuildingType.Stable, 5000);
+		buildingTowncenter = new UnitProducingBuilding(new Point(48, 32), 64, 64, BuildingType.Towncenter, 10000);
 	}
 
 	@Override
 	public void render () {
-		/*Gdx.gl.glClearColor(0, 0, 1, 1);
+
+		Gdx.gl.glClearColor(0, 0, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 20, 20, 100, 100);
-		batch.end();*/
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		orthographicCamera.update();
 
-		System.out.println("CamX: " + orthographicCamera.position.x);
-		System.out.printf("CamY: " + orthographicCamera.position.y);
 		//Map scroll
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 			if (orthographicCamera.position.x <= orthographicCamera.viewportWidth/2){
-				System.out.println("TestXLEFT");
 			}else{
 				orthographicCamera.translate(-SCROLL_SPEED, 0);
 			}
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
 			if (orthographicCamera.position.x >= tiledMap.getLayers().get(0).getProperties().get("width", Integer.class) - (orthographicCamera.viewportWidth/2)){
-				System.out.printf("TextXRight");
 			}else {
 				orthographicCamera.translate(SCROLL_SPEED, 0);
 			}
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)){
 			if (orthographicCamera.position.y >= tiledMap.getLayers().get(0).getProperties().get("height", Integer.class) - (orthographicCamera.viewportHeight/2)){
-				System.out.printf("TextYUp");
 			}else {
 				orthographicCamera.translate(0, SCROLL_SPEED);
 			}
@@ -124,17 +120,19 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 				,tiledMap.getLayers().get(0).getProperties().get("height", Integer.class)//This too
 		);
 		tiledMapRenderer.render();
-		//stage.draw();
 		showFPS();
 
-		//batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
-		//batch.end();
+		batch.setProjectionMatrix(orthographicCamera.combined);
+		batch.begin();
+		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
+		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
+		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
+		batch.end();
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 	}
 
 	@Override
