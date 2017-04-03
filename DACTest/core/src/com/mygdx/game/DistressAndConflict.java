@@ -69,16 +69,23 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		Gdx.input.setInputProcessor(this);
 
 		batch = new SpriteBatch();
-		img = new Texture(Gdx.files.internal("assets/map1.png"));
-		Map tmp = gameManager.loadMap("assets/map1.png");
 		unit = new OffensiveUnit(new Point(400,400), UnitType.Knight, 1000, 1, 1, 100, 1, false);
-		buildingStable = new UnitProducingBuilding(new Point(432, 432), 16, 16, BuildingType.Stable, 5000);
-		buildingTowncenter = new UnitProducingBuilding(new Point(332, 332), 32, 32, BuildingType.Towncenter, 10000);
+		buildingStable = new UnitProducingBuilding(new Point(32, 32), 160, 160, BuildingType.Stable, 5000);
+		buildingTowncenter = new UnitProducingBuilding(new Point(332, 332), 320, 320, BuildingType.Towncenter, 10000);
 	}
 
 	@Override
 	public void render () {
 
+		Gdx.gl.glClearColor(0, 0, 1, 1);
+		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+		batch.begin();
+
+		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
+		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
+		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
+
+		batch.end();
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -86,16 +93,16 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 
 		//Map scroll
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
-			orthographicCamera.translate(-1, 0);
+			orthographicCamera.translate(-3, 0);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-			orthographicCamera.translate(1, 0);
+			orthographicCamera.translate(3, 0);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-			orthographicCamera.translate(0, 1);
+			orthographicCamera.translate(0, 3);
 		}
 		if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
-			orthographicCamera.translate(0, -1);
+			orthographicCamera.translate(0, -3);
 		}
 		tiledMapRenderer.setView(
 				orthographicCamera.combined
@@ -104,21 +111,19 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 				,Gdx.graphics.getWidth()*2//This works realy, really weird.
 				,Gdx.graphics.getHeight()*2);//This too
 		tiledMapRenderer.render();
-		//stage.draw();
 		showFPS();
 
 		batch.setProjectionMatrix(orthographicCamera.combined);
 		batch.begin();
 		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
-		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
-		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
+		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, 16, 16);
+		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, 16, 16);
 		batch.end();
 	}
 
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
 	}
 
 	@Override
