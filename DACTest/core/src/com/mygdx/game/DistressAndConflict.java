@@ -64,14 +64,14 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		orthographicCamera = new OrthographicCamera();
 		orthographicCamera.setToOrtho(false,VIEWPORT_WIDTH,VIEWPORT_HEIGHT);
 		orthographicCamera.update();
-		tiledMap = new TmxMapLoader().load("assets/TestMap.tmx");
+		tiledMap = new TmxMapLoader().load("assets/Map.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		Gdx.input.setInputProcessor(this);
 
 		batch = new SpriteBatch();
-		unit = new OffensiveUnit(new Point(400,400), UnitType.Knight, 1000, 1, 1, 100, 1, false);
-		buildingStable = new UnitProducingBuilding(new Point(32, 32), 160, 160, BuildingType.Stable, 5000);
-		buildingTowncenter = new UnitProducingBuilding(new Point(332, 332), 320, 320, BuildingType.Towncenter, 10000);
+		unit = new OffensiveUnit(new Point(48,128), UnitType.Knight, 1000, 1, 1, 100, 1, false);
+		buildingStable = new UnitProducingBuilding(new Point(32, 144), 32, 32, BuildingType.Stable, 5000);
+		buildingTowncenter = new UnitProducingBuilding(new Point(48, 32), 64, 64, BuildingType.Towncenter, 10000);
 	}
 
 	@Override
@@ -79,13 +79,6 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 
 		Gdx.gl.glClearColor(0, 0, 1, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-
-		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
-		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
-		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
-
-		batch.end();
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -116,8 +109,8 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		batch.setProjectionMatrix(orthographicCamera.combined);
 		batch.begin();
 		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
-		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, 16, 16);
-		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, 16, 16);
+		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
+		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
 		batch.end();
 	}
 
