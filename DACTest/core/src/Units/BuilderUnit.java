@@ -10,17 +10,6 @@ public class BuilderUnit extends Unit {
     private int amountResource;
     private Resource resource;
 
-
-    @Override
-    public void moveTo() {
-
-    }
-
-    @Override
-    public void cancelMove() {
-
-    }
-
     public void getResource(){
 
     }
