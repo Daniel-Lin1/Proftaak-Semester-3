@@ -1,7 +1,11 @@
 package Building;
 
 import Enums.BuildingType;
+import Enums.UnitType;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 
+import javax.xml.soap.Text;
 import java.awt.*;
 
 /**
@@ -13,5 +17,17 @@ public abstract class Building {
     private int sizeY;
     private BuildingType buildingtype;
     private int health;
+    private Texture sprite;
 
+    public void searchSprite()
+    {
+        if (buildingtype == BuildingType.Stable)
+        {
+            sprite = new Texture(Gdx.files.internal("assets/Stable.png"));
+        }
+        else
+        {
+            sprite = null;
+        }
+    }
 }

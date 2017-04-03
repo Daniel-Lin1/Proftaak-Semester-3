@@ -1,10 +1,18 @@
 package com.mygdx.game;
 
+import Enums.UnitType;
 import Player.Account;
 import Game.*;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import Units.OffensiveUnit;
+import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
@@ -12,6 +20,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class DistressAndConflict extends ApplicationAdapter implements InputProcessor {
@@ -26,6 +35,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 
 	static final int VIEWPORT_WIDTH = 512;
 	static final int VIEWPORT_HEIGHT = 512;
+	private OffensiveUnit unit;
 
 	public DistressAndConflict(Account user, GameManager gameManager) {
 		this.user = user;
@@ -53,6 +63,13 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		tiledMap = new TmxMapLoader().load("assets/TestMap.tmx");
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		Gdx.input.setInputProcessor(this);
+
+		/*batch = new SpriteBatch();
+		img = new Texture(Gdx.files.internal("assets/imageToMapTestPng.png"));
+		img = new Texture(Gdx.files.internal("assets/map1.png"));
+		Map tmp = gameManager.loadMap("assets/imageToMapTestPng.png");*/
+
+		unit = new OffensiveUnit(new Point(400,400), UnitType.Knight, 1000, 1, 1, 100, 1, false);
 	}
 
 	@Override
@@ -67,6 +84,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		orthographicCamera.update();
 
+		//Map scroll
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
 			orthographicCamera.translate(-1, 0);
 		}
@@ -88,6 +106,9 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		tiledMapRenderer.render();
 		//stage.draw();
 		showFPS();
+
+		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
+		batch.end();
 	}
 
 	@Override
