@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import Building.UnitProducingBuilding;
+import Enums.BuildingType;
 import Enums.UnitType;
 import Player.Account;
 import Game.*;
@@ -36,6 +38,8 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	static final int VIEWPORT_WIDTH = 512;
 	static final int VIEWPORT_HEIGHT = 512;
 	private OffensiveUnit unit;
+	private UnitProducingBuilding buildingStable;
+	private UnitProducingBuilding buildingTowncenter;
 
 	public DistressAndConflict(Account user, GameManager gameManager) {
 		this.user = user;
@@ -68,6 +72,8 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		img = new Texture(Gdx.files.internal("assets/map1.png"));
 		Map tmp = gameManager.loadMap("assets/map1.png");
 		unit = new OffensiveUnit(new Point(400,400), UnitType.Knight, 1000, 1, 1, 100, 1, false);
+		buildingStable = new UnitProducingBuilding(new Point(432, 432), 16, 16, BuildingType.Stable, 5000);
+		buildingTowncenter = new UnitProducingBuilding(new Point(332, 332), 32, 32, BuildingType.Towncenter, 10000);
 	}
 
 	@Override
@@ -106,6 +112,8 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		showFPS();
 
 		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
+		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
+		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
 		batch.end();
 	}
 

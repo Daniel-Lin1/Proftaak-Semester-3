@@ -19,15 +19,66 @@ public abstract class Building {
     private int health;
     private Texture sprite;
 
-    public void searchSprite()
-    {
+    public void searchSprite() {
         if (buildingtype == BuildingType.Stable)
         {
             sprite = new Texture(Gdx.files.internal("assets/Stable.png"));
+        }
+        else if (buildingtype == BuildingType.Towncenter)
+        {
+            sprite = new Texture(Gdx.files.internal("assets/Towncenter.png"));
         }
         else
         {
             sprite = null;
         }
+    }
+
+    public Point getCoordinate() {
+        return coordinate;
+    }
+
+    public void setCoordinate(Point coordinate) {
+        this.coordinate = coordinate;
+    }
+
+    public int getSizeX() {
+        return sizeX;
+    }
+
+    public void setSizeX(int sizeX) {
+        this.sizeX = sizeX;
+    }
+
+    public int getSizeY() {
+        return sizeY;
+    }
+
+    public void setSizeY(int sizeY) {
+        this.sizeY = sizeY;
+    }
+
+    public BuildingType getBuildingtype() {
+        return buildingtype;
+    }
+
+    public void setBuildingtype(BuildingType buildingtype) {
+        this.buildingtype = buildingtype;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public Texture getSprite() {
+        return sprite;
+    }
+
+    public void setSprite(Texture sprite) {
+        this.sprite = sprite;
     }
 }
