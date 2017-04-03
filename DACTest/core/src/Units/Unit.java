@@ -27,6 +27,7 @@ public abstract class Unit implements Movement, InputProcessor {
     {
         if (unitType == UnitType.Knight)
         {
+            System.out.println(unitType.toString());
             sprite = new Texture(Gdx.files.internal("assets/Knight.png"));
         }
         else

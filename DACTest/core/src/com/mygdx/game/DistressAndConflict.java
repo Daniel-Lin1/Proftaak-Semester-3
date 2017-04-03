@@ -78,11 +78,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 
 	@Override
 	public void render () {
-		/*Gdx.gl.glClearColor(0, 0, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		batch.begin();
-		batch.draw(img, 20, 20, 100, 100);
-		batch.end();*/
+
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
@@ -111,7 +107,8 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		//stage.draw();
 		showFPS();
 
-
+		batch.setProjectionMatrix(orthographicCamera.combined);
+		batch.begin();
 		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
 		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
 		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
