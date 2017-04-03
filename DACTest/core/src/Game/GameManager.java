@@ -41,7 +41,7 @@ public class GameManager {
                 //int A = (int)(color.a * 255f);
 
                 Tile tile; //= new Tile();
-                if(R == 34 && G == 177 && B == 76){
+                if(R == 237 && G == 28 && B == 36){
                     tile = new Tile(true, x, y, true, false, GroundType.Grass, null);
                     spawnpoints.add(new Point(x,y));
                 }else if(R == 255 && G == 242 && B == 0){
@@ -61,8 +61,9 @@ public class GameManager {
                 }else{
                     tile = new Tile(true, x, y, true, false, GroundType.Grass, null);
                     System.out.println("unassighned color in texture (load map from pixmap). replaced with an empty grass tile.");
+                    System.out.println("color : " + R + " " + G + " " + B);
                 }
-                System.out.println("color : " + R + " " + G + " " + B);
+
                 tiles.add(tile);
             }
         }

@@ -38,9 +38,8 @@ public class DistressAndConflict extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture(Gdx.files.internal("assets/imageToMapTestPng.png"));
 		img = new Texture(Gdx.files.internal("assets/map1.png"));
-		Map tmp = gameManager.loadMap("assets/imageToMapTestPng.png");
+		Map tmp = gameManager.loadMap("assets/map1.png");
 	}
 
 	@Override
