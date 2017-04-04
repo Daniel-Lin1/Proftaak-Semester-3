@@ -16,14 +16,14 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.FormatFlagsConversionMismatchException;
 
 public class DistressAndConflict extends ApplicationAdapter implements InputProcessor {
 	private SpriteBatch batch;
@@ -32,6 +32,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	private GameManager gameManager;
 	private TiledMap tiledMap;
 	private TiledMapRenderer tiledMapRenderer;
+	private Stage stage;
 	OrthographicCamera orthographicCamera;
 	private int OldFps = 0;
 
@@ -70,6 +71,9 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		Gdx.input.setInputProcessor(this);
 
+		stage = new TiledMapStage(tiledMap);
+		Gdx.input.setInputProcessor(stage);
+
 		batch = new SpriteBatch();
 		unit = new OffensiveUnit(new Point(48,128), UnitType.Knight, 1000, 1, 1, 100, 1, false);
 		buildingStable = new UnitProducingBuilding(new Point(32, 144), 32, 32, BuildingType.Stable, 5000);
@@ -85,6 +89,8 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		orthographicCamera.update();
+		stage.act();
+		stage.draw();
 
 		//Map scroll
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
