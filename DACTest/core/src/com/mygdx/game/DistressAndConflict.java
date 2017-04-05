@@ -5,6 +5,7 @@ import Enums.BuildingType;
 import Enums.UnitType;
 import Player.Account;
 import Game.*;
+import Units.Unit;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -35,6 +36,8 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	private Stage stage;
 	OrthographicCamera orthographicCamera;
 	private int OldFps = 0;
+
+	private ArrayList<Unit> units = new ArrayList<Unit>();
 
 	static final int SCROLL_SPEED = 10;
 	static final int VIEWPORT_WIDTH = 950;
@@ -71,7 +74,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		Gdx.input.setInputProcessor(this);
 
-		stage = new TiledMapStage(tiledMap);
+		stage = new TiledMapStage(tiledMap, this);
 		Gdx.input.setInputProcessor(stage);
 
 		batch = new SpriteBatch();
@@ -130,7 +133,11 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 
 		batch.setProjectionMatrix(orthographicCamera.combined);
 		batch.begin();
-		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
+		for (int i = 0; i < units.size() && units.size() != 0; i++)
+		{
+			batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
+		}
+		//batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
 		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
 		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
 		batch.end();
@@ -190,5 +197,9 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	@Override
 	public boolean scrolled(int amount) {
 		return false;
+	}
+
+	public void addUnit(float x, float y) {
+		units.add(new OffensiveUnit(new Point((int)x, (int)y), UnitType.Knight, 10, 10, 10, 10, 10, true));
 	}
 }
