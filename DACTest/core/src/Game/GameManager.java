@@ -1,6 +1,7 @@
 package Game;
 
 import Enums.GroundType;
+import Enums.ResourceEnum;
 import Enums.State;
 import Player.Player;
 import com.badlogic.gdx.Gdx;
@@ -27,6 +28,7 @@ public class GameManager {
     }
 
     private Map CreateMapFromImage(Pixmap pixmap){
+        //currently not in use!
         //https://github.com/mattdesl/lwjgl-basics/wiki/LibGDX-Textures
         ArrayList<Tile> tiles = new ArrayList<Tile>(pixmap.getHeight() * pixmap.getWidth());
         ArrayList<Point> spawnpoints = new ArrayList<Point>(8);
@@ -45,19 +47,19 @@ public class GameManager {
                     tile = new Tile(true, x, y, true, false, GroundType.Grass, null);
                     spawnpoints.add(new Point(x,y));
                 }else if(R == 255 && G == 242 && B == 0){
-                    tile = new Tile(false, x, y, true, false, GroundType.Grass, new Resource(Enums.Resource.Gold, 500));
+                    tile = new Tile(false, x, y, true, false, GroundType.Grass, new Resource(ResourceEnum.Gold, 500));
                 }else if(R == 195 && G == 195 && B == 195){
-                    tile = new Tile(false, x, y, true, false, GroundType.Grass, new Resource(Enums.Resource.Stone, 600));
+                    tile = new Tile(false, x, y, true, false, GroundType.Grass, new Resource(ResourceEnum.Stone, 600));
                 }else if(R == 255 && G == 255 && B == 255){
                     tile = new Tile(true, x, y, true, false, GroundType.Grass, null);
                 }else if(R == 153 && G == 217 && B == 234){
                     tile = new Tile(false, x, y, true, false, GroundType.Water, null);
                 }else if(R == 181 && G == 230 && B == 29){
-                    tile = new Tile(false, x, y, true, false, GroundType.Grass, new Resource(Enums.Resource.Wood, 100));
+                    tile = new Tile(false, x, y, true, false, GroundType.Grass, new Resource(ResourceEnum.Wood, 100));
                 }else if(R == 185 && G == 122 && B == 87){
                     tile = new Tile(false, x,y,false, false, GroundType.Stone, null);
                 }else if(R == 255 && G == 174 && B == 201){
-                    tile = new Tile(true, x, y, true, false, GroundType.Grass, new Resource(Enums.Resource.Food, 100));
+                    tile = new Tile(true, x, y, true, false, GroundType.Grass, new Resource(ResourceEnum.Food, 100));
                 }else{
                     tile = new Tile(true, x, y, true, false, GroundType.Grass, null);
                     System.out.println("unassighned color in texture (load map from pixmap). replaced with an empty grass tile.");
