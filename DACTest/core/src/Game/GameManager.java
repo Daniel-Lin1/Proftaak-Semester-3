@@ -9,21 +9,28 @@ import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.*;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
 import Game.Map.TiledMapStage;
 
 import java.awt.*;
+import java.awt.Image;
 import java.util.ArrayList;
 
 /**
@@ -41,8 +48,8 @@ public class GameManager {
     private Stage stage;
     private OrthographicCamera orthographicCamera;
     private DistressAndConflict dac;
-    private ArrayList<Unit> units = new ArrayList<Unit>();
-    private ArrayList<Building> buildings = new ArrayList<Building>();
+    public static ArrayList<Unit> units = new ArrayList<Unit>();
+    public static ArrayList<Building> buildings = new ArrayList<Building>();
     private OrthographicCameraControlClass gamecamera;
     //Stage en Skin voor UI inladen
     private SpriteBatch batch;
@@ -69,7 +76,9 @@ public class GameManager {
         //set tiles en stage goed enzo
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stage = new TiledMapStage(tiledMap, dac);
+        UIStage = new TiledMapStage(tiledMap, dac);
         Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(UIStage);
 
         //UI inladen van bestanden
         UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
@@ -136,6 +145,19 @@ public class GameManager {
         UIBatch.draw(UISkin.getSprite("buttonlong_brown"),350,0,1570, 200);
         UIBatch.draw(UISkin.getSprite("buttonSquare_brown"),0,0,350,250);
         UIBatch.end();
+        com.badlogic.gdx.scenes.scene2d.ui.Image image = new com.badlogic.gdx.scenes.scene2d.ui.Image();
+        Texture texture = new Texture("assets/Knight.png");
+        image.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
+        image.setPosition(150, 150);
+        image.setSize(texture.getWidth(), texture.getHeight());
+        image.addListener(new ClickListener() {
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Ik werk!");
+            }
+        });
+        UIStage.addActor(image);
+        UIStage.act();
+        UIStage.draw();
     }
 
     public TiledMap getTiledMap() {
