@@ -54,7 +54,6 @@ public class GameManager {
     private OrthographicCameraControlClass gamecamera;
     //Stage en Skin voor UI inladen
     private SpriteBatch batch;
-    private OrthographicCameraControlClass gamecamera;
 
     public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList<Player> participants) {
         this.gamestate = gamestate;
@@ -76,10 +75,6 @@ public class GameManager {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stage = new TiledMapStage(tiledMap, dac);
         Gdx.input.setInputProcessor(stage);
-
-        //UI inladen van bestanden
-        UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
-        UISkin.addRegions(new TextureAtlas(Gdx.files.internal("assets/UI/medieval.atlas")));
 
         batch = new SpriteBatch();
         UnitProducingBuilding uPB = new UnitProducingBuilding(new Point(48, 320), 64, 64, BuildingType.Towncenter, 1000);
