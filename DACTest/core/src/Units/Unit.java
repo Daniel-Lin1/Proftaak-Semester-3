@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * Created by Daniel on 26-3-2017.
  */
-public abstract class Unit implements Movement, InputProcessor {
+public abstract class Unit implements Movement {
 
     private Point coordinate;
     private UnitType unitType;
