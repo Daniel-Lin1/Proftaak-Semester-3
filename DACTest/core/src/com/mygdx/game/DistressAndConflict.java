@@ -100,6 +100,9 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		orthographicCamera.update();
 		stage.act();
 		stage.draw();
+		stage.getViewport().update((int)orthographicCamera.viewportWidth, (int)orthographicCamera.viewportHeight, false);
+		stage.getViewport().setCamera(orthographicCamera);
+		stage.getViewport().getCamera().update();
 
 		//Map scroll
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
