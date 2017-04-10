@@ -18,6 +18,7 @@ public abstract class Building {
     private BuildingType buildingtype;
     private int health;
     private Texture sprite;
+    private boolean selected;
 
     public void searchSprite() {
         if (buildingtype == BuildingType.Stable)
@@ -81,4 +82,10 @@ public abstract class Building {
     public void setSprite(Texture sprite) {
         this.sprite = sprite;
     }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public boolean getSelected() { return selected; }
 }

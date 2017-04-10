@@ -22,6 +22,8 @@ public abstract class Unit implements Movement, InputProcessor {
     private int range;
     private boolean willReturnFire;
     private Texture sprite;
+    private boolean selected;
+    public Texture selectedSprite;
 
     public void searchSprite()
     {
@@ -29,6 +31,7 @@ public abstract class Unit implements Movement, InputProcessor {
         {
             System.out.println(unitType.toString());
             sprite = new Texture(Gdx.files.internal("assets/Knight.png"));
+            selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
         }
         else
         {
@@ -118,4 +121,10 @@ public abstract class Unit implements Movement, InputProcessor {
     public void setWillReturnFire(boolean willReturnFire) {
         this.willReturnFire = willReturnFire;
     }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
+
+    public boolean getSelected() { return selected; }
 }

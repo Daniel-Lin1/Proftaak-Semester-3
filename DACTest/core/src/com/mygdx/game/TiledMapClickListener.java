@@ -1,9 +1,14 @@
 package com.mygdx.game;
 
+import Building.Building;
+import Units.OffensiveUnit;
+import Units.Unit;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+
+import java.util.ArrayList;
 
 /**
  * Created by Imre on 4-4-2017.
@@ -12,7 +17,9 @@ public class TiledMapClickListener extends ClickListener {
     private TiledMapActor actor;
     private TiledMapStage stage;
 
-
+    //toDo alle data uit gamemanager halen en in deze lists zetten
+    private ArrayList<Unit> units = new ArrayList<Unit>();
+    private ArrayList<Building> buildings = new ArrayList<Building>();
 
     public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage) {
         this.actor = actor;
@@ -22,8 +29,29 @@ public class TiledMapClickListener extends ClickListener {
     @Override
     public void clicked(InputEvent event, float x, float y) {
         System.out.println("X:" + actor.getX() + " Y:" + actor.getY() + " has been clicked.");
-        System.out.println("x="+ x + " y=" + y);
-        stage.createUnit(actor);
+
+        //ToDo: om units te spawnen om te testen pas dit aan
+        //stage.createUnit(actor);
+
+        for (int i = 0; i < units.size() && units.size() != 0; i++) {
+            if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
+                units.get(i).setSelected(true);
+            } else {
+                units.get(i).setSelected(false);
+            }
+        }
+
+        for (int i = 0; i < buildings.size() && buildings.size() != 0; i++)
+        {
+            if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY())
+            {
+                buildings.get(i).setSelected(true);
+            }
+            else
+            {
+                buildings.get(i).setSelected(false);
+            }
+        }
     }
 
     @Override

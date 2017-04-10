@@ -153,6 +153,11 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		for (int i = 0; i < units.size() && units.size() != 0; i++)
 		{
 			batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
+			if (units.get(i).getSelected() == true)
+			{
+				Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
+				batch.draw(selectedSprite, units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
+			}
 		}
 		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
 		batch.end();
