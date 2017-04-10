@@ -9,6 +9,7 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import javafx.scene.control.Button;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -32,7 +33,6 @@ public class TiledMapClickListener extends ClickListener {
     @Override
     public void clicked(InputEvent event, float x, float y) {
 
-
         //ToDo: om units te spawnen om te testen pas dit aan
         //stage.createUnit(actor);
             System.out.println("X:" + actor.getX() + " Y:" + actor.getY() + " has been clicked.");
@@ -44,6 +44,23 @@ public class TiledMapClickListener extends ClickListener {
                 }
         stage.createUnit(actor); // gebruik dit om te debuggen en units onClick te spawnen.
             }
+        ArrayList<Unit> units = GameManager.units;
+        ArrayList<Building> buildings = GameManager.buildings;
+        for (int i = 0; i < units.size() && units.size() != 0; i++) {
+            if (units.get(i).getSelected() == true)
+            {
+                units.get(i).moveTo(new Point((int)actor.getX(), (int)actor.getY()));
+                units.get(i).setSelected(false);
+            }
+            else
+            {
+                if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
+                    units.get(i).setSelected(true);
+                } else {
+                    units.get(i).setSelected(false);
+                }
+            }
+        }
 
             for (int i = 0; i < buildings.size() && buildings.size() != 0; i++)
             {
