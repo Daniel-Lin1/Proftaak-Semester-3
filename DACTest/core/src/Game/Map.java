@@ -1,5 +1,8 @@
 package Game;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -17,5 +20,8 @@ public class Map {
         this.sizeY = sizeY;
         this.Tiles = tiles;
         this.spawnPoints = spawnPoints;
+    }
+
+    public void render(){
     }
 }

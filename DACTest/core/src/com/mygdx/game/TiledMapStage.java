@@ -28,20 +28,14 @@ public class TiledMapStage extends Stage {
 
 
     public TiledMapStage(TiledMap tiledMap, DistressAndConflict dac) {
-        this.tiledMap = tiledMap;
         this.dac = dac;
-        this.ogc = dac.getOrthographicCamera();
+        this.tiledMap = tiledMap;
+        this.ogc = dac.gameManager.getOrthographicCamera();
 
         background.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         foreground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         addActor(background);
         addActor(foreground);
-
-        Texture texture = new Texture(Gdx.files.internal("assets/map1.png"));
-        Image map = new Image();
-        map.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
-        map.setSize(texture.getWidth(), texture.getHeight());
-        background.addActor(map);
 
         for (MapLayer layer : tiledMap.getLayers()) {
             TiledMapTileLayer tiledLayer = (TiledMapTileLayer)layer;
@@ -69,6 +63,6 @@ public class TiledMapStage extends Stage {
 //        unit.setSize(texture.getWidth(), texture.getHeight());
 //        unit.setPosition(actor.getX(), actor.getY());
 //        foreground.addActor(unit);
-        dac.addUnit((int)actor.getX(), (int)actor.getY());
+        dac.gameManager.addUnit((int)actor.getX(), (int)actor.getY());
     }
 }
