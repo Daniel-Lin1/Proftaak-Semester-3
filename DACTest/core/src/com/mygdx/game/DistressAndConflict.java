@@ -5,6 +5,7 @@ import Enums.BuildingType;
 import Enums.UnitType;
 import Player.Account;
 import Game.*;
+import Units.Unit;
 import com.badlogic.gdx.*;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -16,14 +17,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.FormatFlagsConversionMismatchException;
 
 public class DistressAndConflict extends ApplicationAdapter implements InputProcessor {
 	private SpriteBatch batch;
@@ -32,15 +34,24 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	private GameManager gameManager;
 	private TiledMap tiledMap;
 	private TiledMapRenderer tiledMapRenderer;
-	OrthographicCamera orthographicCamera;
+	private Stage stage;
+	private OrthographicCamera orthographicCamera;
 	private int OldFps = 0;
 
+	private ArrayList<Unit> units = new ArrayList<Unit>();
+
 	static final int SCROLL_SPEED = 10;
-	static final int VIEWPORT_WIDTH = 1000;
-	static final int VIEWPORT_HEIGHT = 1000;
+	static final int VIEWPORT_WIDTH = 1920;
+	static final int VIEWPORT_HEIGHT = 1080;
+
 	private OffensiveUnit unit;
 	private UnitProducingBuilding buildingStable;
 	private UnitProducingBuilding buildingTowncenter;
+
+
+	public OrthographicCamera getOrthographicCamera() {
+		return orthographicCamera;
+	}
 
 	public DistressAndConflict(Account user, GameManager gameManager) {
 		this.user = user;
@@ -70,6 +81,9 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
 		Gdx.input.setInputProcessor(this);
 
+		stage = new TiledMapStage(tiledMap, this);
+		Gdx.input.setInputProcessor(stage);
+
 		batch = new SpriteBatch();
 		unit = new OffensiveUnit(new Point(48,128), UnitType.Knight, 1000, 1, 1, 100, 1, false);
 		buildingStable = new UnitProducingBuilding(new Point(32, 144), 32, 32, BuildingType.Stable, 5000);
@@ -85,6 +99,8 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		orthographicCamera.update();
+		stage.act();
+		stage.draw();
 
 		//Map scroll
 		if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
@@ -120,10 +136,14 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 				,tiledMap.getLayers().get(0).getProperties().get("height", Integer.class)//This too
 		);
 		tiledMapRenderer.render();
-		showFPS();
+		//showFPS();
 
 		batch.setProjectionMatrix(orthographicCamera.combined);
 		batch.begin();
+		for (int i = 0; i < units.size() && units.size() != 0; i++)
+		{
+			batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
+		}
 		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
 		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
 		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
@@ -184,5 +204,14 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	@Override
 	public boolean scrolled(int amount) {
 		return false;
+	}
+
+	public void addUnit(int x, int y) {
+		Vector3 coordinate = new Vector3(x, y, 0);
+		orthographicCamera.project(coordinate);
+		units.add(new OffensiveUnit(new Point(x, y), UnitType.Knight, 10, 10, 10, 10, 10, true));
+	}
+	public Point isoto(){
+		return null;
 	}
 }
