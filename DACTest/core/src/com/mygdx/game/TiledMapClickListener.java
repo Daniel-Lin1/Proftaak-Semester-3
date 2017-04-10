@@ -21,13 +21,13 @@ public class TiledMapClickListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        System.out.println(actor.cell + " has been clicked.");
+        System.out.println("X:" + actor.getX() + " Y:" + actor.getY() + " has been clicked.");
         System.out.println("x="+ x + " y=" + y);
         stage.createUnit(actor);
     }
 
     @Override
     public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-        //System.out.println("Hovering over " + actor.cell);
+        //System.out.println("Hovering over: " + "X:" + actor.getX() + " Y:" + actor.getY());
     }
 }

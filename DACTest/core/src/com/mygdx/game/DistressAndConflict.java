@@ -41,7 +41,6 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	static final int SCROLL_SPEED = 10;
 	static final int VIEWPORT_WIDTH = 1920;
 	static final int VIEWPORT_HEIGHT = 1080;
-	private OffensiveUnit unit;
 	private UnitProducingBuilding buildingTowncenter;
 
 
@@ -82,8 +81,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 
 		batch = new SpriteBatch();
 		buildingTowncenter = new UnitProducingBuilding(new Point(48, 32), 64, 64, BuildingType.Towncenter, 1000);
-		unit = buildingTowncenter.produceUnit(UnitType.Knight);
-		units.add(unit);
+		units.add(buildingTowncenter.produceUnit(UnitType.Knight));
 
 	}
 

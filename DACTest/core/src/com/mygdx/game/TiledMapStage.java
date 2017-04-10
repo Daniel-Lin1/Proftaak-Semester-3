@@ -37,12 +37,6 @@ public class TiledMapStage extends Stage {
         addActor(background);
         addActor(foreground);
 
-        Texture texture = new Texture(Gdx.files.internal("assets/map1.png"));
-        Image map = new Image();
-        map.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
-        map.setSize(texture.getWidth(), texture.getHeight());
-        background.addActor(map);
-
         for (MapLayer layer : tiledMap.getLayers()) {
             TiledMapTileLayer tiledLayer = (TiledMapTileLayer)layer;
             createActorsForLayer(tiledLayer);
