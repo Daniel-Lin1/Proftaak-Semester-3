@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 
 /**
  * Created by Marc-Antoine on 4/10/2017.
@@ -11,10 +12,12 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 public class OrthographicCameraControlClass {
     private int SCROLL_SPEED = 10;
     private TiledMap tiledMap;
+    private TiledMapTileLayer tiledMapTileLayer;
 
     public OrthographicCameraControlClass(int SCROLL_SPEED, TiledMap tiledMap) {
         this.SCROLL_SPEED = SCROLL_SPEED;
         this.tiledMap = tiledMap;
+        this.tiledMapTileLayer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
     }
 
     public OrthographicCamera Render(OrthographicCamera orthographicCamera){

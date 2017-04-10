@@ -63,7 +63,7 @@ public class GameManager {
         orthographicCamera = new OrthographicCamera();
         orthographicCamera.setToOrtho(false,1920,1080);
         orthographicCamera.update();
-        tiledMap = new TmxMapLoader().load("assets/TestMap1.tmx");
+        tiledMap = new TmxMapLoader().load("assets/TestMap2.tmx");
         gamecamera = new OrthographicCameraControlClass(10, tiledMap);
 
         //set tiles en stage goed enzo
@@ -77,7 +77,7 @@ public class GameManager {
 
 
         batch = new SpriteBatch();
-        UnitProducingBuilding uPB = new UnitProducingBuilding(new Point(48, 32), 64, 64, BuildingType.Towncenter, 1000);
+        UnitProducingBuilding uPB = new UnitProducingBuilding(new Point(48, 320), 64, 64, BuildingType.Towncenter, 1000);
         buildings.add(uPB);
         units.add(uPB.produceUnit(UnitType.Knight));
     }
@@ -116,8 +116,17 @@ public class GameManager {
                 batch.draw(selectedSprite, units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
             }
         }
-        //batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
-        batch.end();
+
+        for (int i = 0; i < buildings.size() && buildings.size() != 0; i++)
+        {
+            batch.draw(buildings.get(i).getSprite(), buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
+            if (buildings.get(i).getSelected() == true)
+            {
+                Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
+                batch.draw(selectedSprite, buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
+            }
+        }
+       batch.end();
 
     }
 
