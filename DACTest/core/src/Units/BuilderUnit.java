@@ -17,5 +17,4 @@ public class BuilderUnit extends Unit {
     public Building build(BuildingType buildingtype){
         return null;
     }
-
 }
