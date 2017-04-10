@@ -50,12 +50,8 @@ public class GameManager {
     private DistressAndConflict dac;
     private ArrayList<Unit> units = new ArrayList<Unit>();
     private ArrayList<Building> buildings = new ArrayList<Building>();
-    private OrthographicCameraControlClass gamecamera;
-    //Stage en Skin voor UI inladen
     private SpriteBatch batch;
-    private Stage UIStage;
-    private Skin UISkin;
-    private SpriteBatch UIBatch;
+    private OrthographicCameraControlClass gamecamera;
 
     public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList<Player> participants) {
         this.gamestate = gamestate;
@@ -76,14 +72,7 @@ public class GameManager {
         //set tiles en stage goed enzo
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stage = new TiledMapStage(tiledMap, dac);
-        UIStage = new TiledMapStage(tiledMap, dac);
         Gdx.input.setInputProcessor(stage);
-        Gdx.input.setInputProcessor(UIStage);
-
-        //UI inladen van bestanden
-        UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
-        UISkin.addRegions(new TextureAtlas(Gdx.files.internal("assets/UI/medieval.atlas")));
-
 
         batch = new SpriteBatch();
         UnitProducingBuilding uPB = new UnitProducingBuilding(new Point(48, 320), 64, 64, BuildingType.Towncenter, 1000);
@@ -100,8 +89,6 @@ public class GameManager {
         stage.getViewport().update((int)orthographicCamera.viewportWidth, (int)orthographicCamera.viewportHeight, false);
         stage.getViewport().setCamera(orthographicCamera);
         stage.getViewport().getCamera().update();
-
-
 
         tiledMapRenderer.setView(
                 orthographicCamera.combined
@@ -139,27 +126,6 @@ public class GameManager {
 
     }
 
-    public void renderUI(){
-        UIBatch = new SpriteBatch();
-        UIBatch.begin();
-        UIBatch.draw(UISkin.getSprite("buttonlong_brown"),350,0,1570, 200);
-        UIBatch.draw(UISkin.getSprite("buttonSquare_brown"),0,0,350,250);
-        UIBatch.end();
-        com.badlogic.gdx.scenes.scene2d.ui.Image image = new com.badlogic.gdx.scenes.scene2d.ui.Image();
-        Texture texture = new Texture("assets/Knight.png");
-        image.setDrawable(new TextureRegionDrawable(new TextureRegion(texture)));
-        image.setPosition(150, 150);
-        image.setSize(texture.getWidth(), texture.getHeight());
-        image.addListener(new ClickListener() {
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Ik werk!");
-            }
-        });
-        UIStage.addActor(image);
-        UIStage.act();
-        UIStage.draw();
-    }
-
     public TiledMap getTiledMap() {
         return tiledMap;
     }
@@ -185,4 +151,12 @@ public class GameManager {
 		orthographicCamera.project(coordinate);
 		units.add(new OffensiveUnit(new Point(x, y), UnitType.Knight, 10, 10, 10, 10, 10, true));
 	}
+
+    public ArrayList<Unit> getUnits() {
+        return units;
+    }
+
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
 }

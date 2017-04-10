@@ -2,6 +2,7 @@ package com.mygdx.game;
 
 import Enums.State;
 import Game.GameManager;
+import Game.UIManager;
 import Player.Account;
 import Player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -15,18 +16,21 @@ public class DistressAndConflict extends ApplicationAdapter {
 	//private SpriteBatch batch;
 	private Account user;
 	public GameManager gameManager;
+	public UIManager uiManager;
 	private int OldFps = 0;
 
 
 
-	public DistressAndConflict(Account user, GameManager gameManager) {
+	public DistressAndConflict(Account user, GameManager gameManager, UIManager uiManager) {
 		this.user = user;
 		this.gameManager = gameManager;
+		this.uiManager = uiManager;
 	}
 
 	public DistressAndConflict() {
 		this.user = new Account();
 		this.gameManager = new GameManager(this, State.Finished, 1, "lel", new ArrayList<Player>());
+		this.uiManager = new UIManager(this, this.gameManager);
 	}
 
 	public void host(){
@@ -41,6 +45,8 @@ public class DistressAndConflict extends ApplicationAdapter {
 		//http://www.gamefromscratch.com/post/2014/04/16/LibGDX-Tutorial-11-Tiled-Maps-Part-1-Simple-Orthogonal-Maps.aspx
 		//gameManager.setTiledMap(new TmxMapLoader().load("assets/TestMap1.tmx"));
 		gameManager.create();
+		uiManager.create();
+
 		//batch = new SpriteBatch();
 	}
 
@@ -50,7 +56,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gameManager.Render();
-		gameManager.renderUI();
+		uiManager.Render();
 		showFPS();
 
 		//batch.setProjectionMatrix(gameManager.getOrthographicCamera().combined);

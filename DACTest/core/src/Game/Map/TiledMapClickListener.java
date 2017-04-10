@@ -42,7 +42,7 @@ public class TiledMapClickListener extends ClickListener {
                 } else {
                     units.get(i).setSelected(false);
                 }
-        //stage.createUnit(actor); // gebruik dit om te debuggen en units onClick te spawnen.
+        stage.createUnit(actor); // gebruik dit om te debuggen en units onClick te spawnen.
             }
 
             for (int i = 0; i < buildings.size() && buildings.size() != 0; i++)
