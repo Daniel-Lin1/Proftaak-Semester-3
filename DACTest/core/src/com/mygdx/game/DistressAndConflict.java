@@ -15,12 +15,15 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -43,6 +46,10 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	static final int VIEWPORT_HEIGHT = 1080;
 	private UnitProducingBuilding buildingTowncenter;
 
+	//Stage en Skin voor UI inladen
+	private Stage UIStage;
+	private Skin UISkin;
+	private SpriteBatch UIBatch;
 
 	public OrthographicCamera getOrthographicCamera() {
 		return orthographicCamera;
@@ -82,6 +89,11 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		batch = new SpriteBatch();
 		buildingTowncenter = new UnitProducingBuilding(new Point(48, 32), 64, 64, BuildingType.Towncenter, 1000);
 		units.add(buildingTowncenter.produceUnit(UnitType.Knight));
+
+		//UI inladen van bestanden
+		UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
+		UISkin.addRegions(new TextureAtlas(Gdx.files.internal("assets/UI/medieval.atlas")));
+		stage = new Stage(new ScreenViewport());
 
 	}
 
@@ -144,6 +156,18 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		}
 		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
 		batch.end();
+
+		renderUI();
+	}
+
+	public void renderUI(){
+		UIBatch = new SpriteBatch();
+		UIBatch.begin();
+		UIBatch.draw(UISkin.getSprite("buttonlong_brown"),350,0,1570, 200);
+		UIBatch.draw(UISkin.getSprite("buttonSquare_brown"),0,0,350,250);
+		UIBatch.draw(unit.getSprite(), 50, 50, 150, 150);
+
+		UIBatch.end();
 	}
 
 	@Override
