@@ -29,13 +29,13 @@ public class OrthographicCameraControlClass {
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
-            if (orthographicCamera.position.x >= tiledMap.getLayers().get(0).getProperties().get("width", Integer.class) - (orthographicCamera.viewportWidth/2)){
+            if (orthographicCamera.position.x >= (tiledMapTileLayer.getWidth() * tiledMapTileLayer.getTileWidth()) - (orthographicCamera.viewportWidth/2)){
             }else {
                 orthographicCamera.translate(SCROLL_SPEED, 0);
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.UP)){
-            if (orthographicCamera.position.y >= tiledMap.getLayers().get(0).getProperties().get("height", Integer.class) - (orthographicCamera.viewportHeight/2)){
+            if (orthographicCamera.position.y >= (tiledMapTileLayer.getHeight() * tiledMapTileLayer.getTileHeight()) - (orthographicCamera.viewportHeight/2)){
             }else {
                 orthographicCamera.translate(0, SCROLL_SPEED);
             }
