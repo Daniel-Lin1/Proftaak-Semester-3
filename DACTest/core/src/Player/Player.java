@@ -18,7 +18,6 @@ public class Player {
     private ArrayList<Unit> units;
     private ArrayList<Building>buildings;
 
-
     public void command(){
 
     }

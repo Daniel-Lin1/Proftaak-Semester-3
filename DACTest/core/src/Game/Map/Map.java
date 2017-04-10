@@ -1,9 +1,5 @@
 package Game.Map;
 
-import Game.Tile;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-
 import java.awt.*;
 import java.util.ArrayList;
 

@@ -49,7 +49,6 @@ public abstract class Unit implements Movement {
 
     }
 
-
     public Texture getSprite() {
         return sprite;
     }
@@ -127,4 +126,13 @@ public abstract class Unit implements Movement {
     }
 
     public boolean getSelected() { return selected; }
+
+    public String GetUIInfo(){
+                "Health : " + health + "\n" +
+                "Speed : " + speed + "\n" +
+                "HitPerSecond : " + hitDamage + "\n" +
+                "HitDamage : " + hitDamage + "\n"+
+                "Range : " + range + "\n" +
+                "Will currently return fire : " + willReturnFire;
+    }
 }

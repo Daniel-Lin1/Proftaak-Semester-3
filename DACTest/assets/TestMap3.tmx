@@ -1,0 +1,1028 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="240" height="140" tilewidth="16" tileheight="16" nextobjectid="1">
+ <tileset firstgid="1" name="tileset" tilewidth="16" tileheight="16" tilecount="1024" columns="32">
+  <image source="image.png" width="512" height="512"/>
+  <tile id="0">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="1">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="2">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="3">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="4">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="5">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="6">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="7">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="8">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="9">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="10">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="11">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="32">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="33">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="34">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="35">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="36">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="37">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="38">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="39">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="40">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="41">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="42">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="43">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="64">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="65">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="66">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="67">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="68">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="69">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="70">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="71">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="72">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="73">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="74">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="75">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="96">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="97">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="98">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="99">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="100">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="101">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="102">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="103">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="104">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="105">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="106">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="107">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="128">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="129">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="130">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="131">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="132">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="133">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="134">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="135">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="136">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="137">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="138">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="139">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="160">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="161">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="162">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="163">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="164">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="165">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="166">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="167">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="168">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="169">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="170">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="171">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="192">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="193">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="194">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="195">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="196">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="197">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="198">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="199">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="200">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="201">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="202">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="203">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="224">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="225">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="226">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="227">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="228">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="229">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="230">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="231">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="232">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="233">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="234">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="235">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="256">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="257">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="258">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="259">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="260">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="261">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="262">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="263">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="264">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="265">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="266">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="267">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="288">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="289">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="290">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="291">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="292">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="293">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="294">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="295">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="296">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="297">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="298">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="299">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="320">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="321">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="322">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="323">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="324">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="325">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="326">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="327">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="328">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="329">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="330">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="331">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="352">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="353">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="354">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="355">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="356">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="357">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="358">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="359">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="360">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="361">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="362">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="363">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="384">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="385">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="386">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="387">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="388">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="389">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="390">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="391">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="392">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="393">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="394">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="395">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="416">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="417">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="418">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="419">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="420">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="421">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="422">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="423">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="424">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="425">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="426">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+  <tile id="427">
+   <properties>
+    <property name="height" type="int" value="1080"/>
+    <property name="width" type="int" value="1920"/>
+   </properties>
+  </tile>
+ </tileset>
+ <layer name="BackgroundLayer" width="240" height="140">
+  <properties>
+   <property name="height" type="int" value="2240"/>
+   <property name="width" type="int" value="3840"/>
+  </properties>
+  <data encoding="base64" compression="zlib">
+   eJzt00Fu20AUREH7IMr9j5kslcGQYjqSf8uuxaAgmfA80+jb58fHrz/nRvLtbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsanvE3NHSQX21Dw1nb7tgs+R4bONrtdBfZYEPDmetep3vIJqfvPjvrXqffFdlmQ8OVTd8+O3vJ6b1MN9y77nTd8O4z+VNtaDja8Lpf2yX/tqFht92z/TZ0kg02NKzbPdusDZN/72G6YbfZs71Od5ItNmz1fqNnP59+V2SbDQ3rZo8a709DLzltQ8O63aPvmnrJBqfvvvq97ZL7XUxs9tF2H52Gd0dOO7Hdq9u+f/72hPvJ72ZDw9G2GzvJJhsa1g0/OtOdZIsNDfctjzbd0Em22NBw1ma75LFNDbutHj3T0E1OO333bqPrXl+53fVe8p2c3u5tObv97s4zt3vUQLbb0HBlv6/qtWG+sy0Nu83utv3MDdss392GhivbffXGbJnv6PTd97t9tOH1+2dvcfp9kP9qW8Pu/M92bZjf2Ya7122uu77a+aztTr8X8qrTdx/tdrfdRzu9suWrzzf8b8hHTt19dna7ekXv1W2TrU7fve52t52v6LRdvqMN2z3quG2eOdr3K7Y8/b8hr+xosmHdytm+j5pf0WPDfAdbGo5+fuV3TPeTUzY0rFv+tTm7Z8ifbkvD2W5bu8lpGxp2TbvPu22TP9mGhl3T7vN6pjvJaRsarmyY5H4n0w22S2Y2NJDMbGggmdnQQDKzoYFkZkMDycyGBpKZDQ0kMxsaSGY2NJDMbGggmdnQQDLzNwYOpAo=
+  </data>
+ </layer>
+ <layer name="PropsLayer" width="240" height="140">
+  <data encoding="base64" compression="zlib">
+   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
+  </data>
+ </layer>
+</map>
