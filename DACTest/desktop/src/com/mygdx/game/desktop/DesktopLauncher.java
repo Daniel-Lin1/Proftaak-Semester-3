@@ -11,8 +11,8 @@ public class DesktopLauncher {
 		config.useGL30 = true;
 		//config.resizable = false;
 		//config.fullscreen = true;
-		//config.height = 1080;
-		//config.width = 1920;
+		//config.height = 950;
+		//config.width = 950;
 		config.foregroundFPS = 60;
 		new LwjglApplication(new DistressAndConflict(), config);
 	}
