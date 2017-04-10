@@ -41,9 +41,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	static final int SCROLL_SPEED = 10;
 	static final int VIEWPORT_WIDTH = 1920;
 	static final int VIEWPORT_HEIGHT = 1080;
-
 	private OffensiveUnit unit;
-	private UnitProducingBuilding buildingStable;
 	private UnitProducingBuilding buildingTowncenter;
 
 
@@ -67,7 +65,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	public void join(){
 
 	}
-
+	
 	@Override
 	public void create () {
 		//http://www.gamefromscratch.com/post/2014/04/16/LibGDX-Tutorial-11-Tiled-Maps-Part-1-Simple-Orthogonal-Maps.aspx
@@ -83,9 +81,10 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		Gdx.input.setInputProcessor(stage);
 
 		batch = new SpriteBatch();
-		unit = new OffensiveUnit(new Point(48,128), UnitType.Knight, 1000, 1, 1, 100, 1, false);
-		buildingStable = new UnitProducingBuilding(new Point(32, 144), 32, 32, BuildingType.Stable, 5000);
-		buildingTowncenter = new UnitProducingBuilding(new Point(48, 32), 64, 64, BuildingType.Towncenter, 10000);
+		buildingTowncenter = new UnitProducingBuilding(new Point(48, 32), 64, 64, BuildingType.Towncenter, 1000);
+		unit = buildingTowncenter.produceUnit(UnitType.Knight);
+		units.add(unit);
+
 	}
 
 	@Override
@@ -145,8 +144,6 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		{
 			batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
 		}
-		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
-		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
 		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
 		batch.end();
 	}
