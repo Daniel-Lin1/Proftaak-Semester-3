@@ -12,7 +12,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.ArrayList;
 
 public class DistressAndConflict extends ApplicationAdapter {
-	private SpriteBatch batch;
+	//private SpriteBatch batch;
 	private Account user;
 	public GameManager gameManager;
 	private int OldFps = 0;
@@ -41,7 +41,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 		//http://www.gamefromscratch.com/post/2014/04/16/LibGDX-Tutorial-11-Tiled-Maps-Part-1-Simple-Orthogonal-Maps.aspx
 		//gameManager.setTiledMap(new TmxMapLoader().load("assets/TestMap1.tmx"));
 		gameManager.create();
-		batch = new SpriteBatch();
+		//batch = new SpriteBatch();
 	}
 
 	@Override
@@ -53,14 +53,14 @@ public class DistressAndConflict extends ApplicationAdapter {
 		gameManager.renderUI();
 		showFPS();
 
-		batch.setProjectionMatrix(gameManager.getOrthographicCamera().combined);
+		//batch.setProjectionMatrix(gameManager.getOrthographicCamera().combined);
 	}
 
 
 
 	@Override
 	public void dispose () {
-		batch.dispose();
+		//batch.dispose();
 	}
 
 	public void showFPS(){//Created to optimize FPS, YaY 60 FPS!
