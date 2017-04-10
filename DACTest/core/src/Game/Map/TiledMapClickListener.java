@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -35,12 +36,19 @@ public class TiledMapClickListener extends ClickListener {
 
         ArrayList<Unit> units = GameManager.units;
         ArrayList<Building> buildings = GameManager.buildings;
-        System.out.println("X:" + actor.getX() + " Y:" + actor.getY() + " has been clicked.");
         for (int i = 0; i < units.size() && units.size() != 0; i++) {
-            if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
-                units.get(i).setSelected(true);
-            } else {
+            if (units.get(i).getSelected() == true)
+            {
+                units.get(i).moveTo(new Point((int)actor.getX(), (int)actor.getY()));
                 units.get(i).setSelected(false);
+            }
+            else
+            {
+                if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
+                    units.get(i).setSelected(true);
+                } else {
+                    units.get(i).setSelected(false);
+                }
             }
         }
 
