@@ -1,12 +1,10 @@
-package com.mygdx.game;
+package Game.Map;
 
 import Building.Building;
-import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import javafx.scene.control.Button;
 
@@ -34,7 +32,7 @@ public class TiledMapClickListener extends ClickListener {
         System.out.println("X:" + actor.getX() + " Y:" + actor.getY() + " has been clicked.");
 
         //ToDo: om units te spawnen om te testen pas dit aan
-        //stage.createUnit(actor);
+        stage.createUnit(actor);
 
         for (int i = 0; i < units.size() && units.size() != 0; i++) {
             if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
