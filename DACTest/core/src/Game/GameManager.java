@@ -48,8 +48,8 @@ public class GameManager {
     private Stage stage;
     private OrthographicCamera orthographicCamera;
     private DistressAndConflict dac;
-    private ArrayList<Unit> units = new ArrayList<Unit>();
-    private ArrayList<Building> buildings = new ArrayList<Building>();
+    public static ArrayList<Unit> units = new ArrayList<Unit>();
+    public static ArrayList<Building> buildings = new ArrayList<Building>();
     private OrthographicCameraControlClass gamecamera;
     //Stage en Skin voor UI inladen
     private SpriteBatch batch;
