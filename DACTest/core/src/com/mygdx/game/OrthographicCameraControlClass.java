@@ -22,25 +22,25 @@ public class OrthographicCameraControlClass {
 
     public OrthographicCamera Render(OrthographicCamera orthographicCamera){
         //Map scroll
-        if (Gdx.input.isKeyPressed(Input.Keys.LEFT)){
+        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
             if (orthographicCamera.position.x <= orthographicCamera.viewportWidth/2){
             }else{
                 orthographicCamera.translate(-SCROLL_SPEED, 0);
             }
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)){
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
             if (orthographicCamera.position.x >= tiledMap.getLayers().get(0).getProperties().get("width", Integer.class) - (orthographicCamera.viewportWidth/2)){
             }else {
                 orthographicCamera.translate(SCROLL_SPEED, 0);
             }
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.UP)){
+        if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)){
             if (orthographicCamera.position.y >= tiledMap.getLayers().get(0).getProperties().get("height", Integer.class) - (orthographicCamera.viewportHeight/2)){
             }else {
                 orthographicCamera.translate(0, SCROLL_SPEED);
             }
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)){
+        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)|| Gdx.input.isKeyPressed(Input.Keys.S)){
             if (orthographicCamera.position.y <= orthographicCamera.viewportHeight/2 - 250){
 
             }else{

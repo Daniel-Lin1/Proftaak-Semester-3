@@ -76,7 +76,7 @@ public class GameManager {
         //set tiles en stage goed enzo
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stage = new TiledMapStage(tiledMap, dac);
-        UIStage = new TiledMapStage(tiledMap, dac);
+        //UIStage = new TiledMapStage(tiledMap, dac);
         Gdx.input.setInputProcessor(stage);
         Gdx.input.setInputProcessor(UIStage);
 
@@ -100,8 +100,6 @@ public class GameManager {
         stage.getViewport().update((int)orthographicCamera.viewportWidth, (int)orthographicCamera.viewportHeight, false);
         stage.getViewport().setCamera(orthographicCamera);
         stage.getViewport().getCamera().update();
-
-
 
         tiledMapRenderer.setView(
                 orthographicCamera.combined
@@ -136,7 +134,6 @@ public class GameManager {
             }
         }
        batch.end();
-
     }
 
     public void renderUI(){
