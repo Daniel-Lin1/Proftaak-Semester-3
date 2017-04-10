@@ -78,7 +78,7 @@ public class GameManager {
         stage = new TiledMapStage(tiledMap, dac);
         //UIStage = new TiledMapStage(tiledMap, dac);
         Gdx.input.setInputProcessor(stage);
-        Gdx.input.setInputProcessor(UIStage);
+        //Gdx.input.setInputProcessor(UIStage);
 
         //UI inladen van bestanden
         UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));

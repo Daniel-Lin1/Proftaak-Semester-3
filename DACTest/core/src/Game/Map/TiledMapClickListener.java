@@ -39,6 +39,7 @@ public class TiledMapClickListener extends ClickListener {
         for (int i = 0; i < units.size() && units.size() != 0; i++) {
             if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
                 units.get(i).setSelected(true);
+                System.out.println(units.get(i).toString());
             } else {
                 units.get(i).setSelected(false);
             }
