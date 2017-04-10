@@ -48,8 +48,11 @@ public class GameManager {
     private Stage stage;
     private OrthographicCamera orthographicCamera;
     private DistressAndConflict dac;
-    private ArrayList<Unit> units = new ArrayList<Unit>();
-    private ArrayList<Building> buildings = new ArrayList<Building>();
+
+    public static ArrayList<Unit> units = new ArrayList<Unit>();
+    public static ArrayList<Building> buildings = new ArrayList<Building>();
+    private OrthographicCameraControlClass gamecamera;
+    //Stage en Skin voor UI inladen
     private SpriteBatch batch;
     private OrthographicCameraControlClass gamecamera;
 
@@ -67,17 +70,20 @@ public class GameManager {
         orthographicCamera.setToOrtho(false,1920,1080);
         orthographicCamera.update();
         tiledMap = new TmxMapLoader().load("assets/TestMap2.tmx");
-        gamecamera = new OrthographicCameraControlClass(10, tiledMap);
+        gamecamera = new OrthographicCameraControlClass(800, tiledMap);
 
         //set tiles en stage goed enzo
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stage = new TiledMapStage(tiledMap, dac);
         Gdx.input.setInputProcessor(stage);
 
+        //UI inladen van bestanden
+        UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
+        UISkin.addRegions(new TextureAtlas(Gdx.files.internal("assets/UI/medieval.atlas")));
+
         batch = new SpriteBatch();
         UnitProducingBuilding uPB = new UnitProducingBuilding(new Point(48, 320), 64, 64, BuildingType.Towncenter, 1000);
         buildings.add(uPB);
-        units.add(uPB.produceUnit(UnitType.Knight));
     }
 
     public void Render(){
@@ -123,7 +129,6 @@ public class GameManager {
             }
         }
        batch.end();
-
     }
 
     public TiledMap getTiledMap() {

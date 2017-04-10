@@ -13,12 +13,14 @@ import java.util.ArrayList;
 public class Map {
     private int sizeX;
     private int sizeY;
+    private String mapName;
     private ArrayList<Tile>Tiles;
     private ArrayList<Point> spawnPoints;
 
-    public Map(int sizeX, int sizeY, ArrayList<Tile> tiles, ArrayList<Point> spawnPoints ) {
+    public Map(int sizeX, int sizeY, String mapName, ArrayList<Tile> tiles, ArrayList<Point> spawnPoints ) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
+        this.mapName = mapName;
         this.Tiles = tiles;
         this.spawnPoints = spawnPoints;
     }
