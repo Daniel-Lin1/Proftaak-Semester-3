@@ -63,7 +63,7 @@ public class GameManager {
         orthographicCamera = new OrthographicCamera();
         orthographicCamera.setToOrtho(false,1920,1080);
         orthographicCamera.update();
-        tiledMap = new TmxMapLoader().load("assets/TestMap1.tmx");
+        tiledMap = new TmxMapLoader().load("assets/TestMap2.tmx");
         gamecamera = new OrthographicCameraControlClass(10, tiledMap);
 
         //set tiles en stage goed enzo
