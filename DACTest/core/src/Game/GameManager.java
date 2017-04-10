@@ -71,7 +71,7 @@ public class GameManager {
         orthographicCamera.setToOrtho(false,1920,1080);
         orthographicCamera.update();
         tiledMap = new TmxMapLoader().load("assets/TestMap2.tmx");
-        gamecamera = new OrthographicCameraControlClass(10, tiledMap);
+        gamecamera = new OrthographicCameraControlClass(800, tiledMap);
 
         //set tiles en stage goed enzo
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
