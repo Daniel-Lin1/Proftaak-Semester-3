@@ -12,12 +12,15 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
 import com.mygdx.game.TiledMapStage;
@@ -42,6 +45,10 @@ public class GameManager {
     private ArrayList<Unit> units = new ArrayList<Unit>();
     private ArrayList<Building> buildings = new ArrayList<Building>();
     private OrthographicCameraControlClass gamecamera;
+    //Stage en Skin voor UI inladen
+    private Stage UIStage;
+    private Skin UISkin;
+    private SpriteBatch UIBatch;
 
     public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList<Player> participants) {
         this.gamestate = gamestate;
@@ -86,6 +93,10 @@ public class GameManager {
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stage = new TiledMapStage(tiledMap, dac);
         Gdx.input.setInputProcessor(stage);
+
+        //UI inladen van bestanden
+        UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
+        UISkin.addRegions(new TextureAtlas(Gdx.files.internal("assets/UI/medieval.atlas")));
     }
 
     public void Render(){
@@ -115,6 +126,14 @@ public class GameManager {
 
     }
 
+    public void renderUI(){
+        UIBatch = new SpriteBatch();
+        UIBatch.begin();
+        UIBatch.draw(UISkin.getSprite("buttonlong_brown"),350,0,1570, 200);
+        UIBatch.draw(UISkin.getSprite("buttonSquare_brown"),0,0,350,250);
+        UIBatch.end();
+    }
+
     public TiledMap getTiledMap() {
         return tiledMap;
     }
@@ -140,54 +159,4 @@ public class GameManager {
 		orthographicCamera.project(coordinate);
 		units.add(new OffensiveUnit(new Point(x, y), UnitType.Knight, 10, 10, 10, 10, 10, true));
 	}
-
-    /*public Map loadMap(String ImageLocation){
-        return CreateMapFromImage( new Pixmap(Gdx.files.internal(ImageLocation)));
-    }
-
-    private Map CreateMapFromImage(Pixmap pixmap){
-        //currently not in use!
-        //https://github.com/mattdesl/lwjgl-basics/wiki/LibGDX-Textures
-        ArrayList<Tile> tiles = new ArrayList<Tile>(pixmap.getHeight() * pixmap.getWidth());
-        ArrayList<Point> spawnpoints = new ArrayList<Point>(8);
-        Color color = new Color();
-        for (int x=0; x<pixmap.getWidth(); x++) {
-            for (int y=0; y<pixmap.getHeight(); y++) {
-                int val = pixmap.getPixel(x, y);
-                Color.rgba8888ToColor(color, val);
-                int R = (int)(color.r * 255f);
-                int G = (int)(color.g * 255f);
-                int B = (int)(color.b * 255f);
-                //int A = (int)(color.a * 255f);
-
-                Tile tile; //= new Tile();
-                if(R == 237 && G == 28 && B == 36){
-                    tile = new Tile(true, x, y, true, false, GroundType.Grass, null);
-                    spawnpoints.add(new Point(x,y));
-                }else if(R == 255 && G == 242 && B == 0){
-                    tile = new Tile(false, x, y, true, false, GroundType.Grass, new Resource(ResourceEnum.Gold, 500));
-                }else if(R == 195 && G == 195 && B == 195){
-                    tile = new Tile(false, x, y, true, false, GroundType.Grass, new Resource(ResourceEnum.Stone, 600));
-                }else if(R == 255 && G == 255 && B == 255){
-                    tile = new Tile(true, x, y, true, false, GroundType.Grass, null);
-                }else if(R == 153 && G == 217 && B == 234){
-                    tile = new Tile(false, x, y, true, false, GroundType.Water, null);
-                }else if(R == 181 && G == 230 && B == 29){
-                    tile = new Tile(false, x, y, true, false, GroundType.Grass, new Resource(ResourceEnum.Wood, 100));
-                }else if(R == 185 && G == 122 && B == 87){
-                    tile = new Tile(false, x,y,false, false, GroundType.Stone, null);
-                }else if(R == 255 && G == 174 && B == 201){
-                    tile = new Tile(true, x, y, true, false, GroundType.Grass, new Resource(ResourceEnum.Food, 100));
-                }else{
-                    tile = new Tile(true, x, y, true, false, GroundType.Grass, null);
-                    System.out.println("unassighned color in texture (load map from pixmap). replaced with an empty grass tile.");
-                    System.out.println("color : " + R + " " + G + " " + B);
-                }
-
-                tiles.add(tile);
-            }
-        }
-        System.out.println(tiles.size());
-        return map = new Map(10,5, tiles, spawnpoints );
-    }*/
 }

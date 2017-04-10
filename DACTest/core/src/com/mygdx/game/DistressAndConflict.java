@@ -8,6 +8,15 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.ArrayList;
 
@@ -16,6 +25,8 @@ public class DistressAndConflict extends ApplicationAdapter {
 	private Account user;
 	public GameManager gameManager;
 	private int OldFps = 0;
+
+
 
 	public DistressAndConflict(Account user, GameManager gameManager) {
 		this.user = user;
@@ -40,7 +51,6 @@ public class DistressAndConflict extends ApplicationAdapter {
 		//gameManager.setTiledMap(new TmxMapLoader().load("assets/TestMap1.tmx"));
 		gameManager.create();
 		batch = new SpriteBatch();
-
 	}
 
 	@Override
@@ -52,18 +62,34 @@ public class DistressAndConflict extends ApplicationAdapter {
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gameManager.Render();
+		gameManager.renderUI();
 
 		showFPS();
 
 		batch.setProjectionMatrix(gameManager.getOrthographicCamera().combined);
 		batch.begin();
+//<<<<<<< HEAD
 //		for (int i = 0; i < units.size() && units.size() != 0; i++)
 //		{
 //			batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
 //		}
 //		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
+//=======
+//		for (int i = 0; i < units.size() && units.size() != 0; i++)
+//		{
+//			batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
+//			if (units.get(i).getSelected() == true)
+//			{
+//				Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
+//				batch.draw(selectedSprite, units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
+//			}
+//		}
+//		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
+//>>>>>>> origin/master
 		batch.end();
 	}
+
+
 
 	@Override
 	public void dispose () {
