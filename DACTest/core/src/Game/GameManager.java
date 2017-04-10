@@ -88,7 +88,6 @@ public class GameManager {
         batch = new SpriteBatch();
         UnitProducingBuilding uPB = new UnitProducingBuilding(new Point(48, 320), 64, 64, BuildingType.Towncenter, 1000);
         buildings.add(uPB);
-        units.add(uPB.produceUnit(UnitType.Knight));
     }
 
     public void Render(){

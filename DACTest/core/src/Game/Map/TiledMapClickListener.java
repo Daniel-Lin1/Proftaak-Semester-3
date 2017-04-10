@@ -1,14 +1,15 @@
 package Game.Map;
 
-import Building.Building;
+import Building.*;
+import Enums.UnitType;
 import Game.GameManager;
+import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import javafx.scene.control.Button;
 
 import java.util.ArrayList;
 
@@ -25,13 +26,13 @@ public class TiledMapClickListener extends ClickListener {
     }
 
     // ToDo: clickevents die right click en left click onderscheiden
+    // ToDo: Units moven met right click event
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
 
+        //stage.createUnit(actor); //om units te spawnen om te testen pas dit aan
 
-        //ToDo: om units te spawnen om te testen pas dit aan
-        //stage.createUnit(actor);
         ArrayList<Unit> units = GameManager.units;
         ArrayList<Building> buildings = GameManager.buildings;
         System.out.println("X:" + actor.getX() + " Y:" + actor.getY() + " has been clicked.");
@@ -47,7 +48,10 @@ public class TiledMapClickListener extends ClickListener {
         {
             if (actor.getX() == buildings.get(i).getCoordinate().getX() && actor.getY() == buildings.get(i).getCoordinate().getY())
             {
-                buildings.get(i).setSelected(true);
+                // ToDo: dit moet via UI gebeuren en niet via dit clickEvent
+                UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
+                units.add(uPB.produceUnit(UnitType.Knight));
+                //buildings.get(i).setSelected(true);
             }
             else
             {

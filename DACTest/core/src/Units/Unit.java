@@ -40,8 +40,8 @@ public abstract class Unit implements Movement, InputProcessor {
     }
 
     @Override
-    public void moveTo() {
-
+    public void moveTo(Point point) {
+        this.coordinate = point;
     }
 
     @Override
