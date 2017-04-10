@@ -3,10 +3,12 @@ package com.mygdx.game;
 import Building.Building;
 import Units.OffensiveUnit;
 import Units.Unit;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import javafx.scene.control.Button;
 
 import java.util.ArrayList;
 
@@ -27,6 +29,7 @@ public class TiledMapClickListener extends ClickListener {
     }
 
     @Override
+   // leftButton.addListener(new ClickListener(Input.Buttons))
     public void clicked(InputEvent event, float x, float y) {
         System.out.println("X:" + actor.getX() + " Y:" + actor.getY() + " has been clicked.");
 
@@ -53,6 +56,7 @@ public class TiledMapClickListener extends ClickListener {
             }
         }
     }
+
 
     @Override
     public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
