@@ -31,8 +31,8 @@ public class TiledMapClickListener extends ClickListener {
     public void clicked(InputEvent event, float x, float y) {
         System.out.println("X:" + actor.getX() + " Y:" + actor.getY() + " has been clicked.");
 
-        //ToDo: om units te spawnen om te testen pas dit aan
-        stage.createUnit(actor);
+
+        //stage.createUnit(actor); // gebruik dit om te debuggen en units onClick te spawnen.
 
         for (int i = 0; i < units.size() && units.size() != 0; i++) {
             if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
