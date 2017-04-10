@@ -3,12 +3,11 @@ package Game;
 import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.*;
+import Game.Map.Map;
 import Player.Player;
 import Units.OffensiveUnit;
 import Units.Unit;
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Color;
@@ -28,7 +27,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
-import com.mygdx.game.TiledMapStage;
+import Game.Map.TiledMapStage;
 
 import java.awt.*;
 import java.awt.Image;
@@ -38,6 +37,7 @@ import java.util.ArrayList;
  * Created by Daniel on 26-3-2017.
  */
 public class GameManager {
+    //ToDo : marc moet deze classe opschonen! wat een puinhoop kneus.
     private State gamestate;
     private int lobbyID;
     private String password;
@@ -52,6 +52,7 @@ public class GameManager {
     private ArrayList<Building> buildings = new ArrayList<Building>();
     private OrthographicCameraControlClass gamecamera;
     //Stage en Skin voor UI inladen
+    private SpriteBatch batch;
     private Stage UIStage;
     private Skin UISkin;
     private SpriteBatch UIBatch;
@@ -62,29 +63,6 @@ public class GameManager {
         this.password = password;
         this.participants = participants;
         this.dac = dac;
-
-//        // set camera
-//        orthographicCamera = new OrthographicCamera();
-//        orthographicCamera.setToOrtho(false,1920,1080);
-//        orthographicCamera.update();
-//        gamecamera = new OrthographicCameraControlClass(10, tiledMap);
-//
-//        //set tiles en stage goed enzo
-//        tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-//        stage = new TiledMapStage(tiledMap);
-//
-//        //Gdx.input.setInputProcessor(stage);
-//
-//        tiledMapRenderer.setView(
-//                orthographicCamera.combined
-//                ,0
-//                ,0
-//                ,tiledMap.getLayers().get(0).getProperties().get("width", Integer.class)//This works realy, really weird.
-//                ,tiledMap.getLayers().get(0).getProperties().get("height", Integer.class)//This too
-//        );
-
-//        buildings.add(new UnitProducingBuilding(new Point(48, 32), 64, 64, BuildingType.Towncenter, 1000));
-//        units.add(buildingTowncenter.produceUnit(UnitType.Knight));
     }
 
     public void create (){
@@ -92,7 +70,7 @@ public class GameManager {
         orthographicCamera = new OrthographicCamera();
         orthographicCamera.setToOrtho(false,1920,1080);
         orthographicCamera.update();
-        tiledMap = new TmxMapLoader().load("assets/TestMap1.tmx");
+        tiledMap = new TmxMapLoader().load("assets/TestMap2.tmx");
         gamecamera = new OrthographicCameraControlClass(10, tiledMap);
 
         //set tiles en stage goed enzo
@@ -105,6 +83,12 @@ public class GameManager {
         //UI inladen van bestanden
         UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
         UISkin.addRegions(new TextureAtlas(Gdx.files.internal("assets/UI/medieval.atlas")));
+
+
+        batch = new SpriteBatch();
+        UnitProducingBuilding uPB = new UnitProducingBuilding(new Point(48, 320), 64, 64, BuildingType.Towncenter, 1000);
+        buildings.add(uPB);
+        units.add(uPB.produceUnit(UnitType.Knight));
     }
 
     public void Render(){
@@ -130,7 +114,28 @@ public class GameManager {
 
         //forloop voor participants
         // render items / buildings from you and other players.
+        batch.setProjectionMatrix(orthographicCamera.combined);
+        batch.begin();
+        for (int i = 0; i < units.size() && units.size() != 0; i++)
+        {
+            batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
+            if (units.get(i).getSelected() == true)
+            {
+                Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
+                batch.draw(selectedSprite, units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
+            }
+        }
 
+        for (int i = 0; i < buildings.size() && buildings.size() != 0; i++)
+        {
+            batch.draw(buildings.get(i).getSprite(), buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
+            if (buildings.get(i).getSelected() == true)
+            {
+                Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
+                batch.draw(selectedSprite, buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
+            }
+        }
+       batch.end();
 
     }
 
@@ -175,7 +180,7 @@ public class GameManager {
         return orthographicCamera;
     }
 
-    	public void addUnit(int x, int y) {
+    public void addUnit(int x, int y) {
 		Vector3 coordinate = new Vector3(x, y, 0);
 		orthographicCamera.project(coordinate);
 		units.add(new OffensiveUnit(new Point(x, y), UnitType.Knight, 10, 10, 10, 10, 10, true));
