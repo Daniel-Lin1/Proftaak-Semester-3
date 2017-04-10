@@ -43,6 +43,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	static final int SCROLL_SPEED = 10;
 	static final int VIEWPORT_WIDTH = 1920;
 	static final int VIEWPORT_HEIGHT = 1080;
+
 	private OffensiveUnit unit;
 	private UnitProducingBuilding buildingStable;
 	private UnitProducingBuilding buildingTowncenter;
