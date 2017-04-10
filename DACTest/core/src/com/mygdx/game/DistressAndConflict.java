@@ -20,6 +20,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.*;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 
 import java.awt.*;
@@ -34,17 +35,22 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 	private TiledMap tiledMap;
 	private TiledMapRenderer tiledMapRenderer;
 	private Stage stage;
-	OrthographicCamera orthographicCamera;
+	private OrthographicCamera orthographicCamera;
 	private int OldFps = 0;
 
 	private ArrayList<Unit> units = new ArrayList<Unit>();
 
 	static final int SCROLL_SPEED = 10;
-	static final int VIEWPORT_WIDTH = 950;
-	static final int VIEWPORT_HEIGHT = 950;
+	static final int VIEWPORT_WIDTH = 1920;
+	static final int VIEWPORT_HEIGHT = 1080;
 	private OffensiveUnit unit;
 	private UnitProducingBuilding buildingStable;
 	private UnitProducingBuilding buildingTowncenter;
+
+
+	public OrthographicCamera getOrthographicCamera() {
+		return orthographicCamera;
+	}
 
 	public DistressAndConflict(Account user, GameManager gameManager) {
 		this.user = user;
@@ -129,7 +135,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 				,tiledMap.getLayers().get(0).getProperties().get("height", Integer.class)//This too
 		);
 		tiledMapRenderer.render();
-		showFPS();
+		//showFPS();
 
 		batch.setProjectionMatrix(orthographicCamera.combined);
 		batch.begin();
@@ -137,7 +143,7 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		{
 			batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
 		}
-		//batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
+		batch.draw(unit.getSprite(), unit.getCoordinate().x, unit.getCoordinate().y, 16, 16);
 		batch.draw(buildingStable.getSprite(), buildingStable.getCoordinate().x, buildingStable.getCoordinate().y, buildingStable.getSizeX(), buildingStable.getSizeY());
 		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
 		batch.end();
@@ -199,7 +205,12 @@ public class DistressAndConflict extends ApplicationAdapter implements InputProc
 		return false;
 	}
 
-	public void addUnit(float x, float y) {
-		units.add(new OffensiveUnit(new Point((int)x, (int)y), UnitType.Knight, 10, 10, 10, 10, 10, true));
+	public void addUnit(int x, int y) {
+		Vector3 coordinate = new Vector3(x, y, 0);
+		orthographicCamera.project(coordinate);
+		units.add(new OffensiveUnit(new Point(x, y), UnitType.Knight, 10, 10, 10, 10, 10, true));
+	}
+	public Point isoto(){
+		return null;
 	}
 }

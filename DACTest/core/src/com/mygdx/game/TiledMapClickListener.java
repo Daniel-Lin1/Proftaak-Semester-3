@@ -12,6 +12,8 @@ public class TiledMapClickListener extends ClickListener {
     private TiledMapActor actor;
     private TiledMapStage stage;
 
+
+
     public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage) {
         this.actor = actor;
         this.stage = stage;
@@ -20,6 +22,7 @@ public class TiledMapClickListener extends ClickListener {
     @Override
     public void clicked(InputEvent event, float x, float y) {
         System.out.println(actor.cell + " has been clicked.");
+        System.out.println("x="+ x + " y=" + y);
         stage.createUnit(actor);
     }
 

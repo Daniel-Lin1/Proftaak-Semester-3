@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.MapLayer;
@@ -21,12 +22,14 @@ public class TiledMapStage extends Stage {
     private TiledMap tiledMap;
     private Group background = new Group();
     private Group foreground = new Group();
+    private OrthographicCamera ogc;
 
 
 
     public TiledMapStage(TiledMap tiledMap, DistressAndConflict dac) {
         this.tiledMap = tiledMap;
         this.dac = dac;
+        this.ogc = dac.getOrthographicCamera();
 
         background.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         foreground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -65,6 +68,6 @@ public class TiledMapStage extends Stage {
 //        unit.setSize(texture.getWidth(), texture.getHeight());
 //        unit.setPosition(actor.getX(), actor.getY());
 //        foreground.addActor(unit);
-        dac.addUnit(actor.getX(), actor.getY());
+        dac.addUnit((int)actor.getX(), (int)actor.getY());
     }
 }
