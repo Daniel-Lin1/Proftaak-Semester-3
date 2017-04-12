@@ -8,7 +8,6 @@ import Player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 
@@ -58,19 +57,8 @@ public class DistressAndConflict extends ApplicationAdapter {
 		gameManager.Render();
 		uiManager.Render();
 		showFPS();
-
-<<<<<<< HEAD
-		batch.setProjectionMatrix(gameManager.getOrthographicCamera().combined);
-		batch.begin();
-//		for (int i = 0; i < units.size() && units.size() != 0; i++)
-//		{
-//			batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
-//		}
-//		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
-//		batch.end();
-=======
+		
 		//batch.setProjectionMatrix(gameManager.getOrthographicCamera().combined);
->>>>>>> 75dbf7570bd97451e61f05ef4c8492af829763c1
 	}
 
 
