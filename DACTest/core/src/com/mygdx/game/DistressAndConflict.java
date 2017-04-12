@@ -57,7 +57,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 		gameManager.Render();
 		uiManager.Render();
 		showFPS();
-		
+
 		//batch.setProjectionMatrix(gameManager.getOrthographicCamera().combined);
 	}
 

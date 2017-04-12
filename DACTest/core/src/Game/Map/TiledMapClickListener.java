@@ -1,15 +1,13 @@
 package Game.Map;
 
-import Building.*;
+import Building.Building;
+import Building.UnitProducingBuilding;
 import Enums.UnitType;
 import Game.GameManager;
 import Units.Unit;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import javafx.scene.control.Button;
 
 import java.awt.*;
 import java.util.ArrayList;

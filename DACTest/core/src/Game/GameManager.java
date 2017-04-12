@@ -2,35 +2,30 @@ package Game;
 
 import Building.Building;
 import Building.UnitProducingBuilding;
-import Enums.*;
+import Enums.BuildingType;
+import Enums.State;
+import Enums.UnitType;
 import Game.Map.Map;
+import Game.Map.Tile;
+import Game.Map.TiledMapStage;
 import Player.Player;
 import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
-import Game.Map.TiledMapStage;
 
 import java.awt.*;
-import java.awt.Image;
 import java.util.ArrayList;
 
 /**
@@ -71,6 +66,8 @@ public class GameManager {
         tiledMap = new TmxMapLoader().load("assets/TestMap3.tmx");
         gamecamera = new OrthographicCameraControlClass(800, tiledMap);
 
+        CreateMap(tiledMap);
+
         //set tiles en stage goed enzo
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
         stage = new TiledMapStage(tiledMap, dac);
@@ -81,6 +78,32 @@ public class GameManager {
         buildings.add(uPB);
     }
 
+    public void CreateMap(TiledMap tiledMap){//Function to generate tiles based on the map.
+        TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
+        //Init vars
+        int tilesHorizontal = tiledMapTileLayer.getWidth();
+        int tilesVertical = tiledMapTileLayer.getHeight();
+        int totalTiles = tilesHorizontal * tilesVertical;
+
+        int tileHeight = (int)tiledMapTileLayer.getTileHeight();
+        int tileWidth = (int)tiledMapTileLayer.getTileWidth();
+        ArrayList<Tile> tiles = new ArrayList<Tile>();
+
+        int tmpTilesHorizontal = 10;
+        int tmpTilesVertical = 10;
+        int tmpTotalTiles = tmpTilesHorizontal * tmpTilesVertical;
+        int number = 1;
+
+
+        for (int i = 1; i < tilesVertical+1; i++) {
+            for (int j = tilesHorizontal; j >= 1; j--) {
+
+                System.out.println("#" + number + " | X:" + i*16 + " | Y:" + j*16);
+                number++;
+            }
+        }
+
+    }
     public void Render(){
         orthographicCamera = gamecamera.Render(orthographicCamera);
         orthographicCamera.update();
