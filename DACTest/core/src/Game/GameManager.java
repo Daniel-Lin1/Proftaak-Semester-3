@@ -66,7 +66,7 @@ public class GameManager {
         tiledMap = new TmxMapLoader().load("assets/TestMap3.tmx");
         gamecamera = new OrthographicCameraControlClass(800, tiledMap);
 
-        CreateMap(tiledMap);
+        createMap(tiledMap);
 
         //set tiles en stage goed enzo
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
@@ -78,7 +78,7 @@ public class GameManager {
         buildings.add(uPB);
     }
 
-    public void CreateMap(TiledMap tiledMap){//Function to generate tiles based on the map.
+    public void createMap(TiledMap tiledMap){//Function to generate tiles based on the map.
         TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
         //Init vars
         int tilesHorizontal = tiledMapTileLayer.getWidth();
@@ -104,8 +104,8 @@ public class GameManager {
         }
 
     }
-    public void Render(){
-        orthographicCamera = gamecamera.Render(orthographicCamera);
+    public void render(){
+        orthographicCamera = gamecamera.render(orthographicCamera);
         orthographicCamera.update();
         tiledMapRenderer.render();
         stage.act();

@@ -2,7 +2,6 @@ package Game;
 
 import Building.Building;
 import Units.Unit;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -45,7 +44,7 @@ public class UIManager {
 
     }
 
-    public void Render()
+    public void render()
     {
         UIBatch.begin();
         UIBatch.draw(UISkin.getSprite("buttonlong_brown"),350,0,1570, 200);
@@ -57,7 +56,7 @@ public class UIManager {
         {
             if(unit.getSelected() == true)
             {
-                font.draw(UIBatch, unit.GetUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
+                font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
                 UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 180, 180);
             }
         }
@@ -65,7 +64,7 @@ public class UIManager {
         {
             if(building.getSelected() == true)
             {
-                font.draw(UIBatch, building.GetUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
+                font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
                 UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 180, 180);
             }
         }

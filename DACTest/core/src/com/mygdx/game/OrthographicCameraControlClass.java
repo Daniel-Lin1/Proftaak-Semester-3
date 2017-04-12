@@ -20,7 +20,7 @@ public class OrthographicCameraControlClass {
         this.tiledMapTileLayer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
     }
 
-    public OrthographicCamera Render(OrthographicCamera orthographicCamera){
+    public OrthographicCamera render(OrthographicCamera orthographicCamera){
         //Map scroll
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
             if (orthographicCamera.position.x <= orthographicCamera.viewportWidth/2){

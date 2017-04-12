@@ -3,7 +3,6 @@ package Units;
 import Enums.UnitType;
 import Interfaces.Movement;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;
@@ -127,7 +126,7 @@ public abstract class Unit implements Movement {
 
     public boolean getSelected() { return selected; }
 
-    public String GetUIInfo(){
+    public String getUIInfo(){
         return  "UnitType : " + unitType.toString() + "\n" +
                 "Health : " + health + "\n" +
                 "Speed : " + speed + "\n" +
