@@ -2,40 +2,35 @@ package com.mygdx.game;
 
 import Enums.State;
 import Game.GameManager;
+import Game.UIManager;
 import Player.Account;
 import Player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 
 import java.util.ArrayList;
 
 public class DistressAndConflict extends ApplicationAdapter {
-	private SpriteBatch batch;
+	//private SpriteBatch batch;
 	private Account user;
 	public GameManager gameManager;
+	public UIManager uiManager;
 	private int OldFps = 0;
 
 
 
-	public DistressAndConflict(Account user, GameManager gameManager) {
+	public DistressAndConflict(Account user, GameManager gameManager, UIManager uiManager) {
 		this.user = user;
 		this.gameManager = gameManager;
+		this.uiManager = uiManager;
 	}
 
 	public DistressAndConflict() {
 		this.user = new Account();
 		this.gameManager = new GameManager(this, State.Finished, 1, "lel", new ArrayList<Player>());
+		this.uiManager = new UIManager(this, this.gameManager);
 	}
 
 	public void host(){
@@ -50,22 +45,21 @@ public class DistressAndConflict extends ApplicationAdapter {
 		//http://www.gamefromscratch.com/post/2014/04/16/LibGDX-Tutorial-11-Tiled-Maps-Part-1-Simple-Orthogonal-Maps.aspx
 		//gameManager.setTiledMap(new TmxMapLoader().load("assets/TestMap1.tmx"));
 		gameManager.create();
-		batch = new SpriteBatch();
+		uiManager.create();
+
+		//batch = new SpriteBatch();
 	}
 
 	@Override
 	public void render () {
-
-		Gdx.gl.glClearColor(0, 0, 1, 1);
-		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		Gdx.gl.glClearColor(0, 0, 0, 0);
 		Gdx.gl.glBlendFunc(GL20.GL_SRC_ALPHA, GL20.GL_ONE_MINUS_SRC_ALPHA);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		gameManager.Render();
-		gameManager.renderUI();
-
+		uiManager.Render();
 		showFPS();
 
+<<<<<<< HEAD
 		batch.setProjectionMatrix(gameManager.getOrthographicCamera().combined);
 		batch.begin();
 //		for (int i = 0; i < units.size() && units.size() != 0; i++)
@@ -74,13 +68,16 @@ public class DistressAndConflict extends ApplicationAdapter {
 //		}
 //		batch.draw(buildingTowncenter.getSprite(), buildingTowncenter.getCoordinate().x, buildingTowncenter.getCoordinate().y, buildingTowncenter.getSizeX(), buildingTowncenter.getSizeY());
 //		batch.end();
+=======
+		//batch.setProjectionMatrix(gameManager.getOrthographicCamera().combined);
+>>>>>>> 75dbf7570bd97451e61f05ef4c8492af829763c1
 	}
 
 
 
 	@Override
 	public void dispose () {
-		batch.dispose();
+		//batch.dispose();
 	}
 
 	public void showFPS(){//Created to optimize FPS, YaY 60 FPS!

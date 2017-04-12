@@ -11,7 +11,7 @@ import java.awt.*;
 /**
  * Created by Daniel on 26-3-2017.
  */
-public abstract class Unit implements Movement, InputProcessor {
+public abstract class Unit implements Movement {
 
     private Point coordinate;
     private UnitType unitType;
@@ -40,15 +40,14 @@ public abstract class Unit implements Movement, InputProcessor {
     }
 
     @Override
-    public void moveTo() {
-
+    public void moveTo(Point point) {
+        this.coordinate = point;
     }
 
     @Override
     public void cancelMove() {
 
     }
-
 
     public Texture getSprite() {
         return sprite;
@@ -127,4 +126,14 @@ public abstract class Unit implements Movement, InputProcessor {
     }
 
     public boolean getSelected() { return selected; }
+
+    public String GetUIInfo(){
+        return  "UnitType : " + unitType.toString() + "\n" +
+                "Health : " + health + "\n" +
+                "Speed : " + speed + "\n" +
+                "HitPerSecond : " + hitDamage + "\n" +
+                "HitDamage : " + hitDamage + "\n"+
+                "Range : " + range + "\n" +
+                "Will currently return fire : " + willReturnFire;
+    }
 }

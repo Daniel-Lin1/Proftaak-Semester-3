@@ -1,13 +1,17 @@
-package com.mygdx.game;
+package Game.Map;
 
-import Building.Building;
-import Units.OffensiveUnit;
+import Building.*;
+import Enums.UnitType;
+import Game.GameManager;
 import Units.Unit;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import javafx.scene.control.Button;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -26,26 +30,39 @@ public class TiledMapClickListener extends ClickListener {
         this.stage = stage;
     }
 
+    // ToDo: clickevents die right click en left click onderscheiden
+
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        System.out.println("X:" + actor.getX() + " Y:" + actor.getY() + " has been clicked.");
 
-        //ToDo: om units te spawnen om te testen pas dit aan
-        //stage.createUnit(actor);
+        //stage.createUnit(actor); //om units te spawnen om te testen pas dit aan
 
+        ArrayList<Unit> units = GameManager.units;
+        ArrayList<Building> buildings = GameManager.buildings;
         for (int i = 0; i < units.size() && units.size() != 0; i++) {
-            if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
-                units.get(i).setSelected(true);
-            } else {
+            if (units.get(i).getSelected() == true)
+            {
+                units.get(i).moveTo(new Point((int)actor.getX(), (int)actor.getY()));
                 units.get(i).setSelected(false);
+            }
+            else
+            {
+                if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
+                    units.get(i).setSelected(true);
+                } else {
+                    units.get(i).setSelected(false);
+                }
             }
         }
 
         for (int i = 0; i < buildings.size() && buildings.size() != 0; i++)
         {
-            if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY())
+            if (actor.getX() == buildings.get(i).getCoordinate().getX() && actor.getY() == buildings.get(i).getCoordinate().getY())
             {
-                buildings.get(i).setSelected(true);
+                // ToDo: dit moet via UI gebeuren en niet via dit clickEvent
+                UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
+                units.add(uPB.produceUnit(UnitType.Knight));
+                //buildings.get(i).setSelected(true);
             }
             else
             {

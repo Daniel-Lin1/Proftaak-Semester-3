@@ -1,6 +1,7 @@
-package Game;
+package Game.Map;
 
 import Enums.GroundType;
+import Game.Resource;
 
 /**
  * Created by Daniel on 26-3-2017.

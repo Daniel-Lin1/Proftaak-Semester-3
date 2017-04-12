@@ -88,4 +88,9 @@ public abstract class Building {
     }
 
     public boolean getSelected() { return selected; }
+
+    public String GetUIInfo(){
+        return "Building Type : " + buildingtype + "\n" +
+                "Health : " + health;
+    }
 }
