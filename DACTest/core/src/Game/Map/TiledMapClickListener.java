@@ -32,7 +32,6 @@ public class TiledMapClickListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-
         //stage.createUnit(actor); //om units te spawnen om te testen pas dit aan
 
         ArrayList<Unit> units = GameManager.units;
