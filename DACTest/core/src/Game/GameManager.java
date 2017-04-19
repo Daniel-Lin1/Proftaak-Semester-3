@@ -32,12 +32,96 @@ import java.util.ArrayList;
  * Created by Daniel on 26-3-2017.
  */
 public class GameManager {
+    public State getGamestate() {
+        return this.gamestate;
+    }
+
+    public void setGamestate(State gamestate) {
+        this.gamestate = gamestate;
+    }
+
+    public int getLobbyID() {
+        return this.lobbyID;
+    }
+
+    public void setLobbyID(int lobbyID) {
+        this.lobbyID = lobbyID;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Map getMap() {
+        return this.map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return this.players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public Stage getStage() {
+        return this.stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setOrthographicCamera(OrthographicCamera orthographicCamera) {
+        this.orthographicCamera = orthographicCamera;
+    }
+
+    public DistressAndConflict getDac() {
+        return this.dac;
+    }
+
+    public void setDac(DistressAndConflict dac) {
+        this.dac = dac;
+    }
+
+    public static void setUnits(ArrayList<Unit> units) {
+        GameManager.units = units;
+    }
+
+    public static void setBuildings(ArrayList<Building> buildings) {
+        GameManager.buildings = buildings;
+    }
+
+    public OrthographicCameraControlClass getGamecamera() {
+        return this.gamecamera;
+    }
+
+    public void setGamecamera(OrthographicCameraControlClass gamecamera) {
+        this.gamecamera = gamecamera;
+    }
+
+    public SpriteBatch getBatch() {
+        return this.batch;
+    }
+
+    public void setBatch(SpriteBatch batch) {
+        this.batch = batch;
+    }
+
     //ToDo : marc moet deze classe opschonen! wat een puinhoop kneus.
     private State gamestate;
     private int lobbyID;
     private String password;
     private Map map;
-    private ArrayList<Player>participants;
+    private ArrayList<Player> players;
     private TiledMap tiledMap;
     private TiledMapRenderer tiledMapRenderer;
     private Stage stage;
@@ -54,8 +138,12 @@ public class GameManager {
         this.gamestate = gamestate;
         this.lobbyID = lobbyID;
         this.password = password;
-        this.participants = participants;
+        this.players = players;
         this.dac = dac;
+    }
+
+    public GameManager(){
+
     }
 
     public void create (){
