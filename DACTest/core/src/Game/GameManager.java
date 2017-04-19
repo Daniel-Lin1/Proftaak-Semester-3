@@ -78,6 +78,7 @@ public class GameManager {
         buildings.add(uPB);
     }
 
+    //TODO: Fix this method
     public ArrayList<Tile> generateTiles(TiledMap tiledMap){//Function to generate tiles based on the map.
         TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
         //Init vars
@@ -140,7 +141,7 @@ public class GameManager {
         for (int i = 0; i < buildings.size() && buildings.size() != 0; i++)
         {
             batch.draw(buildings.get(i).getSprite(), buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
-            if (buildings.get(i).getSelected() == true)
+            if (buildings.get(i).getSelected())
             {
                 Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
                 batch.draw(selectedSprite, buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
