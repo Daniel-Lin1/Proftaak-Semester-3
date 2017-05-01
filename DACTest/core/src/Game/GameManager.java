@@ -32,6 +32,24 @@ import java.util.ArrayList;
  * Created by Daniel on 26-3-2017.
  */
 public class GameManager {
+    private State gamestate;
+    private int lobbyID;
+    private String password;
+    private Map map;
+    private ArrayList<Player> players;
+    private TiledMap tiledMap;
+    private TiledMapRenderer tiledMapRenderer;
+    private Stage stage;
+    private OrthographicCamera orthographicCamera;
+    private DistressAndConflict dac;
+
+    protected static final ArrayList<Unit> units = new ArrayList<Unit>();
+    protected static final ArrayList<Building> buildings = new ArrayList<Building>();
+
+    private OrthographicCameraControlClass gamecamera;
+    //Stage en Skin voor UI inladen
+    private SpriteBatch batch;
+
     public State getGamestate() {
         return this.gamestate;
     }
@@ -93,11 +111,11 @@ public class GameManager {
     }
 
     public static void setUnits(ArrayList<Unit> units) {
-        GameManager.units = units;
+        GameManager.setUnits(units);
     }
 
-    public static void setBuildings(ArrayList<Building> buildings) {
-        GameManager.buildings = buildings;
+    public static void setBuildings(ArrayList buildings) {
+        GameManager.setBuildings(buildings);
     }
 
     public OrthographicCameraControlClass getGamecamera() {
@@ -116,23 +134,36 @@ public class GameManager {
         this.batch = batch;
     }
 
-    //ToDo : marc moet deze classe opschonen! wat een puinhoop kneus.
-    private State gamestate;
-    private int lobbyID;
-    private String password;
-    private Map map;
-    private ArrayList<Player> players;
-    private TiledMap tiledMap;
-    private TiledMapRenderer tiledMapRenderer;
-    private Stage stage;
-    private OrthographicCamera orthographicCamera;
-    private DistressAndConflict dac;
+    public TiledMap getTiledMap() {
+        return tiledMap;
+    }
 
-    public static ArrayList<Unit> units = new ArrayList<Unit>();
-    public static ArrayList<Building> buildings = new ArrayList<Building>();
-    private OrthographicCameraControlClass gamecamera;
-    //Stage en Skin voor UI inladen
-    private SpriteBatch batch;
+    public void setTiledMap(TiledMap tiledMap) {
+        this.tiledMap = tiledMap;
+    }
+
+    public TiledMapRenderer getTiledMapRenderer() {
+        return tiledMapRenderer;
+    }
+
+    public void setTiledMapRenderer(TiledMapRenderer tiledMapRenderer) {
+        this.tiledMapRenderer = tiledMapRenderer;
+    }
+
+    public OrthographicCamera getOrthographicCamera() {
+        return orthographicCamera;
+    }
+
+    public static ArrayList<Unit> getUnits() {
+        return units;
+    }
+
+    public static ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+
+
+    //ToDo : marc moet deze classe opschonen! wat een puinhoop kneus.
 
     public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList<Player> participants) {
         this.gamestate = gamestate;
@@ -172,15 +203,15 @@ public class GameManager {
         //Init vars
         int tilesHorizontal = tiledMapTileLayer.getWidth();
         int tilesVertical = tiledMapTileLayer.getHeight();
-        int totalTiles = tilesHorizontal * tilesVertical;
+        //int totalTiles = tilesHorizontal * tilesVertical;
 
-        int tileHeight = (int)tiledMapTileLayer.getTileHeight();
-        int tileWidth = (int)tiledMapTileLayer.getTileWidth();
+        //int tileHeight = (int)tiledMapTileLayer.getTileHeight();
+        //int tileWidth = (int)tiledMapTileLayer.getTileWidth();
         ArrayList<Tile> tiles = new ArrayList<Tile>();
 
-        int tmpTilesHorizontal = 10;
-        int tmpTilesVertical = 10;
-        int tmpTotalTiles = tmpTilesHorizontal * tmpTilesVertical;
+        //int tmpTilesHorizontal = 10;
+        //int tmpTilesVertical = 10;
+        //int tmpTotalTiles = tmpTilesHorizontal * tmpTilesVertical;
         int number = 1;
 
 
@@ -216,7 +247,7 @@ public class GameManager {
         // render items / buildings from you and other players.
         batch.setProjectionMatrix(orthographicCamera.combined);
         batch.begin();
-        for (int i = 0; i < units.size() && units.size() != 0; i++)
+        for (int i = 0; i < units.size() && !units.isEmpty(); i++)
         {
             batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
             if (units.get(i).getSelected() == true)
@@ -226,7 +257,7 @@ public class GameManager {
             }
         }
 
-        for (int i = 0; i < buildings.size() && buildings.size() != 0; i++)
+        for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
         {
             batch.draw(buildings.get(i).getSprite(), buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
             if (buildings.get(i).getSelected())
@@ -238,37 +269,11 @@ public class GameManager {
        batch.end();
     }
 
-    public TiledMap getTiledMap() {
-        return tiledMap;
-    }
-
-    public void setTiledMap(TiledMap tiledMap) {
-        this.tiledMap = tiledMap;
-    }
-
-    public TiledMapRenderer getTiledMapRenderer() {
-        return tiledMapRenderer;
-    }
-
-    public void setTiledMapRenderer(TiledMapRenderer tiledMapRenderer) {
-        this.tiledMapRenderer = tiledMapRenderer;
-    }
-
-    public OrthographicCamera getOrthographicCamera() {
-        return orthographicCamera;
-    }
-
     public void addUnit(int x, int y) {
 		Vector3 coordinate = new Vector3(x, y, 0);
 		orthographicCamera.project(coordinate);
 		units.add(new OffensiveUnit(new Point(x, y), UnitType.Knight, 10, 10, 10, 10, 10, true));
 	}
 
-    public ArrayList<Unit> getUnits() {
-        return units;
-    }
 
-    public ArrayList<Building> getBuildings() {
-        return buildings;
-    }
 }

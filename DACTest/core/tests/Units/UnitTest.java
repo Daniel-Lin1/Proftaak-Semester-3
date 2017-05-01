@@ -16,25 +16,51 @@ public class UnitTest {
 
     @Test
     void testConstructor() {
-        assert UnitType.Knight == unit.getUnitType();
-        assert 100 == unit.getHealth();
-        assert 1 == unit.getSpeed();
-        assert 1 == unit.getHitDamage();
-        assert 1 == unit.getRange();
-        assert point1 == unit.getCoordinate();
+        boolean sameUnitType;
+        boolean sameHealth;
+        boolean sameSpeed;
+        boolean sameHitDamage;
+        boolean sameRange;
+        boolean samePoint;
+
+        sameUnitType = unit.getUnitType() == UnitType.Knight ? true : false;
+        sameHealth = unit.getHealth() == 100 ? true : false;
+        sameSpeed = unit.getSpeed() == 1 ? true : false;
+        sameHitDamage = unit.getHitDamage() == 1 ? true : false;
+        sameRange = unit.getRange() == 1 ? true : false;
+        samePoint = unit.getCoordinate() == point1 ? true : false;
+
+        assert sameUnitType;
+        assert sameHealth;
+        assert sameSpeed;
+        assert sameHitDamage;
+        assert sameRange;
+        assert samePoint;
     }
 
     @Test
     void testSearchSprite() throws Exception {
+        boolean sameSprite;
+
         unit.searchSprite();
-        assert new Texture(Gdx.files.internal("assets/Knight.png")) == unit.getSprite();
+
+        sameSprite = unit.getSprite() == new Texture(Gdx.files.internal("assets/Knight.png")) ? true : false;
+
+        assert sameSprite;
     }
 
     @Test
     void testMoveTo() throws Exception{
-        assert point1 == unit.getCoordinate();
+        boolean samePoint1;
+        boolean samePoint2;
+
+        samePoint1 = unit.getCoordinate() == point1 ? true : false;
+        assert samePoint1;
+
         Point point2 = new Point(2,2);
         unit.moveTo(point2);
-        assert point2 == unit.getCoordinate();
+
+        samePoint2 = unit.getCoordinates() == point2 ? true : false;
+        assert samePoint2
     }
 }

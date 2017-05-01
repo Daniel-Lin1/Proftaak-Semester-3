@@ -19,21 +19,42 @@ public class BuildingTest {
 
     @Test
     void testConstructor() {
-        assert BuildingType.Towncenter == building.getBuildingtype();
-        assert 1000 == building.getHealth();
-        assert 2 == building.getSizeX();
-        assert 2 == building.getSizeY();
-        assert point1 == building.getCoordinate();
+        boolean sameBuilding;
+        boolean sameHealth;
+        boolean sameSizeX;
+        boolean sameSizeY;
+        boolean samePoint;
+
+        sameBuilding = BuildingType.Towncenter == building.getBuildingtype() ? true : false;
+        sameBuilding = uilding.getHealth() == 1000 ? true : false;
+        sameSizeX = building.getSizeX() == 2 ? true : false;
+        sameSizeY = building.getSizeY() == 2 ? true : false;
+        samePoint = building.getCoordinate() == point1 ? true : false;
+
+        assert sameBuilding;
+        assert sameHealth;
+        assert sameSizeX;
+        assert sameSizeY;
+        assert samePoint;
     }
 
     @Test
     void testSearchSprite() {
+        boolean sameTexture;
+
         building.searchSprite();
-        assert new Texture(Gdx.files.internal("assets/Towncenter.png")) == building.getSprite();
+
+        sameTexture = building.getSprite() == Texture(Gdx.files.internal("assets/Towncenter.png")) ? true : false
+
+        assert sameTexture
     }
 
     @Test
     void produceUnitTest(){
-        assert new OffensiveUnit(new Point(1,1), UnitType.Knight, 100, 1, 1, 10, 1, false) == building.produceUnit(UnitType.Knight);
+        boolean sameUnit;
+        OffensiveUnit unit = new OffensiveUnit(new Point(1,1), UnitType.Knight, 100, 1, 1, 10, 1, false);
+
+        sameUnit = building.produceUnit(UnitType.Knight) == unit ? true : false;
+        assert sameUnit;
     }
 }
