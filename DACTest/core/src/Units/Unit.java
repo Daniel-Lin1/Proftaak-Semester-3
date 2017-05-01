@@ -126,8 +126,6 @@ public abstract class Unit implements Movement {
 
     public boolean getSelected() { return selected; }
 
-    public String GetUIInfo(){
-        return  unitType.toString() + "\n" +
     public String getUIInfo(){
         return  "UnitType : " + unitType.toString() + "\n" +
                 "Health : " + health + "\n" +

@@ -2,12 +2,9 @@ package Game.UserInterface;
 
 import Building.Building;
 import Units.Unit;
-<<<<<<< HEAD:DACTest/core/src/Game/UserInterface/UIManager.java
 import Game.GameManager;
 import Game.TextureVault;
 import com.badlogic.gdx.Game;
-=======
->>>>>>> origin/master:DACTest/core/src/Game/UIManager.java
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -67,7 +64,7 @@ public class UIManager {
             if(unit.getSelected() == true)
             {
                 UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 150, 160);
-                font.draw(UIBatch, unit.GetUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
+                font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
 
                 switch(unit.getUnitType())
                 {
@@ -94,7 +91,7 @@ public class UIManager {
         {
             if(building.getSelected() == true)
             {
-                font.draw(UIBatch, building.GetUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
+                font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
                 UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 150, 150);
                 font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
                 UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 180, 180);
