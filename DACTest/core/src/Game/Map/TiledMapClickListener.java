@@ -32,12 +32,54 @@ public class TiledMapClickListener extends ClickListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        ArrayList<Unit> units = GameManager.getUnits();
+        ArrayList<Building> buildings = GameManager.getBuildings();
         switch (button) {
             case Input.Buttons.LEFT:
-                //Do shit
+                for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
+                    if (units.get(i).getSelected() == true)
+                    {
+                        if (Gdx.input.isKeyPressed(Input.Keys.Q)){
+
+                        }
+                        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+
+                        }
+                        if(Gdx.input.isKeyPressed(Input.Keys.E)){
+
+                        }
+                        if(Gdx.input.isKeyPressed(Input.Keys.R)){
+
+                        }
+                        else{
+                            units.get(i).moveTo(new Point((int)actor.getX(), (int)actor.getY()));
+                            units.get(i).setSelected(false);
+                        }
+                    }
+                }
                 break;
             case Input.Buttons.RIGHT:
-                //Do shit
+                for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
+                    if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
+                        units.get(i).setSelected(true);
+                    } else {
+                        units.get(i).setSelected(false);
+                    }
+                }
+                for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
+                {
+                    if (actor.getX() == buildings.get(i).getCoordinate().getX() && actor.getY() == buildings.get(i).getCoordinate().getY())
+                    {
+                        // ToDo: dit moet via UI gebeuren en niet via dit clickEvent
+                        UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
+                        units.add(uPB.produceUnit(UnitType.Knight));
+                        //buildings.get(i).setSelected(true);
+                    }
+                    else
+                    {
+                        buildings.get(i).setSelected(false);
+                    }
+                }
                 break;
         }
         return true;
@@ -45,54 +87,7 @@ public class TiledMapClickListener extends ClickListener {
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
-        //stage.createUnit(actor); //om units te spawnen om te testen pas dit aan
 
-        ArrayList<Unit> units = GameManager.getUnits();
-        ArrayList<Building> buildings = GameManager.getBuildings();
-        for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
-            if (units.get(i).getSelected() == true)
-            {
-                if (Gdx.input.isKeyPressed(Input.Keys.Q)){
-
-                }
-                if(Gdx.input.isKeyPressed(Input.Keys.W)){
-
-                }
-                if(Gdx.input.isKeyPressed(Input.Keys.E)){
-
-                }
-                if(Gdx.input.isKeyPressed(Input.Keys.R)){
-
-                }
-                else{
-                    units.get(i).moveTo(new Point((int)actor.getX(), (int)actor.getY()));
-                    units.get(i).setSelected(false);
-                }
-            }
-            else
-            {
-                if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
-                    units.get(i).setSelected(true);
-                } else {
-                    units.get(i).setSelected(false);
-                }
-            }
-        }
-
-        for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
-        {
-            if (actor.getX() == buildings.get(i).getCoordinate().getX() && actor.getY() == buildings.get(i).getCoordinate().getY())
-            {
-                // ToDo: dit moet via UI gebeuren en niet via dit clickEvent
-                UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
-                units.add(uPB.produceUnit(UnitType.Knight));
-                //buildings.get(i).setSelected(true);
-            }
-            else
-            {
-                buildings.get(i).setSelected(false);
-            }
-        }
     }
 
     @Override
