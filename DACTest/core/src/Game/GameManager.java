@@ -8,6 +8,7 @@ import Enums.UnitType;
 import Game.Map.Map;
 import Game.Map.Tile;
 import Game.Map.TiledMapStage;
+import Interfaces.GameManagerable;
 import Player.Player;
 import Units.OffensiveUnit;
 import Units.Unit;
@@ -26,12 +27,14 @@ import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
 
 import java.awt.*;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
-public class GameManager {
+public class GameManager extends UnicastRemoteObject implements GameManagerable {
     public State getGamestate() {
         return this.gamestate;
     }
@@ -134,7 +137,8 @@ public class GameManager {
     //Stage en Skin voor UI inladen
     private SpriteBatch batch;
 
-    public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList<Player> participants) {
+    public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList<Player> participants) throws RemoteException {
+        super();
         this.gamestate = gamestate;
         this.lobbyID = lobbyID;
         this.password = password;
@@ -142,7 +146,8 @@ public class GameManager {
         this.dac = dac;
     }
 
-    public GameManager(){
+    public GameManager() throws RemoteException {
+        super();
 
     }
 
