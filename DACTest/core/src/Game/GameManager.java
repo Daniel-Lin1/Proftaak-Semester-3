@@ -2,47 +2,126 @@ package Game;
 
 import Building.Building;
 import Building.UnitProducingBuilding;
-import Enums.*;
+import Enums.BuildingType;
+import Enums.State;
+import Enums.UnitType;
 import Game.Map.Map;
+import Game.Map.Tile;
+import Game.Map.TiledMapStage;
 import Player.Player;
 import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.*;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
-import Game.Map.TiledMapStage;
 
 import java.awt.*;
-import java.awt.Image;
 import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
 public class GameManager {
+    public State getGamestate() {
+        return this.gamestate;
+    }
+
+    public void setGamestate(State gamestate) {
+        this.gamestate = gamestate;
+    }
+
+    public int getLobbyID() {
+        return this.lobbyID;
+    }
+
+    public void setLobbyID(int lobbyID) {
+        this.lobbyID = lobbyID;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public Map getMap() {
+        return this.map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return this.players;
+    }
+
+    public void setPlayers(ArrayList<Player> players) {
+        this.players = players;
+    }
+
+    public Stage getStage() {
+        return this.stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setOrthographicCamera(OrthographicCamera orthographicCamera) {
+        this.orthographicCamera = orthographicCamera;
+    }
+
+    public DistressAndConflict getDac() {
+        return this.dac;
+    }
+
+    public void setDac(DistressAndConflict dac) {
+        this.dac = dac;
+    }
+
+    public static void setUnits(ArrayList<Unit> units) {
+        GameManager.units = units;
+    }
+
+    public static void setBuildings(ArrayList<Building> buildings) {
+        GameManager.buildings = buildings;
+    }
+
+    public OrthographicCameraControlClass getGamecamera() {
+        return this.gamecamera;
+    }
+
+    public void setGamecamera(OrthographicCameraControlClass gamecamera) {
+        this.gamecamera = gamecamera;
+    }
+
+    public SpriteBatch getBatch() {
+        return this.batch;
+    }
+
+    public void setBatch(SpriteBatch batch) {
+        this.batch = batch;
+    }
+
     //ToDo : marc moet deze classe opschonen! wat een puinhoop kneus.
     private State gamestate;
     private int lobbyID;
     private String password;
     private Map map;
-    private ArrayList<Player>participants;
+    private ArrayList<Player> players;
     private TiledMap tiledMap;
     private TiledMapRenderer tiledMapRenderer;
     private Stage stage;
@@ -59,8 +138,12 @@ public class GameManager {
         this.gamestate = gamestate;
         this.lobbyID = lobbyID;
         this.password = password;
-        this.participants = participants;
+        this.players = players;
         this.dac = dac;
+    }
+
+    public GameManager(){
+
     }
 
     public void create (){
@@ -70,6 +153,8 @@ public class GameManager {
         orthographicCamera.update();
         tiledMap = new TmxMapLoader().load("assets/TestMap3.tmx");
         gamecamera = new OrthographicCameraControlClass(800, tiledMap);
+
+        generateTiles(tiledMap);
 
         //set tiles en stage goed enzo
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
@@ -81,8 +166,35 @@ public class GameManager {
         buildings.add(uPB);
     }
 
-    public void Render(){
-        orthographicCamera = gamecamera.Render(orthographicCamera);
+    //TODO: Fix this method
+    public ArrayList<Tile> generateTiles(TiledMap tiledMap){//Function to generate tiles based on the map.
+        TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
+        //Init vars
+        int tilesHorizontal = tiledMapTileLayer.getWidth();
+        int tilesVertical = tiledMapTileLayer.getHeight();
+        int totalTiles = tilesHorizontal * tilesVertical;
+
+        int tileHeight = (int)tiledMapTileLayer.getTileHeight();
+        int tileWidth = (int)tiledMapTileLayer.getTileWidth();
+        ArrayList<Tile> tiles = new ArrayList<Tile>();
+
+        int tmpTilesHorizontal = 10;
+        int tmpTilesVertical = 10;
+        int tmpTotalTiles = tmpTilesHorizontal * tmpTilesVertical;
+        int number = 1;
+
+
+        for (int i = 1; i < tilesVertical+1; i++) {
+            for (int j = tilesHorizontal; j >= 1; j--) {
+
+                System.out.println("#" + number + " | X:" + i*16 + " | Y:" + j*16);
+                number++;
+            }
+        }
+        return tiles;
+    }
+    public void render(){
+        orthographicCamera = gamecamera.render(orthographicCamera);
         orthographicCamera.update();
         tiledMapRenderer.render();
         stage.act();
@@ -117,7 +229,7 @@ public class GameManager {
         for (int i = 0; i < buildings.size() && buildings.size() != 0; i++)
         {
             batch.draw(buildings.get(i).getSprite(), buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
-            if (buildings.get(i).getSelected() == true)
+            if (buildings.get(i).getSelected())
             {
                 Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
                 batch.draw(selectedSprite, buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());

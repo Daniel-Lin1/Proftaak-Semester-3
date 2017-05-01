@@ -10,15 +10,19 @@ public class Map {
     private int sizeX;
     private int sizeY;
     private String mapName;
-    private ArrayList<Tile>Tiles;
+    private ArrayList<Tile> tiles;
     private ArrayList<Point> spawnPoints;
 
     public Map(int sizeX, int sizeY, String mapName, ArrayList<Tile> tiles, ArrayList<Point> spawnPoints ) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
         this.mapName = mapName;
-        this.Tiles = tiles;
+        this.tiles = tiles;
         this.spawnPoints = spawnPoints;
+    }
+
+    public Map(){
+
     }
 
     public void render(){

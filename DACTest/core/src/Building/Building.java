@@ -1,11 +1,9 @@
 package Building;
 
 import Enums.BuildingType;
-import Enums.UnitType;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-import javax.xml.soap.Text;
 import java.awt.*;
 
 /**
@@ -89,7 +87,7 @@ public abstract class Building {
 
     public boolean getSelected() { return selected; }
 
-    public String GetUIInfo(){
+    public String getUIInfo(){
         return "Building Type : " + buildingtype + "\n" +
                 "Health : " + health;
     }

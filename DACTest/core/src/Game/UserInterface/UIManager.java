@@ -2,9 +2,12 @@ package Game.UserInterface;
 
 import Building.Building;
 import Units.Unit;
+<<<<<<< HEAD:DACTest/core/src/Game/UserInterface/UIManager.java
 import Game.GameManager;
 import Game.TextureVault;
 import com.badlogic.gdx.Game;
+=======
+>>>>>>> origin/master:DACTest/core/src/Game/UIManager.java
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -51,7 +54,7 @@ public class UIManager {
 
     }
 
-    public void Render()
+    public void render()
     {
         amountOfAbilities = 0;
         UIBatch.begin();
@@ -81,6 +84,10 @@ public class UIManager {
                         break;
                 }
 
+
+                font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
+                UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 180, 180);
+
             }
         }
         for(Building building : manager.getBuildings())
@@ -89,6 +96,8 @@ public class UIManager {
             {
                 font.draw(UIBatch, building.GetUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
                 UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 150, 150);
+                font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
+                UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 180, 180);
             }
         }
 
