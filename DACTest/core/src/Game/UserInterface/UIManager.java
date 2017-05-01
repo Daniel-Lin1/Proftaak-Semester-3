@@ -105,14 +105,14 @@ public class UIManager {
 
     private void renderAttacker(){
         amountOfAbilities = 1;
-        UIBatch.draw(textureVault.attack, 400, 40, 140, 140);
+        UIBatch.draw(textureVault.getUiElementAttack(), 400, 40, 140, 140);
     }
 
     private void renderBuilder(){
         amountOfAbilities = 3;
-        UIBatch.draw(textureVault.townCenter, 400, 40, 140, 140);
-        UIBatch.draw(textureVault.gatherResource, 600, 40, 140, 140);
-        UIBatch.draw(textureVault.stable, 800, 40, 140, 140);
+        UIBatch.draw(textureVault.getTownCenter(), 400, 40, 140, 140);
+        UIBatch.draw(textureVault.getGatherResource(), 600, 40, 140, 140);
+        UIBatch.draw(textureVault.getStable(), 800, 40, 140, 140);
     }
 
     private void drawAbilitiesKeys(){

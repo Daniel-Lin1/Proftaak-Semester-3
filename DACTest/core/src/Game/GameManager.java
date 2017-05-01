@@ -113,7 +113,7 @@ public class GameManager {
     public static void setUnits(ArrayList<Unit> units) {
         GameManager.setUnits(units);
     }
-
++
     public static void setBuildings(ArrayList buildings) {
         GameManager.setBuildings(buildings);
     }
