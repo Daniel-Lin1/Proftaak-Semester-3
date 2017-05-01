@@ -47,9 +47,9 @@ public class TiledMapClickListener extends ClickListener {
     public void clicked(InputEvent event, float x, float y) {
         //stage.createUnit(actor); //om units te spawnen om te testen pas dit aan
 
-        ArrayList<Unit> units = GameManager.units;
-        ArrayList<Building> buildings = GameManager.buildings;
-        for (int i = 0; i < units.size() && units.size() != 0; i++) {
+        ArrayList<Unit> units = GameManager.getUnits();
+        ArrayList<Building> buildings = GameManager.getBuildings();
+        for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
             if (units.get(i).getSelected() == true)
             {
                 if (Gdx.input.isKeyPressed(Input.Keys.Q)){
@@ -79,7 +79,7 @@ public class TiledMapClickListener extends ClickListener {
             }
         }
 
-        for (int i = 0; i < buildings.size() && buildings.size() != 0; i++)
+        for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
         {
             if (actor.getX() == buildings.get(i).getCoordinate().getX() && actor.getY() == buildings.get(i).getCoordinate().getY())
             {

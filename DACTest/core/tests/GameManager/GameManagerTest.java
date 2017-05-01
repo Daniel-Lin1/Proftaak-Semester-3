@@ -26,7 +26,10 @@ public class GameManagerTest {
         TiledMap tiledMap = new TiledMap();
         gameManager.setTiledMap(tiledMap);
 
-        assert gameManager.getTiledMap() == tiledMap : "Expected: " + tiledMap + ", Actual: " + gameManager.getTiledMap();
+        TiledMap gmTiledMap = gameManager.getTiledMap();
+
+        gmTiledMap == tiledMap ? true : false
+        assert tiledMapSet : "Expected: " + tiledMap + ", Actual: " + gmTiledMap;
     }
 
     @Test
