@@ -30,7 +30,18 @@ public class TiledMapClickListener extends ClickListener {
         this.stage = stage;
     }
 
-    // ToDo: clickevents die right click en left click onderscheiden
+    @Override
+    public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
+        switch (button) {
+            case Input.Buttons.LEFT:
+                //Do shit
+                break;
+            case Input.Buttons.RIGHT:
+                //Do shit
+                break;
+        }
+        return true;
+    }
 
     @Override
     public void clicked(InputEvent event, float x, float y) {
