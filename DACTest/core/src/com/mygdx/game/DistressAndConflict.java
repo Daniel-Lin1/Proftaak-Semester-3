@@ -2,13 +2,12 @@ package com.mygdx.game;
 
 import Enums.State;
 import Game.GameManager;
-import Game.UIManager;
+import Game.UserInterface.UIManager;
 import Player.Account;
 import Player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 import java.util.ArrayList;
 

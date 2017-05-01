@@ -42,8 +42,22 @@ public class TiledMapClickListener extends ClickListener {
         for (int i = 0; i < units.size() && units.size() != 0; i++) {
             if (units.get(i).getSelected() == true)
             {
-                units.get(i).moveTo(new Point((int)actor.getX(), (int)actor.getY()));
-                units.get(i).setSelected(false);
+                if (Gdx.input.isKeyPressed(Input.Keys.Q)){
+
+                }
+                if(Gdx.input.isKeyPressed(Input.Keys.W)){
+
+                }
+                if(Gdx.input.isKeyPressed(Input.Keys.E)){
+
+                }
+                if(Gdx.input.isKeyPressed(Input.Keys.R)){
+
+                }
+                else{
+                    units.get(i).moveTo(new Point((int)actor.getX(), (int)actor.getY()));
+                    units.get(i).setSelected(false);
+                }
             }
             else
             {
