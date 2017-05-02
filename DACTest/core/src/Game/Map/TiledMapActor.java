@@ -1,4 +1,4 @@
-package Game.Map;
+package game.Map;
 
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;

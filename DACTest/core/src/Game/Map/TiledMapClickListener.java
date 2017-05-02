@@ -1,9 +1,9 @@
-package Game.Map;
+package game.Map;
 
 import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.UnitType;
-import Game.GameManager;
+import game.GameManager;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -20,20 +20,22 @@ import java.util.ArrayList;
 public class TiledMapClickListener extends ClickListener {
     private TiledMapActor actor;
     private TiledMapStage stage;
+    private GameManager gameManager;
 
     //toDo alle data uit gamemanager halen en in deze lists zetten
-    private ArrayList<Unit> units = new ArrayList<Unit>();
-    private ArrayList<Building> buildings = new ArrayList<Building>();
+    private ArrayList<Unit> units = new ArrayList<>();
+    private ArrayList<Building> buildings = new ArrayList<>();
 
     public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage) {
         this.actor = actor;
         this.stage = stage;
+        gameManager = new GameManager();
     }
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        ArrayList<Unit> units = GameManager.getUnits();
-        ArrayList<Building> buildings = GameManager.getBuildings();
+        ArrayList<Unit> units = gameManager.getUnits();
+        ArrayList<Building> buildings = gameManager.getBuildings();
         switch (button) {
             case Input.Buttons.LEFT:
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {

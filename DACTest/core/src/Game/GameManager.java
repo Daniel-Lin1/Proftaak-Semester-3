@@ -1,13 +1,10 @@
-package Game;
+package game;
 
 import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.BuildingType;
 import Enums.State;
 import Enums.UnitType;
-import Game.Map.Map;
-import Game.Map.Tile;
-import Game.Map.TiledMapStage;
 import Player.Player;
 import Units.OffensiveUnit;
 import Units.Unit;
@@ -24,6 +21,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
+import game.Map.Map;
+import game.Map.Tile;
+import game.Map.TiledMapStage;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -43,8 +43,8 @@ public class GameManager {
     private OrthographicCamera orthographicCamera;
     private DistressAndConflict dac;
 
-    protected static final ArrayList<Unit> units = new ArrayList<Unit>();
-    protected static final ArrayList<Building> buildings = new ArrayList<Building>();
+    private ArrayList<Unit> units = new ArrayList<>();
+    private ArrayList<Building> buildings = new ArrayList<>();
 
     private OrthographicCameraControlClass gamecamera;
     //Stage en Skin voor UI inladen
@@ -83,7 +83,7 @@ public class GameManager {
     }
 
     public ArrayList<Player> getPlayers() {
-        return this.players;
+        return players;
     }
 
     public void setPlayers(ArrayList<Player> players) {
@@ -110,12 +110,12 @@ public class GameManager {
         this.dac = dac;
     }
 
-    public static void setUnits(ArrayList<Unit> units) {
-        GameManager.setUnits(units);
+    public void setUnits(ArrayList<Unit> units) {
+        this.units = units;
     }
 
-    public static void setBuildings(ArrayList buildings) {
-        GameManager.setBuildings(buildings);
+    public void setBuildings(ArrayList<Building> buildings) {
+        this.buildings = buildings;
     }
 
     public OrthographicCameraControlClass getGamecamera() {
@@ -154,12 +154,12 @@ public class GameManager {
         return orthographicCamera;
     }
 
-    public static ArrayList<Unit> getUnits() {
-        return units;
+    public ArrayList<Unit> getUnits() {
+        return this.units;
     }
 
-    public static ArrayList<Building> getBuildings() {
-        return buildings;
+    public ArrayList<Building> getBuildings() {
+        return this.buildings;
     }
 
 
@@ -249,6 +249,7 @@ public class GameManager {
         batch.begin();
         for (int i = 0; i < units.size() && !units.isEmpty(); i++)
         {
+            //TODO: Simplify this?
             batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
             if (units.get(i).getSelected() == true)
             {

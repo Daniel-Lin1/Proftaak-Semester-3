@@ -1,8 +1,8 @@
 package com.mygdx.game;
 
 import Enums.State;
-import Game.GameManager;
-import Game.UserInterface.UIManager;
+import game.GameManager;
+import game.UserInterface.UIManager;
 import Player.Account;
 import Player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
