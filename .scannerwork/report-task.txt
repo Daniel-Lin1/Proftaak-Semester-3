@@ -1,5 +1,0 @@
-projectKey=my:DACTest
-serverUrl=http://localhost:9000
-dashboardUrl=http://localhost:9000/dashboard/index/my:DACTest
-ceTaskId=AVvJBUiOc45fMnSlwEf0
-ceTaskUrl=http://localhost:9000/api/ce/task?id=AVvJBUiOc45fMnSlwEf0
