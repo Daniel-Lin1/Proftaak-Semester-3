@@ -190,7 +190,7 @@ public class GameManager {
         tiledMap = new TmxMapLoader().load("assets/TestMap3.tmx");
         gamecamera = new OrthographicCameraControlClass(800, tiledMap);
 
-        generateTiles(tiledMap);
+        //generateTiles(tiledMap);
 
         //set tiles en stage goed enzo
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
