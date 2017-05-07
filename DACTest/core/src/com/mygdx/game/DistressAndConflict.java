@@ -9,6 +9,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public class DistressAndConflict extends ApplicationAdapter {
@@ -24,7 +25,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 		setUiManager(uiManager);
 	}
 
-	public DistressAndConflict() {
+	public DistressAndConflict() throws RemoteException {
 		this.user = new Account();
 		this.gameManager = new GameManager(this, State.Finished, 1, "lel", new ArrayList<Player>());
 		setUiManager(new UIManager(this, this.gameManager));
@@ -57,7 +58,11 @@ public class DistressAndConflict extends ApplicationAdapter {
 	public void create () {
 		//http://www.gamefromscratch.com/post/2014/04/16/LibGDX-Tutorial-11-Tiled-Maps-Part-1-Simple-Orthogonal-Maps.aspx
 		//gameManager.setTiledMap(new TmxMapLoader().load("assets/TestMap1.tmx"));
-		gameManager.create();
+		try {
+			gameManager.create();
+		} catch (RemoteException e) {
+			e.printStackTrace();
+		}
 		uiManager.create();
 
 		//batch = new SpriteBatch();

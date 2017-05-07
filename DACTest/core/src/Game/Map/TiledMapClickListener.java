@@ -3,15 +3,16 @@ package game.Map;
 import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.UnitType;
-import game.GameManager;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import game.GameManager;
 
 import java.awt.*;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -23,10 +24,10 @@ public class TiledMapClickListener extends ClickListener {
     private GameManager gameManager;
 
     //toDo alle data uit gamemanager halen en in deze lists zetten
-    private ArrayList<Unit> units = new ArrayList<>();
-    private ArrayList<Building> buildings = new ArrayList<>();
+    private ArrayList<Unit> units = new ArrayList<Unit>();
+    private ArrayList<Building> buildings = new ArrayList<Building>();
 
-    public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage) {
+    public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage) throws RemoteException {
         this.actor = actor;
         this.stage = stage;
         gameManager = new GameManager();

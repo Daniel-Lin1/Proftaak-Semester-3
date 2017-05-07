@@ -28,7 +28,6 @@ import game.Map.TiledMapStage;
 
 import java.awt.*;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 /**
@@ -47,8 +46,8 @@ public class GameManager {
     private OrthographicCamera orthographicCamera;
     private DistressAndConflict dac;
 
-    private ArrayList<Unit> units = new ArrayList<>();
-    private ArrayList<Building> buildings = new ArrayList<>();
+    private ArrayList<Unit> units = new ArrayList<Unit>();
+    private ArrayList<Building> buildings = new ArrayList<Building>();
 
     private OrthographicCameraControlClass gamecamera;
     //Stage en Skin voor UI inladen
@@ -183,7 +182,7 @@ public class GameManager {
 
     }
 
-    public void create (){
+    public void create () throws RemoteException {
         // set camera
         orthographicCamera = new OrthographicCamera();
         orthographicCamera.setToOrtho(false,1920,1080);
