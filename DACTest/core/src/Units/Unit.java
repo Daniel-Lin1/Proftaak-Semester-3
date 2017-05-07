@@ -22,7 +22,7 @@ public abstract class Unit implements Movement {
     private boolean willReturnFire;
     private Texture sprite;
     private boolean selected;
-    public Texture selectedSprite;
+    private Texture selectedSprite;
 
     public void searchSprite()
     {
@@ -126,6 +126,14 @@ public abstract class Unit implements Movement {
 
     public boolean getSelected() { return selected; }
 
+    public Texture getSelectedSprite() {
+        return selectedSprite;
+    }
+
+    public void setSelectedSprite(Texture selectedSprite) {
+        this.selectedSprite = selectedSprite;
+    }
+
     public String getUIInfo(){
         return  "UnitType : " + unitType.toString() + "\n" +
                 "Health : " + health + "\n" +
@@ -133,6 +141,6 @@ public abstract class Unit implements Movement {
                 "HitPerSecond : " + hitDamage + "\n" +
                 "HitDamage : " + hitDamage + "\n"+
                 "Range : " + range + "\n" +
-                "Will currently return fire : " + willReturnFire;
+                "Returns fire : " + willReturnFire;
     }
 }

@@ -2,8 +2,8 @@ package GameManager;
 
 import Building.Building;
 import Enums.State;
-import Game.GameManager;
-import Game.Map.Map;
+import game.GameManager;
+import game.Map.Map;
 import Player.Player;
 import Units.Unit;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -26,7 +26,10 @@ public class GameManagerTest {
         TiledMap tiledMap = new TiledMap();
         gameManager.setTiledMap(tiledMap);
 
-        assert gameManager.getTiledMap() == tiledMap : "Expected: " + tiledMap + ", Actual: " + gameManager.getTiledMap();
+        TiledMap gmTiledMap = gameManager.getTiledMap();
+
+        gmTiledMap == tiledMap ? true : false
+        assert tiledMapSet : "Expected: " + tiledMap + ", Actual: " + gmTiledMap;
     }
 
     @Test

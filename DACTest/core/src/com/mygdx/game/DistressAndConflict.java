@@ -1,8 +1,8 @@
 package com.mygdx.game;
 
 import Enums.State;
-import Game.GameManager;
-import Game.UIManager;
+import game.GameManager;
+import game.UserInterface.UIManager;
 import Player.Account;
 import Player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -14,22 +14,36 @@ import java.util.ArrayList;
 public class DistressAndConflict extends ApplicationAdapter {
 	//private SpriteBatch batch;
 	private Account user;
-	public GameManager gameManager;
-	public UIManager uiManager;
+	private GameManager gameManager;
+	private UIManager uiManager;
 	private int OldFps = 0;
-
-
 
 	public DistressAndConflict(Account user, GameManager gameManager, UIManager uiManager) {
 		this.user = user;
 		this.gameManager = gameManager;
-		this.uiManager = uiManager;
+		setUiManager(uiManager);
 	}
 
 	public DistressAndConflict() {
 		this.user = new Account();
 		this.gameManager = new GameManager(this, State.Finished, 1, "lel", new ArrayList<Player>());
-		this.uiManager = new UIManager(this, this.gameManager);
+		setUiManager(new UIManager(this, this.gameManager));
+	}
+
+	public GameManager getGameManager() {
+		return gameManager;
+	}
+
+	public void setGameManager(GameManager gameManager) {
+		this.gameManager = gameManager;
+	}
+
+	public UIManager getUiManager() {
+		return uiManager;
+	}
+
+	public void setUiManager(UIManager uiManager) {
+		this.uiManager = uiManager;
 	}
 
 	public void host(){

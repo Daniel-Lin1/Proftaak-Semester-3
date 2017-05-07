@@ -1,9 +1,6 @@
-package Game;
+package game;
 
-import Enums.BuildingType;
 import Enums.ResourceEnum;
-
-import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.

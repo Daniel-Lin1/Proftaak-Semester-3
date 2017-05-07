@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 projectKey=my:DACTest
 serverUrl=http://localhost:9000
 dashboardUrl=http://localhost:9000/dashboard/index/my:DACTest
 ceTaskId=AVvDSLwsCDAEKvChehQG
 ceTaskUrl=http://localhost:9000/api/ce/task?id=AVvDSLwsCDAEKvChehQG
+=======
+projectKey=my:Proftaak-Semester-3
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/my:Proftaak-Semester-3
+ceTaskId=AVvDSUMFFcHlLjSxRmju
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AVvDSUMFFcHlLjSxRmju
+>>>>>>> origin/master

@@ -1,15 +1,9 @@
-package Game.Map;
+package game.Map;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.scenes.scene2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
-import com.sun.prism.image.ViewPort;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
@@ -54,6 +48,6 @@ public class TiledMapStage extends Stage {
     }
 
     public void createUnit(Actor actor) {
-        dac.gameManager.addUnit((int)actor.getX(), (int)actor.getY());
+        dac.getGameManager().addUnit((int)actor.getX(), (int)actor.getY());
     }
 }
