@@ -40,6 +40,7 @@ public class TiledMapClickListener extends ClickListener {
         ArrayList<Building> buildings = gameManager.getBuildings();
         switch (button) {
             case Buttons.LEFT:
+                System.out.println("LEFT button");
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
                     if (units.get(i).getSelected() == true)
                     {
@@ -63,6 +64,7 @@ public class TiledMapClickListener extends ClickListener {
                 }
                 break;
             case Buttons.RIGHT:
+                System.out.println("RIGHT button");
                 //TODO fix this, doesn't spawn units anymore.
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
                     if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
@@ -86,6 +88,9 @@ public class TiledMapClickListener extends ClickListener {
                     }
                 }
                 break;
+            default:
+                System.out.println("Default switch statement reached in " + Thread.currentThread().getStackTrace()[1]);
+                return false;
         }
         return true;
     }
