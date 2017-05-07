@@ -6,6 +6,7 @@ import Enums.UnitType;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -38,7 +39,7 @@ public class TiledMapClickListener extends ClickListener {
         ArrayList<Unit> units = gameManager.getUnits();
         ArrayList<Building> buildings = gameManager.getBuildings();
         switch (button) {
-            case Input.Buttons.LEFT:
+            case Buttons.LEFT:
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
                     if (units.get(i).getSelected() == true)
                     {
@@ -61,7 +62,8 @@ public class TiledMapClickListener extends ClickListener {
                     }
                 }
                 break;
-            case Input.Buttons.RIGHT:
+            case Buttons.RIGHT:
+                //TODO fix this, doesn't spawn units anymore.
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
                     if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
                         units.get(i).setSelected(true);
