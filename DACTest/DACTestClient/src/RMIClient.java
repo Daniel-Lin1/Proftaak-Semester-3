@@ -45,6 +45,7 @@ public class RMIClient {
 
         // Test RMI connection
         if (userAdmin != null) {
+            //Do client stuff
             testUserAdmin();
         }
     }
