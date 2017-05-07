@@ -5,6 +5,7 @@ import Building.UnitProducingBuilding;
 import Enums.BuildingType;
 import Enums.State;
 import Enums.UnitType;
+
 import Player.Player;
 import Units.OffensiveUnit;
 import Units.Unit;
@@ -26,11 +27,14 @@ import game.Map.Tile;
 import game.Map.TiledMapStage;
 
 import java.awt.*;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
+
 public class GameManager {
     private State gamestate;
     private int lobbyID;
@@ -165,7 +169,8 @@ public class GameManager {
 
     //ToDo : marc moet deze classe opschonen! wat een puinhoop kneus.
 
-    public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList<Player> participants) {
+    public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList<Player> participants) throws RemoteException {
+        super();
         this.gamestate = gamestate;
         this.lobbyID = lobbyID;
         this.password = password;
@@ -173,7 +178,8 @@ public class GameManager {
         this.dac = dac;
     }
 
-    public GameManager(){
+    public GameManager() throws RemoteException {
+        super();
 
     }
 
