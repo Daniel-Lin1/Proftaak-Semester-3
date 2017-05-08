@@ -17,8 +17,10 @@ public abstract class Building {
     private int health;
     private Texture sprite;
     private boolean selected;
+    private Texture selectedSprite;
 
     public void searchSprite() {
+        selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
         if (buildingtype == BuildingType.Stable)
         {
             sprite = new Texture(Gdx.files.internal("assets/Stable.png"));
@@ -86,6 +88,14 @@ public abstract class Building {
     }
 
     public boolean getSelected() { return selected; }
+
+    public Texture getSelectedSprite() {
+        return selectedSprite;
+    }
+
+    public void setSelectedSprite(Texture selectedSprite) {
+        this.selectedSprite = selectedSprite;
+    }
 
     public String getUIInfo(){
         return "Building Type : " + buildingtype + "\n" +

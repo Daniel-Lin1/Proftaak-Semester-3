@@ -27,11 +27,11 @@ public abstract class Unit implements Movement {
 
     public void searchSprite()
     {
+        selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
         if (unitType == UnitType.Knight)
         {
             System.out.println(unitType.toString());
             sprite = new Texture(Gdx.files.internal("assets/Knight.png"));
-            selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
         }
         else
         {

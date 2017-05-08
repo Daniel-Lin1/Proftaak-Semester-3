@@ -24,7 +24,6 @@ public class TiledMapClickListener extends ClickListener {
     private TiledMapStage stage;
     private GameManager gameManager;
 
-    //toDo alle data uit gamemanager halen en in deze lists zetten
     private ArrayList<Unit> units = new ArrayList<Unit>();
     private ArrayList<Building> buildings = new ArrayList<Building>();
 
