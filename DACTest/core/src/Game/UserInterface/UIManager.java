@@ -91,11 +91,8 @@ public class UIManager {
             {
                 font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
                 UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 150, 150);
-                font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
-                UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 180, 180);
             }
         }
-
         drawAbilitiesKeys();
         UIBatch.end();
 

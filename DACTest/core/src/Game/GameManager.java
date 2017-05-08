@@ -270,9 +270,7 @@ public class GameManager {
             batch.draw(buildings.get(i).getSprite(), buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
             if (buildings.get(i).getSelected())
             {
-                //todo fix dit zoals hierboven met building.get(i).getselectedsprite();
-                Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
-                batch.draw(selectedSprite, buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
+                batch.draw(buildings.get(i).getSelectedSprite(), buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
             }
         }
        batch.end();
