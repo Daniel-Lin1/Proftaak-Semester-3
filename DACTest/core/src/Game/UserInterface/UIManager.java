@@ -114,19 +114,9 @@ public class UIManager {
     }
 
     private void drawAbilitiesKeys(){
-        //todo alles in een foreach loop
-        if (amountOfAbilities >= 1){
-            abilityFont.draw(UIBatch, "1", 400, 80);
-            if (amountOfAbilities >= 2){
-                abilityFont.draw(UIBatch, "2", 600, 80);
-                if (amountOfAbilities >= 3){
-                    abilityFont.draw(UIBatch, "3", 800, 80);
-                    if (amountOfAbilities >= 4){
-                        abilityFont.draw(UIBatch, "4", 1000, 80);
-                    }
-                }
-            }
+        for (int i = 0; i < amountOfAbilities; i++)
+        {
+            abilityFont.draw(UIBatch, Integer.toString(i + 1), 400 + (i *200), 80);
         }
-
     }
 }

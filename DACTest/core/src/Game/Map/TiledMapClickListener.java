@@ -58,13 +58,23 @@ public class TiledMapClickListener extends ClickListener {
                 {
                     //ToDo spawn units without having to rightclick
                     if (buildings.get(i).getSelected() == true) {
-                        UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
-                        if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-                            units.add(uPB.produceUnit(UnitType.Knight));
-                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-                            units.add(uPB.produceUnit(UnitType.PikeMan));
-                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
-                            units.add(uPB.produceUnit(UnitType.Archer));
+
+                        Boolean canSpawn = true;
+                        for (int i2 = 0; i2 < units.size() && !units.isEmpty(); i2++) {
+                            if (units.get(i2).getPosition().getX() == buildings.get(i).getCoordinate().getX() && units.get(i2).getPosition().getY() == buildings.get(i).getCoordinate().getY() - 16 ) {
+                                canSpawn = false;
+                            }
+                        }
+                        if (canSpawn == true)
+                        {
+                            UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
+                            if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
+                                units.add(uPB.produceUnit(UnitType.Knight));
+                            } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
+                                units.add(uPB.produceUnit(UnitType.PikeMan));
+                            } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
+                                units.add(uPB.produceUnit(UnitType.Archer));
+                            }
                         }
                     }
                 }
