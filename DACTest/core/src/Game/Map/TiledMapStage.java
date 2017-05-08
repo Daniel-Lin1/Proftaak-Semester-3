@@ -52,8 +52,4 @@ public class TiledMapStage extends Stage {
             }
         }
     }
-
-    public void createUnit(Actor actor) {
-        dac.getGameManager().addUnit((int)actor.getX(), (int)actor.getY());
-    }
 }

@@ -29,8 +29,8 @@ public class UIManager {
 
     private int amountOfAbilities;
 
-    private Point SelectedObjectInfoLocation = new Point(200, 200);
-    private Point SelectedObjectImgLocation = new Point(50,50);
+    private Point SelectedObjectInfoLocation = new Point(160, 200);
+    private Point SelectedObjectImgLocation = new Point(50,120);
 
     public UIManager(DistressAndConflict dac, GameManager manager){
         this.dac = dac;
@@ -60,28 +60,24 @@ public class UIManager {
         {
             if(unit.getSelected() == true)
             {
-                UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 150, 160);
+                UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
                 font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
 
                 switch(unit.getUnitType())
                 {
                     case Knight:
+                        renderAttacker();
+                        break;
                     case Archer:
-                    case HorseArcher:
+                        renderAttacker();
+                        break;
                     case PikeMan:
-                    case Slinger:
-                    case SwordMan:
                         renderAttacker();
                         break;
                     case Builder:
                         renderBuilder();
                         break;
                 }
-
-
-                font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
-                UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 180, 180);
-
             }
         }
         for(Building building : manager.getBuildings())
@@ -89,12 +85,21 @@ public class UIManager {
             if(building.getSelected() == true)
             {
                 font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
-                UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 150, 150);
+                UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
+                renderTownCenter();
             }
         }
         drawAbilitiesKeys();
         UIBatch.end();
 
+    }
+
+    private void renderTownCenter()
+    {
+        amountOfAbilities = 3;
+        UIBatch.draw(TextureVault.knight, 400, 40, 140, 140);
+        UIBatch.draw(TextureVault.pikeMan, 600, 40, 140, 140);
+        UIBatch.draw(TextureVault.archer, 800, 40, 140, 140);
     }
 
     private void renderAttacker(){
@@ -109,14 +114,15 @@ public class UIManager {
     }
 
     private void drawAbilitiesKeys(){
+        //todo alles in een foreach loop
         if (amountOfAbilities >= 1){
-            abilityFont.draw(UIBatch, "Q", 400, 80);
+            abilityFont.draw(UIBatch, "1", 400, 80);
             if (amountOfAbilities >= 2){
-                abilityFont.draw(UIBatch, "W", 600, 80);
+                abilityFont.draw(UIBatch, "2", 600, 80);
                 if (amountOfAbilities >= 3){
-                    abilityFont.draw(UIBatch, "E", 800, 80);
+                    abilityFont.draw(UIBatch, "3", 800, 80);
                     if (amountOfAbilities >= 4){
-                        abilityFont.draw(UIBatch, "R", 1000, 80);
+                        abilityFont.draw(UIBatch, "4", 1000, 80);
                     }
                 }
             }

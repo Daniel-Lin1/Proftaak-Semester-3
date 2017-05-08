@@ -95,7 +95,7 @@ public class GameManagerTest {
 
     @Test
     public void testStage(){
-        //TODO: Needs improvement
+        //TODO Needs improvement
         /*GameManager gameManager = new GameManager();
         Stage stage = new Stage();
         gameManager.setStage(stage);

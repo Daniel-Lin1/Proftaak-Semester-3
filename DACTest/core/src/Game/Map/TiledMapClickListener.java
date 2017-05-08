@@ -39,7 +39,6 @@ public class TiledMapClickListener extends ClickListener {
         ArrayList<Building> buildings = gameManager.getBuildings();
         switch (button) {
             case Buttons.RIGHT:
-                System.out.println("RIGHT button");
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
                     if (units.get(i).getSelected() == true) {
                         if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
@@ -52,12 +51,12 @@ public class TiledMapClickListener extends ClickListener {
 
                         } else {
                             units.get(i).moveTo(new Point((int) actor.getX(), (int) actor.getY()));
-                            units.get(i).setSelected(false);
                         }
                     }
                 }
                 for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
                 {
+                    //ToDo spawn units without having to rightclick
                     if (buildings.get(i).getSelected() == true) {
                         UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
                         if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
@@ -66,11 +65,15 @@ public class TiledMapClickListener extends ClickListener {
                             units.add(uPB.produceUnit(UnitType.PikeMan));
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
                             units.add(uPB.produceUnit(UnitType.Archer));
-                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
-
-                        } else {
-                            buildings.get(i).setSelected(false);
                         }
+                    }
+                }
+                for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
+                {
+                    if (buildings.get(i).getSelected() == true)
+                    {
+                        UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
+                        units.add(uPB.produceUnit(UnitType.Knight));
                     }
                 }
                 break;
@@ -100,15 +103,5 @@ public class TiledMapClickListener extends ClickListener {
                 return false;
         }
         return true;
-    }
-
-    @Override
-    public void clicked(InputEvent event, float x, float y) {
-
-    }
-
-    @Override
-    public void enter(InputEvent event, float x, float y, int pointer, Actor fromActor) {
-        //System.out.println("Hovering over: " + "X:" + actor.getX() + " Y:" + actor.getY());
     }
 }

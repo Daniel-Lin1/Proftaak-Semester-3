@@ -228,7 +228,6 @@ public class GameManager {
         batch.begin();
         for (int i = 0; i < units.size() && !units.isEmpty(); i++)
         {
-            //TODO: Simplify this? fix dit.
             units.get(i).move();
             batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x, units.get(i).getPosition().y, 16, 16);
             if (units.get(i).getSelected() == true)
@@ -247,12 +246,4 @@ public class GameManager {
         }
        batch.end();
     }
-
-    public void addUnit(int x, int y) {
-		Vector3 coordinate = new Vector3(x, y, 0);
-		orthographicCamera.project(coordinate);
-		units.add(new OffensiveUnit(new Point(x, y), UnitType.Knight, 10, 10, 10, 10, 10, true));
-	}
-
-
 }
