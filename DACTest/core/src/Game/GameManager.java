@@ -255,9 +255,7 @@ public class GameManager {
         for (int i = 0; i < units.size() && !units.isEmpty(); i++)
         {
             //TODO: Simplify this? fix dit.
-            if (units.get(i).getDestination() != null && !units.get(i).getDestination().equals(units.get(i).getPosition())) {
-                units.get(i).move();
-            }
+            units.get(i).move();
             batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x, units.get(i).getPosition().y, 16, 16);
             if (units.get(i).getSelected() == true)
             {

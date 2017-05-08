@@ -45,6 +45,7 @@ public abstract class Unit implements Movement {
     }
 
     public void move() {
+        if (destination != null && !destination.equals(position)) {
             Point up = new Point(position.x, position.y + 16);
             Point down = new Point(position.x, position.y - 16);
             Point left = new Point(position.x - 16, position.y);
@@ -79,7 +80,7 @@ public abstract class Unit implements Movement {
                     moveRight();
                     break;
             }
-
+        }
 //        if (destination != null && destination != position) {
 //            if (destination.getX() == position.getX() || destination.getY() != position.getY()) {
 //                if (destination.getY() > position.getY()) {
