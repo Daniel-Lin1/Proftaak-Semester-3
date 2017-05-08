@@ -255,7 +255,7 @@ public class GameManager {
         for (int i = 0; i < units.size() && !units.isEmpty(); i++)
         {
             //TODO: Simplify this? fix dit.
-            //units.get(i).move();
+            units.get(i).move();
             batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x, units.get(i).getPosition().y, 16, 16);
             if (units.get(i).getSelected() == true)
             {
