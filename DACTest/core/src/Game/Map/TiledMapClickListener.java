@@ -1,4 +1,4 @@
-package game.Map;
+package Game.Map;
 
 import Building.Building;
 import Building.UnitProducingBuilding;
@@ -10,7 +10,7 @@ import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import game.GameManager;
+import Game.GameManager;
 
 import java.awt.*;
 import java.rmi.RemoteException;
@@ -28,10 +28,10 @@ public class TiledMapClickListener extends ClickListener {
     private ArrayList<Unit> units = new ArrayList<Unit>();
     private ArrayList<Building> buildings = new ArrayList<Building>();
 
-    public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage) throws RemoteException {
+    public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage, GameManager gameManager) throws RemoteException {
         this.actor = actor;
         this.stage = stage;
-        gameManager = new GameManager();
+        this.gameManager = gameManager;
     }
 
     @Override
@@ -65,7 +65,6 @@ public class TiledMapClickListener extends ClickListener {
                 break;
             case Buttons.RIGHT:
                 System.out.println("RIGHT button");
-                //TODO fix this, doesn't spawn units anymore.
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
                     if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
                         units.get(i).setSelected(true);
@@ -77,7 +76,6 @@ public class TiledMapClickListener extends ClickListener {
                 {
                     if (actor.getX() == buildings.get(i).getCoordinate().getX() && actor.getY() == buildings.get(i).getCoordinate().getY())
                     {
-                        // ToDo: dit moet via UI gebeuren en niet via dit clickEvent
                         UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
                         units.add(uPB.produceUnit(UnitType.Knight));
                         //buildings.get(i).setSelected(true);

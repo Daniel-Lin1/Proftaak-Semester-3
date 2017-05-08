@@ -1,9 +1,9 @@
-package game.UserInterface;
+package Game.UserInterface;
 
 import Building.Building;
 import Units.Unit;
-import game.GameManager;
-import game.TextureVault;
+import Game.GameManager;
+import Game.TextureVault;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
