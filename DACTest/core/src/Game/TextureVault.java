@@ -23,7 +23,6 @@ public class TextureVault {
         this.setKnight(new Texture(Gdx.files.internal("assets/Knight.png")));
         this.setUiElementAttack(new Texture(Gdx.files.internal("assets/uiElementAttack.png")));
         this.setGatherResource(new Texture(Gdx.files.internal("assets/GatherResources.png")));
-        this.setStable(new Texture(Gdx.files.internal("assets/Stable.png")));
         this.setTownCenter(new Texture(Gdx.files.internal("assets/Towncenter.png")));
     }
 
