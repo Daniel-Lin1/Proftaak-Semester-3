@@ -68,14 +68,6 @@ public class TiledMapClickListener extends ClickListener {
                         }
                     }
                 }
-                for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
-                {
-                    if (buildings.get(i).getSelected() == true)
-                    {
-                        UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
-                        units.add(uPB.produceUnit(UnitType.Knight));
-                    }
-                }
                 break;
             case Buttons.LEFT:
                 System.out.println("LEFT button");
