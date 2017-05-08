@@ -1,6 +1,7 @@
 package Units;
 
 import Enums.UnitType;
+import Game.TextureVault;
 import Interfaces.Movement;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,11 +28,17 @@ public abstract class Unit implements Movement {
 
     public void searchSprite()
     {
+        selectedSprite = TextureVault.selected;
         if (unitType == UnitType.Knight)
         {
-            System.out.println(unitType.toString());
-            sprite = new Texture(Gdx.files.internal("assets/Knight.png"));
-            selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
+            sprite = TextureVault.knight;
+        }
+        else if (unitType == UnitType.PikeMan)
+        {
+            sprite = TextureVault.pikeMan;
+        }
+        else if (unitType == UnitType.Archer) {
+            sprite = TextureVault.archer;
         }
         else
         {
@@ -45,34 +52,64 @@ public abstract class Unit implements Movement {
     }
 
     public void move() {
-        if (destination != null && destination != position) {
-            System.out.println("current " +(this.position.getX() /16) +" "+ (this.position.getY() /16));
+        //todo inplement dijkstra :)
+        if (destination != null && !destination.equals(position)) {
+	    System.out.println("current " +(this.position.getX() /16) +" "+ (this.position.getY() /16));
             System.out.println("new current "+(destination.getX() /16) +" "+ (destination.getY() /16));
+            Point up = new Point(position.x, position.y + 16);
+            Point down = new Point(position.x, position.y - 16);
+            Point left = new Point(position.x - 16, position.y);
+            Point right = new Point(position.x + 16, position.y);
 
+            Double shortestDistance = up.distance(destination.getX(), destination.getY());
+            int nextStep = 1;
 
-
-            //todo inplement dijkstra :)
-
-
-
-            if (destination.getX() == position.getX() || destination.getY() != position.getY()) {
-                if (destination.getY() > position.getY()) {
-                    moveUP();
-                }
-                else if (destination.getY() < position.getY()) {
-                    moveDown();
-                }
+            if (shortestDistance > down.distance(destination.getX(), destination.getY())) {
+                shortestDistance = down.distance(destination.getX(), destination.getY());
+                nextStep = 2;
             }
-            if (destination.getY() == position.getY()) {
-                if (destination.getX() > position.getX()) {
-                    moveRight();
-                }
-                else if (destination.getX() < position.getX()) {
+            if (shortestDistance > left.distance(destination.getX(), destination.getY())) {
+                shortestDistance = left.distance(destination.getX(), destination.getY());
+                nextStep = 3;
+            }
+            if (shortestDistance > right.distance(destination.getX(), destination.getY())) {
+                nextStep = 4;
+            }
+
+            switch (nextStep) {
+                case 1:
+                    moveUP();
+                    break;
+                case 2:
+                    moveDown();
+                    break;
+                case 3:
                     moveLeft();
-                }
+                    break;
+                case 4:
+                    moveRight();
+                    break;
             }
 
         }
+//        if (destination != null && destination != position) {
+//            if (destination.getX() == position.getX() || destination.getY() != position.getY()) {
+//                if (destination.getY() > position.getY()) {
+//                    moveUP();
+//                }
+//                else if (destination.getY() < position.getY()) {
+//                    moveDown();
+//                }
+//            }
+//            if (destination.getY() == position.getY()) {
+//                if (destination.getX() > position.getX()) {
+//                    moveRight();
+//                }
+//                else if (destination.getX() < position.getX()) {
+//                    moveLeft();
+//                }
+//            }
+//        }
     }
 
     public void moveUP() { position.y = position.y + 16; }
@@ -83,6 +120,14 @@ public abstract class Unit implements Movement {
     @Override
     public void cancelMove() {
         destination = null;
+    }
+
+    public Point getDestination() {
+        return destination;
+    }
+
+    public Point getPosition(Point position) {
+        return position;
     }
 
     public Texture getSprite() {

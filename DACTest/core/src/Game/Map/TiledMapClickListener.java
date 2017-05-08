@@ -24,7 +24,6 @@ public class TiledMapClickListener extends ClickListener {
     private TiledMapStage stage;
     private GameManager gameManager;
 
-    //toDo alle data uit gamemanager halen en in deze lists zetten
     private ArrayList<Unit> units = new ArrayList<Unit>();
     private ArrayList<Building> buildings = new ArrayList<Building>();
 
@@ -64,9 +63,9 @@ public class TiledMapClickListener extends ClickListener {
                         if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
                             units.add(uPB.produceUnit(UnitType.Knight));
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-
+                            units.add(uPB.produceUnit(UnitType.PikeMan));
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
-
+                            units.add(uPB.produceUnit(UnitType.Archer));
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
 
                         } else {
