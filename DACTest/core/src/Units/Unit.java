@@ -1,6 +1,7 @@
 package Units;
 
 import Enums.UnitType;
+import Game.TextureVault;
 import Interfaces.Movement;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,11 +28,17 @@ public abstract class Unit implements Movement {
 
     public void searchSprite()
     {
-        selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
+        selectedSprite = TextureVault.selected;
         if (unitType == UnitType.Knight)
         {
-            System.out.println(unitType.toString());
-            sprite = new Texture(Gdx.files.internal("assets/Knight.png"));
+            sprite = TextureVault.knight;
+        }
+        else if (unitType == UnitType.PikeMan)
+        {
+            sprite = TextureVault.pikeMan;
+        }
+        else if (unitType == UnitType.Archer) {
+            sprite = TextureVault.archer;
         }
         else
         {

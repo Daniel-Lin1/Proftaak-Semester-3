@@ -24,10 +24,18 @@ public class UnitProducingBuilding extends Building {
 
     public OffensiveUnit produceUnit(UnitType unittype){
         OffensiveUnit unit = null;
+        Point point = new Point( (int)this.getCoordinate().getX(), (int)this.getCoordinate().getY() - 16);
         if (unittype == UnitType.Knight)
         {
-            Point point = new Point( (int)this.getCoordinate().getX(), (int)this.getCoordinate().getY() - 16);
             unit = new OffensiveUnit(point, UnitType.Knight, 100, 1, 1, 10, 1, false);
+        }
+        else if (unittype == UnitType.PikeMan)
+        {
+            unit = new OffensiveUnit(point, UnitType.PikeMan, 80, 1, 1, 8, 1, false);
+        }
+        else if (unittype == UnitType.Archer)
+        {
+            unit = new OffensiveUnit(point, UnitType.Archer, 60, 1, 1, 8, 4, false);
         }
         return unit;
     }

@@ -1,6 +1,7 @@
 package Building;
 
 import Enums.BuildingType;
+import Game.TextureVault;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -20,14 +21,10 @@ public abstract class Building {
     private Texture selectedSprite;
 
     public void searchSprite() {
-        selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
-        if (buildingtype == BuildingType.Stable)
+        selectedSprite = TextureVault.selected;
+        if (buildingtype == BuildingType.Towncenter)
         {
-            sprite = new Texture(Gdx.files.internal("assets/Stable.png"));
-        }
-        else if (buildingtype == BuildingType.Towncenter)
-        {
-            sprite = new Texture(Gdx.files.internal("assets/Towncenter.png"));
+            sprite = TextureVault.townCenter;
         }
         else
         {

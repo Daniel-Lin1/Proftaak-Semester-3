@@ -5,6 +5,7 @@ import Units.Unit;
 import Game.GameManager;
 import Game.TextureVault;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -25,7 +26,6 @@ public class UIManager {
     private GameManager manager;
     private BitmapFont font;
     private BitmapFont abilityFont;
-    private TextureVault textureVault;
 
     private int amountOfAbilities;
 
@@ -45,7 +45,6 @@ public class UIManager {
         font = new BitmapFont();
         abilityFont = new BitmapFont();
         abilityFont.getData().setScale(3, 3);
-        textureVault = new TextureVault();
 
     }
 
@@ -100,14 +99,13 @@ public class UIManager {
 
     private void renderAttacker(){
         amountOfAbilities = 1;
-        UIBatch.draw(textureVault.getUiElementAttack(), 400, 40, 140, 140);
+        UIBatch.draw(TextureVault.uiElementAttack, 400, 40, 140, 140);
     }
 
     private void renderBuilder(){
         amountOfAbilities = 3;
-        UIBatch.draw(textureVault.getTownCenter(), 400, 40, 140, 140);
-        UIBatch.draw(textureVault.getGatherResource(), 600, 40, 140, 140);
-        UIBatch.draw(textureVault.getStable(), 800, 40, 140, 140);
+        UIBatch.draw(TextureVault.townCenter, 400, 40, 140, 140);
+        UIBatch.draw(TextureVault.gatherResource, 600, 40, 140, 140);
     }
 
     private void drawAbilitiesKeys(){
