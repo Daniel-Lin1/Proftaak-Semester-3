@@ -2,6 +2,7 @@ package Building;
 
 import Enums.BuildingType;
 import Interfaces.Damage;
+import Units.Unit;
 
 import java.awt.*;
 
@@ -29,7 +30,7 @@ public class DefenseBuilding extends Building implements Damage {
     }
 
     @Override
-    public void attack() {
+    public void attack(Unit target) {
 
     }
 
