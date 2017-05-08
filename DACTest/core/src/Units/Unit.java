@@ -46,6 +46,15 @@ public abstract class Unit implements Movement {
 
     public void move() {
         if (destination != null && destination != position) {
+            System.out.println("current " +(this.position.getX() /16) +" "+ (this.position.getY() /16));
+            System.out.println("new current "+(destination.getX() /16) +" "+ (destination.getY() /16));
+
+
+
+            //todo inplement dijkstra :)
+
+
+
             if (destination.getX() == position.getX() || destination.getY() != position.getY()) {
                 if (destination.getY() > position.getY()) {
                     moveUP();
@@ -62,6 +71,7 @@ public abstract class Unit implements Movement {
                     moveLeft();
                 }
             }
+
         }
     }
 

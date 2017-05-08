@@ -188,6 +188,7 @@ public class GameManager {
         orthographicCamera.setToOrtho(false,1920,1080);
         orthographicCamera.update();
         tiledMap = new TmxMapLoader().load("assets/TestMap3.tmx");
+        map = new Map(tiledMap, "tmpNaam");
         gamecamera = new OrthographicCameraControlClass(800, tiledMap);
 
         //generateTiles(tiledMap);
@@ -202,33 +203,6 @@ public class GameManager {
         buildings.add(uPB);
     }
 
-    //TODO: Fix this method
-    public ArrayList<Tile> generateTiles(TiledMap tiledMap){//Function to generate tiles based on the map.
-        TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
-        //Init vars
-        int tilesHorizontal = tiledMapTileLayer.getWidth();
-        int tilesVertical = tiledMapTileLayer.getHeight();
-        //int totalTiles = tilesHorizontal * tilesVertical;
-
-        //int tileHeight = (int)tiledMapTileLayer.getTileHeight();
-        //int tileWidth = (int)tiledMapTileLayer.getTileWidth();
-        ArrayList<Tile> tiles = new ArrayList<Tile>();
-
-        //int tmpTilesHorizontal = 10;
-        //int tmpTilesVertical = 10;
-        //int tmpTotalTiles = tmpTilesHorizontal * tmpTilesVertical;
-        int number = 1;
-
-
-        for (int i = 1; i < tilesVertical+1; i++) {
-            for (int j = tilesHorizontal; j >= 1; j--) {
-
-                System.out.println("#" + number + " | X:" + i*16 + " | Y:" + j*16);
-                number++;
-            }
-        }
-        return tiles;
-    }
     public void render(){
         orthographicCamera = gamecamera.render(orthographicCamera);
         orthographicCamera.update();
