@@ -254,13 +254,12 @@ public class GameManager {
         batch.begin();
         for (int i = 0; i < units.size() && !units.isEmpty(); i++)
         {
-            //TODO: Simplify this?
+            //TODO: Simplify this? fix dit.
             //units.get(i).move();
             batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x, units.get(i).getPosition().y, 16, 16);
             if (units.get(i).getSelected() == true)
             {
-                Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
-                batch.draw(selectedSprite, units.get(i).getPosition().x, units.get(i).getPosition().y, 16, 16);
+                batch.draw(units.get(i).getSelectedSprite(), units.get(i).getPosition().x, units.get(i).getPosition().y, 16, 16);
             }
         }
 
@@ -269,6 +268,7 @@ public class GameManager {
             batch.draw(buildings.get(i).getSprite(), buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
             if (buildings.get(i).getSelected())
             {
+                //todo fix dit zoals hierboven met building.get(i).getselectedsprite();
                 Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
                 batch.draw(selectedSprite, buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
             }
