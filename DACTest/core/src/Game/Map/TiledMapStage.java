@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
@@ -35,8 +36,14 @@ public class TiledMapStage extends Stage {
         addActor(foreground);
 
         for (MapLayer layer : tiledMap.getLayers()) {
-            TiledMapTileLayer tiledLayer = (TiledMapTileLayer)layer;
-            createActorsForLayer(tiledLayer);
+            try{
+                TiledMapTileLayer tiledLayer = (TiledMapTileLayer)layer;
+                createActorsForLayer(tiledLayer);
+            }catch (Exception ex){
+                System.out.println(ex.toString() + "  !!! fix dit nog ff. dit staat in de tiledmapstage constructor :)  !!!");
+                TiledMapImageLayer tiledLayer = (TiledMapImageLayer)layer;
+            }
+
         }
     }
 

@@ -53,9 +53,10 @@ public abstract class Unit implements Movement {
 
     public void move() {
         //todo inplement dijkstra :)
+        
+
+
         if (destination != null && !destination.equals(position)) {
-	    System.out.println("current " +(this.position.getX() /16) +" "+ (this.position.getY() /16));
-            System.out.println("new current "+(destination.getX() /16) +" "+ (destination.getY() /16));
             Point up = new Point(position.x, position.y + 16);
             Point down = new Point(position.x, position.y - 16);
             Point left = new Point(position.x - 16, position.y);
@@ -89,27 +90,12 @@ public abstract class Unit implements Movement {
                 case 4:
                     moveRight();
                     break;
+                default:
+                    //niets. geen manier om er heen te gaan.
+                    System.out.println("default case in move algeritme");
+                    break;
             }
-
         }
-//        if (destination != null && destination != position) {
-//            if (destination.getX() == position.getX() || destination.getY() != position.getY()) {
-//                if (destination.getY() > position.getY()) {
-//                    moveUP();
-//                }
-//                else if (destination.getY() < position.getY()) {
-//                    moveDown();
-//                }
-//            }
-//            if (destination.getY() == position.getY()) {
-//                if (destination.getX() > position.getX()) {
-//                    moveRight();
-//                }
-//                else if (destination.getX() < position.getX()) {
-//                    moveLeft();
-//                }
-//            }
-//        }
     }
 
     public void moveUP() { position.y = position.y + 16; }

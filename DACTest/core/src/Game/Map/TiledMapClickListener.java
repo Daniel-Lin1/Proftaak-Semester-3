@@ -80,7 +80,6 @@ public class TiledMapClickListener extends ClickListener {
                 }
                 break;
             case Buttons.LEFT:
-                System.out.println("LEFT button");
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
                     if (actor.getX() == units.get(i).getPosition().getX() && actor.getY() == units.get(i).getPosition().getY()) {
                         units.get(i).setSelected(true);
