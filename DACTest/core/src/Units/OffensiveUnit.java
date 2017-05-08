@@ -10,8 +10,8 @@ import java.awt.*;
  */
 public class OffensiveUnit extends Unit{
 
-    public OffensiveUnit(Point coordinate, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire) {
-        this.setCoordinate(coordinate);
+    public OffensiveUnit(Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire) {
+        this.setPosition(position);
         this.setUnitType(unitType);
         this.setHealth(health);
         this.setSpeed(speed);

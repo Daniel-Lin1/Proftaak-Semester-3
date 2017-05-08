@@ -67,7 +67,7 @@ public class TiledMapClickListener extends ClickListener {
                 System.out.println("RIGHT button");
                 //TODO fix this, doesn't spawn units anymore.
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
-                    if (actor.getX() == units.get(i).getCoordinate().getX() && actor.getY() == units.get(i).getCoordinate().getY()) {
+                    if (actor.getX() == units.get(i).getPosition().getX() && actor.getY() == units.get(i).getPosition().getY()) {
                         units.get(i).setSelected(true);
                     } else {
                         units.get(i).setSelected(false);

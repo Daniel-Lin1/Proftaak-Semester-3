@@ -12,7 +12,8 @@ import java.awt.*;
  */
 public abstract class Unit implements Movement {
 
-    private Point coordinate;
+    private Point position;
+    private Point destination;
     private UnitType unitType;
     private int health;
     private int speed;
@@ -40,12 +41,38 @@ public abstract class Unit implements Movement {
 
     @Override
     public void moveTo(Point point) {
-        this.coordinate = point;
+        this.destination = point;
     }
+
+//    public void move() {
+//        if (destination != null && destination != position) {
+//            if (destination.getX() == position.getX()) {
+//                if (destination.getY() > position.getY()) {
+//                    moveUP();
+//                }
+//                else if (destination.getY() < position.getY()) {
+//                    moveDown();
+//                }
+//            }
+//            else if (destination.getY() == position.getY()) {
+//                if (destination.getX() > position.getX()) {
+//                    moveRight();
+//                }
+//                else if (destination.getX() < position.getX()) {
+//                    moveLeft();
+//                }
+//            }
+//        }
+//    }
+
+//    public void moveUP() { position.y = position.y + 16; }
+//    public void moveRight() { position.x = position.x + 16; }
+//    public void moveDown() { position.y = position.y - 16; }
+//    public void moveLeft() { position.x = position.x - 16; }
 
     @Override
     public void cancelMove() {
-
+        destination = null;
     }
 
     public Texture getSprite() {
@@ -56,12 +83,12 @@ public abstract class Unit implements Movement {
         this.sprite = sprite;
     }
 
-    public Point getCoordinate() {
-        return coordinate;
+    public Point getPosition() {
+        return position;
     }
 
-    public void setCoordinate(Point coordinate) {
-        this.coordinate = coordinate;
+    public void setPosition(Point position) {
+        this.position = position;
     }
 
     public UnitType getUnitType() {

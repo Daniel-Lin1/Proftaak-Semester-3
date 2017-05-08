@@ -255,11 +255,12 @@ public class GameManager {
         for (int i = 0; i < units.size() && !units.isEmpty(); i++)
         {
             //TODO: Simplify this?
-            batch.draw(units.get(i).getSprite(), units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
+            //units.get(i).move();
+            batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x, units.get(i).getPosition().y, 16, 16);
             if (units.get(i).getSelected() == true)
             {
                 Texture selectedSprite = new Texture(Gdx.files.internal("assets/Selected.png"));
-                batch.draw(selectedSprite, units.get(i).getCoordinate().x, units.get(i).getCoordinate().y, 16, 16);
+                batch.draw(selectedSprite, units.get(i).getPosition().x, units.get(i).getPosition().y, 16, 16);
             }
         }
 
