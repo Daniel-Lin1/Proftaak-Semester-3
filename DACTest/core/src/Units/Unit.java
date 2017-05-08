@@ -45,24 +45,59 @@ public abstract class Unit implements Movement {
     }
 
     public void move() {
-        if (destination != null && destination != position) {
-            if (destination.getX() == position.getX() || destination.getY() != position.getY()) {
-                if (destination.getY() > position.getY()) {
+            Point up = new Point(position.x, position.y + 16);
+            Point down = new Point(position.x, position.y - 16);
+            Point left = new Point(position.x - 16, position.y);
+            Point right = new Point(position.x + 16, position.y);
+
+            Double shortestDistance = up.distance(destination.getX(), destination.getY());
+            int nextStep = 1;
+
+            if (shortestDistance > down.distance(destination.getX(), destination.getY())) {
+                shortestDistance = down.distance(destination.getX(), destination.getY());
+                nextStep = 2;
+            }
+            if (shortestDistance > left.distance(destination.getX(), destination.getY())) {
+                shortestDistance = left.distance(destination.getX(), destination.getY());
+                nextStep = 3;
+            }
+            if (shortestDistance > right.distance(destination.getX(), destination.getY())) {
+                nextStep = 4;
+            }
+
+            switch (nextStep) {
+                case 1:
                     moveUP();
-                }
-                else if (destination.getY() < position.getY()) {
+                    break;
+                case 2:
                     moveDown();
-                }
-            }
-            if (destination.getY() == position.getY()) {
-                if (destination.getX() > position.getX()) {
-                    moveRight();
-                }
-                else if (destination.getX() < position.getX()) {
+                    break;
+                case 3:
                     moveLeft();
-                }
+                    break;
+                case 4:
+                    moveRight();
+                    break;
             }
-        }
+
+//        if (destination != null && destination != position) {
+//            if (destination.getX() == position.getX() || destination.getY() != position.getY()) {
+//                if (destination.getY() > position.getY()) {
+//                    moveUP();
+//                }
+//                else if (destination.getY() < position.getY()) {
+//                    moveDown();
+//                }
+//            }
+//            if (destination.getY() == position.getY()) {
+//                if (destination.getX() > position.getX()) {
+//                    moveRight();
+//                }
+//                else if (destination.getX() < position.getX()) {
+//                    moveLeft();
+//                }
+//            }
+//        }
     }
 
     public void moveUP() { position.y = position.y + 16; }
@@ -73,6 +108,14 @@ public abstract class Unit implements Movement {
     @Override
     public void cancelMove() {
         destination = null;
+    }
+
+    public Point getDestination() {
+        return destination;
+    }
+
+    public Point getPosition(Point position) {
+        return position;
     }
 
     public Texture getSprite() {
