@@ -44,31 +44,31 @@ public abstract class Unit implements Movement {
         this.destination = point;
     }
 
-//    public void move() {
-//        if (destination != null && destination != position) {
-//            if (destination.getX() == position.getX()) {
-//                if (destination.getY() > position.getY()) {
-//                    moveUP();
-//                }
-//                else if (destination.getY() < position.getY()) {
-//                    moveDown();
-//                }
-//            }
-//            else if (destination.getY() == position.getY()) {
-//                if (destination.getX() > position.getX()) {
-//                    moveRight();
-//                }
-//                else if (destination.getX() < position.getX()) {
-//                    moveLeft();
-//                }
-//            }
-//        }
-//    }
+    public void move() {
+        if (destination != null && destination != position) {
+            if (destination.getX() == position.getX() || destination.getY() != position.getY()) {
+                if (destination.getY() > position.getY()) {
+                    moveUP();
+                }
+                else if (destination.getY() < position.getY()) {
+                    moveDown();
+                }
+            }
+            if (destination.getY() == position.getY()) {
+                if (destination.getX() > position.getX()) {
+                    moveRight();
+                }
+                else if (destination.getX() < position.getX()) {
+                    moveLeft();
+                }
+            }
+        }
+    }
 
-//    public void moveUP() { position.y = position.y + 16; }
-//    public void moveRight() { position.x = position.x + 16; }
-//    public void moveDown() { position.y = position.y - 16; }
-//    public void moveLeft() { position.x = position.x - 16; }
+    public void moveUP() { position.y = position.y + 16; }
+    public void moveRight() { position.x = position.x + 16; }
+    public void moveDown() { position.y = position.y - 16; }
+    public void moveLeft() { position.x = position.x - 16; }
 
     @Override
     public void cancelMove() {
