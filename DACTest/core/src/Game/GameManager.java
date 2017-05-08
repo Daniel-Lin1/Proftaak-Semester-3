@@ -1,4 +1,4 @@
-package game;
+package Game;
 
 import Building.Building;
 import Building.UnitProducingBuilding;
@@ -22,9 +22,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
-import game.Map.Map;
-import game.Map.Tile;
-import game.Map.TiledMapStage;
+import Game.Map.Map;
+import Game.Map.Tile;
+import Game.Map.TiledMapStage;
 
 import java.awt.*;
 import java.rmi.RemoteException;
@@ -194,7 +194,7 @@ public class GameManager {
 
         //set tiles en stage goed enzo
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-        stage = new TiledMapStage(tiledMap, dac);
+        stage = new TiledMapStage(tiledMap, dac, this);
         Gdx.input.setInputProcessor(stage);
 
         batch = new SpriteBatch();

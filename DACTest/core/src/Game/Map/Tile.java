@@ -1,7 +1,7 @@
-package game.Map;
+package Game.Map;
 
 import Enums.GroundType;
-import game.Resource;
+import Game.Resource;
 
 import java.awt.*;
 

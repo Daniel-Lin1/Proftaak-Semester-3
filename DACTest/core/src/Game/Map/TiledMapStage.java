@@ -1,5 +1,6 @@
-package game.Map;
+package Game.Map;
 
+import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
@@ -9,6 +10,7 @@ import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.DistressAndConflict;
+import Game.GameManager;
 
 import java.rmi.RemoteException;
 
@@ -20,10 +22,12 @@ public class TiledMapStage extends Stage {
     private TiledMap tiledMap;
     private Group background = new Group();
     private Group foreground = new Group();
+    private GameManager gameManager;
 
-    public TiledMapStage(TiledMap tiledMap, DistressAndConflict dac) throws RemoteException {
+    public TiledMapStage(TiledMap tiledMap, DistressAndConflict dac, GameManager gameManager) throws RemoteException {
         this.dac = dac;
         this.tiledMap = tiledMap;
+        this.gameManager = gameManager;
 
         background.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         foreground.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -43,7 +47,7 @@ public class TiledMapStage extends Stage {
                 TiledMapActor actor = new TiledMapActor(tiledMap, tiledLayer, cell);
                 actor.setBounds(x * tiledLayer.getTileWidth(), y * tiledLayer.getTileHeight(), tiledLayer.getTileWidth(), tiledLayer.getTileHeight());
                 addActor(actor);
-                EventListener eventListener = new TiledMapClickListener(actor, this);
+                EventListener eventListener = new TiledMapClickListener(actor, this, gameManager);
                 actor.addListener(eventListener);
             }
         }
