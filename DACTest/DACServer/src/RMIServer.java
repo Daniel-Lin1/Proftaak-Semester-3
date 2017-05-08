@@ -1,3 +1,5 @@
+import java.util.Observable;
+
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -6,7 +8,7 @@ import java.rmi.registry.LocateRegistry;
 /**
  * Created by Ixbitz on 5-5-2017 in DACTest
  */
-public class RMIServer {
+public class RMIServer extends Observable {
 
     private static final int portNumber = 1099;
     private static final String bindingName = "UserAdmin";
@@ -48,4 +50,5 @@ public class RMIServer {
         // write your code here
         RMIServer server = new RMIServer();//Start RMI server
     }
+
 }

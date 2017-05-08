@@ -2,12 +2,14 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.Observable;
+import java.util.Observer;
 import java.util.Scanner;
 
 /**
  * Created by Ixbitz on 5-5-2017 in DACTest
  */
-public class RMIClient {
+public class RMIClient implements Observer{
     private static final String bindingName = "UserAdmin";
     private static String ipAddress;
     private static int portNumber;
@@ -91,5 +93,10 @@ public class RMIClient {
         portNumber = 1099;
 
         RMIClient rmiClient = new RMIClient(ipAddress, portNumber);
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }
