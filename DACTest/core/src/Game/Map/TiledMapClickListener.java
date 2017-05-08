@@ -39,32 +39,44 @@ public class TiledMapClickListener extends ClickListener {
         ArrayList<Unit> units = gameManager.getUnits();
         ArrayList<Building> buildings = gameManager.getBuildings();
         switch (button) {
-            case Buttons.LEFT:
-                System.out.println("LEFT button");
+            case Buttons.RIGHT:
+                System.out.println("RIGHT button");
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
-                    if (units.get(i).getSelected() == true)
-                    {
-                        if (Gdx.input.isKeyPressed(Input.Keys.Q)){
+                    if (units.get(i).getSelected() == true) {
+                        if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
 
-                        }
-                        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
 
-                        }
-                        if(Gdx.input.isKeyPressed(Input.Keys.E)){
+                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
 
-                        }
-                        if(Gdx.input.isKeyPressed(Input.Keys.R)){
+                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
 
-                        }
-                        else{
-                            units.get(i).moveTo(new Point((int)actor.getX(), (int)actor.getY()));
+                        } else {
+                            units.get(i).moveTo(new Point((int) actor.getX(), (int) actor.getY()));
                             units.get(i).setSelected(false);
                         }
                     }
                 }
+                for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
+                {
+                    if (buildings.get(i).getSelected() == true) {
+                        UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
+                        if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
+                            units.add(uPB.produceUnit(UnitType.Knight));
+                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
+
+                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
+
+                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
+
+                        } else {
+                            buildings.get(i).setSelected(false);
+                        }
+                    }
+                }
                 break;
-            case Buttons.RIGHT:
-                System.out.println("RIGHT button");
+            case Buttons.LEFT:
+                System.out.println("LEFT button");
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
                     if (actor.getX() == units.get(i).getPosition().getX() && actor.getY() == units.get(i).getPosition().getY()) {
                         units.get(i).setSelected(true);
@@ -76,9 +88,7 @@ public class TiledMapClickListener extends ClickListener {
                 {
                     if (actor.getX() == buildings.get(i).getCoordinate().getX() && actor.getY() == buildings.get(i).getCoordinate().getY())
                     {
-                        UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
-                        units.add(uPB.produceUnit(UnitType.Knight));
-                        //buildings.get(i).setSelected(true);
+                        buildings.get(i).setSelected(true);
                     }
                     else
                     {
