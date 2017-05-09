@@ -37,6 +37,16 @@ public class TiledMapClickListener extends ClickListener {
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         ArrayList<Unit> units = gameManager.getUnits();
         ArrayList<Building> buildings = gameManager.getBuildings();
+        Map map = gameManager.getMap();
+        //map.getTiles().get((int)actor.getX()).get((int)actor.getY()).toString();
+
+        int tilex = /*150 -*/ ((int) actor.getX() /16);
+        int tiley = /*150 -*/ ((int) actor.getY() /16);
+        System.out.println("x :"+ tilex+" y :"+tiley);
+        System.out.println(map.getTiles().get(tiley).get(tilex));
+
+
+
         switch (button) {
             case Buttons.RIGHT:
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {

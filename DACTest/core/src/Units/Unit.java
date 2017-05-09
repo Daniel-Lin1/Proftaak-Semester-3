@@ -53,9 +53,6 @@ public abstract class Unit implements Movement {
 
     public void move() {
         //todo inplement dijkstra :)
-        
-
-
         if (destination != null && !destination.equals(position)) {
             Point up = new Point(position.x, position.y + 16);
             Point down = new Point(position.x, position.y - 16);

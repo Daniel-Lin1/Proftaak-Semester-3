@@ -55,7 +55,6 @@ public class UIManager {
         UIBatch.draw(UISkin.getSprite("buttonlong_brown"),350,0,1570, 200);
         UIBatch.draw(UISkin.getSprite("buttonSquare_brown"),0,0,350,250);
 
-
         for(Unit unit : manager.getUnits())
         {
             if(unit.getSelected() == true)

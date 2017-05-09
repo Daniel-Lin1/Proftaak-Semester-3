@@ -9,12 +9,17 @@ import java.awt.*;
  * Created by Daniel on 26-3-2017.
  */
 public class Tile {
+    private int id;
     private boolean isWalkable;
     private boolean isBuildable;
     private boolean isOccupied;
     private GroundType groundType;
     private Resource resource;
     private Point cordinate;
+
+    public int getId() {
+        return id;
+    }
 
     public boolean isWalkable() {
         return this.isWalkable;
@@ -64,7 +69,8 @@ public class Tile {
         this.cordinate = cordinate;
     }
 
-    public Tile(boolean isWalkable, boolean isBuildable, boolean isOccupied, GroundType groundType, Resource resource) {
+    public Tile(int id, boolean isWalkable, boolean isBuildable, boolean isOccupied, GroundType groundType, Resource resource) {
+        this.id = id;
         this.isWalkable = isWalkable;
         this.isBuildable = isBuildable;
         this.isOccupied = isOccupied;
@@ -77,8 +83,8 @@ public class Tile {
 
     @Override
     public String toString() {
-        return "Tile{" +
-                "cordinate=" + getCordinate().toString() +
+        return "Tile{" + id +
+                ", cordinate=" + cordinate +
                 ", isWalkable=" + isWalkable +
                 ", isBuildable=" + isBuildable +
                 ", isOccupied=" + isOccupied +

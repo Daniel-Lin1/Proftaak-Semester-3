@@ -13,4 +13,12 @@ public class Resource {
         this.resourceEnum = resourceEnum;
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "Resource{" +
+                "resourceEnum=" + resourceEnum +
+                ", amount=" + amount +
+                '}';
+    }
 }
