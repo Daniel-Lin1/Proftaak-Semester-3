@@ -15,7 +15,7 @@ public class Tile {
     private boolean isOccupied;
     private GroundType groundType;
     private Resource resource;
-    private Point cordinate;
+    private Point coordinate;
 
     public int getId() {
         return id;
@@ -61,12 +61,12 @@ public class Tile {
         this.resource = resource;
     }
 
-    public Point getCordinate() {
-        return cordinate;
+    public Point getCoordinate() {
+        return coordinate;
     }
 
-    public void setCordinate(Point cordinate) {
-        this.cordinate = cordinate;
+    public void setCoordinate(Point coordinate) {
+        this.coordinate = coordinate;
     }
 
     public Tile(int id, boolean isWalkable, boolean isBuildable, boolean isOccupied, GroundType groundType, Resource resource) {
@@ -76,6 +76,7 @@ public class Tile {
         this.isOccupied = isOccupied;
         this.groundType = groundType;
         this.resource = resource;
+        this.coordinate = new Point();
     }
 
     public Tile() {
@@ -84,7 +85,7 @@ public class Tile {
     @Override
     public String toString() {
         return "Tile{" + id +
-                ", cordinate=" + cordinate +
+                ", coordinate=" + coordinate.toString() +
                 ", isWalkable=" + isWalkable +
                 ", isBuildable=" + isBuildable +
                 ", isOccupied=" + isOccupied +

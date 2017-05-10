@@ -37,14 +37,17 @@ public class TiledMapClickListener extends ClickListener {
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
         ArrayList<Unit> units = gameManager.getUnits();
         ArrayList<Building> buildings = gameManager.getBuildings();
-        Map map = gameManager.getMap();
-        //map.getTiles().get((int)actor.getX()).get((int)actor.getY()).toString();
+//        int tilex = /*150 -*/ ((int) actor.getX() /16);
+//        int tiley = /*150 -*/ ((int) actor.getY() /16);
+//
+//        int tmp = (-1* ((tiley+1) - map.getTiles().get(0).size()));
+//        System.out.println("eerste x :"+ tilex+" y :"+tiley + " tweede x :" + tilex + " y :" + tmp);
+//        System.out.println(map.getTiles().get(tilex).get(tmp));
+//        System.out.println("**********************************");
 
-        int tilex = /*150 -*/ ((int) actor.getX() /16);
-        int tiley = /*150 -*/ ((int) actor.getY() /16);
-        System.out.println("x :"+ tilex+" y :"+tiley);
-        System.out.println(map.getTiles().get(tiley).get(tilex));
 
+        Tile tile = gameManager.getMap().getTiles().get(((int) actor.getX() /16)).get((-1* ((((int) actor.getY() /16)+1) - gameManager.getMap().getTiles().get(0).size())));
+        System.out.println(tile);
 
 
         switch (button) {
@@ -60,7 +63,12 @@ public class TiledMapClickListener extends ClickListener {
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
 
                         } else {
-                            units.get(i).moveTo(new Point((int) actor.getX(), (int) actor.getY()));
+                            if(tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null){
+                                units.get(i).moveTo(new Point((int) actor.getX(), (int) actor.getY()));
+                            }else{
+                                System.out.println("kan niet moven.");
+                            }
+
                         }
                     }
                 }

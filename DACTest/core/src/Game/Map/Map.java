@@ -50,7 +50,7 @@ public class Map {
         this.sizeY = tiledMapTileLayer.getHeight();
         int tileID = 0;
 
-        Pixmap mapenzoPNG = new Pixmap(Gdx.files.internal("assets/map1pixelversion.png"));
+        Pixmap mapenzoPNG = new Pixmap(Gdx.files.internal("assets/map1pixelversionbmp.bmp"));
         Color color = new Color(0,0,0,0);
         for (int x=0; x<mapenzoPNG.getWidth(); x++) {
             tiles.add(new ArrayList<Tile>());
@@ -62,33 +62,28 @@ public class Map {
                 int G = (int)(color.g * 255f);
                 int B = (int)(color.b * 255f);
                 Tile tile = new Tile();
-                tile.setCordinate(new Point(x*16, y*16));
 
-                if(R == 34 && G == 177 && B == 76){
+                if(R == 237 && G == 28 && B == 36){ //rood
                     tile = new Tile(tileID,true, true, false, GroundType.Grass, null);
                     spawnPoints.add(new Point(x,y));
-                }else if(R == 255 && G == 242 && B == 0){
+                }else if(R == 255 && G == 242 && B == 0){ //geel
                     tile = new Tile(tileID,true, true, false, GroundType.Grass, new Resource(ResourceEnum.Gold, 500));
-                }else if(R == 195 && G == 195 && B == 195){
+                }else if(R == 195 && G == 195 && B == 195){ //grijs
                     tile = new Tile(tileID, true, true, false, GroundType.Grass, new Resource(ResourceEnum.Stone, 600));
-                }else if(R == 255 && G == 255 && B == 255){
+                }else if(R == 255 && G == 255 && B == 255){ //wit
                     tile = new Tile(tileID, true, true, false, GroundType.Grass, null);
-                }else if(R == 153 && G == 217 && B == 234){
+                }else if(R == 153 && G == 217 && B == 234){ //blauw
                     tile = new Tile(tileID, false, false, false, GroundType.Water, null);
-                }else if(R == 181 && G == 230 && B == 29){
+                }else if(R == 181 && G == 230 && B == 29){ //groen
                     tile = new Tile(tileID, true, true, false, GroundType.Grass, new Resource(ResourceEnum.Wood, 100));
-                }else if(R == 185 && G == 122 && B == 87){
-                    System.out.println("deze is als het goed is niet meer bestaand.");
-                    tile = new Tile(tileID,true, true, false, GroundType.Grass, null);
-                }else if(R == 255 && G == 174 && B == 201){
+                }else if(R == 255 && G == 174 && B == 201){ //roze
                     tile = new Tile(tileID,true, true, false, GroundType.Grass, new Resource(ResourceEnum.Food, 100) );
                 }else{
                     tile = new Tile(tileID,true, true, false, GroundType.Grass, null);
                     System.out.println("unassighned color in texture (load map from pixmap). replaced with an empty grass tile.");
+                    System.out.println("r :" + R +" g :" + G +" b :"+ B);
                 }
-                if(tile.getId() < 300){ //todo remove dit
-                    System.out.println(tile.toString());
-                }
+                tile.setCoordinate(new Point(x, y));
                 tiles.get(x).add(tile);
                 tileID++;
             }
