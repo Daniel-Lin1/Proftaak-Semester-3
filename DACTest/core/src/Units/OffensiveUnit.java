@@ -5,13 +5,14 @@ import Interfaces.Damage;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
 public class OffensiveUnit extends Unit implements Damage{
 
-    public OffensiveUnit(Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire) {
+    public OffensiveUnit(Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire, ArrayList<ArrayList>tiles) {
         this.setPosition(position);
         this.setUnitType(unitType);
         this.setHealth(health);
@@ -20,6 +21,7 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setHitDamage(hitDamage);
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
+        this.setTiles(tiles);
     }
 
     //zou moeten werken maar nog niet getest -Nick

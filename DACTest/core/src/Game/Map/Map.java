@@ -91,4 +91,8 @@ public class Map {
     }
     public void render(){
     }
+
+    public Tile GetTileFromCord(int x, int y){
+        return tiles.get(x).get((-1* (((y)+1) - tiles.get(0).size())));
+    }
 }

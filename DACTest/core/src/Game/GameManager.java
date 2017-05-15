@@ -114,7 +114,7 @@ public class GameManager {
         batch = new SpriteBatch();
 
         //todo remove this. only for testing
-        getOwnPlayer().getBuildings().add(new UnitProducingBuilding(new Point(48, 320), 64, 64, BuildingType.Towncenter, 1000));
+        getOwnPlayer().getBuildings().add(new UnitProducingBuilding(new Point(496, 336), 64, 64, BuildingType.Towncenter, 1000));
     }
 
     public void render(){

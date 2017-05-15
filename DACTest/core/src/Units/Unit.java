@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -97,10 +98,21 @@ public abstract class Unit implements Movement, Serializable {
         }
     }
 
-    public void moveUP() { position.y = position.y + 16; }
-    public void moveRight() { position.x = position.x + 16; }
-    public void moveDown() { position.y = position.y - 16; }
-    public void moveLeft() { position.x = position.x - 16; }
+    public void moveUP() {
+        position.y = position.y + 16;
+
+        //oude tile = occupide = false;
+        //nieuwe tile = occupide = true;
+    }
+    public void moveRight() {
+        position.x = position.x + 16;
+    }
+    public void moveDown() {
+        position.y = position.y - 16;
+    }
+    public void moveLeft() {
+        position.x = position.x - 16;
+    }
 
     @Override
     public void cancelMove() {
@@ -184,6 +196,14 @@ public abstract class Unit implements Movement, Serializable {
     }
 
     public boolean getSelected() { return selected; }
+
+    public void setDestination(Point destination) {
+        this.destination = destination;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
 
     public String getUIInfo(){
         return  "UnitType : " + unitType.toString() + "\n" +
