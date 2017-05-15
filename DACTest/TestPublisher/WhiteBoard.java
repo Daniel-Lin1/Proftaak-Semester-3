@@ -31,7 +31,7 @@ public class WhiteBoard extends Application {
     private Canvas panel;
     private final int panelWidth = 500;
     private final int panelHeight = 500;
-    private WhiteBoardCommunicator communicator;
+    private GameManagerCommunicator communicator;
 
     // Current color to draw
     private Color currentColor;
@@ -52,7 +52,7 @@ public class WhiteBoard extends Application {
 
         // Create communicator to communicate with other white boards
         try {
-            this.communicator = new WhiteBoardCommunicator(this);
+            this.communicator = new GameManagerCommunicator(this);
         } catch (RemoteException ex) {
             Logger.getLogger(WhiteBoard.class.getName()).log(Level.SEVERE, null, ex);
         }

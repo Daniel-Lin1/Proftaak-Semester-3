@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 
+import Game.GameManager;
 import fontyspublisher.IRemotePropertyListener;
 import fontyspublisher.IRemotePublisherForDomain;
 import fontyspublisher.IRemotePublisherForListener;
@@ -24,12 +25,12 @@ import java.util.logging.Logger;
  *
  * @author Nico Kuijpers
  */
-public class WhiteBoardCommunicator
+public class GameManagerCommunicator
         extends UnicastRemoteObject
         implements IRemotePropertyListener {
 
     // Reference to whiteboard
-    private final WhiteBoard whiteBoard;
+    private final GameManager gameManager;
 
     // Remote publisher
     private IRemotePublisherForDomain publisherForDomain;
@@ -44,11 +45,11 @@ public class WhiteBoardCommunicator
 
     /**
      * Constructor.
-     * @param whiteBoard  reference to white board
+     * @param gameManager  reference to white board
      * @throws java.rmi.RemoteException
      */
-    public WhiteBoardCommunicator(WhiteBoard whiteBoard) throws RemoteException {
-        this.whiteBoard = whiteBoard;
+    public GameManagerCommunicator(GameManager gameManager) throws RemoteException {
+        this.gameManager = gameManager;
         threadPool = Executors.newFixedThreadPool(nrThreads);
     }
 
@@ -56,7 +57,8 @@ public class WhiteBoardCommunicator
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
         String property = evt.getPropertyName();
         DrawEvent drawEvent = (DrawEvent) evt.getNewValue();
-        whiteBoard.requestDrawDot(property,drawEvent);
+        //TODO: methods die aangeroepen moeten worden in de client
+        //gameManager.requestDrawDot(property,drawEvent);
     }
 
     /**
@@ -86,7 +88,7 @@ public class WhiteBoardCommunicator
                 // Nothing changes at remote publisher in case property was already registered
                 publisherForDomain.registerProperty(property);
             } catch (RemoteException ex) {
-                Logger.getLogger(WhiteBoardCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
@@ -95,7 +97,7 @@ public class WhiteBoardCommunicator
      * Subscribe to property.
      * @param property property to subscribe to
      */
-    public void subscribe(String property) {
+    public void subscribe(final String property) {
         if (connected) {
             final IRemotePropertyListener listener = this;
             threadPool.execute(new Runnable() {
@@ -104,7 +106,7 @@ public class WhiteBoardCommunicator
                     try {
                         publisherForListener.subscribeRemoteListener(listener, property);
                     } catch (RemoteException ex) {
-                        Logger.getLogger(WhiteBoardCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
@@ -115,7 +117,7 @@ public class WhiteBoardCommunicator
      * Unsubscribe to property.
      * @param property property to unsubscribe to
      */
-    public void unsubscribe(String property) {
+    public void unsubscribe(final String property) {
         if (connected) {
             final IRemotePropertyListener listener = this;
             threadPool.execute(new Runnable() {
@@ -124,7 +126,7 @@ public class WhiteBoardCommunicator
                     try {
                         publisherForListener.unsubscribeRemoteListener(listener, property);
                     } catch (RemoteException ex) {
-                        Logger.getLogger(WhiteBoardCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
@@ -136,7 +138,7 @@ public class WhiteBoardCommunicator
      * @param property  color of draw event
      * @param drawEvent draw event
      */
-    public void broadcast(String property, DrawEvent drawEvent) {
+    public void broadcast(final String property, final DrawEvent drawEvent) {
         if (connected) {
             threadPool.execute(new Runnable() {
                 @Override
@@ -144,7 +146,7 @@ public class WhiteBoardCommunicator
                     try {
                         publisherForDomain.inform(property,null,drawEvent);
                     } catch (RemoteException ex) {
-                        Logger.getLogger(WhiteBoardCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
@@ -159,13 +161,13 @@ public class WhiteBoardCommunicator
             try {
                 publisherForListener.unsubscribeRemoteListener(this, null);
             } catch (RemoteException ex) {
-                Logger.getLogger(WhiteBoardCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         try {
             UnicastRemoteObject.unexportObject(this, true);
         } catch (NoSuchObjectException ex) {
-            Logger.getLogger(WhiteBoardCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
