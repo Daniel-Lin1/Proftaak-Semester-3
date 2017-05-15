@@ -2,34 +2,37 @@ package Building;
 
 import Enums.BuildingType;
 import Game.TextureVault;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
-public abstract class Building {
+public abstract class Building implements Serializable {
     private Point coordinate;
     private int sizeX;
     private int sizeY;
     private BuildingType buildingtype;
     private int health;
-    private Texture sprite;
     private boolean selected;
-    private Texture selectedSprite;
 
-    public void searchSprite() {
-        selectedSprite = TextureVault.selected;
-        if (buildingtype == BuildingType.Towncenter)
+    public Texture getSprite()
+    {
+        if (buildingtype == buildingtype.Towncenter)
         {
-            sprite = TextureVault.townCenter;
+            return TextureVault.townCenter;
         }
         else
         {
-            sprite = null;
+            return null;
         }
+    }
+
+    public Texture getSelectedSprite()
+    {
+        return TextureVault.selected;
     }
 
     public Point getCoordinate() {
@@ -72,27 +75,11 @@ public abstract class Building {
         this.health = health;
     }
 
-    public Texture getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(Texture sprite) {
-        this.sprite = sprite;
-    }
-
     public void setSelected(boolean selected) {
         this.selected = selected;
     }
 
     public boolean getSelected() { return selected; }
-
-    public Texture getSelectedSprite() {
-        return selectedSprite;
-    }
-
-    public void setSelectedSprite(Texture selectedSprite) {
-        this.selectedSprite = selectedSprite;
-    }
 
     public String getUIInfo(){
         return "Building Type : " + buildingtype + "\n" +
