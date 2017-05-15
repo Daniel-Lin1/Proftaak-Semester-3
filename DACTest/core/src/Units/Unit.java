@@ -3,15 +3,15 @@ package Units;
 import Enums.UnitType;
 import Game.TextureVault;
 import Interfaces.Movement;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
-public abstract class Unit implements Movement {
+public abstract class Unit implements Movement, Serializable {
 
     private Point position;
     private Point destination;
@@ -22,28 +22,30 @@ public abstract class Unit implements Movement {
     private int hitDamage;
     private int range;
     private boolean willReturnFire;
-    private Texture sprite;
     private boolean selected;
-    private Texture selectedSprite;
 
-    public void searchSprite()
+    public Texture getSprite()
     {
-        selectedSprite = TextureVault.selected;
         if (unitType == UnitType.Knight)
         {
-            sprite = TextureVault.knight;
+            return TextureVault.knight;
         }
         else if (unitType == UnitType.PikeMan)
         {
-            sprite = TextureVault.pikeMan;
+            return TextureVault.pikeMan;
         }
         else if (unitType == UnitType.Archer) {
-            sprite = TextureVault.archer;
+            return TextureVault.archer;
         }
         else
         {
-            sprite = null;
+            return null;
         }
+    }
+
+    public Texture getSelectedSprite()
+    {
+        return TextureVault.selected;
     }
 
     @Override
@@ -111,14 +113,6 @@ public abstract class Unit implements Movement {
 
     public Point getPosition(Point position) {
         return position;
-    }
-
-    public Texture getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(Texture sprite) {
-        this.sprite = sprite;
     }
 
     public Point getPosition() {
@@ -190,14 +184,6 @@ public abstract class Unit implements Movement {
     }
 
     public boolean getSelected() { return selected; }
-
-    public Texture getSelectedSprite() {
-        return selectedSprite;
-    }
-
-    public void setSelectedSprite(Texture selectedSprite) {
-        this.selectedSprite = selectedSprite;
-    }
 
     public String getUIInfo(){
         return  "UnitType : " + unitType.toString() + "\n" +
