@@ -38,6 +38,7 @@ public class TiledMapClickListener extends ClickListener {
         ArrayList<Building> buildings = gameManager.getOwnPlayer().getBuildings();
 
         Tile tile = gameManager.getMap().GetTileFromCord((int)actor.getX() /16, (int) actor.getY() /16);
+        //tile = gameManager.getMap().GetTileFromCord((int)actor.getX(), (int) actor.getY());
         System.out.println(tile);
 
         switch (button) {
@@ -54,11 +55,10 @@ public class TiledMapClickListener extends ClickListener {
 
                         } else {
                             if(tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null){
-                                units.get(i).moveTo(new Point((int) actor.getX(), (int) actor.getY()));
+                                units.get(i).moveTo(new Point((int) actor.getX()/16, (int) actor.getY()/16));
                             }else{
                                 System.out.println("kan niet moven.");
                             }
-
                         }
                     }
                 }
@@ -69,7 +69,7 @@ public class TiledMapClickListener extends ClickListener {
 
                         Boolean canSpawn = true;
                         for (int i2 = 0; i2 < units.size() && !units.isEmpty(); i2++) {
-                            if (units.get(i2).getPosition().getX() == buildings.get(i).getCoordinate().getX() && units.get(i2).getPosition().getY() == buildings.get(i).getCoordinate().getY() - 16 ) {
+                            if (units.get(i2).getPosition().getX() == buildings.get(i).getCoordinate().getX() && units.get(i2).getPosition().getY() == buildings.get(i).getCoordinate().getY() - 1 ) {
                                 canSpawn = false;
                             }
                         }
@@ -89,7 +89,7 @@ public class TiledMapClickListener extends ClickListener {
                 break;
             case Buttons.LEFT:
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
-                    if (actor.getX() == units.get(i).getPosition().getX() && actor.getY() == units.get(i).getPosition().getY()) {
+                    if (actor.getX()/16 == units.get(i).getPosition().getX() && actor.getY()/16 == units.get(i).getPosition().getY()) {
                         units.get(i).setSelected(true);
                     } else {
                         units.get(i).setSelected(false);
@@ -97,7 +97,7 @@ public class TiledMapClickListener extends ClickListener {
                 }
                 for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
                 {
-                    if (actor.getX() == buildings.get(i).getCoordinate().getX() && actor.getY() == buildings.get(i).getCoordinate().getY())
+                    if (actor.getX() /16 == buildings.get(i).getCoordinate().getX() && actor.getY()/16 == buildings.get(i).getCoordinate().getY())
                     {
                         buildings.get(i).setSelected(true);
                     }

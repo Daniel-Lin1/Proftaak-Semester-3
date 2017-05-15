@@ -26,7 +26,7 @@ public class UnitProducingBuilding extends Building {
 
     public OffensiveUnit produceUnit(UnitType unittype){
         OffensiveUnit unit = null;
-        Point point = new Point( (int)this.getCoordinate().getX(), (int)this.getCoordinate().getY() - 16);
+        Point point = new Point( (int)this.getCoordinate().getX(), (int)this.getCoordinate().getY() - 1);
         if (unittype == UnitType.Knight)
         {
             unit = new OffensiveUnit(point, UnitType.Knight, 100, 1, 1, 10, 1, false);

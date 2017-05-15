@@ -1,5 +1,6 @@
 package Game;
 
+import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.BuildingType;
 import Enums.State;
@@ -113,8 +114,8 @@ public class GameManager {
 
         batch = new SpriteBatch();
 
-        //todo remove this. only for testing
-        getOwnPlayer().getBuildings().add(new UnitProducingBuilding(new Point(496, 336), 64, 64, BuildingType.Towncenter, 1000));
+        //todo review of dit de correcte plek ervoor is.
+        createTowncenters();
     }
 
     public void render() {
@@ -134,18 +135,18 @@ public class GameManager {
     private void renderUnits(Player player) {
         for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++) {
             player.getUnits().get(i).move();
-            batch.draw(player.getUnits().get(i).getSprite(), player.getUnits().get(i).getPosition().x, player.getUnits().get(i).getPosition().y, 16, 16);
+            batch.draw(player.getUnits().get(i).getSprite(), player.getUnits().get(i).getPosition().x *16, player.getUnits().get(i).getPosition().y*16, 16, 16);
             if (player.getUnits().get(i).getSelected() == true) {
-                batch.draw(player.getUnits().get(i).getSelectedSprite(), player.getUnits().get(i).getPosition().x, player.getUnits().get(i).getPosition().y, 16, 16);
+                batch.draw(player.getUnits().get(i).getSelectedSprite(), player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
             }
         }
     }
 
     private void renderBuildings(Player player) {
         for (int i = 0; i < player.getBuildings().size() && !player.getBuildings().isEmpty(); i++) {
-            batch.draw(player.getBuildings().get(i).getSprite(), player.getBuildings().get(i).getCoordinate().x, player.getBuildings().get(i).getCoordinate().y, player.getBuildings().get(i).getSizeX(), player.getBuildings().get(i).getSizeY());
+            batch.draw(player.getBuildings().get(i).getSprite(), player.getBuildings().get(i).getCoordinate().x*16, player.getBuildings().get(i).getCoordinate().y*16, player.getBuildings().get(i).getSizeX(), player.getBuildings().get(i).getSizeY());
             if (player.getBuildings().get(i).getSelected()) {
-                batch.draw(player.getBuildings().get(i).getSelectedSprite(), player.getBuildings().get(i).getCoordinate().x, player.getBuildings().get(i).getCoordinate().y, player.getBuildings().get(i).getSizeX(), player.getBuildings().get(i).getSizeY());
+                batch.draw(player.getBuildings().get(i).getSelectedSprite(), player.getBuildings().get(i).getCoordinate().x*16, player.getBuildings().get(i).getCoordinate().y*16, player.getBuildings().get(i).getSizeX(), player.getBuildings().get(i).getSizeY());
             }
         }
     }
@@ -167,5 +168,16 @@ public class GameManager {
                 , tiledMap.getLayers().get(0).getProperties().get("width", Integer.class)//This works realy, really weird.
                 , tiledMap.getLayers().get(0).getProperties().get("height", Integer.class)//This too
         );
+    }
+
+    private void createTowncenters(){
+        for(int i=0; i<getPlayers().size(); i++){
+            Point tmp = map.getSpawnPoints().get(i);
+            Point cord = map.GetTileFromCord(tmp.x, tmp.y).getCoordinate();
+            System.out.println(tmp.x +" : " + tmp.y);
+            System.out.println(cord.x +" : " + cord.y);
+            Building townCenter = new UnitProducingBuilding(cord, 64, 64, BuildingType.Towncenter, 1000);
+            getPlayers().get(i).getBuildings().add(townCenter);
+        }
     }
 }

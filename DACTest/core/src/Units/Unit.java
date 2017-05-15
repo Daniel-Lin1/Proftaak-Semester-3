@@ -56,10 +56,10 @@ public abstract class Unit implements Movement, Serializable {
     public void move() {
         //todo inplement dijkstra :)
         if (destination != null && !destination.equals(position)) {
-            Point up = new Point(position.x, position.y + 16);
-            Point down = new Point(position.x, position.y - 16);
-            Point left = new Point(position.x - 16, position.y);
-            Point right = new Point(position.x + 16, position.y);
+            Point up = new Point(position.x, position.y + 1);
+            Point down = new Point(position.x, position.y - 1);
+            Point left = new Point(position.x - 1, position.y);
+            Point right = new Point(position.x + 1, position.y);
 
             Double shortestDistance = up.distance(destination.getX(), destination.getY());
             int nextStep = 1;
@@ -98,19 +98,16 @@ public abstract class Unit implements Movement, Serializable {
     }
 
     public void moveUP() {
-        position.y = position.y + 16;
-
-        //oude tile = occupide = false;
-        //nieuwe tile = occupide = true;
+        position.y = position.y + 1;
     }
     public void moveRight() {
-        position.x = position.x + 16;
+        position.x = position.x + 1;
     }
     public void moveDown() {
-        position.y = position.y - 16;
+        position.y = position.y - 1;
     }
     public void moveLeft() {
-        position.x = position.x - 16;
+        position.x = position.x - 1;
     }
 
     @Override

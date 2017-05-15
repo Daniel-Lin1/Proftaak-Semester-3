@@ -31,6 +31,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 		players.add(new Player(0, "player1"));
 		players.add(new Player(1, "player2"));
 		players.add(new Player(2, "player3"));
+		players.add(new Player(3, "player4"));
 
 		this.gameManager = new GameManager(State.Finished, 1, "lel", players, 0);
 		this.uiManager = new UIManager(this.gameManager);
@@ -38,8 +39,8 @@ public class DistressAndConflict extends ApplicationAdapter {
 		gameManager.setUiManager(this.uiManager);
 
 		//TODO : Kan dit beter ?
-		this.gmc = new GameManagerClient(gameManager);
-		gmc.connectToPublisherActionPerformed();
+		//this.gmc = new GameManagerClient(gameManager);
+		//gmc.connectToPublisherActionPerformed();
 	}
 
 	public void host(){
@@ -68,8 +69,6 @@ public class DistressAndConflict extends ApplicationAdapter {
 		uiManager.render();
 		showFPS();
 	}
-
-
 
 	@Override
 	public void dispose () {
