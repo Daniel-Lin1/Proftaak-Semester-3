@@ -7,11 +7,11 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class TextureVault {
 
-    public static Texture selected = new Texture(Gdx.files.internal("assets/Selected.png"));
-    public static Texture townCenter = new Texture(Gdx.files.internal("assets/Towncenter.png"));
-    public static Texture knight = new Texture(Gdx.files.internal("assets/Knight.png"));
-    public static Texture archer = new Texture(Gdx.files.internal("assets/Archer.png"));
-    public static Texture pikeMan = new Texture(Gdx.files.internal("assets/PikeMan.png"));
-    public static Texture uiElementAttack = new Texture(Gdx.files.internal("assets/uiElementAttack.png"));
-    public static Texture gatherResource = new Texture(Gdx.files.internal("assets/GatherResource.png"));
+    public final static Texture selected = new Texture(Gdx.files.internal("assets/Selected.png"));
+    public final static Texture townCenter = new Texture(Gdx.files.internal("assets/Towncenter.png"));
+    public final static Texture knight = new Texture(Gdx.files.internal("assets/Knight.png"));
+    public final static Texture archer = new Texture(Gdx.files.internal("assets/Archer.png"));
+    public final static Texture pikeMan = new Texture(Gdx.files.internal("assets/PikeMan.png"));
+    public final static Texture uiElementAttack = new Texture(Gdx.files.internal("assets/uiElementAttack.png"));
+    public final static Texture gatherResource = new Texture(Gdx.files.internal("assets/GatherResource.png"));
 }
