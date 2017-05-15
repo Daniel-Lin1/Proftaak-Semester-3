@@ -44,6 +44,38 @@ public class Player implements Serializable {
         this.buildings = buildings;
     }
 
+    public int getAmountGold() {
+        return amountGold;
+    }
+
+    public void setAmountGold(int amountGold) {
+        this.amountGold = amountGold;
+    }
+
+    public int getAmountWood() {
+        return amountWood;
+    }
+
+    public void setAmountWood(int amountWood) {
+        this.amountWood = amountWood;
+    }
+
+    public int getAmountFood() {
+        return amountFood;
+    }
+
+    public void setAmountFood(int amountFood) {
+        this.amountFood = amountFood;
+    }
+
+    public int getAmountStone() {
+        return amountStone;
+    }
+
+    public void setAmountStone(int amountStone) {
+        this.amountStone = amountStone;
+    }
+
     public Player(int playerID, String nickName) {
         this.playerID = playerID;
         this.nickName = nickName;

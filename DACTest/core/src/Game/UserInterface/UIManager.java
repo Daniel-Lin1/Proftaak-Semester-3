@@ -42,7 +42,6 @@ public class UIManager {
         font = new BitmapFont();
         abilityFont = new BitmapFont();
         abilityFont.getData().setScale(3, 3);
-
     }
 
     public void render()
@@ -51,7 +50,7 @@ public class UIManager {
         UIBatch.begin();
         UIBatch.draw(UISkin.getSprite("buttonlong_brown"),350,0,1570, 200);
         UIBatch.draw(UISkin.getSprite("buttonSquare_brown"),0,0,350,250);
-
+        drawResources();
         for(Unit unit : gameManager.getOwnPlayer().getUnits())
         {
             if(unit.getSelected() == true)
@@ -87,7 +86,6 @@ public class UIManager {
         }
         drawAbilitiesKeys();
         UIBatch.end();
-
     }
 
     private void renderTownCenter()
@@ -114,5 +112,8 @@ public class UIManager {
         {
             abilityFont.draw(UIBatch, Integer.toString(i + 1), 400 + (i *200), 80);
         }
+    }
+    public void drawResources(){
+        font.draw(UIBatch, "Goud : " + gameManager.getOwnPlayer().getAmountGold() +"\nWood : " + gameManager.getOwnPlayer().getAmountWood() + "\nFood : " + gameManager.getOwnPlayer().getAmountFood() + "\nStone : " + gameManager.getOwnPlayer().getAmountStone(), 10, 1070);
     }
 }
