@@ -61,7 +61,7 @@ public class Map {
                 int R = (int)(color.r * 255f);
                 int G = (int)(color.g * 255f);
                 int B = (int)(color.b * 255f);
-                Tile tile = new Tile();
+                Tile tile;
 
                 if(R == 237 && G == 28 && B == 36){ //rood
                     tile = new Tile(tileID,true, true, false, GroundType.Grass, null);
