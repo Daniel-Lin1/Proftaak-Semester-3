@@ -7,6 +7,7 @@ import fontyspublisher.IRemotePublisherForDomain;
 import fontyspublisher.IRemotePublisherForListener;
 
 import java.beans.PropertyChangeEvent;
+import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -74,7 +75,7 @@ public class Communicator extends UnicastRemoteObject implements IRemoteProperty
         }
     }
 
-    public void subscribe(final String property) {
+    public void subscribe( String property) {
         if (connected) {
             final IRemotePropertyListener listener = this;
             threadPool.execute(new Runnable() {
@@ -87,6 +88,36 @@ public class Communicator extends UnicastRemoteObject implements IRemoteProperty
                     }
                 }
             });
+        }
+    }
+
+    public void broadcast( String property, MoveEvent moveEvent) {
+        if (connected) {
+            threadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        publisherForDomain.inform(property,null,moveEvent);
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(Communicator.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+        }
+    }
+    
+    public void stop() {
+        if (connected) {
+            try {
+                publisherForListener.unsubscribeRemoteListener(this, null);
+            } catch (RemoteException ex) {
+                Logger.getLogger(Communicator.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        try {
+            UnicastRemoteObject.unexportObject(this, true);
+        } catch (NoSuchObjectException ex) {
+            Logger.getLogger(Communicator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
