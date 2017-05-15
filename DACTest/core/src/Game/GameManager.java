@@ -1,29 +1,22 @@
 package Game;
 
-import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.BuildingType;
 import Enums.State;
-import Enums.UnitType;
 
+import Game.UserInterface.UIManager;
 import Player.Player;
-import Units.OffensiveUnit;
-import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
 import Game.Map.Map;
-import Game.Map.Tile;
 import Game.Map.TiledMapStage;
 
 import java.awt.*;
@@ -45,9 +38,8 @@ public class GameManager {
     private Stage stage;
     private OrthographicCamera orthographicCamera;
     private DistressAndConflict dac;
-
-    private ArrayList<Unit> units = new ArrayList<Unit>();
-    private ArrayList<Building> buildings = new ArrayList<Building>();
+    private int OwnPlayerid;
+    private UIManager uiManager;
 
     private OrthographicCameraControlClass gamecamera;
     //Stage en Skin voor UI inladen
@@ -89,97 +81,20 @@ public class GameManager {
         return players;
     }
 
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
+    public UIManager getUiManager() {
+        return uiManager;
     }
 
-    public Stage getStage() {
-        return this.stage;
+    public void setUiManager(UIManager uiManager) {
+        this.uiManager = uiManager;
     }
 
-    public void setStage(Stage stage) {
-        this.stage = stage;
-    }
-
-    public void setOrthographicCamera(OrthographicCamera orthographicCamera) {
-        this.orthographicCamera = orthographicCamera;
-    }
-
-    public DistressAndConflict getDac() {
-        return this.dac;
-    }
-
-    public void setDac(DistressAndConflict dac) {
-        this.dac = dac;
-    }
-
-    public void setUnits(ArrayList<Unit> units) {
-        this.units = units;
-    }
-
-    public void setBuildings(ArrayList<Building> buildings) {
-        this.buildings = buildings;
-    }
-
-    public OrthographicCameraControlClass getGamecamera() {
-        return this.gamecamera;
-    }
-
-    public void setGamecamera(OrthographicCameraControlClass gamecamera) {
-        this.gamecamera = gamecamera;
-    }
-
-    public SpriteBatch getBatch() {
-        return this.batch;
-    }
-
-    public void setBatch(SpriteBatch batch) {
-        this.batch = batch;
-    }
-
-    public TiledMap getTiledMap() {
-        return tiledMap;
-    }
-
-    public void setTiledMap(TiledMap tiledMap) {
-        this.tiledMap = tiledMap;
-    }
-
-    public TiledMapRenderer getTiledMapRenderer() {
-        return tiledMapRenderer;
-    }
-
-    public void setTiledMapRenderer(TiledMapRenderer tiledMapRenderer) {
-        this.tiledMapRenderer = tiledMapRenderer;
-    }
-
-    public OrthographicCamera getOrthographicCamera() {
-        return orthographicCamera;
-    }
-
-    public ArrayList<Unit> getUnits() {
-        return this.units;
-    }
-
-    public ArrayList<Building> getBuildings() {
-        return this.buildings;
-    }
-
-
-    //ToDo : marc moet deze classe opschonen! wat een puinhoop kneus.
-
-    public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList<Player> participants) throws RemoteException {
-        super();
+    public GameManager(State gamestate, int lobbyID, String password, ArrayList<Player> players, int ownPlayerid) throws RemoteException {
         this.gamestate = gamestate;
         this.lobbyID = lobbyID;
         this.password = password;
         this.players = players;
-        this.dac = dac;
-    }
-
-    public GameManager() throws RemoteException {
-        super();
-
+        this.OwnPlayerid = ownPlayerid;
     }
 
     public void create () throws RemoteException {
@@ -191,19 +106,55 @@ public class GameManager {
         map = new Map(tiledMap, "tmpNaam");
         gamecamera = new OrthographicCameraControlClass(800, tiledMap);
 
-        //generateTiles(tiledMap);
-
-        //set tiles en stage goed enzo
+        //sets map
         tiledMapRenderer = new OrthogonalTiledMapRenderer(tiledMap);
-        stage = new TiledMapStage(tiledMap, dac, this);
+        stage = new TiledMapStage(tiledMap, this);
         Gdx.input.setInputProcessor(stage);
 
         batch = new SpriteBatch();
-        UnitProducingBuilding uPB = new UnitProducingBuilding(new Point(48, 320), 64, 64, BuildingType.Towncenter, 1000);
-        buildings.add(uPB);
+
+        //todo remove this. only for testing
+        getOwnPlayer().getBuildings().add(new UnitProducingBuilding(new Point(496, 336), 64, 64, BuildingType.Towncenter, 1000));
     }
 
     public void render(){
+        renderCameraAndMap();
+        batch.begin();
+        for (Player player: players) {
+            renderUnits(player);
+            renderBuildings(player);
+        }
+       batch.end();
+    }
+
+    public Player getOwnPlayer(){
+        return getPlayers().get(OwnPlayerid);
+    }
+
+    private void renderUnits(Player player){
+        for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++)
+        {
+            player.getUnits().get(i).move();
+            batch.draw(player.getUnits().get(i).getSprite(), player.getUnits().get(i).getPosition().x, player.getUnits().get(i).getPosition().y, 16, 16);
+            if (player.getUnits().get(i).getSelected() == true)
+            {
+                batch.draw(player.getUnits().get(i).getSelectedSprite(), player.getUnits().get(i).getPosition().x, player.getUnits().get(i).getPosition().y, 16, 16);
+            }
+        }
+    }
+
+    private void renderBuildings(Player player){
+        for (int i = 0; i < player.getBuildings().size() && !player.getBuildings().isEmpty(); i++)
+        {
+            batch.draw(player.getBuildings().get(i).getSprite(), player.getBuildings().get(i).getCoordinate().x, player.getBuildings().get(i).getCoordinate().y, player.getBuildings().get(i).getSizeX(), player.getBuildings().get(i).getSizeY());
+            if (player.getBuildings().get(i).getSelected())
+            {
+                batch.draw(player.getBuildings().get(i).getSelectedSprite(), player.getBuildings().get(i).getCoordinate().x, player.getBuildings().get(i).getCoordinate().y, player.getBuildings().get(i).getSizeX(), player.getBuildings().get(i).getSizeY());
+            }
+        }
+    }
+
+    private void renderCameraAndMap(){
         orthographicCamera = gamecamera.render(orthographicCamera);
         orthographicCamera.update();
         tiledMapRenderer.render();
@@ -212,7 +163,7 @@ public class GameManager {
         stage.getViewport().update((int)orthographicCamera.viewportWidth, (int)orthographicCamera.viewportHeight, false);
         stage.getViewport().setCamera(orthographicCamera);
         stage.getViewport().getCamera().update();
-
+        batch.setProjectionMatrix(orthographicCamera.combined);
         tiledMapRenderer.setView(
                 orthographicCamera.combined
                 ,0
@@ -220,30 +171,5 @@ public class GameManager {
                 ,tiledMap.getLayers().get(0).getProperties().get("width", Integer.class)//This works realy, really weird.
                 ,tiledMap.getLayers().get(0).getProperties().get("height", Integer.class)//This too
         );
-
-
-        //forloop voor participants
-        // render items / buildings from you and other players.
-        batch.setProjectionMatrix(orthographicCamera.combined);
-        batch.begin();
-        for (int i = 0; i < units.size() && !units.isEmpty(); i++)
-        {
-            units.get(i).move();
-            batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x, units.get(i).getPosition().y, 16, 16);
-            if (units.get(i).getSelected() == true)
-            {
-                batch.draw(units.get(i).getSelectedSprite(), units.get(i).getPosition().x, units.get(i).getPosition().y, 16, 16);
-            }
-        }
-
-        for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
-        {
-            batch.draw(buildings.get(i).getSprite(), buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
-            if (buildings.get(i).getSelected())
-            {
-                batch.draw(buildings.get(i).getSelectedSprite(), buildings.get(i).getCoordinate().x, buildings.get(i).getCoordinate().y, buildings.get(i).getSizeX(), buildings.get(i).getSizeY());
-            }
-        }
-       batch.end();
     }
 }

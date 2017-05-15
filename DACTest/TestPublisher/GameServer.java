@@ -13,7 +13,7 @@ import java.rmi.registry.Registry;
  *
  * @author Nico Kuijpers
  */
-public class WhiteBoardServer {
+public class GameServer {
 
     private static int portNumber = 1099;
     private static String bindingName = "publisher";

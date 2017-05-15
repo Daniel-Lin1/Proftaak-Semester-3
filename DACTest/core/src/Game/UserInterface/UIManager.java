@@ -5,7 +5,6 @@ import Units.Unit;
 import Game.GameManager;
 import Game.TextureVault;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -19,11 +18,10 @@ import java.awt.*;
  */
 public class UIManager {
 
-    private DistressAndConflict dac;
     //Skin en spritebatch voor UI inladen
     private Skin UISkin;
     private SpriteBatch UIBatch;
-    private GameManager manager;
+    private GameManager gameManager;
     private BitmapFont font;
     private BitmapFont abilityFont;
 
@@ -32,9 +30,8 @@ public class UIManager {
     private Point SelectedObjectInfoLocation = new Point(160, 200);
     private Point SelectedObjectImgLocation = new Point(50,120);
 
-    public UIManager(DistressAndConflict dac, GameManager manager){
-        this.dac = dac;
-        this.manager = manager;
+    public UIManager(GameManager manager){
+        this.gameManager = manager;
     }
 
     public void create(){
@@ -55,7 +52,7 @@ public class UIManager {
         UIBatch.draw(UISkin.getSprite("buttonlong_brown"),350,0,1570, 200);
         UIBatch.draw(UISkin.getSprite("buttonSquare_brown"),0,0,350,250);
 
-        for(Unit unit : manager.getUnits())
+        for(Unit unit : gameManager.getOwnPlayer().getUnits())
         {
             if(unit.getSelected() == true)
             {
@@ -79,7 +76,7 @@ public class UIManager {
                 }
             }
         }
-        for(Building building : manager.getBuildings())
+        for(Building building : gameManager.getOwnPlayer().getBuildings())
         {
             if(building.getSelected() == true)
             {

@@ -22,7 +22,6 @@ public class UnitProducingBuilding extends Building {
         this.setSizeY(sizeY);
         this.setBuildingtype(buildingType);
         this.setHealth(health);
-        searchSprite();
     }
 
     public OffensiveUnit produceUnit(UnitType unittype){

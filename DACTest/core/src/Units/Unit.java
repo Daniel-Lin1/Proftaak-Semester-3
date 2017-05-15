@@ -3,7 +3,6 @@ package Units;
 import Enums.UnitType;
 import Game.TextureVault;
 import Interfaces.Movement;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;
@@ -23,28 +22,30 @@ public abstract class Unit implements Movement, Serializable {
     private int hitDamage;
     private int range;
     private boolean willReturnFire;
-    private Texture sprite;
     private boolean selected;
-    private Texture selectedSprite;
 
-    public void searchSprite()
+    public Texture getSprite()
     {
-        selectedSprite = TextureVault.selected;
         if (unitType == UnitType.Knight)
         {
-            sprite = TextureVault.knight;
+            return TextureVault.knight;
         }
         else if (unitType == UnitType.PikeMan)
         {
-            sprite = TextureVault.pikeMan;
+            return TextureVault.pikeMan;
         }
         else if (unitType == UnitType.Archer) {
-            sprite = TextureVault.archer;
+            return TextureVault.archer;
         }
         else
         {
-            sprite = null;
+            return null;
         }
+    }
+
+    public Texture getSelectedSprite()
+    {
+        return TextureVault.selected;
     }
 
     @Override
@@ -96,10 +97,21 @@ public abstract class Unit implements Movement, Serializable {
         }
     }
 
-    public void moveUP() { position.y = position.y + 16; }
-    public void moveRight() { position.x = position.x + 16; }
-    public void moveDown() { position.y = position.y - 16; }
-    public void moveLeft() { position.x = position.x - 16; }
+    public void moveUP() {
+        position.y = position.y + 16;
+
+        //oude tile = occupide = false;
+        //nieuwe tile = occupide = true;
+    }
+    public void moveRight() {
+        position.x = position.x + 16;
+    }
+    public void moveDown() {
+        position.y = position.y - 16;
+    }
+    public void moveLeft() {
+        position.x = position.x - 16;
+    }
 
     @Override
     public void cancelMove() {
@@ -112,14 +124,6 @@ public abstract class Unit implements Movement, Serializable {
 
     public Point getPosition(Point position) {
         return position;
-    }
-
-    public Texture getSprite() {
-        return sprite;
-    }
-
-    public void setSprite(Texture sprite) {
-        this.sprite = sprite;
     }
 
     public Point getPosition() {
@@ -192,12 +196,12 @@ public abstract class Unit implements Movement, Serializable {
 
     public boolean getSelected() { return selected; }
 
-    public Texture getSelectedSprite() {
-        return selectedSprite;
+    public void setDestination(Point destination) {
+        this.destination = destination;
     }
 
-    public void setSelectedSprite(Texture selectedSprite) {
-        this.selectedSprite = selectedSprite;
+    public boolean isSelected() {
+        return selected;
     }
 
     public String getUIInfo(){

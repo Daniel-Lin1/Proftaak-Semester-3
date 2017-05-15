@@ -19,6 +19,42 @@ public class Player implements Serializable {
     private ArrayList<Unit> units;
     private ArrayList<Building>buildings;
 
+
+    public int getPlayerID() {
+        return playerID;
+    }
+
+    public void setPlayerID(int playerID) {
+        this.playerID = playerID;
+    }
+
+    public ArrayList<Unit> getUnits() {
+        return units;
+    }
+
+    public void setUnits(ArrayList<Unit> units) {
+        this.units = units;
+    }
+
+    public ArrayList<Building> getBuildings() {
+        return buildings;
+    }
+
+    public void setBuildings(ArrayList<Building> buildings) {
+        this.buildings = buildings;
+    }
+
+    public Player(int playerID, String nickName) {
+        this.playerID = playerID;
+        this.nickName = nickName;
+        this.amountGold = 500;
+        this.amountWood = 500;
+        this.amountFood = 500;
+        this.amountStone = 500;
+        this.units = new ArrayList<Unit>();
+        this.buildings = new ArrayList<Building>();
+    }
+
     public void command(){
 
     }

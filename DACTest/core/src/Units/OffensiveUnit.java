@@ -5,6 +5,7 @@ import Interfaces.Damage;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -20,7 +21,6 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setHitDamage(hitDamage);
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
-        searchSprite();
     }
 
     //zou moeten werken maar nog niet getest -Nick

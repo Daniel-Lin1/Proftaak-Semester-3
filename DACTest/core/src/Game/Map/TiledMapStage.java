@@ -25,8 +25,7 @@ public class TiledMapStage extends Stage {
     private Group foreground = new Group();
     private GameManager gameManager;
 
-    public TiledMapStage(TiledMap tiledMap, DistressAndConflict dac, GameManager gameManager) throws RemoteException {
-        this.dac = dac;
+    public TiledMapStage(TiledMap tiledMap, GameManager gameManager) throws RemoteException {
         this.tiledMap = tiledMap;
         this.gameManager = gameManager;
 
@@ -35,15 +34,12 @@ public class TiledMapStage extends Stage {
         addActor(background);
         addActor(foreground);
 
-        for (MapLayer layer : tiledMap.getLayers()) {
-            try{
-                TiledMapTileLayer tiledLayer = (TiledMapTileLayer)layer;
-                createActorsForLayer(tiledLayer);
-            }catch (Exception ex){
-                System.out.println(ex.toString() + "  !!! fix dit nog ff. dit staat in de tiledmapstage constructor :)  !!!");
-                TiledMapImageLayer tiledLayer = (TiledMapImageLayer)layer;
-            }
 
+        try{
+            createActorsForLayer((TiledMapTileLayer)tiledMap.getLayers().get(0));
+        }catch (ClassCastException ex){
+            System.out.println(ex.toString());
+            System.out.println("dit word veroorzaakt doordat de map niet goed is opgebouwed. zorg dat layer 1 in het .tmx bestand een TiledMapTileLayer is. GR marc-a");
         }
     }
 
