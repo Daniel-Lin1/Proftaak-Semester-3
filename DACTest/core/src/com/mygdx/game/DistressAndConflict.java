@@ -3,6 +3,7 @@ package com.mygdx.game;
 import Enums.State;
 import Game.GameManager;
 import Game.UserInterface.UIManager;
+import Multiplayer.GameManagerClient;
 import Player.Account;
 import Player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
@@ -22,10 +23,10 @@ public class DistressAndConflict extends ApplicationAdapter {
 	private UIManager uiManager;
 	private int OldFps = 0;
 	private static final Logger LOG = Logger.getLogger(DistressAndConflict.class.getName());
+	private GameManagerClient gmc;
 
 	public DistressAndConflict(Account account) throws RemoteException {
 		this.user = account;
-
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player(0, "player1"));
 		players.add(new Player(1, "player2"));
@@ -35,6 +36,10 @@ public class DistressAndConflict extends ApplicationAdapter {
 		this.uiManager = new UIManager(this.gameManager);
 
 		gameManager.setUiManager(this.uiManager);
+
+		//TODO : Kan dit beter ?
+		this.gmc = new GameManagerClient(gameManager);
+		gmc.connectToPublisherActionPerformed();
 	}
 
 	public void host(){

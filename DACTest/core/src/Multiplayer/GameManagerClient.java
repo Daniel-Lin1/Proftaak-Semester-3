@@ -1,18 +1,14 @@
+package Multiplayer;
+
 import Game.GameManager;
+import Units.Unit;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.CheckBox;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import Units.Unit;
+
 import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,7 +37,7 @@ public class GameManagerClient extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        connectToPublisherActionPerformed(null);
+        connectToPublisherActionPerformed();
     }
 
     // Broadcast draw event to other white boards
@@ -52,7 +48,7 @@ public class GameManagerClient extends Application {
 
     // Draw dot on white board
     private void setUnit(ArrayList<Unit> units) {
-        gameManager.setUnits(units);
+        gameManager.getOwnPlayer().setUnits(units);
     }
 
     /**
@@ -63,14 +59,14 @@ public class GameManagerClient extends Application {
         Platform.runLater(new Runnable(){
             @Override
             public void run() {
-                //setUnits(units);
+                gameManager.getOwnPlayer().setUnits(units);
             }
         });
     }
 
 
 
-    private void connectToPublisherActionPerformed(ActionEvent event) {
+    public void connectToPublisherActionPerformed() {
         //TODO: Call wanneer er geconnect moet worden
         // Establish connection with remote publisherForDomain
         communicator.connectToPublisher();

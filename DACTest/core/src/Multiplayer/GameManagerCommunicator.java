@@ -1,7 +1,10 @@
-package Multiplayer;
+package Multiplayer;/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
-import Game.GameManager;
-import Units.MoveEvent;
+import Units.Unit;
 import fontyspublisher.IRemotePropertyListener;
 import fontyspublisher.IRemotePublisherForDomain;
 import fontyspublisher.IRemotePublisherForListener;
@@ -13,69 +16,87 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- * Created by Daniel on 15-5-2017.
- */
-public class Communicator extends UnicastRemoteObject implements IRemotePropertyListener {
+public class GameManagerCommunicator
+        extends UnicastRemoteObject
+        implements IRemotePropertyListener {
 
-    private GameManager gameManager;
+    // Reference to whiteboard
+    private final GameManagerClient gameManager;
 
+    // Remote publisher
     private IRemotePublisherForDomain publisherForDomain;
     private IRemotePublisherForListener publisherForListener;
     private static int portNumber = 1099;
     private static String bindingName = "publisher";
     private boolean connected = false;
 
+    // Thread pool
     private final int nrThreads = 10;
     private ExecutorService threadPool = null;
 
-    protected Communicator(GameManager gameManager) throws RemoteException {
-        this.gameManager = gameManager ;
+    /**
+     * Constructor.
+     * @param gameManager  reference to white board
+     * @throws RemoteException
+     */
+    public GameManagerCommunicator(GameManagerClient gameManager) throws RemoteException {
+        this.gameManager = gameManager;
         threadPool = Executors.newFixedThreadPool(nrThreads);
-
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
         String property = evt.getPropertyName();
-        //TODO : MovementEvent hardcoded
-        MoveEvent moveEvent = (MoveEvent) evt.getNewValue();
-        //TODO : requestmethod
 
+        ArrayList<Unit> units = new ArrayList<Unit>();
+        units.add(1, new Units.BuilderUnit());
+        //TODO: methods die aangeroepen moeten worden in de client
+        gameManager.requestSetUnits(units);
     }
 
-    public void connecToPublisher(){
-        try{
+    /**
+     * Establish connection with remote publisher.
+     */
+    public void connectToPublisher() {
+        try {
             Registry registry = LocateRegistry.getRegistry("localhost", portNumber);
             publisherForDomain = (IRemotePublisherForDomain) registry.lookup(bindingName);
             publisherForListener = (IRemotePublisherForListener) registry.lookup(bindingName);
             connected = true;
             System.out.println("Connection with remote publisher established");
-        }
-        catch (RemoteException | NotBoundException re){
+        } catch (RemoteException | NotBoundException re) {
             connected = false;
             System.err.println("Cannot establish connection to remote publisher");
             System.err.println("Run WhiteBoardServer to start remote publisher");
         }
     }
 
-    public void register(String property){
+    /**
+     * Register property at remote publisher.
+     * @param property  property to be registered
+     */
+    public void register(String property) {
         if (connected) {
             try {
                 // Nothing changes at remote publisher in case property was already registered
                 publisherForDomain.registerProperty(property);
             } catch (RemoteException ex) {
-                Logger.getLogger(Communicator.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
 
-    public void subscribe( String property) {
+    /**
+     * Subscribe to property.
+     * @param property property to subscribe to
+     */
+    public void subscribe(final String property) {
         if (connected) {
             final IRemotePropertyListener listener = this;
             threadPool.execute(new Runnable() {
@@ -84,40 +105,66 @@ public class Communicator extends UnicastRemoteObject implements IRemoteProperty
                     try {
                         publisherForListener.subscribeRemoteListener(listener, property);
                     } catch (RemoteException ex) {
-                        Logger.getLogger(Communicator.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
         }
     }
 
-    public void broadcast( String property, MoveEvent moveEvent) {
+    /**
+     * Unsubscribe to property.
+     * @param property property to unsubscribe to
+     */
+    public void unsubscribe(final String property) {
         if (connected) {
+            final IRemotePropertyListener listener = this;
             threadPool.execute(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        publisherForDomain.inform(property,null,moveEvent);
+                        publisherForListener.unsubscribeRemoteListener(listener, property);
                     } catch (RemoteException ex) {
-                        Logger.getLogger(Communicator.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
             });
         }
     }
-    
+
+    /**
+     * Broadcast draw event.
+     * @param property the correct property type
+     * @param object value of the property to be broadcasted
+     * draw event
+     */
+    public void broadcast(final String property, final Object object) {
+        if (connected) {
+            threadPool.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        publisherForDomain.inform(property,null,object);
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            });
+        }
+    }
+
     public void stop() {
         if (connected) {
             try {
                 publisherForListener.unsubscribeRemoteListener(this, null);
             } catch (RemoteException ex) {
-                Logger.getLogger(Communicator.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         try {
             UnicastRemoteObject.unexportObject(this, true);
         } catch (NoSuchObjectException ex) {
-            Logger.getLogger(Communicator.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 }
