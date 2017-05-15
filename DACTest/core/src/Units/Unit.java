@@ -1,6 +1,7 @@
 package Units;
 
 import Enums.UnitType;
+import Game.Map.Map;
 import Game.TextureVault;
 import Interfaces.Movement;
 import com.badlogic.gdx.graphics.Texture;
@@ -23,6 +24,7 @@ public abstract class Unit implements Movement, Serializable {
     private int range;
     private boolean willReturnFire;
     private boolean selected;
+    private Map map;
 
     public Texture getSprite()
     {
@@ -61,22 +63,27 @@ public abstract class Unit implements Movement, Serializable {
             Point left = new Point(position.x - 1, position.y);
             Point right = new Point(position.x + 1, position.y);
 
-            Double shortestDistance = up.distance(destination.getX(), destination.getY());
-            int nextStep = 1;
-
-            if (shortestDistance > down.distance(destination.getX(), destination.getY())) {
+            Double shortestDistance = 99999.00;
+            int nextStep = 0;
+            if(shortestDistance > up.distance(destination.getX(), destination.getY()) && checkNextTileIfWalkable(up)) {
+                shortestDistance = up.distance(destination.getX(), destination.getY());
+                nextStep = 1;
+            }
+            if (shortestDistance > down.distance(destination.getX(), destination.getY()) && checkNextTileIfWalkable(down)) {
                 shortestDistance = down.distance(destination.getX(), destination.getY());
                 nextStep = 2;
             }
-            if (shortestDistance > left.distance(destination.getX(), destination.getY())) {
+            if (shortestDistance > left.distance(destination.getX(), destination.getY()) && checkNextTileIfWalkable(left)) {
                 shortestDistance = left.distance(destination.getX(), destination.getY());
                 nextStep = 3;
             }
-            if (shortestDistance > right.distance(destination.getX(), destination.getY())) {
+            if (shortestDistance > right.distance(destination.getX(), destination.getY()) && checkNextTileIfWalkable(right)) {
                 nextStep = 4;
             }
-
+            map.getTileFromCord(position.x, position.y).setOccupied(false);
             switch (nextStep) {
+                case 0:
+                    break;
                 case 1:
                     moveUP();
                     break;
@@ -94,6 +101,7 @@ public abstract class Unit implements Movement, Serializable {
                     System.out.println("default case in move algeritme");
                     break;
             }
+            map.getTileFromCord(position.x, position.y).setOccupied(true);
         }
     }
 
@@ -108,6 +116,19 @@ public abstract class Unit implements Movement, Serializable {
     }
     public void moveLeft() {
         position.x = position.x - 1;
+    }
+
+    private boolean checkNextTileIfWalkable(Point point){
+        if(map.getTileFromCord(point.x, point.y).isOccupied()){
+            return false;
+        }
+        if(map.getTileFromCord(point.x, point.y).getResource() != null){
+            return false;
+        }
+        if(!map.getTileFromCord(point.x, point.y).isWalkable()){
+            return false;
+        }
+        return true;
     }
 
     @Override
@@ -199,6 +220,10 @@ public abstract class Unit implements Movement, Serializable {
 
     public boolean isSelected() {
         return selected;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 
     public String getUIInfo(){

@@ -115,7 +115,7 @@ public class GameManager {
         batch = new SpriteBatch();
 
         //todo review of dit de correcte plek ervoor is.
-        createTowncenters();
+        createTownCenters();
     }
 
     public void render() {
@@ -144,9 +144,9 @@ public class GameManager {
 
     private void renderBuildings(Player player) {
         for (int i = 0; i < player.getBuildings().size() && !player.getBuildings().isEmpty(); i++) {
-            batch.draw(player.getBuildings().get(i).getSprite(), player.getBuildings().get(i).getCoordinate().x*16, player.getBuildings().get(i).getCoordinate().y*16, player.getBuildings().get(i).getSizeX(), player.getBuildings().get(i).getSizeY());
+            batch.draw(player.getBuildings().get(i).getSprite(), player.getBuildings().get(i).getCoordinate().x*16, player.getBuildings().get(i).getCoordinate().y*16, player.getBuildings().get(i).getSizeX()*16, player.getBuildings().get(i).getSizeY()*16);
             if (player.getBuildings().get(i).getSelected()) {
-                batch.draw(player.getBuildings().get(i).getSelectedSprite(), player.getBuildings().get(i).getCoordinate().x*16, player.getBuildings().get(i).getCoordinate().y*16, player.getBuildings().get(i).getSizeX(), player.getBuildings().get(i).getSizeY());
+                batch.draw(player.getBuildings().get(i).getSelectedSprite(), player.getBuildings().get(i).getCoordinate().x*16, player.getBuildings().get(i).getCoordinate().y*16, player.getBuildings().get(i).getSizeX() *16, player.getBuildings().get(i).getSizeY()*16);
             }
         }
     }
@@ -170,14 +170,15 @@ public class GameManager {
         );
     }
 
-    private void createTowncenters(){
+    private void createTownCenters(){
         for(int i=0; i<getPlayers().size(); i++){
             Point tmp = map.getSpawnPoints().get(i);
-            Point cord = map.GetTileFromCord(tmp.x, tmp.y).getCoordinate();
-            System.out.println(tmp.x +" : " + tmp.y);
-            System.out.println(cord.x +" : " + cord.y);
-            Building townCenter = new UnitProducingBuilding(cord, 64, 64, BuildingType.Towncenter, 1000);
-            getPlayers().get(i).getBuildings().add(townCenter);
+            Point cord = map.getTileFromCord(tmp.x, tmp.y).getCoordinate();
+            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.Towncenter, 1000, map);
+            if(townCenter.checkBuildingPossible()){
+                townCenter.setBuildingsTilesOccupide(townCenter);
+                getPlayers().get(i).getBuildings().add(townCenter);
+            }
         }
     }
 }

@@ -89,9 +89,10 @@ public class Map {
         }
     }
     public void render(){
+        //todo render resources
     }
 
-    public Tile GetTileFromCord(int x, int y){
+    public Tile getTileFromCord(int x, int y){
         if(x == 150){x = 149;} //op een hele cheez manier een glitch van die laatste rij (buiten de map clicken) gefixed. :)
         return tiles.get(x).get((-1* (((y)+1) - tiles.get(0).size())));
     }

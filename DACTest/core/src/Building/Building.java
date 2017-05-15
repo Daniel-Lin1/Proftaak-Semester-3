@@ -1,6 +1,8 @@
 package Building;
 
 import Enums.BuildingType;
+import Game.Map.Map;
+import Game.Map.Tile;
 import Game.TextureVault;
 import com.badlogic.gdx.graphics.Texture;
 
@@ -17,6 +19,7 @@ public abstract class Building implements Serializable {
     private BuildingType buildingtype;
     private int health;
     private boolean selected;
+    private Map map;
 
     public Texture getSprite()
     {
@@ -80,6 +83,39 @@ public abstract class Building implements Serializable {
     }
 
     public boolean getSelected() { return selected; }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public Map getMap() {
+        return map;
+    }
+
+    public boolean checkBuildingPossible(){
+        for(int i=0; i<sizeX; i++){
+            for(int j=0; j<sizeY; j++){
+                Tile tile = map.getTileFromCord(coordinate.x + i, coordinate.y + j);
+                if(!tile.isBuildable() || tile.isOccupied() || tile.getResource() != null){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void setBuildingsTilesOccupide(Building building){
+        for(int i=0; i<sizeX; i++){
+            for(int j=0; j<sizeY; j++){
+                Tile tile = map.getTileFromCord(coordinate.x + i, coordinate.y + j);
+                tile.setOccupied(true);
+            }
+        }
+    }
 
     public String getUIInfo(){
         return "Building Type : " + buildingtype + "\n" +

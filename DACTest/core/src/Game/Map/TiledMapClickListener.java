@@ -37,9 +37,8 @@ public class TiledMapClickListener extends ClickListener {
         ArrayList<Unit> units = gameManager.getOwnPlayer().getUnits();
         ArrayList<Building> buildings = gameManager.getOwnPlayer().getBuildings();
 
-        Tile tile = gameManager.getMap().GetTileFromCord((int)actor.getX() /16, (int) actor.getY() /16);
-        //tile = gameManager.getMap().GetTileFromCord((int)actor.getX(), (int) actor.getY());
-        System.out.println(tile);
+        Tile tile = gameManager.getMap().getTileFromCord((int)actor.getX() /16, (int) actor.getY() /16);
+        //System.out.println(tile);
 
         switch (button) {
             case Buttons.RIGHT:

@@ -1,6 +1,7 @@
 package Units;
 
 import Enums.UnitType;
+import Game.Map.Map;
 import Interfaces.Damage;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class OffensiveUnit extends Unit implements Damage{
 
-    public OffensiveUnit(Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire) {
+    public OffensiveUnit(Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire, Map map) {
         this.setPosition(position);
         this.setUnitType(unitType);
         this.setHealth(health);
@@ -21,6 +22,7 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setHitDamage(hitDamage);
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
+        this.setMap(map);
     }
 
     //zou moeten werken maar nog niet getest -Nick
