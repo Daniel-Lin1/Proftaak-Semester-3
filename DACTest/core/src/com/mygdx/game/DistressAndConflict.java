@@ -8,9 +8,12 @@ import Player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import sun.rmi.runtime.Log;
 
 import java.rmi.RemoteException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DistressAndConflict extends ApplicationAdapter {
 	//private SpriteBatch batch;
@@ -18,6 +21,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 	private GameManager gameManager;
 	private UIManager uiManager;
 	private int OldFps = 0;
+	private static final Logger LOG = Logger.getLogger(DistressAndConflict.class.getName());
 
 	public DistressAndConflict(Account account) throws RemoteException {
 		this.user = account;
@@ -46,7 +50,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 			this.uiManager.create();
 			this.gameManager.create();
 		} catch (RemoteException e) {
-			e.printStackTrace();
+			LOG.log(Level.INFO, e.getMessage());
 		}
 	}
 
