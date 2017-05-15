@@ -15,5 +15,6 @@ public class NormalBuilding extends Building {
         this.setSizeY(sizeY);
         this.setBuildingtype(buildingType);
         this.setHealth(health);
+        searchSprite();
     }
 }

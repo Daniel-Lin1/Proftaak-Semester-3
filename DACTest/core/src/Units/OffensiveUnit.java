@@ -20,6 +20,7 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setHitDamage(hitDamage);
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
+        searchSprite();
     }
 
     //zou moeten werken maar nog niet getest -Nick
