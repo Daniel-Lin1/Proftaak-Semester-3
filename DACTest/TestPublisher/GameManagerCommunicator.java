@@ -5,16 +5,19 @@
  */
 
 import Game.GameManager;
+import Units.Unit;
 import fontyspublisher.IRemotePropertyListener;
 import fontyspublisher.IRemotePublisherForDomain;
 import fontyspublisher.IRemotePublisherForListener;
 import java.beans.PropertyChangeEvent;
+import java.lang.reflect.Array;
 import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -30,7 +33,7 @@ public class GameManagerCommunicator
         implements IRemotePropertyListener {
 
     // Reference to whiteboard
-    private final GameManager gameManager;
+    private final GameManagerClient gameManager;
 
     // Remote publisher
     private IRemotePublisherForDomain publisherForDomain;
@@ -48,7 +51,7 @@ public class GameManagerCommunicator
      * @param gameManager  reference to white board
      * @throws java.rmi.RemoteException
      */
-    public GameManagerCommunicator(GameManager gameManager) throws RemoteException {
+    public GameManagerCommunicator(GameManagerClient gameManager) throws RemoteException {
         this.gameManager = gameManager;
         threadPool = Executors.newFixedThreadPool(nrThreads);
     }
@@ -57,8 +60,11 @@ public class GameManagerCommunicator
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
         String property = evt.getPropertyName();
         DrawEvent drawEvent = (DrawEvent) evt.getNewValue();
+
+        ArrayList<Unit> units = new ArrayList<Unit>();
+        units.add(1, new Units.BuilderUnit());
         //TODO: methods die aangeroepen moeten worden in de client
-        //gameManager.requestDrawDot(property,drawEvent);
+        gameManager.requestSetUnits(units);
     }
 
     /**
@@ -135,16 +141,17 @@ public class GameManagerCommunicator
 
     /**
      * Broadcast draw event.
-     * @param property  color of draw event
-     * @param drawEvent draw event
+     * @param property the correct property type
+     * @param object value of the property to be broadcasted
+     * draw event
      */
-    public void broadcast(final String property, final DrawEvent drawEvent) {
+    public void broadcast(final String property, final Object object) {
         if (connected) {
             threadPool.execute(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        publisherForDomain.inform(property,null,drawEvent);
+                        publisherForDomain.inform(property,null,object);
                     } catch (RemoteException ex) {
                         Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
                     }

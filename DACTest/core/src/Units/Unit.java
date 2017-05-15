@@ -7,11 +7,12 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
-public abstract class Unit implements Movement {
+public abstract class Unit implements Movement, Serializable {
 
     private Point position;
     private Point destination;
