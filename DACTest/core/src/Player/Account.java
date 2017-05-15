@@ -10,6 +10,9 @@ public class Account {
     private String password;
     private int elo;
 
+    public Account() {
+    }
+
     public void login(String email, String password){
 
     }

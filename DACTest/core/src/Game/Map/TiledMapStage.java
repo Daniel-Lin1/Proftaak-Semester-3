@@ -25,8 +25,7 @@ public class TiledMapStage extends Stage {
     private Group foreground = new Group();
     private GameManager gameManager;
 
-    public TiledMapStage(TiledMap tiledMap, DistressAndConflict dac, GameManager gameManager) throws RemoteException {
-        this.dac = dac;
+    public TiledMapStage(TiledMap tiledMap, GameManager gameManager) throws RemoteException {
         this.tiledMap = tiledMap;
         this.gameManager = gameManager;
 

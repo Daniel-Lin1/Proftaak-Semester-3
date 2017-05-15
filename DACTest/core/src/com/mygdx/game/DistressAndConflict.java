@@ -19,32 +19,18 @@ public class DistressAndConflict extends ApplicationAdapter {
 	private UIManager uiManager;
 	private int OldFps = 0;
 
-	public DistressAndConflict(Account user, GameManager gameManager, UIManager uiManager) {
-		this.user = user;
-		this.gameManager = gameManager;
-		setUiManager(uiManager);
-	}
+	public DistressAndConflict(Account account) throws RemoteException {
+		this.user = account;
 
-	public DistressAndConflict() throws RemoteException {
-		this.user = new Account();
-		this.gameManager = new GameManager(this, State.Finished, 1, "lel", new ArrayList<Player>());
-		setUiManager(new UIManager(this, this.gameManager));
-	}
+		ArrayList<Player> players = new ArrayList<Player>();
+		players.add(new Player(0, "player1"));
+		players.add(new Player(1, "player2"));
+		players.add(new Player(2, "player3"));
 
-	public GameManager getGameManager() {
-		return gameManager;
-	}
+		this.gameManager = new GameManager(State.Finished, 1, "lel", players, 0);
+		this.uiManager = new UIManager(this.gameManager);
 
-	public void setGameManager(GameManager gameManager) {
-		this.gameManager = gameManager;
-	}
-
-	public UIManager getUiManager() {
-		return uiManager;
-	}
-
-	public void setUiManager(UIManager uiManager) {
-		this.uiManager = uiManager;
+		gameManager.setUiManager(this.uiManager);
 	}
 
 	public void host(){
@@ -56,16 +42,12 @@ public class DistressAndConflict extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		//http://www.gamefromscratch.com/post/2014/04/16/LibGDX-Tutorial-11-Tiled-Maps-Part-1-Simple-Orthogonal-Maps.aspx
-		//gameManager.setTiledMap(new TmxMapLoader().load("assets/TestMap1.tmx"));
 		try {
-			gameManager.create();
+			this.uiManager.create();
+			this.gameManager.create();
 		} catch (RemoteException e) {
 			e.printStackTrace();
 		}
-		uiManager.create();
-
-		//batch = new SpriteBatch();
 	}
 
 	@Override
@@ -76,8 +58,6 @@ public class DistressAndConflict extends ApplicationAdapter {
 		gameManager.render();
 		uiManager.render();
 		showFPS();
-
-		//batch.setProjectionMatrix(gameManager.getOrthographicCamera().combined);
 	}
 
 
@@ -87,8 +67,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 		//batch.dispose();
 	}
 
-	public void showFPS(){//Created to optimize FPS, YaY 60 FPS!
-		//https://libgdx.badlogicgames.com/nightlies/docs/api/com/badlogic/gdx/Graphics.html#getFramesPerSecond--
+	public void showFPS(){
 		int CurFPS = Gdx.graphics.getFramesPerSecond();
 		if (CurFPS != OldFps){
 			OldFps = CurFPS;

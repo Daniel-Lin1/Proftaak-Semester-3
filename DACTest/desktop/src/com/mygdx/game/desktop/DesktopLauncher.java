@@ -1,5 +1,6 @@
 package com.mygdx.game.desktop;
 
+import Player.Account;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import com.mygdx.game.DistressAndConflict;
@@ -16,6 +17,6 @@ public class DesktopLauncher {
 		config.height = 1080;
 		config.width = 1920;
 		config.foregroundFPS = 60;
-		new LwjglApplication(new DistressAndConflict(), config);
+		new LwjglApplication(new DistressAndConflict(new Account()), config);
 	}
 }

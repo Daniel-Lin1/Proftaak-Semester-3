@@ -7,7 +7,6 @@ import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import Game.GameManager;
@@ -35,8 +34,8 @@ public class TiledMapClickListener extends ClickListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        ArrayList<Unit> units = gameManager.getUnits();
-        ArrayList<Building> buildings = gameManager.getBuildings();
+        ArrayList<Unit> units = gameManager.getOwnPlayer().getUnits();
+        ArrayList<Building> buildings = gameManager.getOwnPlayer().getBuildings();
 //        int tilex = /*150 -*/ ((int) actor.getX() /16);
 //        int tiley = /*150 -*/ ((int) actor.getY() /16);
 //
