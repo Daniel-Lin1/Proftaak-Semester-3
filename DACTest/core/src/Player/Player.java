@@ -90,4 +90,72 @@ public class Player implements Serializable {
     public void command(){
 
     }
+
+    public boolean BuyUnit(Unit unit){
+        boolean canBuy = false;
+        switch(unit.getUnitType())
+        {
+            case Knight:
+                if(amountGold - 100 >= 0 && amountFood - 50 >= 0){
+                    canBuy = true;
+                    amountGold -= 100;
+                    amountFood -= 50;
+                }
+                break;
+            case Archer:
+                if(amountGold - 50 >= 0 && amountFood - 35 >= 0 && amountWood - 25 >=0 ){
+                    canBuy = true;
+                    amountGold -= 50;
+                    amountFood -= 35;
+                    amountWood -= 25;
+                }
+                break;
+            case PikeMan:
+                if(amountGold - 20 >= 0 && amountFood - 50 >= 0 && amountWood - 25 >=0 ){
+                    canBuy = true;
+                    amountGold -= 20;
+                    amountFood -= 50;
+                    amountWood -= 25;
+                }
+                break;
+            case Builder:
+                if(amountFood - 100 >= 0){
+                    canBuy = true;
+                    amountFood -= 100;
+                }
+        }
+
+        if(canBuy){
+            System.out.println("canbuy");
+            units.add(unit);
+        }
+        return canBuy;
+    }
+    public boolean BuyBuilding(Building building){
+        boolean canBuy = false;
+        switch(building.getBuildingtype())
+        {
+            case Towncenter:
+                if(amountGold - 1000 >= 0 && amountFood - 1000 >= 0 && amountStone - 1000 >= 0){
+                    canBuy = true;
+                    amountGold -= 1000;
+                    amountFood -= 100;
+                    amountStone -= 1000;
+                }
+                break;
+            case Archery:
+                if(amountWood - 500 >= 0 && amountStone - 500 >=0 ){
+                    canBuy = true;
+                    amountStone -= 500;
+                    amountWood -= 500;
+                }
+                break;
+        }
+
+        if(canBuy){
+            System.out.println("canbuy");
+            buildings.add(building);
+        }
+        return canBuy;
+    }
 }

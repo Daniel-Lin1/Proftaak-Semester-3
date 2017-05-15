@@ -77,11 +77,11 @@ public class TiledMapClickListener extends ClickListener {
                         {
                             UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
                             if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-                                units.add(uPB.produceUnit(UnitType.Knight));
+                                gameManager.getOwnPlayer().BuyUnit(uPB.produceUnit(UnitType.Knight));
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-                                units.add(uPB.produceUnit(UnitType.PikeMan));
+                                gameManager.getOwnPlayer().BuyUnit(uPB.produceUnit(UnitType.PikeMan));
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
-                                units.add(uPB.produceUnit(UnitType.Archer));
+                                gameManager.getOwnPlayer().BuyUnit(uPB.produceUnit(UnitType.Archer));
                             }
                         }
                     }

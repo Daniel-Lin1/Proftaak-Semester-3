@@ -97,10 +97,10 @@ public class GameManager {
         this.OwnPlayerid = ownPlayerid;
     }
 
-    public void create () throws RemoteException {
+    public void create() throws RemoteException {
         // set camera
         orthographicCamera = new OrthographicCamera();
-        orthographicCamera.setToOrtho(false,1920,1080);
+        orthographicCamera.setToOrtho(false, 1920, 1080);
         orthographicCamera.update();
         tiledMap = new TmxMapLoader().load("assets/TestMap3.tmx");
         map = new Map(tiledMap, "tmpNaam");
@@ -117,59 +117,55 @@ public class GameManager {
         getOwnPlayer().getBuildings().add(new UnitProducingBuilding(new Point(496, 336), 64, 64, BuildingType.Towncenter, 1000));
     }
 
-    public void render(){
+    public void render() {
         renderCameraAndMap();
         batch.begin();
-        for (Player player: players) {
+        for (Player player : players) {
             renderUnits(player);
             renderBuildings(player);
         }
-       batch.end();
+        batch.end();
     }
 
-    public Player getOwnPlayer(){
+    public Player getOwnPlayer() {
         return getPlayers().get(OwnPlayerid);
     }
 
-    private void renderUnits(Player player){
-        for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++)
-        {
+    private void renderUnits(Player player) {
+        for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++) {
             player.getUnits().get(i).move();
             batch.draw(player.getUnits().get(i).getSprite(), player.getUnits().get(i).getPosition().x, player.getUnits().get(i).getPosition().y, 16, 16);
-            if (player.getUnits().get(i).getSelected() == true)
-            {
+            if (player.getUnits().get(i).getSelected() == true) {
                 batch.draw(player.getUnits().get(i).getSelectedSprite(), player.getUnits().get(i).getPosition().x, player.getUnits().get(i).getPosition().y, 16, 16);
             }
         }
     }
 
-    private void renderBuildings(Player player){
-        for (int i = 0; i < player.getBuildings().size() && !player.getBuildings().isEmpty(); i++)
-        {
+    private void renderBuildings(Player player) {
+        for (int i = 0; i < player.getBuildings().size() && !player.getBuildings().isEmpty(); i++) {
             batch.draw(player.getBuildings().get(i).getSprite(), player.getBuildings().get(i).getCoordinate().x, player.getBuildings().get(i).getCoordinate().y, player.getBuildings().get(i).getSizeX(), player.getBuildings().get(i).getSizeY());
-            if (player.getBuildings().get(i).getSelected())
-            {
+            if (player.getBuildings().get(i).getSelected()) {
                 batch.draw(player.getBuildings().get(i).getSelectedSprite(), player.getBuildings().get(i).getCoordinate().x, player.getBuildings().get(i).getCoordinate().y, player.getBuildings().get(i).getSizeX(), player.getBuildings().get(i).getSizeY());
             }
         }
     }
 
-    private void renderCameraAndMap(){
+    private void renderCameraAndMap() {
         orthographicCamera = gamecamera.render(orthographicCamera);
         orthographicCamera.update();
         tiledMapRenderer.render();
         stage.act();
         stage.draw();
-        stage.getViewport().update((int)orthographicCamera.viewportWidth, (int)orthographicCamera.viewportHeight, false);
+        stage.getViewport().update((int) orthographicCamera.viewportWidth, (int) orthographicCamera.viewportHeight, false);
         stage.getViewport().setCamera(orthographicCamera);
         stage.getViewport().getCamera().update();
         batch.setProjectionMatrix(orthographicCamera.combined);
         tiledMapRenderer.setView(
                 orthographicCamera.combined
-                ,0
-                ,0
-                ,tiledMap.getLayers().get(0).getProperties().get("width", Integer.class)//This works realy, really weird.
-                ,tiledMap.getLayers().get(0).getProperties().get("height", Integer.class)//This too
+                , 0
+                , 0
+                , tiledMap.getLayers().get(0).getProperties().get("width", Integer.class)//This works realy, really weird.
+                , tiledMap.getLayers().get(0).getProperties().get("height", Integer.class)//This too
         );
     }
 }
