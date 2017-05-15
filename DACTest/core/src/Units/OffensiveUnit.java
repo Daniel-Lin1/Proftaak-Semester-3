@@ -28,10 +28,10 @@ public class OffensiveUnit extends Unit implements Damage{
     //zou moeten werken maar nog niet getest -Nick
     @Override
     public void attack(Unit target) {
-        if ((this.getPosition().getX() + (this.getRange() * 16) >= target.getPosition().getX()) &&
-            (this.getPosition().getX() - (this.getRange() * 16) <= target.getPosition().getX()) &&
-            (this.getPosition().getY() + (this.getRange() * 16) >= target.getPosition().getY()) &&
-            (this.getPosition().getY() - (this.getRange() * 16) <= target.getPosition().getY()))
+        if ((this.getPosition().getX() + (this.getRange()) >= target.getPosition().getX()) &&
+            (this.getPosition().getX() - (this.getRange()) <= target.getPosition().getX()) &&
+            (this.getPosition().getY() + (this.getRange()) >= target.getPosition().getY()) &&
+            (this.getPosition().getY() - (this.getRange()) <= target.getPosition().getY()))
         {
             target.setHealth(target.getHealth() - this.getHitDamage());
         }
