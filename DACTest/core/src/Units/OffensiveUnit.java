@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class OffensiveUnit extends Unit implements Damage{
 
-    public OffensiveUnit(Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire, ArrayList<ArrayList>tiles) {
+    public OffensiveUnit(Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire) {
         this.setPosition(position);
         this.setUnitType(unitType);
         this.setHealth(health);
@@ -21,7 +21,6 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setHitDamage(hitDamage);
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
-        this.setTiles(tiles);
     }
 
     //zou moeten werken maar nog niet getest -Nick
