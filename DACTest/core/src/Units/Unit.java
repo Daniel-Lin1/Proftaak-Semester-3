@@ -2,6 +2,7 @@ package Units;
 
 import Enums.UnitType;
 import Game.Map.Map;
+import Game.Map.PathFinder;
 import Game.TextureVault;
 import Interfaces.Movement;
 import com.badlogic.gdx.graphics.Texture;
@@ -53,6 +54,24 @@ public abstract class Unit implements Movement, Serializable {
     @Override
     public void moveTo(Point point) {
         this.destination = point;
+        //PathFinder pf = new PathFinder(map);
+        //boolean solved = pf.solve(position, destination);
+        //System.out.println(solved + "");
+        //System.out.println(pf.toString());
+        //System.out.println("" + solved);
+    }
+
+    private void moveUP() {
+        position.y = position.y + 1;
+    }
+    private void moveRight() {
+        position.x = position.x + 1;
+    }
+    private void moveDown() {
+        position.y = position.y - 1;
+    }
+    private void moveLeft() {
+        position.x = position.x - 1;
     }
 
     public void move() {
@@ -65,25 +84,23 @@ public abstract class Unit implements Movement, Serializable {
 
             Double shortestDistance = 99999.00;
             int nextStep = 0;
-            if(shortestDistance > up.distance(destination.getX(), destination.getY()) && checkNextTileIfWalkable(up)) {
+            if(shortestDistance > up.distance(destination.getX(), destination.getY()) && map.checkTileIfWalkable(up)) {
                 shortestDistance = up.distance(destination.getX(), destination.getY());
                 nextStep = 1;
             }
-            if (shortestDistance > down.distance(destination.getX(), destination.getY()) && checkNextTileIfWalkable(down)) {
+            if (shortestDistance > down.distance(destination.getX(), destination.getY()) && map.checkTileIfWalkable(down)) {
                 shortestDistance = down.distance(destination.getX(), destination.getY());
                 nextStep = 2;
             }
-            if (shortestDistance > left.distance(destination.getX(), destination.getY()) && checkNextTileIfWalkable(left)) {
+            if (shortestDistance > left.distance(destination.getX(), destination.getY()) && map.checkTileIfWalkable(left)) {
                 shortestDistance = left.distance(destination.getX(), destination.getY());
                 nextStep = 3;
             }
-            if (shortestDistance > right.distance(destination.getX(), destination.getY()) && checkNextTileIfWalkable(right)) {
+            if (shortestDistance > right.distance(destination.getX(), destination.getY()) && map.checkTileIfWalkable(right)) {
                 nextStep = 4;
             }
             map.getTileFromCord(position.x, position.y).setOccupied(false);
             switch (nextStep) {
-                case 0:
-                    break;
                 case 1:
                     moveUP();
                     break;
@@ -103,32 +120,6 @@ public abstract class Unit implements Movement, Serializable {
             }
             map.getTileFromCord(position.x, position.y).setOccupied(true);
         }
-    }
-
-    public void moveUP() {
-        position.y = position.y + 1;
-    }
-    public void moveRight() {
-        position.x = position.x + 1;
-    }
-    public void moveDown() {
-        position.y = position.y - 1;
-    }
-    public void moveLeft() {
-        position.x = position.x - 1;
-    }
-
-    private boolean checkNextTileIfWalkable(Point point){
-        if(map.getTileFromCord(point.x, point.y).isOccupied()){
-            return false;
-        }
-        if(map.getTileFromCord(point.x, point.y).getResource() != null){
-            return false;
-        }
-        if(!map.getTileFromCord(point.x, point.y).isWalkable()){
-            return false;
-        }
-        return true;
     }
 
     @Override

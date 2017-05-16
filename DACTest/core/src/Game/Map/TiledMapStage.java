@@ -25,7 +25,7 @@ public class TiledMapStage extends Stage {
     private Group foreground = new Group();
     private GameManager gameManager;
 
-    public TiledMapStage(TiledMap tiledMap, GameManager gameManager) throws RemoteException {
+    public TiledMapStage(TiledMap tiledMap, GameManager gameManager) {
         this.tiledMap = tiledMap;
         this.gameManager = gameManager;
 
@@ -43,7 +43,7 @@ public class TiledMapStage extends Stage {
         }
     }
 
-    private void createActorsForLayer(TiledMapTileLayer tiledLayer) throws RemoteException {
+    private void createActorsForLayer(TiledMapTileLayer tiledLayer)  {
         for (int x = 0; x <= tiledLayer.getWidth(); x++) {
             for (int y = 0; y <= tiledLayer.getHeight(); y++) {
                 TiledMapTileLayer.Cell cell = tiledLayer.getCell(x, y);

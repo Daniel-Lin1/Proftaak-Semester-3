@@ -4,9 +4,7 @@ import Game.GameManager;
 import Units.Unit;
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.stage.Stage;
-
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.logging.Level;

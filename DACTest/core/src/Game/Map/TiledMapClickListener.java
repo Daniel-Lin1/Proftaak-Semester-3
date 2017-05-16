@@ -26,7 +26,7 @@ public class TiledMapClickListener extends ClickListener {
     private ArrayList<Unit> units = new ArrayList<Unit>();
     private ArrayList<Building> buildings = new ArrayList<Building>();
 
-    public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage, GameManager gameManager) throws RemoteException {
+    public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage, GameManager gameManager) {
         this.actor = actor;
         this.stage = stage;
         this.gameManager = gameManager;
@@ -53,11 +53,11 @@ public class TiledMapClickListener extends ClickListener {
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
 
                         } else {
-                            if(tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null){
-                                units.get(i).moveTo(new Point((int) actor.getX()/16, (int) actor.getY()/16));
-                            }else{
-                                System.out.println("kan niet moven.");
-                            }
+//                            if(tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null){
+                            units.get(i).moveTo(new Point((int) actor.getX()/16, (int) actor.getY()/16));
+//                            }else{
+//                                System.out.println("kan niet moven.");
+//                            }
                         }
                     }
                 }

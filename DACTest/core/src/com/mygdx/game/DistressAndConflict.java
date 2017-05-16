@@ -25,7 +25,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 	private static final Logger LOG = Logger.getLogger(DistressAndConflict.class.getName());
 	private GameManagerClient gmc;
 
-	public DistressAndConflict(Account account) throws RemoteException {
+	public DistressAndConflict(Account account)  {
 		this.user = account;
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player(0, "player1"));
@@ -39,8 +39,8 @@ public class DistressAndConflict extends ApplicationAdapter {
 		gameManager.setUiManager(this.uiManager);
 
 		//TODO : Kan dit beter ?
-		//this.gmc = new GameManagerClient(gameManager);
-		//gmc.connectToPublisherActionPerformed();
+		this.gmc = new GameManagerClient(gameManager);
+		gmc.connectToPublisherActionPerformed();
 	}
 
 	public void host(){
@@ -52,12 +52,8 @@ public class DistressAndConflict extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		try {
-			this.uiManager.create();
-			this.gameManager.create();
-		} catch (RemoteException e) {
-			LOG.log(Level.INFO, e.getMessage());
-		}
+		this.uiManager.create();
+		this.gameManager.create();
 	}
 
 	@Override

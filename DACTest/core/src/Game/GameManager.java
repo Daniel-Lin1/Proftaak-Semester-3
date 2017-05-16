@@ -90,7 +90,7 @@ public class GameManager {
         this.uiManager = uiManager;
     }
 
-    public GameManager(State gamestate, int lobbyID, String password, ArrayList<Player> players, int ownPlayerid) throws RemoteException {
+    public GameManager(State gamestate, int lobbyID, String password, ArrayList<Player> players, int ownPlayerid) {
         this.gamestate = gamestate;
         this.lobbyID = lobbyID;
         this.password = password;
@@ -98,7 +98,7 @@ public class GameManager {
         this.OwnPlayerid = ownPlayerid;
     }
 
-    public void create() throws RemoteException {
+    public void create() {
         // set camera
         orthographicCamera = new OrthographicCamera();
         orthographicCamera.setToOrtho(false, 1920, 1080);
