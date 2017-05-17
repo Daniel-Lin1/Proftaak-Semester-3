@@ -5,6 +5,7 @@ import Enums.ResourceEnum;
 import Game.Resource;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Pixmap;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.graphics.Color;
@@ -104,8 +105,13 @@ public class Map {
             }
         }
     }
-    public void render(){
+    public void render(Batch batch){
         //todo render resources
+        for (ArrayList<Tile> tiles : tiles){
+            for (Tile tile : tiles) {
+                tile.render(batch);
+            }
+        }
     }
 
     public Tile getTileFromCord(int x, int y){

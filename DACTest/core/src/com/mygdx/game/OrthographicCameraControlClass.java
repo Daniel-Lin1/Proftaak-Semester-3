@@ -12,12 +12,10 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 public class OrthographicCameraControlClass {
     private int SCROLL_SPEED = 10;
     private TiledMap tiledMap;
-    private TiledMapTileLayer tiledMapTileLayer;
 
     public OrthographicCameraControlClass(int SCROLL_SPEED, TiledMap tiledMap) {
         this.SCROLL_SPEED = SCROLL_SPEED;
         this.tiledMap = tiledMap;
-        this.tiledMapTileLayer = (TiledMapTileLayer) tiledMap.getLayers().get(0);
     }
 
     public OrthographicCamera render(OrthographicCamera orthographicCamera){

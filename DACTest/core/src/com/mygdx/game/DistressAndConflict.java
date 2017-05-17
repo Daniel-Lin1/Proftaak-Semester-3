@@ -17,13 +17,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DistressAndConflict extends ApplicationAdapter {
-	//private SpriteBatch batch;
 	private Account user;
 	private GameManager gameManager;
 	private UIManager uiManager;
 	private int OldFps = 0;
-	private static final Logger LOG = Logger.getLogger(DistressAndConflict.class.getName());
-	public GameManagerClient gmc;
 
 	public DistressAndConflict(Account account)  {
 		this.user = account;
@@ -36,10 +33,6 @@ public class DistressAndConflict extends ApplicationAdapter {
 		this.gameManager = new GameManager(State.Finished, 1, "lel", players, 0);
 		this.uiManager = new UIManager(this.gameManager);
 		gameManager.setUiManager(this.uiManager);
-		gameManager.setDac(this);
-
-
-
 	}
 
 	public void host(){
@@ -63,11 +56,6 @@ public class DistressAndConflict extends ApplicationAdapter {
 		gameManager.render();
 		uiManager.render();
 		showFPS();
-	}
-
-	@Override
-	public void dispose () {
-		//batch.dispose();
 	}
 
 	public void showFPS(){

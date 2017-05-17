@@ -1,15 +1,10 @@
 package Building;
 
-import Building.Building;
 import Enums.BuildingType;
 import Enums.UnitType;
-import Game.GameManager;
 import Game.Map.Map;
 import Units.OffensiveUnit;
-import Units.Unit;
-
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -24,8 +19,6 @@ public class UnitProducingBuilding extends Building {
         this.setBuildingtype(buildingType);
         this.setHealth(health);
         this.setMap(map);
-
-
     }
 
     public OffensiveUnit produceUnit(UnitType unittype){

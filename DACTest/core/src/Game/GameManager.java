@@ -40,19 +40,13 @@ public class GameManager {
     private OrthographicCamera orthographicCamera;
     private GameManagerClient gmc;
 
-    private DistressAndConflict dac;
+    //private DistressAndConflict dac;
     private int OwnPlayerid;
     private UIManager uiManager;
 
     private OrthographicCameraControlClass gamecamera;
     //Stage en Skin voor UI inladen
     private SpriteBatch batch;
-
-    public DistressAndConflict getDac() {
-        return dac;
-    }
-
-    public void setDac(DistressAndConflict dac) {this.dac = dac;}
 
     public State getGamestate() {
         return this.gamestate;
@@ -106,7 +100,6 @@ public class GameManager {
         this.password = password;
         this.players = players;
         this.OwnPlayerid = ownPlayerid;
-
         this.gmc = new GameManagerClient(this);
     }
 
@@ -131,7 +124,7 @@ public class GameManager {
     }
 
     public void render() {
-        renderCameraAndMap();
+        renderCameraAndTiledMap();
         batch.begin();
         for (Player player : players) {
             renderUnits(player);
@@ -143,7 +136,6 @@ public class GameManager {
     public Player getOwnPlayer() {
         return getPlayers().get(OwnPlayerid);
     }
-
 
     private void renderUnits(Player player) {
         for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++) {
@@ -164,7 +156,7 @@ public class GameManager {
         }
     }
 
-    private void renderCameraAndMap() {
+    private void renderCameraAndTiledMap() {
         orthographicCamera = gamecamera.render(orthographicCamera);
         orthographicCamera.update();
         tiledMapRenderer.render();
