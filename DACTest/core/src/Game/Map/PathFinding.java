@@ -5,6 +5,9 @@ package Game.Map;
  */
 /**
  * Created by Marc-Antoine on 5/17/2017.
+ * this has been taken from the interweeeeebz :)
+ * Site :
+ * http://www.codebytes.in/2015/02/a-shortest-path-finding-algorithm.html
  */
 import java.awt.*;
 import java.util.*;
@@ -152,9 +155,7 @@ public abstract class PathFinding {
             for(int j=0;j<y;++j){
                 grid[i][j] = new Cell(i, j);
                 grid[i][j].heuristicCost = Math.abs(i-endI)+Math.abs(j-endJ);
-//                  System.out.print(grid[i][j].heuristicCost+" ");
             }
-//              System.out.println();
         }
         grid[si][sj].finalCost = 0;
 
@@ -167,37 +168,43 @@ public abstract class PathFinding {
         }
 
         //Display initial map
-        System.out.println("Grid: ");
-        for(int i=0;i<x;++i){
-            for(int j=0;j<y;++j){
-                if(i==si&&j==sj)System.out.print("SO  "); //Source
-                else if(i==ei && j==ej)System.out.print("DE  ");  //Destination
-                else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
-                else System.out.print("BL  ");
-            }
-            System.out.println();
-        }
-        System.out.println();
+        //debugging purposes
+//        System.out.println("Grid: ");
+//        for(int i=0;i<x;++i){
+//            for(int j=0;j<y;++j){
+//                if(i==si&&j==sj)System.out.print("SO  "); //Source
+//                else if(i==ei && j==ej)System.out.print("DE  ");  //Destination
+//                else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
+//                else System.out.print("BL  ");
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
 
         AStar();
-        System.out.println("\nScores for cells: ");
-        for(int i=0;i<x;++i){
-            for(int j=0;j<x;++j){
-                if(grid[i][j]!=null)System.out.printf("%-3d ", grid[i][j].finalCost);
-                else System.out.print("BL  ");
-            }
-            System.out.println();
-        }
-        System.out.println();
+        //debugging purposes
+//        System.out.println("\nScores for cells: ");
+//        for(int i=0;i<x;++i){
+//            for(int j=0;j<x;++j){
+//                if(grid[i][j]!=null)System.out.printf("%-3d ", grid[i][j].finalCost);
+//                else System.out.print("BL  ");
+//            }
+//            System.out.println();
+//        }
+//        System.out.println();
 
+
+        //printlines in deze if laat het calculated path zien.
+        // debugging pupposes
         if(closed[endI][endJ]){
             ArrayList<Point> path = new ArrayList<Point>();
             //Trace back the path
-            System.out.println("Path: ");
+            //System.out.println("Path: ");
             Cell current = grid[endI][endJ];
             System.out.print(current);
             while(current.parent!=null){
-                System.out.print(" -> "+current.parent);
+
+                //System.out.print(" -> "+current.parent);
                 current = current.parent;
                 path.add(new Point(current.i,current.j));
             }
@@ -208,11 +215,4 @@ public abstract class PathFinding {
             return null;
         }
     }
-
-    //public static void main(String[] args) throws Exception{
-        //test(1, 5, 5, 0, 0, 3, 2, new int[][]{{0,4},{2,2},{3,1},{3,3}});
-        //test(2, 5, 5, 0, 0, 4, 4, new int[][]{{0,4},{2,2},{3,1},{3,3}});
-        //test(3, 7, 7, 2, 1, 5, 4, new int[][]{{4,1},{4,3},{5,3},{2,3}});
-        //test(1, 5, 5, 0, 0, 4, 4, new int[][]{{3,4},{3,3},{4,3}});
-    //}
 }
