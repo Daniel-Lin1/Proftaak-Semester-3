@@ -47,12 +47,6 @@ public class GameManagerClient {
 
 
 
-    /**
-     * Request to draw dot on white board.
-     *
-     * @param oldUnit the unit meant to be replaced
-     * @param newUnit the unit it is replaced with
-     */
     public void requestSetUnits(final Unit oldUnit, Unit newUnit) {
         new Thread(() -> {
             // do something important here, asynchronously to the rendering thread

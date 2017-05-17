@@ -10,19 +10,12 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-/**
- *
- * @author Nico Kuijpers
- */
+
 public class GameServer {
 
     private static int portNumber = 1099;
     private static String bindingName = "publisher";
 
-    /**
-     * @param args the command line arguments
-     * @throws RemoteException
-     */
     public static void main(String[] args) throws RemoteException {
         // Create an instance of RemotePublisher
         RemotePublisher remotePublisher = new RemotePublisher();

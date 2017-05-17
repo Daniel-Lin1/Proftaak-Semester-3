@@ -41,11 +41,6 @@ public class GameManagerCommunicator
     private final int nrThreads = 10;
     private ExecutorService threadPool = null;
 
-    /**
-     * Constructor.
-     * @param gameManager  reference to white board
-     * @throws RemoteException
-     */
     public GameManagerCommunicator(GameManagerClient gameManagerClient) throws RemoteException {
         this.gameManagerClient = gameManagerClient;
 
@@ -61,9 +56,7 @@ public class GameManagerCommunicator
 
     }
 
-    /**
-     * Establish connection with remote publisher.
-     */
+
     public void connectToPublisher() {
         try {
             Registry registry = LocateRegistry.getRegistry("localhost", portNumber);
@@ -74,14 +67,10 @@ public class GameManagerCommunicator
         } catch (RemoteException | NotBoundException re) {
             connected = false;
             System.err.println("Cannot establish connection to remote publisher");
-            System.err.println("Run WhiteBoardServer to start remote publisher");
+            System.err.println("Run GameServer to start remote publisher");
         }
     }
 
-    /**
-     * Register property at remote publisher.
-     * @param property  property to be registered
-     */
     public void register(String property) {
         if (connected) {
             try {
@@ -93,10 +82,6 @@ public class GameManagerCommunicator
         }
     }
 
-    /**
-     * Subscribe to property.
-     * @param property property to subscribe to
-     */
     public void subscribe(final String property) {
         if (connected) {
             final IRemotePropertyListener listener = this;
@@ -113,10 +98,7 @@ public class GameManagerCommunicator
         }
     }
 
-    /**
-     * Unsubscribe to property.
-     * @param property property to unsubscribe to
-     */
+
     public void unsubscribe(final String property) {
         if (connected) {
             final IRemotePropertyListener listener = this;
@@ -133,13 +115,7 @@ public class GameManagerCommunicator
         }
     }
 
-    /**
-     * Broadcast draw event.
-     * @param property the correct property type
-     * @param oldObject value of the oldproperty to be broadcasted
-     * @param newObject value of the newproperty to be broadcasted
-     * draw event
-     */
+
     public void broadcast(final String property, Object oldObject, Object newObject) {
         if (connected) {
             threadPool.execute(new Runnable() {
