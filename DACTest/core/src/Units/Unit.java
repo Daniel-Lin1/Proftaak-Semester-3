@@ -85,10 +85,10 @@ public abstract class Unit implements Movement, Serializable {
     }
 
     public void move() {
-        //if(path.size() > 0){
-        //    this.position = path.get(0);
-        //    path.remove(0);
-        //}
+        if(path.size() > 0){
+            this.position = path.get(0);
+            path.remove(0);
+        }
     }
 
     @Override

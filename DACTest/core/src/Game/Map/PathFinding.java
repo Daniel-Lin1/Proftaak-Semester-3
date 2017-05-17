@@ -38,7 +38,7 @@ public abstract class PathFinding {
 
     static PriorityQueue<Cell> open;
 
-    static boolean closed[][];git
+    static boolean closed[][];
     static int startI, startJ;
     static int endI, endJ;
 
