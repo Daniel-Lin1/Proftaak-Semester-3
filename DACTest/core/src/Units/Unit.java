@@ -2,13 +2,15 @@ package Units;
 
 import Enums.UnitType;
 import Game.Map.Map;
-import Game.Map.PathFinder;
+import Game.Map.PathFinding;
 import Game.TextureVault;
 import Interfaces.Movement;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -17,6 +19,10 @@ public abstract class Unit implements Movement, Serializable {
 
     private Point position;
     private Point destination;
+    private ArrayList<Point> path;
+
+    ArrayList<Point> dirtySolution = new ArrayList<>();
+
     private UnitType unitType;
     private int health;
     private int speed;
@@ -52,79 +58,43 @@ public abstract class Unit implements Movement, Serializable {
     }
 
     @Override
-    public void moveTo(Point point) {
-        this.destination = point;
-        //PathFinder pf = new PathFinder(map);
-        //boolean solved = pf.solve(position, destination);
-        //System.out.println(solved + "");
-        //System.out.println(pf.toString());
-        //System.out.println("" + solved);
-    }
-
-    private void moveUP() {
-        position.y = position.y + 1;
-    }
-    private void moveRight() {
-        position.x = position.x + 1;
-    }
-    private void moveDown() {
-        position.y = position.y - 1;
-    }
-    private void moveLeft() {
-        position.x = position.x - 1;
+    public void moveTo(Point destination) {
+        this.destination = destination;
+        int[][] grid;
+        int count = 0;
+        //grid = new int[][]{};
+        for (int x=0; x<map.getSizeX(); x++) {
+            for (int y=0; y<map.getSizeY(); y++) {
+                if (!map.checkTileIfWalkable(new Point(x, y))){
+                    count++;
+                }
+            }
+        }
+        grid = new int[count][2];
+        count = 0;
+        for (int x=0; x<map.getSizeX(); x++) {
+            for (int y=0; y<map.getSizeY(); y++) {
+                if (!map.checkTileIfWalkable(new Point(x, y))){
+                    grid[count][0] = x;
+                    grid[count][1] = y;
+                    count++;
+                }
+            }
+        }
+        path = PathFinding.test(map.getSizeX(), map.getSizeY(), destination.x, destination.y, position.x, position.y, grid);
     }
 
     public void move() {
-        //todo inplement dijkstra :)
-        if (destination != null && !destination.equals(position)) {
-            Point up = new Point(position.x, position.y + 1);
-            Point down = new Point(position.x, position.y - 1);
-            Point left = new Point(position.x - 1, position.y);
-            Point right = new Point(position.x + 1, position.y);
-
-            Double shortestDistance = 99999.00;
-            int nextStep = 0;
-            if(shortestDistance > up.distance(destination.getX(), destination.getY()) && map.checkTileIfWalkable(up)) {
-                shortestDistance = up.distance(destination.getX(), destination.getY());
-                nextStep = 1;
-            }
-            if (shortestDistance > down.distance(destination.getX(), destination.getY()) && map.checkTileIfWalkable(down)) {
-                shortestDistance = down.distance(destination.getX(), destination.getY());
-                nextStep = 2;
-            }
-            if (shortestDistance > left.distance(destination.getX(), destination.getY()) && map.checkTileIfWalkable(left)) {
-                shortestDistance = left.distance(destination.getX(), destination.getY());
-                nextStep = 3;
-            }
-            if (shortestDistance > right.distance(destination.getX(), destination.getY()) && map.checkTileIfWalkable(right)) {
-                nextStep = 4;
-            }
-            map.getTileFromCord(position.x, position.y).setOccupied(false);
-            switch (nextStep) {
-                case 1:
-                    moveUP();
-                    break;
-                case 2:
-                    moveDown();
-                    break;
-                case 3:
-                    moveLeft();
-                    break;
-                case 4:
-                    moveRight();
-                    break;
-                default:
-                    //niets. geen manier om er heen te gaan.
-                    System.out.println("default case in move algeritme");
-                    break;
-            }
-            map.getTileFromCord(position.x, position.y).setOccupied(true);
+        if(path.size() > 0){
+            this.position = path.get(0);
+            path.remove(0);
         }
     }
 
     @Override
     public void cancelMove() {
         destination = null;
+        this.path = new ArrayList<Point>();
     }
 
     public Point getDestination() {
@@ -215,6 +185,14 @@ public abstract class Unit implements Movement, Serializable {
 
     public void setMap(Map map) {
         this.map = map;
+    }
+
+    public ArrayList<Point> getPath() {
+        return path;
+    }
+
+    public void setPath(ArrayList<Point> path) {
+        this.path = path;
     }
 
     public String getUIInfo(){

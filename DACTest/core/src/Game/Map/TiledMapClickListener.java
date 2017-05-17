@@ -53,11 +53,11 @@ public class TiledMapClickListener extends ClickListener {
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
 
                         } else {
-//                            if(tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null){
+                            if(tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null){
                             units.get(i).moveTo(new Point((int) actor.getX()/16, (int) actor.getY()/16));
-//                            }else{
-//                                System.out.println("kan niet moven.");
-//                            }
+                            }else{
+                                System.out.println("kan niet moven.");
+                            }
                         }
                     }
                 }

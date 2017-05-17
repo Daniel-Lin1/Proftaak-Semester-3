@@ -21,7 +21,6 @@ import Game.Map.Map;
 import Game.Map.TiledMapStage;
 
 import java.awt.*;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -89,6 +88,7 @@ public class GameManager {
     public void setUiManager(UIManager uiManager) {
         this.uiManager = uiManager;
     }
+
 
     public GameManager(State gamestate, int lobbyID, String password, ArrayList<Player> players, int ownPlayerid) {
         this.gamestate = gamestate;
