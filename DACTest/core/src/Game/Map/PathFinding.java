@@ -201,7 +201,7 @@ public abstract class PathFinding {
             //Trace back the path
             //System.out.println("Path: ");
             Cell current = grid[endI][endJ];
-            System.out.print(current);
+            //System.out.print(current);
             while(current.parent!=null){
 
                 //System.out.print(" -> "+current.parent);
