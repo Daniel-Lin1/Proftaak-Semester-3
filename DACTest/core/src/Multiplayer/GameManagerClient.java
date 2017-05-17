@@ -85,12 +85,12 @@ public class GameManagerClient {
         }
     }
 
-    public void broadcastSpawnUnit (String property, UnitType type, double posx, double posy){
-        SpawnEvent spawnEvent = new SpawnEvent(type,posx,posy);
+    public void broadcastSpawnUnit (String property,Unit unit){
+        SpawnEvent spawnEvent = new SpawnEvent(unit);
         communicator.broadcast(property, null, spawnEvent);
     }
 
-    public void requestSpawnUnit(String property, SpawnEvent spawnEvent) {
+    public void requestSpawnUnit(String property, Unit unit) {
         new Thread(() -> {
             // do something important here, asynchronously to the rendering thread
             int count = 0;
@@ -100,7 +100,7 @@ public class GameManagerClient {
             Gdx.app.postRunnable(new Runnable() {
                 @Override
                 public void run() {
-
+                    gameManager.getOwnPlayer().getUnits().add(unit);
                 }
             });
         }).start();

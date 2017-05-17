@@ -51,8 +51,8 @@ public class GameManagerCommunicator
     @Override
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
         String property = evt.getPropertyName();
-        SpawnEvent spawnEvent = (SpawnEvent) evt.getNewValue();
-        gameManagerClient.requestSpawnUnit(property, spawnEvent);
+        Unit unit = (Unit) evt.getNewValue();
+        gameManagerClient.requestSpawnUnit(property, unit);
     }
 
 
