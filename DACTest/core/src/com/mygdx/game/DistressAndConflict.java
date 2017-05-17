@@ -25,12 +25,13 @@ public class DistressAndConflict extends ApplicationAdapter {
 	private static final Logger LOG = Logger.getLogger(DistressAndConflict.class.getName());
 	public GameManagerClient gmc;
 
-	public DistressAndConflict(Account account) throws RemoteException {
+	public DistressAndConflict(Account account)  {
 		this.user = account;
 		ArrayList<Player> players = new ArrayList<Player>();
 		players.add(new Player(0, "player1"));
 		players.add(new Player(1, "player2"));
 		players.add(new Player(2, "player3"));
+		players.add(new Player(3, "player4"));
 
 		this.gameManager = new GameManager(State.Finished, 1, "lel", players, 0);
 		this.uiManager = new UIManager(this.gameManager);
@@ -50,12 +51,8 @@ public class DistressAndConflict extends ApplicationAdapter {
 	
 	@Override
 	public void create () {
-		try {
-			this.uiManager.create();
-			this.gameManager.create();
-		} catch (RemoteException e) {
-			LOG.log(Level.INFO, e.getMessage());
-		}
+		this.uiManager.create();
+		this.gameManager.create();
 	}
 
 	@Override
@@ -67,8 +64,6 @@ public class DistressAndConflict extends ApplicationAdapter {
 		uiManager.render();
 		showFPS();
 	}
-
-
 
 	@Override
 	public void dispose () {

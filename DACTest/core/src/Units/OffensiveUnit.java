@@ -1,6 +1,7 @@
 package Units;
 
 import Enums.UnitType;
+import Game.Map.Map;
 import Interfaces.Damage;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class OffensiveUnit extends Unit implements Damage{
 
-    public OffensiveUnit(Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire) {
+    public OffensiveUnit(Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire, Map map) {
         this.setPosition(position);
         this.setUnitType(unitType);
         this.setHealth(health);
@@ -21,15 +22,17 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setHitDamage(hitDamage);
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
+        this.setMap(map);
+        this.setPath(new ArrayList<Point>());
     }
 
     //zou moeten werken maar nog niet getest -Nick
     @Override
     public void attack(Unit target) {
-        if ((this.getPosition().getX() + (this.getRange() * 16) >= target.getPosition().getX()) &&
-            (this.getPosition().getX() - (this.getRange() * 16) <= target.getPosition().getX()) &&
-            (this.getPosition().getY() + (this.getRange() * 16) >= target.getPosition().getY()) &&
-            (this.getPosition().getY() - (this.getRange() * 16) <= target.getPosition().getY()))
+        if ((this.getPosition().getX() + (this.getRange()) >= target.getPosition().getX()) &&
+            (this.getPosition().getX() - (this.getRange()) <= target.getPosition().getX()) &&
+            (this.getPosition().getY() + (this.getRange()) >= target.getPosition().getY()) &&
+            (this.getPosition().getY() - (this.getRange()) <= target.getPosition().getY()))
         {
             target.setHealth(target.getHealth() - this.getHitDamage());
         }

@@ -26,13 +26,28 @@ public class Map {
         return tiles;
     }
 
-    public Map(String mapName, TiledMap tiledMap, ArrayList<ArrayList<Tile>> tiles, ArrayList<Point> spawnPoints ) {
-        this.mapName = mapName;
-        this.tiles = new ArrayList<ArrayList<Tile>>();
-        this.spawnPoints = new ArrayList<Point>();
-        CreateMapFromTiledMap(tiledMap);
-        this.sizeX = tiles.size();
-        this.sizeY = tiles.get(0).size();
+    public String getMapName() {
+        return mapName;
+    }
+
+    public ArrayList<Point> getSpawnPoints() {
+        return spawnPoints;
+    }
+
+    public int getSizeX() {
+        return sizeX;
+    }
+
+    public void setSizeX(int sizeX) {
+        this.sizeX = sizeX;
+    }
+
+    public int getSizeY() {
+        return sizeY;
+    }
+
+    public void setSizeY(int sizeY) {
+        this.sizeY = sizeY;
     }
 
     public Map(TiledMap tiledMap, String mapName){
@@ -90,9 +105,24 @@ public class Map {
         }
     }
     public void render(){
+        //todo render resources
     }
 
-    public Tile GetTileFromCord(int x, int y){
+    public Tile getTileFromCord(int x, int y){
+        if(x == 150){x = 149;} //op een hele cheez manier een glitch van die laatste rij (buiten de map clicken) gefixed. :)
         return tiles.get(x).get((-1* (((y)+1) - tiles.get(0).size())));
+    }
+
+    public boolean checkTileIfWalkable(Point point){
+        if(getTileFromCord(point.x, point.y).isOccupied()){
+            return false;
+        }
+        if(getTileFromCord(point.x, point.y).getResource() != null){
+            return false;
+        }
+        if(!getTileFromCord(point.x, point.y).isWalkable()){
+            return false;
+        }
+        return true;
     }
 }

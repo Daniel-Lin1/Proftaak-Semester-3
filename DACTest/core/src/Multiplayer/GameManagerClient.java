@@ -5,7 +5,6 @@ import Units.Unit;
 import Player.Player;
 import com.badlogic.gdx.Gdx;
 import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
 import java.rmi.RemoteException;
 import java.util.logging.Level;

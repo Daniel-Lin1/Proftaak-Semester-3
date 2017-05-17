@@ -27,7 +27,7 @@ public class TiledMapClickListener extends ClickListener {
     private ArrayList<Unit> units = new ArrayList<Unit>();
     private ArrayList<Building> buildings = new ArrayList<Building>();
 
-    public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage, GameManager gameManager) throws RemoteException {
+    public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage, GameManager gameManager) {
         this.actor = actor;
         this.stage = stage;
         this.gameManager = gameManager;
@@ -38,8 +38,8 @@ public class TiledMapClickListener extends ClickListener {
         units = gameManager.getOwnPlayer().getUnits();
         ArrayList<Building> buildings = gameManager.getOwnPlayer().getBuildings();
 
-        Tile tile = gameManager.getMap().GetTileFromCord((int)actor.getX() /16, (int) actor.getY() /16);
-        System.out.println(tile);
+        Tile tile = gameManager.getMap().getTileFromCord((int)actor.getX() /16, (int) actor.getY() /16);
+        //System.out.println(tile);
 
         switch (button) {
             case Buttons.RIGHT:
@@ -61,7 +61,6 @@ public class TiledMapClickListener extends ClickListener {
                                 System.out.println("kan niet moven.");
                             }
                             gameManager.getGmc().broadcastSetUnit("unit", oldUnit, units.get(i));
-
                         }
                     }
                 }
@@ -72,7 +71,7 @@ public class TiledMapClickListener extends ClickListener {
 
                         Boolean canSpawn = true;
                         for (int i2 = 0; i2 < units.size() && !units.isEmpty(); i2++) {
-                            if (units.get(i2).getPosition().getX() == buildings.get(i).getCoordinate().getX() && units.get(i2).getPosition().getY() == buildings.get(i).getCoordinate().getY() - 16 ) {
+                            if (units.get(i2).getPosition().getX() == buildings.get(i).getCoordinate().getX() && units.get(i2).getPosition().getY() == buildings.get(i).getCoordinate().getY() - 1 ) {
                                 canSpawn = false;
                             }
                         }
@@ -80,11 +79,11 @@ public class TiledMapClickListener extends ClickListener {
                         {
                             UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
                             if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-                                gameManager.getOwnPlayer().addUnit(uPB.produceUnit(UnitType.Knight));
+                                gameManager.getOwnPlayer().BuyUnit(uPB.produceUnit(UnitType.Knight));
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-                                gameManager.getOwnPlayer().addUnit(uPB.produceUnit(UnitType.PikeMan));
+                                gameManager.getOwnPlayer().BuyUnit(uPB.produceUnit(UnitType.PikeMan));
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
-                                gameManager.getOwnPlayer().addUnit(uPB.produceUnit(UnitType.Archer));
+                                gameManager.getOwnPlayer().BuyUnit(uPB.produceUnit(UnitType.Archer));
                             }
                         }
                     }
@@ -92,7 +91,7 @@ public class TiledMapClickListener extends ClickListener {
                 break;
             case Buttons.LEFT:
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
-                    if (actor.getX() == units.get(i).getPosition().getX() && actor.getY() == units.get(i).getPosition().getY()) {
+                    if (actor.getX()/16 == units.get(i).getPosition().getX() && actor.getY()/16 == units.get(i).getPosition().getY()) {
                         units.get(i).setSelected(true);
                     } else {
                         units.get(i).setSelected(false);
@@ -100,7 +99,7 @@ public class TiledMapClickListener extends ClickListener {
                 }
                 for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
                 {
-                    if (actor.getX() == buildings.get(i).getCoordinate().getX() && actor.getY() == buildings.get(i).getCoordinate().getY())
+                    if (actor.getX() /16 == buildings.get(i).getCoordinate().getX() && actor.getY()/16 == buildings.get(i).getCoordinate().getY())
                     {
                         buildings.get(i).setSelected(true);
                     }
