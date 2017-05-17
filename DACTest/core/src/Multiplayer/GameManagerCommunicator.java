@@ -5,6 +5,7 @@ package Multiplayer;/*
  */
 
 import Game.GameManager;
+import Multiplayer.Event.SpawnEvent;
 import Units.Unit;
 import fontyspublisher.IRemotePropertyListener;
 import fontyspublisher.IRemotePublisherForDomain;
@@ -49,12 +50,18 @@ public class GameManagerCommunicator
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
+        String property = evt.getPropertyName();
+        SpawnEvent spawnEvent = (SpawnEvent) evt.getNewValue();
+        gameManagerClient.requestSpawnUnit(property, spawnEvent);
+    }
+
+
+    /* public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
 
         gameManagerClient.requestSetUnits((Unit)evt.getOldValue(),(Unit)evt.getNewValue());
-
         System.out.println(evt.getPropertyName());
 
-    }
+    }*/
 
 
     public void connectToPublisher() {
@@ -98,7 +105,6 @@ public class GameManagerCommunicator
         }
     }
 
-
     public void unsubscribe(final String property) {
         if (connected) {
             final IRemotePropertyListener listener = this;
@@ -114,7 +120,6 @@ public class GameManagerCommunicator
             });
         }
     }
-
 
     public void broadcast(final String property, Object oldObject, Object newObject) {
         if (connected) {

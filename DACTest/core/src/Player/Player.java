@@ -88,7 +88,7 @@ public class Player implements Serializable {
         this.amountWood = 500;
         this.amountFood = 500;
         this.amountStone = 500;
-        this.units = new ArrayList<Unit>();
+        this.units =  new ArrayList<Unit>();
         Point point = new Point( 496, 320);
         this.buildings = new ArrayList<Building>();
     }
