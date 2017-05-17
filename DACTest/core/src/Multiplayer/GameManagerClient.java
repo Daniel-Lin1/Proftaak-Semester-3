@@ -1,6 +1,8 @@
 package Multiplayer;
 
+import Enums.UnitType;
 import Game.GameManager;
+import Multiplayer.Event.SpawnEvent;
 import Units.Unit;
 import Player.Player;
 import com.badlogic.gdx.Gdx;
@@ -45,8 +47,6 @@ public class GameManagerClient {
         communicator.broadcast(property, oldUnit, newUnit);
     }
 
-
-
     public void requestSetUnits(final Unit oldUnit, Unit newUnit) {
         new Thread(() -> {
             // do something important here, asynchronously to the rendering thread
@@ -54,28 +54,19 @@ public class GameManagerClient {
 
             //int position;
             //Player correctPlayer;
-
-
-
             Gdx.app.postRunnable(new Runnable() {
                 @Override
                 public void run() {
                     // process the result, e.g. add it to an Array<Result> field of the ApplicationListener.
                     int count = 0;
-
                     for (Player player : gameManager.getPlayers()) {
                         for (Unit unit : player.getUnits()) {
                             if (unit.getPosition().getX() == oldUnit.getPosition().getX() && unit.getPosition().getY() == oldUnit.getPosition().getY()) {
                                 player.getUnits().set(count, newUnit);
                             }
-                            else{
-                                player.getUnits().add(newUnit);
-                            }
                             count++;
                         }
                     }
-
-
                 }
             });
         }).start();
@@ -92,6 +83,32 @@ public class GameManagerClient {
             communicator.register(property);
             communicator.subscribe(property);
         }
+    }
+
+    public void broadcastSpawnUnit (String property, UnitType type, double posx, double posy){
+        SpawnEvent spawnEvent = new SpawnEvent(type,posx,posy);
+        communicator.broadcast(property, null, spawnEvent);
+    }
+
+    public void requestSpawnUnit(String property, SpawnEvent spawnEvent) {
+        new Thread(() -> {
+            // do something important here, asynchronously to the rendering thread
+            int count = 0;
+
+            //int position;
+            //Player correctPlayer;
+            Gdx.app.postRunnable(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
+        }).start();
+
+    }
+
+    public void spawnunit(){
+
     }
 
     public void stop() {
