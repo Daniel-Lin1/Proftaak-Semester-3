@@ -58,18 +58,6 @@ public abstract class Unit implements Movement, Serializable {
         return TextureVault.selected;
     }
 
-    @Override
-<<<<<<< HEAD
-    public void moveTo(Point point) {
-        this.destination = point;
-    }
-
-    public void move() {
-	if(path.size() > 0{
-	this.position = path.get(0);
-	path.remove(0);
-    }
-
     public void moveTo(Point destination) {
         this.destination = destination;
         int[][] grid;
@@ -97,10 +85,10 @@ public abstract class Unit implements Movement, Serializable {
     }
 
     public void move() {
-        if(path.size() > 0){
-            this.position = path.get(0);
-            path.remove(0);
-        }
+        //if(path.size() > 0){
+        //    this.position = path.get(0);
+        //    path.remove(0);
+        //}
     }
 
     @Override
