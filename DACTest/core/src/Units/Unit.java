@@ -24,6 +24,7 @@ public abstract class Unit implements Movement, Serializable {
     private boolean willReturnFire;
     private boolean selected;
 
+
     public Texture getSprite()
     {
         if (unitType == UnitType.Knight)
@@ -54,6 +55,7 @@ public abstract class Unit implements Movement, Serializable {
     }
 
     public void move() {
+
         //todo inplement dijkstra :)
         if (destination != null && !destination.equals(position)) {
             Point up = new Point(position.x, position.y + 16);

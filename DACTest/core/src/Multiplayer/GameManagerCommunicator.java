@@ -4,6 +4,7 @@ package Multiplayer;/*
  * and open the template in the editor.
  */
 
+import Game.GameManager;
 import Units.Unit;
 import fontyspublisher.IRemotePropertyListener;
 import fontyspublisher.IRemotePublisherForDomain;
@@ -27,7 +28,7 @@ public class GameManagerCommunicator
         implements IRemotePropertyListener {
 
     // Reference to whiteboard
-    private final GameManagerClient gameManager;
+    private final GameManagerClient gameManagerClient;
 
     // Remote publisher
     private IRemotePublisherForDomain publisherForDomain;
@@ -45,19 +46,19 @@ public class GameManagerCommunicator
      * @param gameManager  reference to white board
      * @throws RemoteException
      */
-    public GameManagerCommunicator(GameManagerClient gameManager) throws RemoteException {
-        this.gameManager = gameManager;
+    public GameManagerCommunicator(GameManagerClient gameManagerClient) throws RemoteException {
+        this.gameManagerClient = gameManagerClient;
+
         threadPool = Executors.newFixedThreadPool(nrThreads);
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
-        String property = evt.getPropertyName();
 
-        ArrayList<Unit> units = new ArrayList<Unit>();
-        units.add(1, new Units.BuilderUnit());
-        //TODO: methods die aangeroepen moeten worden in de client
-        gameManager.requestSetUnits(units);
+        gameManagerClient.requestSetUnits((Unit)evt.getOldValue(),(Unit)evt.getNewValue());
+
+        System.out.println(evt.getPropertyName());
+
     }
 
     /**
@@ -135,16 +136,17 @@ public class GameManagerCommunicator
     /**
      * Broadcast draw event.
      * @param property the correct property type
-     * @param object value of the property to be broadcasted
+     * @param oldObject value of the oldproperty to be broadcasted
+     * @param newObject value of the newproperty to be broadcasted
      * draw event
      */
-    public void broadcast(final String property, final Object object) {
+    public void broadcast(final String property, Object oldObject, Object newObject) {
         if (connected) {
             threadPool.execute(new Runnable() {
                 @Override
                 public void run() {
                     try {
-                        publisherForDomain.inform(property,null,object);
+                        publisherForDomain.inform(property,oldObject,newObject);
                     } catch (RemoteException ex) {
                         Logger.getLogger(GameManagerCommunicator.class.getName()).log(Level.SEVERE, null, ex);
                     }

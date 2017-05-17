@@ -1,8 +1,11 @@
 package Player;
 
 import Building.Building;
+import Enums.UnitType;
+import Units.OffensiveUnit;
 import Units.Unit;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -36,6 +39,8 @@ public class Player implements Serializable {
         this.units = units;
     }
 
+    public void addUnit(Unit unit) { this.units.add(unit);}
+
     public ArrayList<Building> getBuildings() {
         return buildings;
     }
@@ -52,6 +57,7 @@ public class Player implements Serializable {
         this.amountFood = 500;
         this.amountStone = 500;
         this.units = new ArrayList<Unit>();
+        Point point = new Point( 496, 320);
         this.buildings = new ArrayList<Building>();
     }
 

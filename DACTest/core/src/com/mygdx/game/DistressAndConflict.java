@@ -23,7 +23,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 	private UIManager uiManager;
 	private int OldFps = 0;
 	private static final Logger LOG = Logger.getLogger(DistressAndConflict.class.getName());
-	private GameManagerClient gmc;
+	public GameManagerClient gmc;
 
 	public DistressAndConflict(Account account) throws RemoteException {
 		this.user = account;
@@ -34,12 +34,11 @@ public class DistressAndConflict extends ApplicationAdapter {
 
 		this.gameManager = new GameManager(State.Finished, 1, "lel", players, 0);
 		this.uiManager = new UIManager(this.gameManager);
-
 		gameManager.setUiManager(this.uiManager);
+		gameManager.setDac(this);
 
-		//TODO : Kan dit beter ?
-		this.gmc = new GameManagerClient(gameManager);
-		gmc.connectToPublisherActionPerformed();
+
+
 	}
 
 	public void host(){

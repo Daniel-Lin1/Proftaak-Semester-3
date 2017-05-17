@@ -3,6 +3,7 @@ package Game.Map;
 import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.UnitType;
+import Multiplayer.GameManagerClient;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -34,7 +35,7 @@ public class TiledMapClickListener extends ClickListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        ArrayList<Unit> units = gameManager.getOwnPlayer().getUnits();
+        units = gameManager.getOwnPlayer().getUnits();
         ArrayList<Building> buildings = gameManager.getOwnPlayer().getBuildings();
 
         Tile tile = gameManager.getMap().GetTileFromCord((int)actor.getX() /16, (int) actor.getY() /16);
@@ -44,6 +45,7 @@ public class TiledMapClickListener extends ClickListener {
             case Buttons.RIGHT:
                 for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
                     if (units.get(i).getSelected() == true) {
+                        Unit oldUnit = units.get(i);
                         if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
 
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
@@ -53,18 +55,19 @@ public class TiledMapClickListener extends ClickListener {
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
 
                         } else {
-                            if(tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null){
+                            if (tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null) {
                                 units.get(i).moveTo(new Point((int) actor.getX(), (int) actor.getY()));
-                            }else{
+                            } else {
                                 System.out.println("kan niet moven.");
                             }
+                            gameManager.getGmc().broadcastSetUnit("unit", oldUnit, units.get(i));
 
                         }
                     }
                 }
                 for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
                 {
-                    //ToDo spawn units without having to rightclick
+                    //ToDo spawn units without having to right click
                     if (buildings.get(i).getSelected() == true) {
 
                         Boolean canSpawn = true;
@@ -77,11 +80,11 @@ public class TiledMapClickListener extends ClickListener {
                         {
                             UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
                             if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-                                units.add(uPB.produceUnit(UnitType.Knight));
+                                gameManager.getOwnPlayer().addUnit(uPB.produceUnit(UnitType.Knight));
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-                                units.add(uPB.produceUnit(UnitType.PikeMan));
+                                gameManager.getOwnPlayer().addUnit(uPB.produceUnit(UnitType.PikeMan));
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
-                                units.add(uPB.produceUnit(UnitType.Archer));
+                                gameManager.getOwnPlayer().addUnit(uPB.produceUnit(UnitType.Archer));
                             }
                         }
                     }

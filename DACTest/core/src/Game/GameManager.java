@@ -5,6 +5,7 @@ import Enums.BuildingType;
 import Enums.State;
 
 import Game.UserInterface.UIManager;
+import Multiplayer.GameManagerClient;
 import Player.Player;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -37,6 +38,8 @@ public class GameManager {
     private TiledMapRenderer tiledMapRenderer;
     private Stage stage;
     private OrthographicCamera orthographicCamera;
+    private GameManagerClient gmc;
+
     private DistressAndConflict dac;
     private int OwnPlayerid;
     private UIManager uiManager;
@@ -44,6 +47,12 @@ public class GameManager {
     private OrthographicCameraControlClass gamecamera;
     //Stage en Skin voor UI inladen
     private SpriteBatch batch;
+
+    public DistressAndConflict getDac() {
+        return dac;
+    }
+
+    public void setDac(DistressAndConflict dac) {this.dac = dac;}
 
     public State getGamestate() {
         return this.gamestate;
@@ -89,12 +98,16 @@ public class GameManager {
         this.uiManager = uiManager;
     }
 
+    public GameManagerClient getGmc() {return gmc;}
+
     public GameManager(State gamestate, int lobbyID, String password, ArrayList<Player> players, int ownPlayerid) throws RemoteException {
         this.gamestate = gamestate;
         this.lobbyID = lobbyID;
         this.password = password;
         this.players = players;
         this.OwnPlayerid = ownPlayerid;
+
+        this.gmc = new GameManagerClient(this);
     }
 
     public void create () throws RemoteException {
@@ -132,6 +145,7 @@ public class GameManager {
     }
 
     private void renderUnits(Player player){
+
         for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++)
         {
             player.getUnits().get(i).move();

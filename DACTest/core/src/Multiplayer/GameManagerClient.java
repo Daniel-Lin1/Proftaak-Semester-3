@@ -2,21 +2,21 @@ package Multiplayer;
 
 import Game.GameManager;
 import Units.Unit;
-import javafx.application.Application;
+import Player.Player;
+import com.badlogic.gdx.Gdx;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
+import javafx.embed.swing.JFXPanel;
 import javafx.stage.Stage;
-
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 /**
  *
  * @author Nico Kuijpers
  */
-public class GameManagerClient extends Application {
+public class GameManagerClient {
 
     private GameManager gameManager;
     private GameManagerCommunicator communicator;
@@ -33,41 +33,64 @@ public class GameManagerClient extends Application {
         } catch (RemoteException ex) {
             Logger.getLogger(GameManagerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        start(null);
     }
 
-    @Override
     public void start(Stage primaryStage) {
         connectToPublisherActionPerformed();
     }
 
     // Broadcast draw event to other white boards
-    private void broadcastSetUnit (String property, Unit unit) {
-
-        communicator.broadcast(property,unit);
+    public void broadcastSetUnit(String property, Unit oldUnit, Unit newUnit) {
+        communicator.broadcast(property, oldUnit, newUnit);
     }
 
-    // Draw dot on white board
-    private void setUnit(ArrayList<Unit> units) {
-        gameManager.getOwnPlayer().setUnits(units);
-    }
+
 
     /**
      * Request to draw dot on white board.
-     * @param units the units meant to be dislocated
+     *
+     * @param oldUnit the unit meant to be replaced
+     * @param newUnit the unit it is replaced with
      */
-    public void requestSetUnits(final ArrayList<Unit> units) {
-        Platform.runLater(new Runnable(){
-            @Override
-            public void run() {
-                gameManager.getOwnPlayer().setUnits(units);
-            }
-        });
+    public void requestSetUnits(final Unit oldUnit, Unit newUnit) {
+        new Thread(() -> {
+            // do something important here, asynchronously to the rendering thread
+            int count = 0;
+
+            //int position;
+            //Player correctPlayer;
+
+
+
+            Gdx.app.postRunnable(new Runnable() {
+                @Override
+                public void run() {
+                    // process the result, e.g. add it to an Array<Result> field of the ApplicationListener.
+                    int count = 0;
+
+                    for (Player player : gameManager.getPlayers()) {
+                        for (Unit unit : player.getUnits()) {
+                            if (unit.getPosition().getX() == oldUnit.getPosition().getX() && unit.getPosition().getY() == oldUnit.getPosition().getY()) {
+                                player.getUnits().set(count, newUnit);
+                            }
+                            else{
+                                player.getUnits().add(newUnit);
+                            }
+                            count++;
+                        }
+                    }
+
+
+                }
+            });
+        }).start();
+
     }
 
 
-
     public void connectToPublisherActionPerformed() {
-        //TODO: Call wanneer er geconnect moet worden
         // Establish connection with remote publisherForDomain
         communicator.connectToPublisher();
 
@@ -78,25 +101,13 @@ public class GameManagerClient extends Application {
         }
     }
 
-    @Override
     public void stop() {
         try {
-            super.stop();
+            //super.stop();
         } catch (Exception ex) {
             Logger.getLogger(GameManagerClient.class.getName()).log(Level.SEVERE, null, ex);
         }
         communicator.stop();
     }
-
-    /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
-     *
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
+
