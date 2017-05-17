@@ -31,8 +31,6 @@ public abstract class Unit implements Movement, Serializable {
     private int range;
     private boolean willReturnFire;
     private boolean selected;
-    private Map map;
-
 
     public Texture getSprite()
     {
@@ -58,7 +56,7 @@ public abstract class Unit implements Movement, Serializable {
         return TextureVault.selected;
     }
 
-    public void moveTo(Point destination) {
+    public void moveTo(Point destination, Map map) {
         this.destination = destination;
         int[][] grid;
         int count = 0;
@@ -181,10 +179,6 @@ public abstract class Unit implements Movement, Serializable {
 
     public boolean isSelected() {
         return selected;
-    }
-
-    public void setMap(Map map) {
-        this.map = map;
     }
 
     public ArrayList<Point> getPath() {

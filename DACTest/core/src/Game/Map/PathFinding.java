@@ -212,7 +212,7 @@ public abstract class PathFinding {
             return path;
         }else {
             System.out.println("No possible path");
-            return null;
+            return new ArrayList<Point>();
         }
     }
 }

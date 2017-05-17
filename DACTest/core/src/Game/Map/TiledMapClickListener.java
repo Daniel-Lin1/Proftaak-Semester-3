@@ -56,7 +56,7 @@ public class TiledMapClickListener extends ClickListener {
 
                         } else {
                             if (tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null) {
-                                units.get(i).moveTo(new Point((int) actor.getX() /16, (int) actor.getY()/16));
+                                units.get(i).moveTo(new Point((int) actor.getX() /16, (int) actor.getY()/16), gameManager.getMap());
                             } else {
                                 System.out.println("kan niet moven.");
                             }
