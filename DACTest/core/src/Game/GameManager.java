@@ -126,6 +126,7 @@ public class GameManager {
     public void render() {
         renderCameraAndTiledMap();
         batch.begin();
+        map.render(batch);
         for (Player player : players) {
             renderUnits(player);
             renderBuildings(player);
