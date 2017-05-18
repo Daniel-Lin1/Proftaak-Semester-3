@@ -20,10 +20,8 @@ public abstract class Unit implements Movement, Serializable {
     private Point position;
     private Point destination;
     private ArrayList<Point> path;
-
-    ArrayList<Point> dirtySolution = new ArrayList<>();
-
     private UnitType unitType;
+    private int id;
     private int health;
     private int speed;
     private int hitPerSecond;
@@ -187,6 +185,14 @@ public abstract class Unit implements Movement, Serializable {
 
     public void setPath(ArrayList<Point> path) {
         this.path = path;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUIInfo(){

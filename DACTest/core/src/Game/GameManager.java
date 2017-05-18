@@ -40,8 +40,8 @@ public class GameManager {
     private OrthographicCamera orthographicCamera;
     private GameManagerClient gmc;
 
-    //private DistressAndConflict dac;
     private int OwnPlayerid;
+    private int highestUnitID;
     private UIManager uiManager;
 
     private OrthographicCameraControlClass gamecamera;
@@ -186,5 +186,10 @@ public class GameManager {
                 getPlayers().get(i).getBuildings().add(townCenter);
             }
         }
+    }
+
+    public int getHighestUnitIDPlus1(){
+        this.highestUnitID += 1;
+        return this.highestUnitID;
     }
 }

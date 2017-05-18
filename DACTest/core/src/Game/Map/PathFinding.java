@@ -208,7 +208,7 @@ public abstract class PathFinding {
                 current = current.parent;
                 path.add(new Point(current.i,current.j));
             }
-            System.out.println();
+            //System.out.println();
             return path;
         }else {
             System.out.println("No possible path");

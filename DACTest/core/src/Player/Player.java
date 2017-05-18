@@ -89,7 +89,6 @@ public class Player implements Serializable {
         this.amountFood = 500;
         this.amountStone = 500;
         this.units =  new ArrayList<Unit>();
-        Point point = new Point( 496, 320);
         this.buildings = new ArrayList<Building>();
     }
 
@@ -137,6 +136,7 @@ public class Player implements Serializable {
         }
         return canBuy;
     }
+
     public boolean BuyBuilding(Building building){
         boolean canBuy = false;
         switch(building.getBuildingtype())

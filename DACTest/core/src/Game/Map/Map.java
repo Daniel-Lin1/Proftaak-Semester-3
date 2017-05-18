@@ -109,7 +109,7 @@ public class Map {
         //todo render resources
         for (ArrayList<Tile> tiles : tiles){
             for (Tile tile : tiles) {
-                tile.render(batch);
+                tile.render(batch, sizeY);
             }
         }
     }

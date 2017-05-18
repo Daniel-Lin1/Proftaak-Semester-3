@@ -13,7 +13,8 @@ import java.util.ArrayList;
  */
 public class OffensiveUnit extends Unit implements Damage{
 
-    public OffensiveUnit(Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire) {
+    public OffensiveUnit(int unitid, Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire) {
+        this.setId(unitid);
         this.setPosition(position);
         this.setUnitType(unitType);
         this.setHealth(health);

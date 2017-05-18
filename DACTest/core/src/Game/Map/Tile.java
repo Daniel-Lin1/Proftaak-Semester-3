@@ -87,22 +87,22 @@ public class Tile {
     public Tile() {
     }
 
-    public void render(Batch batch){
+    public void render(Batch batch, int mapHight){
         if(resource != null){
             switch (this.resource.getResourceEnum()){
                 //todo Fix dit MARC_ANTOINE PIERE MARIE LOUIS WOLTERS (-1* (((coordinate.y)+1) - 150) * 16) plez maak dat het niet hoeft omgerekent te worden.
                 //also zorg dat de correcte textures ook nog worder getekent
                 case Stone:
-                    batch.draw(TextureVault.knight, coordinate.x *16, (-1* (((coordinate.y)+1) - 150) * 16), 16, 16);
+                    batch.draw(TextureVault.knight, coordinate.x *16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
                 case Gold:
-                    batch.draw(TextureVault.knight, coordinate.x*16, (-1* (((coordinate.y)+1) - 150) * 16), 16, 16);
+                    batch.draw(TextureVault.knight, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
                 case Food:
-                    batch.draw(TextureVault.pikeMan, coordinate.x*16, (-1* (((coordinate.y)+1) - 150) * 16), 16, 16);
+                    batch.draw(TextureVault.pikeMan, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
                 case Wood:
-                    batch.draw(TextureVault.townCenter, coordinate.x*16, (-1* (((coordinate.y)+1) - 150) * 16), 16, 16);
+                    batch.draw(TextureVault.townCenter, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
             }
         }
