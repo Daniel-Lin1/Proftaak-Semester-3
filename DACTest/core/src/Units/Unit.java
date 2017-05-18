@@ -55,28 +55,42 @@ public abstract class Unit implements Movement, Serializable {
     }
 
     public void moveTo(Point destination, Map map) {
+//        this.destination = destination;
+//        int[][] grid;
+//        int count = 0;
+//        //grid = new int[][]{};
+//        for (int x=0; x<map.getSizeX(); x++) {
+//            for (int y=0; y<map.getSizeY(); y++) {
+//                if (!map.checkTileIfWalkable(new Point(x, y))){
+//                    count++;
+//                }
+//            }
+//        }
+//        grid = new int[count][2];
+//        count = 0;
+//        for (int x=0; x<map.getSizeX(); x++) {
+//            for (int y=0; y<map.getSizeY(); y++) {
+//                if (!map.checkTileIfWalkable(new Point(x, y))){
+//                    grid[count][0] = x;
+//                    grid[count][1] = y;
+//                    count++;
+//                }
+//            }
+//        }
+
         this.destination = destination;
-        int[][] grid;
-        int count = 0;
-        //grid = new int[][]{};
+        ArrayList<int[]> grid = new ArrayList<int[]>();
         for (int x=0; x<map.getSizeX(); x++) {
             for (int y=0; y<map.getSizeY(); y++) {
                 if (!map.checkTileIfWalkable(new Point(x, y))){
-                    count++;
+                    int[] point = new int[2];
+                    point[0] = x;
+                    point[1] = y;
+                    grid.add(point);
                 }
             }
         }
-        grid = new int[count][2];
-        count = 0;
-        for (int x=0; x<map.getSizeX(); x++) {
-            for (int y=0; y<map.getSizeY(); y++) {
-                if (!map.checkTileIfWalkable(new Point(x, y))){
-                    grid[count][0] = x;
-                    grid[count][1] = y;
-                    count++;
-                }
-            }
-        }
+        //grid
         path = PathFinding.test(map.getSizeX(), map.getSizeY(), destination.x, destination.y, position.x, position.y, grid);
     }
 

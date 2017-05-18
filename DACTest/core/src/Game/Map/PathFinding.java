@@ -134,7 +134,7 @@ public abstract class PathFinding {
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public static ArrayList<Point> test(int x, int y, int si, int sj, int ei, int ej, int[][] blocked){
+    public static ArrayList<Point> test(int x, int y, int si, int sj, int ei, int ej, ArrayList<int[]> blocked){
         //Reset
         grid = new Cell[x][y];
         closed = new boolean[x][y];
@@ -163,8 +163,8 @@ public abstract class PathFinding {
              Set blocked cells. Simply set the cell values to null
              for blocked cells.
            */
-        for(int i=0;i<blocked.length;++i){
-            setBlocked(blocked[i][0], blocked[i][1]);
+        for(int i=0;i<blocked.size();++i){
+            setBlocked(blocked.get(i)[0],blocked.get(i)[1]);
         }
 
         //Display initial map

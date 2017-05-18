@@ -21,20 +21,20 @@ public class UnitProducingBuilding extends Building {
         this.setMap(map);
     }
 
-    public OffensiveUnit produceUnit(UnitType unittype){
+    public OffensiveUnit produceUnit(int unitId, UnitType unittype){
         OffensiveUnit unit = null;
         Point point = new Point( (int)this.getCoordinate().getX(), (int)this.getCoordinate().getY() - 1);
         if (unittype == UnitType.Knight)
         {
-            unit = new OffensiveUnit(point, UnitType.Knight, 100, 1, 1, 10, 1, false);
+            unit = new OffensiveUnit(unitId, point, UnitType.Knight, 100, 1, 1, 10, 1, false);
         }
         else if (unittype == UnitType.PikeMan)
         {
-            unit = new OffensiveUnit(point, UnitType.PikeMan, 80, 1, 1, 8, 1, false);
+            unit = new OffensiveUnit(unitId, point, UnitType.PikeMan, 80, 1, 1, 8, 1, false);
         }
         else if (unittype == UnitType.Archer)
         {
-            unit = new OffensiveUnit(point, UnitType.Archer, 60, 1, 1, 8, 4, false);
+            unit = new OffensiveUnit(unitId, point, UnitType.Archer, 60, 1, 1, 8, 4, false);
         }
         return unit;
     }
