@@ -1,15 +1,12 @@
 package Multiplayer;
 
-import Enums.UnitType;
 import Game.GameManager;
-import Multiplayer.Event.SpawnEvent;
-import Units.Unit;
 import Player.Player;
+import Units.Unit;
 import com.badlogic.gdx.Gdx;
-import javafx.application.Platform;
 import javafx.stage.Stage;
+
 import java.rmi.RemoteException;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -48,32 +45,6 @@ public class GameManagerClient {
         communicator.broadcast(property, oldUnit, newUnit);
     }
 
-    public void requestSetUnits(final Unit oldUnit, Unit newUnit) {
-        new Thread(() -> {
-            // do something important here, asynchronously to the rendering thread
-            int count = 0;
-
-            //int position;
-            //Player correctPlayer;
-            Gdx.app.postRunnable(new Runnable() {
-                @Override
-                public void run() {
-                    // process the result, e.g. add it to an Array<Result> field of the ApplicationListener.
-                    int count = 0;
-                    for (Player player : gameManager.getPlayers()) {
-                        for (Unit unit : player.getUnits()) {
-                            if (unit.getPosition().getX() == oldUnit.getPosition().getX() && unit.getPosition().getY() == oldUnit.getPosition().getY()) {
-                                player.getUnits().set(count, newUnit);
-                            }
-                            count++;
-                        }
-                    }
-                }
-            });
-        }).start();
-
-    }
-
 
     public void connectToPublisherActionPerformed() {
         // Establish connection with remote publisherForDomain
@@ -86,10 +57,6 @@ public class GameManagerClient {
         }
     }
 
-    public void broadcastSpawnUnit (String property,Unit unit){
-        SpawnEvent spawnEvent = new SpawnEvent(unit);
-        communicator.broadcast(property, null, spawnEvent);
-    }
 
     public void requestSpawnUnit(String property, Unit newUnit, Unit oldUnit) {
         new Thread(() -> {
@@ -98,7 +65,7 @@ public class GameManagerClient {
                 @Override
                 public void run() {
                     boolean found = false;
-                    
+
                     for(Player player : gameManager.getPlayers()){
                         for(Unit unit : player.getUnits()){
                             if(unit.getId() == oldUnit.getId()){
