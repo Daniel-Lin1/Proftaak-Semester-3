@@ -121,13 +121,8 @@ public class Map {
     }
 
     public boolean checkTileIfWalkable(Point point){
-        if(getTileFromCord(point.x, point.y).isOccupied()){
-            return false;
-        }
-        if(getTileFromCord(point.x, point.y).getResource() != null){
-            return false;
-        }
-        if(!getTileFromCord(point.x, point.y).isWalkable()){
+        Tile tile = getTileFromCord(point.x, point.y);
+        if(tile.isOccupied() || tile.getResource() != null || !tile.isWalkable()){
             return false;
         }
         return true;
@@ -150,9 +145,11 @@ public class Map {
         for(int i=0; i<building.getSizeX(); i++){
             tiles.add(i, new ArrayList<Tile>());
             for(int j=0; j<building.getSizeY(); j++){
-                Tile tile = getTileFromCord(building.getCoordinate().x + i, building.getCoordinate().y + j);
-                tiles.get(i).add(tile);
+                //Tile tile = getTileFromCord(building.getCoordinate().x + i, building.getCoordinate().y + j);
+                getTileFromCord(building.getCoordinate().x + i, building.getCoordinate().y + j).setBuilding(building);
+                tiles.get(i).add(getTileFromCord(building.getCoordinate().x, building.getCoordinate().y));
             }
         }
+        building.setTiles(tiles);
     }
 }
