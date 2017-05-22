@@ -34,7 +34,20 @@ public class OffensiveUnit extends Unit implements Damage{
             (this.getPosition().getY() + (this.getRange()) >= target.getPosition().getY()) &&
             (this.getPosition().getY() - (this.getRange()) <= target.getPosition().getY()))
         {
-            target.setHealth(target.getHealth() - this.getHitDamage());
+            this.battle(target);
         }
+    }
+
+    private void battle(Unit target) {
+//        target.setHealth(target.getHealth() - this.getHitDamage());
+//        if (target.isWillReturnFire()) {
+//            this.setHealth(this.getHealth() - target.getHitDamage());
+//        }
+//        if (this.getHealth() <= 0) {
+//
+//        }
+//        if (this.getHealth() > 0 && target.getHealth() > 0) {
+//            this.battle(target);
+//        }
     }
 }

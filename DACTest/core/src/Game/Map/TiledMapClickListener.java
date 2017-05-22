@@ -4,6 +4,7 @@ import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.UnitType;
 import Multiplayer.GameManagerClient;
+import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -47,7 +48,13 @@ public class TiledMapClickListener extends ClickListener {
                     if (units.get(i).getSelected() == true) {
                         Unit oldUnit = units.get(i);
                         if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-
+                            for (int a = 0; a < units.size() && !units.isEmpty(); a++) {
+                                System.out.println(units.get(a).getPosition().getX() + ", " + units.get(a).getPosition().getY());
+                                System.out.println((int)x + ", " + (int)y);
+                                if (units.get(a).getPosition().getX() == actor.getX()/16 && units.get(a).getPosition().getY() == actor.getY()/16) {
+                                   ((OffensiveUnit) units.get(i)).attack(units.get(a));
+                                }
+                            }
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
 
                         } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
