@@ -1,10 +1,7 @@
 package Units;
 
 import Enums.UnitType;
-import Game.Map.Map;
 import Interfaces.Damage;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-
 import java.awt.*;
 import java.util.ArrayList;
 

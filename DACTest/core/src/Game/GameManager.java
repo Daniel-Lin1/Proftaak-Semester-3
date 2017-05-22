@@ -23,12 +23,14 @@ import Game.Map.TiledMapStage;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
 
-public class GameManager {
+public class GameManager implements Observer{
     private State gamestate;
     private int lobbyID;
     private String password;
@@ -181,6 +183,7 @@ public class GameManager {
             Point tmp = map.getSpawnPoints().get(i);
             Point cord = map.getTileFromCord(tmp.x, tmp.y).getCoordinate();
             Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.Towncenter, 1000, map);
+            townCenter.addObserver(this);
             if(townCenter.checkBuildingPossible()){
                 townCenter.setBuildingsTilesOccupide(townCenter);
                 getPlayers().get(i).getBuildings().add(townCenter);
@@ -191,5 +194,11 @@ public class GameManager {
     public int getHighestUnitIDPlus1(){
         this.highestUnitID += 1;
         return this.highestUnitID;
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        //todo hier update code voor multiplayer
+        System.out.println("Update Triggerd!!!");
     }
 }
