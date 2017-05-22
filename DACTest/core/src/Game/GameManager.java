@@ -147,6 +147,18 @@ public class GameManager implements Observer{
             if (player.getUnits().get(i).getSelected() == true) {
                 batch.draw(player.getUnits().get(i).getSelectedSprite(), player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
             }
+            if (player.getUnits().get(i).getHealth() > 75) {
+                batch.draw(TextureVault.Health100, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
+            }
+            if (player.getUnits().get(i).getHealth() <= 75 && player.getUnits().get(i).getHealth() > 50) {
+                batch.draw(TextureVault.Health75, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
+            }
+            if (player.getUnits().get(i).getHealth() <= 50 && player.getUnits().get(i).getHealth() > 25) {
+                batch.draw(TextureVault.Health50, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
+            }
+            if (player.getUnits().get(i).getHealth() <= 25) {
+                batch.draw(TextureVault.Health25, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
+            }
         }
     }
 

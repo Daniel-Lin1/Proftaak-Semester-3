@@ -36,15 +36,7 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     {
         if (unitType == UnitType.Knight)
         {
-            if (this.getHealth() <= 75 && this.getHealth() > 50) {
-                return TextureVault.knight75;
-            }
-            else if (this.getHealth() <= 50) {
-                return TextureVault.knight50;
-            }
-            else {
-                return TextureVault.knight;
-            }
+            return TextureVault.knight;
         }
         else if (unitType == UnitType.PikeMan)
         {
