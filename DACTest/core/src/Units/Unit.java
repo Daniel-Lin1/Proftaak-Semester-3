@@ -11,11 +11,13 @@ import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
-public abstract class Unit implements Movement, Serializable {
+public abstract class Unit extends Observable implements Movement, Serializable {
 
     private Point position;
     private Point destination;
@@ -63,6 +65,8 @@ public abstract class Unit implements Movement, Serializable {
     }
 
     public void moveTo(Point destination, Map map) {
+        this.setChanged();
+        notifyObservers(this);
 //        this.destination = destination;
 //        int[][] grid;
 //        int count = 0;
