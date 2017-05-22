@@ -95,7 +95,7 @@ public class TiledMapClickListener extends ClickListener {
                                 gameManager.getOwnPlayer().BuyUnit(unit);
                                 gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
-                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitIDPlus1(), UnitType.Builder);
+                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Builder);
                                 unit.addObserver(gameManager);
                                 gameManager.getOwnPlayer().BuyUnit(unit);
                                 gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
