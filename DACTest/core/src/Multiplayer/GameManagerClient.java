@@ -9,6 +9,7 @@ import com.badlogic.gdx.Gdx;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -90,26 +91,30 @@ public class GameManagerClient {
         communicator.broadcast(property, null, spawnEvent);
     }
 
-    public void requestSpawnUnit(String property, Unit unit) {
+    public void requestSpawnUnit(String property, Unit newUnit, Unit oldUnit) {
         new Thread(() -> {
-            // do something important here, asynchronously to the rendering thread
-            int count = 0;
-
-            //int position;
-            //Player correctPlayer;
+            newUnit.setSelected(false);
             Gdx.app.postRunnable(new Runnable() {
                 @Override
                 public void run() {
-                    gameManager.getOwnPlayer().getUnits().add(unit);
+                    boolean found = false;
+                    for(Player player : gameManager.getPlayers()){
+                        for(Unit unit : player.getUnits()){
+                            if(unit.getPosition().getY() == oldUnit.getPosition().getY() && unit.getPosition().getX() == oldUnit.getPosition().getX()){
+                                player.getUnits().set(player.getUnits().indexOf(unit), newUnit);
+                                found = true;
+                            }
+                        }
+                    }
+                    if(found == false){
+                        //gameManager.getOwnPlayer().getUnits().add(newUnit);
+                    }
                 }
             });
         }).start();
 
     }
 
-    public void spawnunit(){
-
-    }
 
     public void stop() {
         try {
