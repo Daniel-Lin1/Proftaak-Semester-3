@@ -90,10 +90,11 @@ public class UIManager {
 
     private void renderTownCenter()
     {
-        amountOfAbilities = 3;
+        amountOfAbilities = 4;
         UIBatch.draw(TextureVault.knight, 400, 40, 140, 140);
         UIBatch.draw(TextureVault.pikeMan, 600, 40, 140, 140);
         UIBatch.draw(TextureVault.archer, 800, 40, 140, 140);
+        UIBatch.draw(TextureVault.builder, 1000, 40, 140, 140);
     }
 
     private void renderAttacker(){
@@ -102,9 +103,8 @@ public class UIManager {
     }
 
     private void renderBuilder(){
-        amountOfAbilities = 3;
-        UIBatch.draw(TextureVault.townCenter, 400, 40, 140, 140);
-        UIBatch.draw(TextureVault.gatherResource, 600, 40, 140, 140);
+        amountOfAbilities = 1;
+        UIBatch.draw(TextureVault.gatherResource, 400, 40, 140, 140);
     }
 
     private void drawAbilitiesKeys(){

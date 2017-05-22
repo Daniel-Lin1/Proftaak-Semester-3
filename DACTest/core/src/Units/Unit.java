@@ -53,6 +53,9 @@ public abstract class Unit extends Observable implements Movement, Serializable 
         else if (unitType == UnitType.Archer) {
             return TextureVault.archer;
         }
+        else if (unitType == UnitType.Builder) {
+            return TextureVault.builder;
+        }
         else
         {
             return null;
