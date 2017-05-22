@@ -44,6 +44,7 @@ public class GameManager implements Observer{
 
     private int OwnPlayerid;
     private int highestUnitID;
+    private int highestBuildingID;
     private UIManager uiManager;
 
     private OrthographicCameraControlClass gamecamera;
@@ -191,13 +192,22 @@ public class GameManager implements Observer{
         }
     }
 
-    public int getHighestUnitIDPlus1(){
+    public int getHighestUnitID(){
         highestUnitID = 0;
         for(Player player: getPlayers())
         {
             highestUnitID = highestUnitID + player.getUnits().size();
         }
         return this.highestUnitID;
+    }
+
+    public int getHighestBuildingID(){
+        highestBuildingID = 0;
+        for(Player player: getPlayers())
+        {
+            highestBuildingID = highestBuildingID + player.getBuildings().size();
+        }
+        return this.highestBuildingID;
     }
 
     @Override

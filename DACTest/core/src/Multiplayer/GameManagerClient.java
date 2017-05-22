@@ -1,5 +1,6 @@
 package Multiplayer;
 
+import Building.Building;
 import Game.GameManager;
 import Player.Player;
 import Units.Unit;
@@ -57,6 +58,30 @@ public class GameManagerClient {
         }
     }
 
+    public void requestBuildingAction(Building newBuilding, Building oldBuilding){
+        new Thread(() -> {
+            newBuilding.setSelected(false);
+            Gdx.app.postRunnable(new Runnable() {
+                @Override
+                public void run() {
+                  boolean found = false;
+
+                  for(Player player : gameManager.getPlayers()){
+                      for(Building building : player.getBuildings()){
+                          if(building.getID() == oldBuilding.getID()){
+                              player.getBuildings().set(player.getBuildings().indexOf(building), newBuilding);
+                              found = true;
+                          }
+                      }
+                  }
+                  if (found == false)
+                  {
+                      gameManager.getOwnPlayer().getBuildings().add(newBuilding);
+                  }
+                }
+            });
+        }).start();
+    }
 
     public void requestUnitAction(String property, Unit newUnit, Unit oldUnit) {
         new Thread(() -> {
