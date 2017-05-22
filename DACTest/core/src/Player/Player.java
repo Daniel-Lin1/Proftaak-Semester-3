@@ -1,11 +1,8 @@
 package Player;
 
 import Building.Building;
-import Enums.UnitType;
-import Units.OffensiveUnit;
 import Units.Unit;
 
-import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -89,7 +86,6 @@ public class Player implements Serializable {
         this.amountFood = 500;
         this.amountStone = 500;
         this.units =  new ArrayList<Unit>();
-        Point point = new Point( 496, 320);
         this.buildings = new ArrayList<Building>();
     }
 
@@ -132,14 +128,14 @@ public class Player implements Serializable {
         }
 
         if(canBuy){
-            System.out.println("canbuy");
             units.add(unit);
         }
         return canBuy;
     }
+
     public boolean BuyBuilding(Building building){
         boolean canBuy = false;
-        switch(building.getBuildingtype())
+        switch(building.getBuildingType())
         {
             case Towncenter:
                 if(amountGold - 1000 >= 0 && amountFood - 1000 >= 0 && amountStone - 1000 >= 0){

@@ -1,14 +1,12 @@
 package Game.Map;
 
+import Building.Building;
 import Enums.GroundType;
-import Enums.ResourceEnum;
 import Game.Resource;
 import Game.TextureVault;
+import Units.Unit;
 import com.badlogic.gdx.graphics.g2d.Batch;
-
 import java.awt.*;
-
-import static Enums.ResourceEnum.Gold;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -17,10 +15,11 @@ public class Tile {
     private int id;
     private boolean isWalkable;
     private boolean isBuildable;
-    private boolean isOccupied;
     private GroundType groundType;
     private Resource resource;
     private Point coordinate;
+    private Unit unit;
+    private Building building;
 
     public int getId() {
         return id;
@@ -43,11 +42,7 @@ public class Tile {
     }
 
     public boolean isOccupied() {
-        return this.isOccupied;
-    }
-
-    public void setOccupied(boolean occupied) {
-        this.isOccupied = occupied;
+        return !(building == null && unit == null);
     }
 
     public GroundType getGroundType() {
@@ -74,35 +69,51 @@ public class Tile {
         this.coordinate = coordinate;
     }
 
-    public Tile(int id, boolean isWalkable, boolean isBuildable, boolean isOccupied, GroundType groundType, Resource resource) {
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
+    public Tile(int id, boolean isWalkable, boolean isBuildable, GroundType groundType, Resource resource) {
         this.id = id;
         this.isWalkable = isWalkable;
         this.isBuildable = isBuildable;
-        this.isOccupied = isOccupied;
         this.groundType = groundType;
         this.resource = resource;
         this.coordinate = new Point();
+        this.unit = null;
+        this.building = null;
     }
 
-    public Tile() {
-    }
-
-    public void render(Batch batch){
+    public void render(Batch batch, int mapHight){
         if(resource != null){
             switch (this.resource.getResourceEnum()){
-                //todo Fix dit MARC_ANTOINE PIERE MARIE LOUIS WOLTERS (-1* (((coordinate.y)+1) - 150) * 16) plez maak dat het niet hoeft omgerekent te worden.
-                //also zorg dat de correcte textures ook nog worder getekent
                 case Stone:
-                    batch.draw(TextureVault.knight, coordinate.x *16, (-1* (((coordinate.y)+1) - 150) * 16), 16, 16);
+                    batch.draw(TextureVault.stone, coordinate.x *16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
                 case Gold:
-                    batch.draw(TextureVault.knight, coordinate.x*16, (-1* (((coordinate.y)+1) - 150) * 16), 16, 16);
+                    batch.draw(TextureVault.gold, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
                 case Food:
-                    batch.draw(TextureVault.pikeMan, coordinate.x*16, (-1* (((coordinate.y)+1) - 150) * 16), 16, 16);
+                    batch.draw(TextureVault.berries, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
                 case Wood:
-                    batch.draw(TextureVault.townCenter, coordinate.x*16, (-1* (((coordinate.y)+1) - 150) * 16), 16, 16);
+                    batch.draw(TextureVault.tree, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
             }
         }
@@ -114,9 +125,11 @@ public class Tile {
                 ", coordinate=" + coordinate.toString() +
                 ", isWalkable=" + isWalkable +
                 ", isBuildable=" + isBuildable +
-                ", isOccupied=" + isOccupied +
+                ", isOccupied=" + isOccupied() +
                 ", groundType=" + groundType +
                 ", resource=" + resource +
+                ", unit=" + unit +
+                ", building=" + building +
                 '}';
     }
 }

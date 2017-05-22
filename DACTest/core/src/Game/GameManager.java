@@ -8,6 +8,7 @@ import Enums.State;
 import Game.UserInterface.UIManager;
 import Multiplayer.GameManagerClient;
 import Player.Player;
+import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -16,19 +17,21 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
 import Game.Map.Map;
 import Game.Map.TiledMapStage;
 
 import java.awt.*;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
 
-public class GameManager {
+public class GameManager implements Observer{
     private State gamestate;
     private int lobbyID;
     private String password;
@@ -39,9 +42,11 @@ public class GameManager {
     private Stage stage;
     private OrthographicCamera orthographicCamera;
     private GameManagerClient gmc;
+    private float oldTime;
 
-    //private DistressAndConflict dac;
     private int OwnPlayerid;
+    private int highestUnitID;
+    private int highestBuildingID;
     private UIManager uiManager;
 
     private OrthographicCameraControlClass gamecamera;
@@ -101,6 +106,7 @@ public class GameManager {
         this.players = players;
         this.OwnPlayerid = ownPlayerid;
         this.gmc = new GameManagerClient(this);
+
     }
 
     public void create() {
@@ -139,11 +145,32 @@ public class GameManager {
     }
 
     private void renderUnits(Player player) {
+
         for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++) {
-            player.getUnits().get(i).move();
+
+            if (player.getUnits().get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
+            {
+                player.getUnits().get(i).move();
+                player.getUnits().get(i).setDeltaMoveTime(0);
+            }
+            player.getUnits().get(i).setDeltaMoveTime(player.getUnits().get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
+
+
             batch.draw(player.getUnits().get(i).getSprite(), player.getUnits().get(i).getPosition().x *16, player.getUnits().get(i).getPosition().y*16, 16, 16);
             if (player.getUnits().get(i).getSelected() == true) {
                 batch.draw(player.getUnits().get(i).getSelectedSprite(), player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
+            }
+            if (player.getUnits().get(i).getHealth() > 75) {
+                batch.draw(TextureVault.Health100, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
+            }
+            if (player.getUnits().get(i).getHealth() <= 75 && player.getUnits().get(i).getHealth() > 50) {
+                batch.draw(TextureVault.Health75, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
+            }
+            if (player.getUnits().get(i).getHealth() <= 50 && player.getUnits().get(i).getHealth() > 25) {
+                batch.draw(TextureVault.Health50, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
+            }
+            if (player.getUnits().get(i).getHealth() <= 25) {
+                batch.draw(TextureVault.Health25, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
             }
         }
     }
@@ -178,13 +205,37 @@ public class GameManager {
 
     private void createTownCenters(){
         for(int i=0; i<getPlayers().size(); i++){
-            Point tmp = map.getSpawnPoints().get(i);
-            Point cord = map.getTileFromCord(tmp.x, tmp.y).getCoordinate();
-            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.Towncenter, 1000, map);
-            if(townCenter.checkBuildingPossible()){
-                townCenter.setBuildingsTilesOccupide(townCenter);
+            Point spawnPoint = map.getSpawnPoints().get(i);
+            Point cord = map.getTileFromCord(spawnPoint.x, spawnPoint.y).getCoordinate();
+            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.Towncenter, 1000);
+			townCenter.addObserver(this);
+            if(map.checkBuildingPossible(townCenter)){
+                map.setBuildingsTiles(townCenter);
                 getPlayers().get(i).getBuildings().add(townCenter);
             }
         }
+    }
+
+    public int getHighestUnitID(){
+        highestUnitID = 0;
+        for(Player player: getPlayers())
+        {
+            highestUnitID = highestUnitID + player.getUnits().size();
+        }
+        return this.highestUnitID;
+    }
+
+    public int getHighestBuildingID(){
+        highestBuildingID = 0;
+        for(Player player: getPlayers())
+        {
+            highestBuildingID = highestBuildingID + player.getBuildings().size();
+        }
+        return this.highestBuildingID;
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        //todo hier update code voor multiplayer
     }
 }

@@ -8,18 +8,22 @@ import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Observable;
+
 
 /**
  * Created by Daniel on 26-3-2017.
  */
-public abstract class Building implements Serializable {
+public abstract class Building extends Observable implements Serializable {
+    private int buildingID;
     private Point coordinate;
     private int sizeX;
     private int sizeY;
     private BuildingType buildingtype;
     private int health;
     private boolean selected;
-    private Map map;
+    private ArrayList<ArrayList<Tile>> tiles;
 
     public Texture getSprite()
     {
@@ -31,6 +35,11 @@ public abstract class Building implements Serializable {
         {
             return null;
         }
+    }
+
+    public int getID()
+    {
+        return this.buildingID;
     }
 
     public Texture getSelectedSprite()
@@ -62,11 +71,11 @@ public abstract class Building implements Serializable {
         this.sizeY = sizeY;
     }
 
-    public BuildingType getBuildingtype() {
+    public BuildingType getBuildingType() {
         return buildingtype;
     }
 
-    public void setBuildingtype(BuildingType buildingtype) {
+    public void getBuildingType(BuildingType buildingtype) {
         this.buildingtype = buildingtype;
     }
 
@@ -84,37 +93,24 @@ public abstract class Building implements Serializable {
 
     public boolean getSelected() { return selected; }
 
-    public void setMap(Map map) {
-        this.map = map;
-    }
-
     public boolean isSelected() {
         return selected;
     }
 
-    public Map getMap() {
-        return map;
+    public BuildingType getBuildingtype() {
+        return buildingtype;
     }
 
-    public boolean checkBuildingPossible(){
-        for(int i=0; i<sizeX; i++){
-            for(int j=0; j<sizeY; j++){
-                Tile tile = map.getTileFromCord(coordinate.x + i, coordinate.y + j);
-                if(!tile.isBuildable() || tile.isOccupied() || tile.getResource() != null){
-                    return false;
-                }
-            }
-        }
-        return true;
+    public void setBuildingtype(BuildingType buildingtype) {
+        this.buildingtype = buildingtype;
     }
 
-    public void setBuildingsTilesOccupide(Building building){
-        for(int i=0; i<sizeX; i++){
-            for(int j=0; j<sizeY; j++){
-                Tile tile = map.getTileFromCord(coordinate.x + i, coordinate.y + j);
-                tile.setOccupied(true);
-            }
-        }
+    public ArrayList<ArrayList<Tile>> getTiles() {
+        return tiles;
+    }
+
+    public void setTiles(ArrayList<ArrayList<Tile>> tiles) {
+        this.tiles = tiles;
     }
 
     public String getUIInfo(){
