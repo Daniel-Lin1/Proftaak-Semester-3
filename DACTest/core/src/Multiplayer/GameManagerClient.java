@@ -98,16 +98,17 @@ public class GameManagerClient {
                 @Override
                 public void run() {
                     boolean found = false;
+                    
                     for(Player player : gameManager.getPlayers()){
                         for(Unit unit : player.getUnits()){
-                            if(unit.getPosition().getY() == oldUnit.getPosition().getY() && unit.getPosition().getX() == oldUnit.getPosition().getX()){
+                            if(unit.getId() == oldUnit.getId()){
                                 player.getUnits().set(player.getUnits().indexOf(unit), newUnit);
                                 found = true;
                             }
                         }
                     }
                     if(found == false){
-                        //gameManager.getOwnPlayer().getUnits().add(newUnit);
+                        gameManager.getOwnPlayer().getUnits().add(newUnit);
                     }
                 }
             });
