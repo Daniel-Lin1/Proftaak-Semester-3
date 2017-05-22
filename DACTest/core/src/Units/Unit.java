@@ -31,6 +31,7 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     private int range;
     private boolean willReturnFire;
     private boolean selected;
+    private float deltaMoveTime;
 
     public Texture getSprite()
     {
@@ -44,6 +45,9 @@ public abstract class Unit extends Observable implements Movement, Serializable 
         }
         else if (unitType == UnitType.Archer) {
             return TextureVault.archer;
+        }
+        else if (unitType == UnitType.Builder) {
+            return TextureVault.builder;
         }
         else
         {
@@ -211,6 +215,14 @@ public abstract class Unit extends Observable implements Movement, Serializable 
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public float getDeltaMoveTime() {
+        return deltaMoveTime;
+    }
+
+    public void setDeltaMoveTime(float deltaMoveTime) {
+        this.deltaMoveTime = deltaMoveTime;
     }
 
     public String getUIInfo(){

@@ -24,4 +24,5 @@ public class TextureVault {
     public final static Texture berries = new Texture(Gdx.files.internal("assets/Berries.png"));
     public final static Texture uiBar = new Texture(Gdx.files.internal("assets/UI/UIBar.png"));
     public final static Texture uiBox = new Texture(Gdx.files.internal("assets/UI/UIBox.png"));
+    public final static Texture builder = new Texture(Gdx.files.internal("assets/Builder.png"));
 }

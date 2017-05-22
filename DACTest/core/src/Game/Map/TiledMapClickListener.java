@@ -3,7 +3,6 @@ package Game.Map;
 import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.UnitType;
-import Multiplayer.GameManagerClient;
 import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
@@ -14,7 +13,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import Game.GameManager;
 
 import java.awt.*;
-import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 /**
@@ -82,22 +80,26 @@ public class TiledMapClickListener extends ClickListener {
                         {
                             UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
                             if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitIDPlus1(), UnitType.Knight);
+                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Knight);
                                 unit.addObserver(gameManager);
                                 gameManager.getOwnPlayer().BuyUnit(unit);
                                 gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitIDPlus1(), UnitType.PikeMan);
+                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.PikeMan);
                                 unit.addObserver(gameManager);
                                 gameManager.getOwnPlayer().BuyUnit(unit);
                                 gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
-                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitIDPlus1(), UnitType.Archer);
+                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Archer);
+                                unit.addObserver(gameManager);
+                                gameManager.getOwnPlayer().BuyUnit(unit);
+                                gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
+                            } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
+                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Builder);
                                 unit.addObserver(gameManager);
                                 gameManager.getOwnPlayer().BuyUnit(unit);
                                 gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
                             }
-
                         }
                     }
                 }

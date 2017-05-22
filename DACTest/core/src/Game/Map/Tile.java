@@ -69,6 +69,26 @@ public class Tile {
         this.coordinate = coordinate;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public Building getBuilding() {
+        return building;
+    }
+
+    public void setBuilding(Building building) {
+        this.building = building;
+    }
+
     public Tile(int id, boolean isWalkable, boolean isBuildable, GroundType groundType, Resource resource) {
         this.id = id;
         this.isWalkable = isWalkable;
@@ -108,6 +128,8 @@ public class Tile {
                 ", isOccupied=" + isOccupied() +
                 ", groundType=" + groundType +
                 ", resource=" + resource +
+                ", unit=" + unit +
+                ", building=" + building +
                 '}';
     }
 }

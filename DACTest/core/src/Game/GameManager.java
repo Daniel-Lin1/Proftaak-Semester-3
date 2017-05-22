@@ -22,6 +22,7 @@ import Game.Map.Map;
 import Game.Map.TiledMapStage;
 
 import java.awt.*;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -41,9 +42,11 @@ public class GameManager implements Observer{
     private Stage stage;
     private OrthographicCamera orthographicCamera;
     private GameManagerClient gmc;
+    private float oldTime;
 
     private int OwnPlayerid;
     private int highestUnitID;
+    private int highestBuildingID;
     private UIManager uiManager;
 
     private OrthographicCameraControlClass gamecamera;
@@ -103,6 +106,7 @@ public class GameManager implements Observer{
         this.players = players;
         this.OwnPlayerid = ownPlayerid;
         this.gmc = new GameManagerClient(this);
+
     }
 
     public void create() {
@@ -141,8 +145,17 @@ public class GameManager implements Observer{
     }
 
     private void renderUnits(Player player) {
+
         for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++) {
-            player.getUnits().get(i).move();
+
+            if (player.getUnits().get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
+            {
+                player.getUnits().get(i).move();
+                player.getUnits().get(i).setDeltaMoveTime(0);
+            }
+            player.getUnits().get(i).setDeltaMoveTime(player.getUnits().get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
+
+
             batch.draw(player.getUnits().get(i).getSprite(), player.getUnits().get(i).getPosition().x *16, player.getUnits().get(i).getPosition().y*16, 16, 16);
             if (player.getUnits().get(i).getSelected() == true) {
                 batch.draw(player.getUnits().get(i).getSelectedSprite(), player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
@@ -203,13 +216,22 @@ public class GameManager implements Observer{
         }
     }
 
-    public int getHighestUnitIDPlus1(){
+    public int getHighestUnitID(){
         highestUnitID = 0;
         for(Player player: getPlayers())
         {
             highestUnitID = highestUnitID + player.getUnits().size();
         }
         return this.highestUnitID;
+    }
+
+    public int getHighestBuildingID(){
+        highestBuildingID = 0;
+        for(Player player: getPlayers())
+        {
+            highestBuildingID = highestBuildingID + player.getBuildings().size();
+        }
+        return this.highestBuildingID;
     }
 
     @Override

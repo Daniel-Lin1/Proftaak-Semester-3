@@ -3,7 +3,10 @@ package Building;
 import Enums.BuildingType;
 import Enums.UnitType;
 import Game.Map.Map;
+import Units.BuilderUnit;
 import Units.OffensiveUnit;
+import Units.Unit;
+
 import java.awt.*;
 
 /**
@@ -20,21 +23,27 @@ public class UnitProducingBuilding extends Building {
         this.setHealth(health);
     }
 
-    public OffensiveUnit produceUnit(int unitId, UnitType unittype){
-        OffensiveUnit unit = null;
+    public Unit produceUnit(int unitId, UnitType unittype){
         Point point = new Point( (int)this.getCoordinate().getX(), (int)this.getCoordinate().getY() - 1);
         if (unittype == UnitType.Knight)
         {
-            unit = new OffensiveUnit(unitId, point, UnitType.Knight, 100, 1, 1, 10, 1, false);
+            return new OffensiveUnit(unitId, point, UnitType.Knight, 100, 1, 1, 10, 1, false);
         }
         else if (unittype == UnitType.PikeMan)
         {
-            unit = new OffensiveUnit(unitId, point, UnitType.PikeMan, 80, 1, 1, 8, 1, false);
+            return new OffensiveUnit(unitId, point, UnitType.PikeMan, 80, 1, 1, 8, 1, false);
         }
         else if (unittype == UnitType.Archer)
         {
-            unit = new OffensiveUnit(unitId, point, UnitType.Archer, 60, 1, 1, 8, 4, false);
+            return new OffensiveUnit(unitId, point, UnitType.Archer, 60, 1, 1, 8, 4, false);
         }
-        return unit;
+        else if (unittype == UnitType.Builder)
+        {
+             return new OffensiveUnit(unitId, point, UnitType.Builder, 50, 1, 0, 0, 0, false);
+        }
+        else
+        {
+            return null;
+        }
     }
 }

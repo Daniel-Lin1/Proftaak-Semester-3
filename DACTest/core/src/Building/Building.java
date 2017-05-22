@@ -16,6 +16,7 @@ import java.util.Observable;
  * Created by Daniel on 26-3-2017.
  */
 public abstract class Building extends Observable implements Serializable {
+    private int buildingID;
     private Point coordinate;
     private int sizeX;
     private int sizeY;
@@ -34,6 +35,11 @@ public abstract class Building extends Observable implements Serializable {
         {
             return null;
         }
+    }
+
+    public int getID()
+    {
+        return this.buildingID;
     }
 
     public Texture getSelectedSprite()
