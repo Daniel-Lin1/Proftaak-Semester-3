@@ -9,11 +9,13 @@ import com.badlogic.gdx.graphics.Texture;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Observable;
+
 
 /**
  * Created by Daniel on 26-3-2017.
  */
-public abstract class Building implements Serializable {
+public abstract class Building extends Observable implements Serializable {
     private Point coordinate;
     private int sizeX;
     private int sizeY;
