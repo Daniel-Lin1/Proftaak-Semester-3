@@ -16,4 +16,10 @@ public class TextureVault {
     public final static Texture pikeMan = new Texture(Gdx.files.internal("assets/PikeMan.png"));
     public final static Texture uiElementAttack = new Texture(Gdx.files.internal("assets/uiElementAttack.png"));
     public final static Texture gatherResource = new Texture(Gdx.files.internal("assets/GatherResource.png"));
+    public final static Texture tree = new Texture(Gdx.files.internal("assets/Tree.png"));
+    public final static Texture gold = new Texture(Gdx.files.internal("assets/Gold.png"));
+    public final static Texture stone = new Texture(Gdx.files.internal("assets/Stone.png"));
+    public final static Texture berries = new Texture(Gdx.files.internal("assets/Berries.png"));
+    public final static Texture uiBar = new Texture(Gdx.files.internal("assets/UI/UIBar.png"));
+    public final static Texture uiBox = new Texture(Gdx.files.internal("assets/UI/UIBox.png"));
 }

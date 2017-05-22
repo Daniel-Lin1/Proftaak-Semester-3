@@ -84,16 +84,16 @@ public class Tile {
         if(resource != null){
             switch (this.resource.getResourceEnum()){
                 case Stone:
-                    batch.draw(TextureVault.knight, coordinate.x *16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
+                    batch.draw(TextureVault.stone, coordinate.x *16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
                 case Gold:
-                    batch.draw(TextureVault.knight, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
+                    batch.draw(TextureVault.gold, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
                 case Food:
-                    batch.draw(TextureVault.pikeMan, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
+                    batch.draw(TextureVault.berries, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
                 case Wood:
-                    batch.draw(TextureVault.townCenter, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
+                    batch.draw(TextureVault.tree, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
             }
         }

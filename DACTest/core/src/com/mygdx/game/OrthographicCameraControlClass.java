@@ -27,7 +27,7 @@ public class OrthographicCameraControlClass {
             }
         }
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){
-            if (orthographicCamera.position.x >= tiledMap.getLayers().get(0).getProperties().get("width", Integer.class) - (orthographicCamera.viewportWidth/2)){
+            if (orthographicCamera.position.x >= tiledMap.getLayers().get(0).getProperties().get("width", Integer.class) - (orthographicCamera.viewportWidth/2 + 1450)){
             }else {
                 orthographicCamera.translate(SCROLL_SPEED * Gdx.graphics.getDeltaTime(), 0);
             }

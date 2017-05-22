@@ -48,8 +48,8 @@ public class UIManager {
     {
         amountOfAbilities = 0;
         UIBatch.begin();
-        UIBatch.draw(UISkin.getSprite("buttonlong_brown"),350,0,1570, 200);
-        UIBatch.draw(UISkin.getSprite("buttonSquare_brown"),0,0,350,250);
+        UIBatch.draw(TextureVault.uiBar,350, 0 ,1570, 200);
+        UIBatch.draw(TextureVault.uiBox,0,0,350,250);
         drawResources();
         for(Unit unit : gameManager.getOwnPlayer().getUnits())
         {
