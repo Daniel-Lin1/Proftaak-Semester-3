@@ -58,7 +58,7 @@ public class GameManagerClient {
     }
 
 
-    public void requestSpawnUnit(String property, Unit newUnit, Unit oldUnit) {
+    public void requestUnitAction(String property, Unit newUnit, Unit oldUnit) {
         new Thread(() -> {
             newUnit.setSelected(false);
             Gdx.app.postRunnable(new Runnable() {

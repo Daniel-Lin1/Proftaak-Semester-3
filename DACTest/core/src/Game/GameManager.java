@@ -8,6 +8,7 @@ import Enums.State;
 import Game.UserInterface.UIManager;
 import Multiplayer.GameManagerClient;
 import Player.Player;
+import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -191,7 +192,11 @@ public class GameManager implements Observer{
     }
 
     public int getHighestUnitIDPlus1(){
-        this.highestUnitID += 1;
+        highestUnitID = 0;
+        for(Player player: getPlayers())
+        {
+            highestUnitID = highestUnitID + player.getUnits().size();
+        }
         return this.highestUnitID;
     }
 

@@ -4,8 +4,6 @@ package Multiplayer;/*
  * and open the template in the editor.
  */
 
-import Game.GameManager;
-import Multiplayer.Event.SpawnEvent;
 import Units.Unit;
 import fontyspublisher.IRemotePropertyListener;
 import fontyspublisher.IRemotePublisherForDomain;
@@ -18,7 +16,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
@@ -53,7 +50,7 @@ public class GameManagerCommunicator
 
         String property = evt.getPropertyName();
         Unit unit = (Unit) evt.getNewValue();
-        gameManagerClient.requestSpawnUnit(property, unit, (Unit) evt.getOldValue());
+        gameManagerClient.requestUnitAction(property, unit, (Unit) evt.getOldValue());
     }
 
 
