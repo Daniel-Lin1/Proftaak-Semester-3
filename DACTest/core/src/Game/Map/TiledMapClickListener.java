@@ -82,15 +82,19 @@ public class TiledMapClickListener extends ClickListener {
                                 Unit unit = uPB.produceUnit(gameManager.getHighestUnitIDPlus1(), UnitType.Knight);
                                 unit.addObserver(gameManager);
                                 gameManager.getOwnPlayer().BuyUnit(unit);
+                                gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
                                 Unit unit = uPB.produceUnit(gameManager.getHighestUnitIDPlus1(), UnitType.PikeMan);
                                 unit.addObserver(gameManager);
                                 gameManager.getOwnPlayer().BuyUnit(unit);
+                                gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
                             } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
                                 Unit unit = uPB.produceUnit(gameManager.getHighestUnitIDPlus1(), UnitType.Archer);
                                 unit.addObserver(gameManager);
                                 gameManager.getOwnPlayer().BuyUnit(unit);
+                                gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
                             }
+
                         }
                     }
                 }
