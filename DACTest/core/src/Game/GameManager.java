@@ -16,7 +16,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.mygdx.game.DistressAndConflict;
 import com.mygdx.game.OrthographicCameraControlClass;
 import Game.Map.Map;
 import Game.Map.TiledMapStage;
@@ -178,11 +177,11 @@ public class GameManager {
 
     private void createTownCenters(){
         for(int i=0; i<getPlayers().size(); i++){
-            Point tmp = map.getSpawnPoints().get(i);
-            Point cord = map.getTileFromCord(tmp.x, tmp.y).getCoordinate();
-            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.Towncenter, 1000, map);
-            if(townCenter.checkBuildingPossible()){
-                townCenter.setBuildingsTilesOccupide(townCenter);
+            Point spawnPoint = map.getSpawnPoints().get(i);
+            Point cord = map.getTileFromCord(spawnPoint.x, spawnPoint.y).getCoordinate();
+            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.Towncenter, 1000);
+            if(map.checkBuildingPossible(townCenter)){
+                map.setBuildingsTiles(townCenter);
                 getPlayers().get(i).getBuildings().add(townCenter);
             }
         }

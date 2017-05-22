@@ -1,11 +1,8 @@
 package Player;
 
 import Building.Building;
-import Enums.UnitType;
-import Units.OffensiveUnit;
 import Units.Unit;
 
-import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -139,7 +136,7 @@ public class Player implements Serializable {
 
     public boolean BuyBuilding(Building building){
         boolean canBuy = false;
-        switch(building.getBuildingtype())
+        switch(building.getBuildingType())
         {
             case Towncenter:
                 if(amountGold - 1000 >= 0 && amountFood - 1000 >= 0 && amountStone - 1000 >= 0){

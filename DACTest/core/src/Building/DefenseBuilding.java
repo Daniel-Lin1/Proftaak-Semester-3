@@ -22,7 +22,7 @@ public class DefenseBuilding extends Building implements Damage {
         this.setCoordinate(coordinate);
         this.setSizeX(sizeX);
         this.setSizeY(sizeY);
-        this.setBuildingtype(buildingType);
+        this.getBuildingType(buildingType);
         this.setHealth(health);
         this.setHitPerSecond(hitPerSecond);
         this.setDamage(damage);

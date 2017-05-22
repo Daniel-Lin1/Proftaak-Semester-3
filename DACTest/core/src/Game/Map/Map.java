@@ -1,5 +1,6 @@
 package Game.Map;
 
+import Building.Building;
 import Enums.GroundType;
 import Enums.ResourceEnum;
 import Game.Resource;
@@ -80,22 +81,22 @@ public class Map {
                 Tile tile;
 
                 if(R == 237 && G == 28 && B == 36){ //rood
-                    tile = new Tile(tileID,true, true, false, GroundType.Grass, null);
+                    tile = new Tile(tileID,true, true, GroundType.Grass, null);
                     spawnPoints.add(new Point(x,y));
                 }else if(R == 255 && G == 242 && B == 0){ //geel
-                    tile = new Tile(tileID,true, true, false, GroundType.Grass, new Resource(ResourceEnum.Gold, 500));
+                    tile = new Tile(tileID,true, true, GroundType.Grass, new Resource(ResourceEnum.Gold, 500));
                 }else if(R == 195 && G == 195 && B == 195){ //grijs
-                    tile = new Tile(tileID, true, true, false, GroundType.Grass, new Resource(ResourceEnum.Stone, 600));
+                    tile = new Tile(tileID, true, true, GroundType.Grass, new Resource(ResourceEnum.Stone, 600));
                 }else if(R == 255 && G == 255 && B == 255){ //wit
-                    tile = new Tile(tileID, true, true, false, GroundType.Grass, null);
+                    tile = new Tile(tileID, true, true, GroundType.Grass, null);
                 }else if(R == 153 && G == 217 && B == 234){ //blauw
-                    tile = new Tile(tileID, false, false, false, GroundType.Water, null);
+                    tile = new Tile(tileID, false, false, GroundType.Water, null);
                 }else if(R == 181 && G == 230 && B == 29){ //groen
-                    tile = new Tile(tileID, true, true, false, GroundType.Grass, new Resource(ResourceEnum.Wood, 100));
+                    tile = new Tile(tileID, true, true, GroundType.Grass, new Resource(ResourceEnum.Wood, 100));
                 }else if(R == 255 && G == 174 && B == 201){ //roze
-                    tile = new Tile(tileID,true, true, false, GroundType.Grass, new Resource(ResourceEnum.Food, 100) );
+                    tile = new Tile(tileID,true, true, GroundType.Grass, new Resource(ResourceEnum.Food, 100) );
                 }else{
-                    tile = new Tile(tileID,true, true, false, GroundType.Grass, null);
+                    tile = new Tile(tileID,true, true, GroundType.Grass, null);
                     System.out.println("unassighned color in texture (load map from pixmap). replaced with an empty grass tile.");
                     System.out.println("r :" + R +" g :" + G +" b :"+ B);
                 }
@@ -130,5 +131,28 @@ public class Map {
             return false;
         }
         return true;
+    }
+
+    public boolean checkBuildingPossible(Building building){
+        for(int i=0; i<building.getSizeX(); i++){
+            for(int j=0; j<building.getSizeY(); j++){
+                Tile tile = getTileFromCord(building.getCoordinate().x + i, building.getCoordinate().y + j);
+                if(!tile.isBuildable() || tile.isOccupied() || tile.getResource() != null){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public void setBuildingsTiles(Building building){
+        ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>();
+        for(int i=0; i<building.getSizeX(); i++){
+            tiles.add(i, new ArrayList<Tile>());
+            for(int j=0; j<building.getSizeY(); j++){
+                Tile tile = getTileFromCord(building.getCoordinate().x + i, building.getCoordinate().y + j);
+                tiles.get(i).add(tile);
+            }
+        }
     }
 }

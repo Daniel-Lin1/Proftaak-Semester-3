@@ -11,14 +11,13 @@ import java.awt.*;
  */
 public class UnitProducingBuilding extends Building {
 
-    public UnitProducingBuilding(Point coordinate, int sizeX, int sizeY, BuildingType buildingType, int health, Map map)
+    public UnitProducingBuilding(Point coordinate, int sizeX, int sizeY, BuildingType buildingType, int health)
     {
         this.setCoordinate(coordinate);
         this.setSizeX(sizeX);
         this.setSizeY(sizeY);
-        this.setBuildingtype(buildingType);
+        this.getBuildingType(buildingType);
         this.setHealth(health);
-        this.setMap(map);
     }
 
     public OffensiveUnit produceUnit(int unitId, UnitType unittype){

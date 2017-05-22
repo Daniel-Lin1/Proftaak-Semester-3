@@ -13,7 +13,7 @@ public class NormalBuilding extends Building {
         this.setCoordinate(coordinate);
         this.setSizeX(sizeX);
         this.setSizeY(sizeY);
-        this.setBuildingtype(buildingType);
+        this.getBuildingType(buildingType);
         this.setHealth(health);
     }
 }
