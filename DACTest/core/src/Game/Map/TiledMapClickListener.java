@@ -40,7 +40,6 @@ public class TiledMapClickListener extends ClickListener {
         ArrayList<Building> buildings = gameManager.getOwnPlayer().getBuildings();
 
         Tile tile = gameManager.getMap().getTileFromCord((int)actor.getX() /16, (int) actor.getY() /16);
-        //System.out.println(tile);
 
         switch (button) {
             case Buttons.RIGHT:
@@ -49,8 +48,6 @@ public class TiledMapClickListener extends ClickListener {
                         Unit oldUnit = units.get(i);
                         if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
                             for (int a = 0; a < units.size() && !units.isEmpty(); a++) {
-                                System.out.println(units.get(a).getPosition().getX() + ", " + units.get(a).getPosition().getY());
-                                System.out.println((int)x + ", " + (int)y);
                                 if (units.get(a).getPosition().getX() == actor.getX()/16 && units.get(a).getPosition().getY() == actor.getY()/16) {
                                    ((OffensiveUnit) units.get(i)).attack(units.get(a));
                                 }
@@ -65,7 +62,6 @@ public class TiledMapClickListener extends ClickListener {
                             if (tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null) {
                                 units.get(i).moveTo(new Point((int) actor.getX() /16, (int) actor.getY()/16), gameManager.getMap());
                             } else {
-                                System.out.println("kan niet moven.");
                             }
                             gameManager.getGmc().broadcastSetUnit("unit", oldUnit, units.get(i));
                         }

@@ -198,6 +198,5 @@ public class GameManager implements Observer{
     @Override
     public void update(Observable observable, Object o) {
         //todo hier update code voor multiplayer
-        System.out.println("Update Triggerd!!!");
     }
 }

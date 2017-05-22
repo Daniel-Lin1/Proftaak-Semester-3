@@ -128,7 +128,6 @@ public class Player implements Serializable {
         }
 
         if(canBuy){
-            System.out.println("canbuy");
             units.add(unit);
         }
         return canBuy;
