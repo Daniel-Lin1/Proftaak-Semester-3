@@ -1,6 +1,5 @@
 package Game.Map;
 
-import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.UnitType;
 import Units.OffensiveUnit;
@@ -68,16 +67,16 @@ public class TiledMapClickListener extends ClickListener {
             UnitProducingBuilding uPB = (UnitProducingBuilding)gameManager.getOwnPlayer().getSelectedBuilding();
             if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
                 //produce knight
-                addObserver(uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Knight));
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Knight));
             }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
                 //produce pikeman
-                addObserver(uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.PikeMan));
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.PikeMan));
             }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
                 //produce acher
-                addObserver(uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Archer));
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Archer));
             }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
                 //produce builder unit
-                addObserver(uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Builder));
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Builder));
             }else{
                 //no unit created.
             }

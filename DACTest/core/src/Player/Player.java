@@ -163,7 +163,7 @@ public class Player implements Serializable {
         boolean canBuy = false;
         switch(building.getBuildingType())
         {
-            case Towncenter:
+            case TownCenter:
                 if(amountGold - 1000 >= 0 && amountFood - 1000 >= 0 && amountStone - 1000 >= 0){
                     canBuy = true;
                     amountGold -= 1000;

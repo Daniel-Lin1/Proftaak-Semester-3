@@ -8,7 +8,6 @@ import Enums.State;
 import Game.UserInterface.UIManager;
 import Multiplayer.GameManagerClient;
 import Player.Player;
-import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -22,7 +21,6 @@ import Game.Map.Map;
 import Game.Map.TiledMapStage;
 
 import java.awt.*;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -99,14 +97,13 @@ public class GameManager implements Observer{
 
     public GameManagerClient getGmc() {return gmc;}
 
-    public GameManager(State gamestate, int lobbyID, String password, ArrayList<Player> players, int ownPlayerid) {
-        this.gamestate = gamestate;
+    public GameManager(State gameState, int lobbyID, String password, ArrayList<Player> players, int ownPlayerId) {
+        this.gamestate = gameState;
         this.lobbyID = lobbyID;
         this.password = password;
         this.players = players;
-        this.OwnPlayerid = ownPlayerid;
+        this.OwnPlayerid = ownPlayerId;
         this.gmc = new GameManagerClient(this);
-
     }
 
     public void create() {
@@ -143,43 +140,6 @@ public class GameManager implements Observer{
         return getPlayers().get(OwnPlayerid);
     }
 
-    private void renderUnits(Player player) {
-        for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++) {
-
-            if (player.getUnits().get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
-            {
-                player.getUnits().get(i).move();
-                player.getUnits().get(i).setDeltaMoveTime(0);
-            }
-            player.getUnits().get(i).setDeltaMoveTime(player.getUnits().get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
-            batch.draw(player.getUnits().get(i).getSprite(), player.getUnits().get(i).getPosition().x *16, player.getUnits().get(i).getPosition().y*16, 16, 16);
-            if (player.getUnits().get(i).getSelected() == true) {
-                batch.draw(player.getUnits().get(i).getSelectedSprite(), player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
-            }
-            if (player.getUnits().get(i).getHealth() > 75) {
-                batch.draw(TextureVault.Health100, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
-            }
-            if (player.getUnits().get(i).getHealth() <= 75 && player.getUnits().get(i).getHealth() > 50) {
-                batch.draw(TextureVault.Health75, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
-            }
-            if (player.getUnits().get(i).getHealth() <= 50 && player.getUnits().get(i).getHealth() > 25) {
-                batch.draw(TextureVault.Health50, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
-            }
-            if (player.getUnits().get(i).getHealth() <= 25) {
-                batch.draw(TextureVault.Health25, player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
-            }
-        }
-    }
-
-    private void renderBuildings(Player player) {
-        for (int i = 0; i < player.getBuildings().size() && !player.getBuildings().isEmpty(); i++) {
-            batch.draw(player.getBuildings().get(i).getSprite(), player.getBuildings().get(i).getCoordinate().x*16, player.getBuildings().get(i).getCoordinate().y*16, player.getBuildings().get(i).getSizeX()*16, player.getBuildings().get(i).getSizeY()*16);
-            if (player.getBuildings().get(i).getSelected()) {
-                batch.draw(player.getBuildings().get(i).getSelectedSprite(), player.getBuildings().get(i).getCoordinate().x*16, player.getBuildings().get(i).getCoordinate().y*16, player.getBuildings().get(i).getSizeX() *16, player.getBuildings().get(i).getSizeY()*16);
-            }
-        }
-    }
-
     private void renderCameraAndTiledMap() {
         orthographicCamera = gamecamera.render(orthographicCamera);
         orthographicCamera.update();
@@ -203,7 +163,7 @@ public class GameManager implements Observer{
         for(int i=0; i<getPlayers().size(); i++){
             Point spawnPoint = map.getSpawnPoints().get(i);
             Point cord = map.getTileFromCord(spawnPoint).getCoordinate();
-            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.Towncenter, 1000, map);
+            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.TownCenter, 1000, map);
 			townCenter.addObserver(this);
             if(map.checkBuildingPossible(townCenter)){
                 map.setBuildingsTiles(townCenter);
@@ -212,7 +172,7 @@ public class GameManager implements Observer{
         }
     }
 
-    public int getHighestUnitID(){
+    public int getHighestUnitId(){
         highestUnitID = 0;
         for(Player player: getPlayers())
         {
@@ -221,7 +181,7 @@ public class GameManager implements Observer{
         return this.highestUnitID;
     }
 
-    public int getHighestBuildingID(){
+    public int getHighestBuildingId(){
         highestBuildingID = 0;
         for(Player player: getPlayers())
         {
