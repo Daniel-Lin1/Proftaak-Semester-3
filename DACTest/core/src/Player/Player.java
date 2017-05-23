@@ -200,7 +200,7 @@ public class Player implements Serializable {
 
             batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x *16, units.get(i).getPosition().y*16, 16, 16);
         }
-        //render selected unitsw
+        //render selected units
         for (int i = 0; i < selectedUnits.size(); i++) {
             batch.draw(selectedUnits.get(i).getSelectedSprite(), selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
 
