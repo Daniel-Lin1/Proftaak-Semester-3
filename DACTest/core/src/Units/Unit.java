@@ -3,6 +3,7 @@ package Units;
 import Enums.UnitType;
 import Game.Map.Map;
 import Game.Map.PathFinding;
+import Game.Map.Tile;
 import Game.TextureVault;
 import Interfaces.Movement;
 import com.badlogic.gdx.graphics.Texture;
@@ -32,6 +33,8 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     private boolean willReturnFire;
     private boolean selected;
     private float deltaMoveTime;
+    private Map map;
+    private Tile tile;
 
     public Texture getSprite()
     {
@@ -63,34 +66,11 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     public void moveTo(Point destination, Map map) {
         this.setChanged();
         notifyObservers(this);
-//        this.destination = destination;
-//        int[][] grid;
-//        int count = 0;
-//        //grid = new int[][]{};
-//        for (int x=0; x<map.getSizeX(); x++) {
-//            for (int y=0; y<map.getSizeY(); y++) {
-//                if (!map.checkTileIfWalkable(new Point(x, y))){
-//                    count++;
-//                }
-//            }
-//        }
-//        grid = new int[count][2];
-//        count = 0;
-//        for (int x=0; x<map.getSizeX(); x++) {
-//            for (int y=0; y<map.getSizeY(); y++) {
-//                if (!map.checkTileIfWalkable(new Point(x, y))){
-//                    grid[count][0] = x;
-//                    grid[count][1] = y;
-//                    count++;
-//                }
-//            }
-//        }
-
         this.destination = destination;
         ArrayList<int[]> grid = new ArrayList<int[]>();
         for (int x=0; x<map.getSizeX(); x++) {
             for (int y=0; y<map.getSizeY(); y++) {
-                if (!map.checkTileIfWalkable(new Point(x, y))){
+                if (!map.checkTileIfWalkable(new Point(x, y)) && !(x == position.x && y == position.y)){
                     int[] point = new int[2];
                     point[0] = x;
                     point[1] = y;
@@ -104,8 +84,14 @@ public abstract class Unit extends Observable implements Movement, Serializable 
 
     public void move() {
         if(path.size() > 0){
-            this.position = path.get(0);
-            path.remove(0);
+            Tile tileToMove = this.map.getTileFromCord(path.get(0));
+            if(tileToMove.isWalkable() && !tileToMove.isOccupied()){
+                map.getTileFromCord(position).setUnit(null);
+                this.position = path.get(0);
+                map.getTileFromCord(position).setUnit(this);
+                this.tile = this.map.getTileFromCord(position);
+                path.remove(0);
+            }
         }
     }
 
@@ -223,6 +209,18 @@ public abstract class Unit extends Observable implements Movement, Serializable 
 
     public void setDeltaMoveTime(float deltaMoveTime) {
         this.deltaMoveTime = deltaMoveTime;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
+    }
+
+    public Tile getTile() {
+        return tile;
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
     }
 
     public String getUIInfo(){

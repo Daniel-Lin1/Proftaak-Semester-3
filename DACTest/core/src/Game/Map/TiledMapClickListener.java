@@ -5,6 +5,7 @@ import Building.UnitProducingBuilding;
 import Enums.UnitType;
 import Units.OffensiveUnit;
 import Units.Unit;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
@@ -23,9 +24,6 @@ public class TiledMapClickListener extends ClickListener {
     private TiledMapStage stage;
     private GameManager gameManager;
 
-    private ArrayList<Unit> units = new ArrayList<Unit>();
-    private ArrayList<Building> buildings = new ArrayList<Building>();
-
     public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage, GameManager gameManager) {
         this.actor = actor;
         this.stage = stage;
@@ -34,100 +32,76 @@ public class TiledMapClickListener extends ClickListener {
 
     @Override
     public boolean touchDown(InputEvent event, float x, float y, int pointer, int button) {
-        units = gameManager.getOwnPlayer().getUnits();
-        ArrayList<Building> buildings = gameManager.getOwnPlayer().getBuildings();
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
+        Point mousePoint = new Point((int)actor.getX() /16, (int) actor.getY() /16);
+        Tile tile = gameManager.getMap().getTileFromCord(mousePoint);
 
-        Tile tile = gameManager.getMap().getTileFromCord((int)actor.getX() /16, (int) actor.getY() /16);
-
-        switch (button) {
-            case Buttons.RIGHT:
-                for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
-                    if (units.get(i).getSelected() == true) {
-                        Unit oldUnit = units.get(i);
-                        if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-                            for (int a = 0; a < units.size() && !units.isEmpty(); a++) {
-                                if (units.get(a).getPosition().getX() == actor.getX()/16 && units.get(a).getPosition().getY() == actor.getY()/16) {
-                                   ((OffensiveUnit) units.get(i)).attack(units.get(a));
-                                }
-                            }
-                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-
-                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
-
-                        } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
-
-                        } else {
-                            if (tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null) {
-                                units.get(i).moveTo(new Point((int) actor.getX() /16, (int) actor.getY()/16), gameManager.getMap());
-                            } else {
-                            }
-                            gameManager.getGmc().broadcastSetUnit("unit", oldUnit, units.get(i));
-                        }
+        if(gameManager.getOwnPlayer().getSelectedUnits().size() > 0 ){  // if there are selected units
+            if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
+                for (int i = 0; i < gameManager.getOwnPlayer().getSelectedUnits().size(); i++) {
+                    if(gameManager.getOwnPlayer().getSelectedUnits().get(i) instanceof OffensiveUnit){
+                        //todo check if unit is an opponent before attacking.
+                        OffensiveUnit attackingUnit = (OffensiveUnit) gameManager.getOwnPlayer().getSelectedUnits().get(i);
+                        attackingUnit.attack(tile.getUnit());
                     }
                 }
-                for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
-                {
-                    //ToDo spawn units without having to right click
-                    if (buildings.get(i).getSelected() == true) {
+            }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
 
-                        Boolean canSpawn = true;
-                        for (int i2 = 0; i2 < units.size() && !units.isEmpty(); i2++) {
-                            if (units.get(i2).getPosition().getX() == buildings.get(i).getCoordinate().getX() && units.get(i2).getPosition().getY() == buildings.get(i).getCoordinate().getY() - 1 ) {
-                                canSpawn = false;
-                            }
-                        }
-                        if (canSpawn == true)
-                        {
-                            UnitProducingBuilding uPB = (UnitProducingBuilding)buildings.get(i);
-                            if (Gdx.input.isKeyPressed(Input.Keys.NUM_1)) {
-                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Knight);
-                                unit.addObserver(gameManager);
-                                gameManager.getOwnPlayer().BuyUnit(unit);
-                                gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
-                            } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_2)) {
-                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.PikeMan);
-                                unit.addObserver(gameManager);
-                                gameManager.getOwnPlayer().BuyUnit(unit);
-                                gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
-                            } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_3)) {
-                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Archer);
-                                unit.addObserver(gameManager);
-                                gameManager.getOwnPlayer().BuyUnit(unit);
-                                gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
-                            } else if (Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
-                                Unit unit = uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Builder);
-                                unit.addObserver(gameManager);
-                                gameManager.getOwnPlayer().BuyUnit(unit);
-                                gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
-                            }
-                        }
+            }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
+
+            }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
+
+            }else if (button == Buttons.RIGHT){
+                if (tile.isWalkable() && !tile.isOccupied() && tile.getResource() == null) {
+                    for (int i = 0; i < gameManager.getOwnPlayer().getSelectedUnits().size(); i++) {
+                        Unit oldUnit = gameManager.getOwnPlayer().getSelectedUnits().get(i);
+                        Unit newUnit = oldUnit;
+                        newUnit.moveTo(mousePoint, gameManager.getMap());
+                        gameManager.getGmc().broadcastSetUnit("unit", oldUnit, newUnit);
                     }
                 }
-                break;
-            case Buttons.LEFT:
-                for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
-                    if (actor.getX()/16 == units.get(i).getPosition().getX() && actor.getY()/16 == units.get(i).getPosition().getY()) {
-                        units.get(i).setSelected(true);
-                    } else {
-                        units.get(i).setSelected(false);
-                    }
-                }
-                for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++)
-                {
-                    if (actor.getX() /16 == buildings.get(i).getCoordinate().getX() && actor.getY()/16 == buildings.get(i).getCoordinate().getY())
-                    {
-                        buildings.get(i).setSelected(true);
-                    }
-                    else
-                    {
-                        buildings.get(i).setSelected(false);
-                    }
-                }
-                break;
-            default:
-                System.out.println("Default switch statement reached in " + Thread.currentThread().getStackTrace()[1]);
-                return false;
+            }
+        }
+
+        //todo building stuff input zou in een andere click listener moeten zitten. dan kan je een building selecteren en dan los op <1-2-3-4-5> clicken en een unit maken.
+        if(gameManager.getOwnPlayer().getSelectedBuilding() != null && gameManager.getOwnPlayer().getSelectedBuilding() instanceof UnitProducingBuilding){  // if there is a unit producing building
+            UnitProducingBuilding uPB = (UnitProducingBuilding)gameManager.getOwnPlayer().getSelectedBuilding();
+            if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
+                //produce knight
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Knight));
+            }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
+                //produce pikeman
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.PikeMan));
+            }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
+                //produce acher
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Archer));
+            }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
+                //produce builder unit
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitID(), UnitType.Builder));
+            }else{
+                //no unit created.
+            }
+        }
+        if(button == Buttons.LEFT){
+            if(tile.getUnit() != null){
+                //todo check if unit on tile is friendly / enemy
+                gameManager.getOwnPlayer().addUnitToSelectedUnits(tile.getUnit());
+            }
+            if(tile.getBuilding() != null){
+                //todo check if building on tile is friendly / enemy
+                gameManager.getOwnPlayer().setSelectedBuilding(tile.getBuilding());
+            }
+            if(tile.getBuilding() == null && tile.getUnit() == null){
+                gameManager.getOwnPlayer().setSelectedUnits(new ArrayList<Unit>());
+                gameManager.getOwnPlayer().setSelectedBuilding(null);
+            }
         }
         return true;
+    }
+
+    private void addObserver(Unit unit){
+        unit.addObserver(gameManager);
+        gameManager.getOwnPlayer().BuyUnit(unit);
+        gameManager.getGmc().broadcastSetUnit("unit", unit, unit);
     }
 }

@@ -1,6 +1,8 @@
 package Units;
 
 import Enums.UnitType;
+import Game.Map.Map;
+import Game.Map.Tile;
 import Interfaces.Damage;
 import java.awt.*;
 import java.util.ArrayList;
@@ -10,9 +12,10 @@ import java.util.ArrayList;
  */
 public class OffensiveUnit extends Unit implements Damage{
 
-    public OffensiveUnit(int unitid, Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire) {
+    public OffensiveUnit(int unitid, Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire, Map map) {
         this.setId(unitid);
         this.setPosition(position);
+        this.setTile(map.getTileFromCord(position));
         this.setUnitType(unitType);
         this.setHealth(health);
         this.setSpeed(speed);
@@ -21,6 +24,7 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
         this.setPath(new ArrayList<Point>());
+        this.setMap(map);
     }
 
     //zou moeten werken maar nog niet getest -Nick

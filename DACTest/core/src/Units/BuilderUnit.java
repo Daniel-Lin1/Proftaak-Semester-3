@@ -3,6 +3,7 @@ import Enums.BuildingType;
 import Building.Building;
 import Enums.ResourceEnum;
 import Enums.UnitType;
+import Game.Map.Map;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class BuilderUnit extends Unit {
     private int amountResource;
     private ResourceEnum resourceEnum;
 
-    public BuilderUnit(int unitid, Point position, UnitType unitType, int health, int speed)
+    public BuilderUnit(int unitid, Point position, UnitType unitType, int health, int speed, Map map)
     {
         this.setId(unitid);
         this.setPosition(position);
@@ -22,6 +23,7 @@ public class BuilderUnit extends Unit {
         this.setHealth(health);
         this.setSpeed(speed);
         this.setPath(new ArrayList<Point>());
+        this.setMap(map);
     }
 
     public void getResource(){

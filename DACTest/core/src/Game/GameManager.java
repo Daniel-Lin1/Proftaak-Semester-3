@@ -134,8 +134,7 @@ public class GameManager implements Observer{
         batch.begin();
         map.render(batch);
         for (Player player : players) {
-            renderUnits(player);
-            renderBuildings(player);
+            player.render(batch);
         }
         batch.end();
     }
@@ -145,7 +144,6 @@ public class GameManager implements Observer{
     }
 
     private void renderUnits(Player player) {
-
         for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++) {
 
             if (player.getUnits().get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
@@ -154,8 +152,6 @@ public class GameManager implements Observer{
                 player.getUnits().get(i).setDeltaMoveTime(0);
             }
             player.getUnits().get(i).setDeltaMoveTime(player.getUnits().get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
-
-
             batch.draw(player.getUnits().get(i).getSprite(), player.getUnits().get(i).getPosition().x *16, player.getUnits().get(i).getPosition().y*16, 16, 16);
             if (player.getUnits().get(i).getSelected() == true) {
                 batch.draw(player.getUnits().get(i).getSelectedSprite(), player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
@@ -206,8 +202,8 @@ public class GameManager implements Observer{
     private void createTownCenters(){
         for(int i=0; i<getPlayers().size(); i++){
             Point spawnPoint = map.getSpawnPoints().get(i);
-            Point cord = map.getTileFromCord(spawnPoint.x, spawnPoint.y).getCoordinate();
-            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.Towncenter, 1000);
+            Point cord = map.getTileFromCord(spawnPoint).getCoordinate();
+            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.Towncenter, 1000, map);
 			townCenter.addObserver(this);
             if(map.checkBuildingPossible(townCenter)){
                 map.setBuildingsTiles(townCenter);
