@@ -30,7 +30,7 @@ public class DistressAndConflict extends ApplicationAdapter {
 		players.add(new Player(2, "player3"));
 		players.add(new Player(3, "player4"));
 
-		this.gameManager = new GameManager(State.Finished, 1, "lel", players, 0);
+		this.gameManager = new GameManager(State.Finished, 1, "lel", players, 1);
 		this.uiManager = new UIManager(this.gameManager);
 		gameManager.setUiManager(this.uiManager);
 	}
