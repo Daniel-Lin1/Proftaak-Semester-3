@@ -24,7 +24,6 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
         this.setPath(new ArrayList<Point>());
-        this.setMap(map);
     }
 
     //zou moeten werken maar nog niet getest -Nick

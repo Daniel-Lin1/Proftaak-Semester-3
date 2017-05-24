@@ -190,14 +190,6 @@ public class Player implements Serializable {
     public void render(Batch batch){
         //render units
         for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
-            //todo zet de move van units ergens anders. dit hoord niet in de render methoden.
-            if (units.get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
-            {
-                units.get(i).move();
-                units.get(i).setDeltaMoveTime(0);
-            }
-            units.get(i).setDeltaMoveTime(units.get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
-
             batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x *16, units.get(i).getPosition().y*16, 16, 16);
         }
         //render selected units

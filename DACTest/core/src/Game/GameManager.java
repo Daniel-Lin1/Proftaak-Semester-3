@@ -8,6 +8,7 @@ import Enums.State;
 import Game.UserInterface.UIManager;
 import Multiplayer.GameManagerClient;
 import Player.Player;
+import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -127,6 +128,20 @@ public class GameManager implements Observer{
     }
 
     public void render() {
+        for (Player player : players) {
+            //todo zet de move van units ergens anders. dit hoord niet in de render methoden.
+            ArrayList<Unit> units = player.getUnits();
+            for (int i = 0; i < units.size(); i++) {
+                if (player.getUnits().get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
+                {
+                    units.get(i).move(map);
+                    units.get(i).setDeltaMoveTime(0);
+                }
+                units.get(i).setDeltaMoveTime(units.get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
+            }
+        }
+
+
         renderCameraAndTiledMap();
         batch.begin();
         map.render(batch);

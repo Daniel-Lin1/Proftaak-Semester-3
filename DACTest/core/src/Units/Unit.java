@@ -33,7 +33,6 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     private boolean willReturnFire;
     private boolean selected;
     private float deltaMoveTime;
-    private Map map;
     private Tile tile;
 
     public Texture getSprite()
@@ -79,17 +78,17 @@ public abstract class Unit extends Observable implements Movement, Serializable 
             }
         }
         //grid
-        path = PathFinding.test(map.getSizeX(), map.getSizeY(), destination.x, destination.y, position.x, position.y, grid);
+        path = PathFinding.findPath(map.getSizeX(), map.getSizeY(), destination.x, destination.y, position.x, position.y, grid);
     }
 
-    public void move() {
+    public void move(Map map) {
         if(path.size() > 0){
-            Tile tileToMove = this.map.getTileFromCord(path.get(0));
+            Tile tileToMove = map.getTileFromCord(path.get(0));
             if(tileToMove.isWalkable() && !tileToMove.isOccupied()){
                 map.getTileFromCord(position).setUnit(null);
                 this.position = path.get(0);
                 map.getTileFromCord(position).setUnit(this);
-                this.tile = this.map.getTileFromCord(position);
+                this.tile = map.getTileFromCord(position);
                 path.remove(0);
             }
         }
@@ -209,10 +208,6 @@ public abstract class Unit extends Observable implements Movement, Serializable 
 
     public void setDeltaMoveTime(float deltaMoveTime) {
         this.deltaMoveTime = deltaMoveTime;
-    }
-
-    public void setMap(Map map) {
-        this.map = map;
     }
 
     public Tile getTile() {
