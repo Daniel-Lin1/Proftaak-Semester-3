@@ -31,13 +31,13 @@ public class UnitProducingBuilding extends Building {
         Unit unit;
         switch (unittype) {
             case Knight:
-                unit = new OffensiveUnit(unitId, point, UnitType.Knight, 100, 1, 1, 10, 1, false, map);
+                unit = new OffensiveUnit(unitId, point, UnitType.Knight, 100, 1, 1, 10, 1, true, map);
                 break;
             case PikeMan:
-                unit = new OffensiveUnit(unitId, point, UnitType.PikeMan, 80, 1, 1, 8, 1, false, map);
+                unit = new OffensiveUnit(unitId, point, UnitType.PikeMan, 80, 1, 1, 8, 1, true, map);
                 break;
             case Archer:
-                unit = new OffensiveUnit(unitId, point, UnitType.Archer, 60, 1, 1, 8, 4, false, map);
+                unit = new OffensiveUnit(unitId, point, UnitType.Archer, 60, 1, 1, 8, 4, true, map);
                 break;
             case Builder:
                 unit = new OffensiveUnit(unitId, point, UnitType.Builder, 50, 1, 0, 0, 0, false, map);
