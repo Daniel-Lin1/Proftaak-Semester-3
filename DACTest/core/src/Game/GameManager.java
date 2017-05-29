@@ -193,7 +193,7 @@ public class GameManager implements Observer{
         for(int i=0; i<getPlayers().size(); i++){
             Point spawnPoint = map.getSpawnPoints().get(i);
             Point cord = map.getTileFromCord(spawnPoint).getCoordinate();
-            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.TownCenter, 1000, map);
+            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.TownCenter, 1000);
 			townCenter.addObserver(this);
             if(map.checkBuildingPossible(townCenter)){
                 map.setBuildingsTiles(townCenter);
