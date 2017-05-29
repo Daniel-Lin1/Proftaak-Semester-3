@@ -9,7 +9,7 @@ import java.io.Serializable;
  * Created by Yannick on 22-5-2017.
  */
 public class ObjectIdentifier implements Serializable{
-    private Player player;
+    private int playerId;
     private Object object;
 
     /*
@@ -17,13 +17,13 @@ public class ObjectIdentifier implements Serializable{
     Param @object building or unit
 
      */
-    public ObjectIdentifier(Player player, Object object){
-        this.player = player;
+    public ObjectIdentifier(int playerId, Object object){
+        this.playerId = playerId;
         this.object = object;
     }
 
-    public Player getPlayer(){
-        return this.player;
+    public int getPlayerId(){
+        return this.playerId;
     }
 
     public Object getObject(){

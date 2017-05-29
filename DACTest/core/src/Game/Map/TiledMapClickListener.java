@@ -57,7 +57,7 @@ public class TiledMapClickListener extends ClickListener {
                         Unit oldUnit = gameManager.getOwnPlayer().getSelectedUnits().get(i);
                         Unit newUnit = oldUnit;
                         newUnit.moveTo(mousePoint, gameManager.getMap());
-                        gameManager.getGmc().broadcastSetUnit("unit", oldUnit, new ObjectIdentifier(gameManager.getOwnPlayer(),newUnit));
+                        gameManager.getGmc().broadcastSetUnit("unit", oldUnit, new ObjectIdentifier(gameManager.getOwnPlayer().getPlayerID(),newUnit));
                     }
                 }
             }
@@ -68,16 +68,16 @@ public class TiledMapClickListener extends ClickListener {
             UnitProducingBuilding uPB = (UnitProducingBuilding)gameManager.getOwnPlayer().getSelectedBuilding();
             if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
                 //produce knight
-                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Knight));
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Knight, gameManager.getMap()));
             }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
                 //produce pikeman
-                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.PikeMan));
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.PikeMan, gameManager.getMap()));
             }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
                 //produce acher
-                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Archer));
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Archer, gameManager.getMap()));
             }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
                 //produce builder unit
-                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Builder));
+                addObserver(uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Builder, gameManager.getMap()));
             }else{
                 //no unit created.
             }
@@ -102,6 +102,6 @@ public class TiledMapClickListener extends ClickListener {
     private void addObserver(Unit unit){
         unit.addObserver(gameManager);
         gameManager.getOwnPlayer().BuyUnit(unit);
-        gameManager.getGmc().broadcastSetUnit("unit", unit, new ObjectIdentifier(gameManager.getOwnPlayer(), unit));
+        gameManager.getGmc().broadcastSetUnit("unit", unit, new ObjectIdentifier(gameManager.getOwnPlayer().getPlayerID(), unit));
     }
 }

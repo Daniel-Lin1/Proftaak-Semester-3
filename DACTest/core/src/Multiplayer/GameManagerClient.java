@@ -93,16 +93,23 @@ public class GameManagerClient {
                 public void run() {
                     boolean found = false;
 
+
                     for(Player player : gameManager.getPlayers()){
-                        for(Unit unit : player.getUnits()){
-                            if(unit.getId() == oldUnit.getId()){
-                                objectIdentifier.getPlayer().getUnits().set(player.getUnits().indexOf(newUnit), newUnit);
-                                found = true;
+                        if(player.getUnits().isEmpty() == false){
+                            for(Unit unit : player.getUnits()){
+                                if(unit.getId() == oldUnit.getId()){
+                                    player.getUnits().set(player.getUnits().indexOf(unit),newUnit);
+
+
+                                    //player.getUnits().set(objectIdentifier.getPlayer().getUnits().indexOf(newUnit), newUnit);
+                                    //objectIdentifier.getPlayer().getUnits().set(player.getUnits().indexOf(newUnit), newUnit);
+                                    found = true;
+                                }
                             }
                         }
                     }
                     if(found == false){
-                        gameManager.getOwnPlayer().getUnits().add(newUnit);
+                        gameManager.getPlayers().get(objectIdentifier.getPlayerId()).getUnits().add(newUnit);
                     }
                 }
             });

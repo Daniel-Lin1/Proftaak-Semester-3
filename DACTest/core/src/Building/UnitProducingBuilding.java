@@ -14,19 +14,18 @@ import java.awt.*;
  */
 public class UnitProducingBuilding extends Building {
 
-    private Map map;
 
-    public UnitProducingBuilding(Point coordinate, int sizeX, int sizeY, BuildingType buildingType, int health, Map map)
+
+    public UnitProducingBuilding(Point coordinate, int sizeX, int sizeY, BuildingType buildingType, int health)
     {
         this.setCoordinate(coordinate);
         this.setSizeX(sizeX);
         this.setSizeY(sizeY);
         this.getBuildingType(buildingType);
         this.setHealth(health);
-        this.map = map;
     }
 
-    public Unit produceUnit(int unitId, UnitType unittype){
+    public Unit produceUnit(int unitId, UnitType unittype, Map map){
         Point point = new Point(getCoordinate().x,getCoordinate().y - 1);
         Unit unit;
         switch (unittype) {
