@@ -46,6 +46,7 @@ public class UIManager {
 
     public void render()
     {
+        Boolean UIRendered = false;
         amountOfAbilities = 0;
         UIBatch.begin();
         UIBatch.draw(TextureVault.uiBar,350, 0 ,1570, 200);
@@ -53,27 +54,32 @@ public class UIManager {
         drawResources();
         for(Unit unit : gameManager.getOwnPlayer().getSelectedUnits())
         {
-            UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
-            font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
-
-            switch(unit.getUnitType())
+            if (UIRendered == false)
             {
-                case Knight:
-                    renderAttacker();
-                    break;
-                case Archer:
-                    renderAttacker();
-                    break;
-                case PikeMan:
-                    renderAttacker();
-                    break;
-                case Builder:
-                    renderBuilder();
-                    break;
+                UIRendered = true;
+                UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
+                font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
+
+                switch(unit.getUnitType())
+                {
+                    case Knight:
+                        renderAttacker();
+                        break;
+                    case Archer:
+                        renderAttacker();
+                        break;
+                    case PikeMan:
+                        renderAttacker();
+                        break;
+                    case Builder:
+                        renderBuilder();
+                        break;
+                }
             }
         }
         Building building = gameManager.getOwnPlayer().getSelectedBuilding();
-        if(building != null){
+        if(building != null && UIRendered == false){
+            UIRendered = true;
             font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
             UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
             renderTownCenter();
