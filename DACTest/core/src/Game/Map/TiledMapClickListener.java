@@ -60,6 +60,9 @@ public class TiledMapClickListener extends ClickListener {
                         gameManager.getGmc().broadcastSetUnit("unit", oldUnit, new ObjectIdentifier(gameManager.getOwnPlayer().getPlayerID(),newUnit));
                     }
                 }
+                //----- //ToDo dit is een cheezy fix. later aanpassen! - Nick
+                gameManager.getOwnPlayer().setSelectedUnits(new ArrayList<Unit>());
+                //-----
             }
         }
 
