@@ -134,7 +134,7 @@ public abstract class PathFinding {
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public static ArrayList<Point> test(int x, int y, int si, int sj, int ei, int ej, ArrayList<int[]> blocked){
+    public static ArrayList<Point> findPath(int x, int y, int si, int sj, int ei, int ej, ArrayList<int[]> blocked){
         //Reset
         grid = new Cell[x][y];
         closed = new boolean[x][y];

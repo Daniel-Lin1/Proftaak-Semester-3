@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.Texture;
 public class TextureVault {
 
     public final static Texture selected = new Texture(Gdx.files.internal("assets/Selected.png"));
-    public final static Texture townCenter = new Texture(Gdx.files.internal("assets/Towncenter.png"));
+    public final static Texture townCenter = new Texture(Gdx.files.internal("assets/TownCenter.png"));
     public final static Texture knight = new Texture(Gdx.files.internal("assets/Knight1.png"));
     public final static Texture archer = new Texture(Gdx.files.internal("assets/Archer1.png"));
     public final static Texture pikeMan = new Texture(Gdx.files.internal("assets/PikeMan1.png"));

@@ -46,15 +46,17 @@ public class UIManager {
 
     public void render()
     {
+        Boolean UIRendered = false;
         amountOfAbilities = 0;
         UIBatch.begin();
         UIBatch.draw(TextureVault.uiBar,350, 0 ,1570, 200);
         UIBatch.draw(TextureVault.uiBox,0,0,350,250);
         drawResources();
-        for(Unit unit : gameManager.getOwnPlayer().getUnits())
+        for(Unit unit : gameManager.getOwnPlayer().getSelectedUnits())
         {
-            if(unit.getSelected() == true)
+            if (UIRendered == false)
             {
+                UIRendered = true;
                 UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
                 font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
 
@@ -75,14 +77,12 @@ public class UIManager {
                 }
             }
         }
-        for(Building building : gameManager.getOwnPlayer().getBuildings())
-        {
-            if(building.getSelected() == true)
-            {
-                font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
-                UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
-                renderTownCenter();
-            }
+        Building building = gameManager.getOwnPlayer().getSelectedBuilding();
+        if(building != null && UIRendered == false){
+            UIRendered = true;
+            font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
+            UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
+            renderTownCenter();
         }
         drawAbilitiesKeys();
         UIBatch.end();

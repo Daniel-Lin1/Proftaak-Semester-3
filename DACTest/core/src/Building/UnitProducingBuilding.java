@@ -14,6 +14,8 @@ import java.awt.*;
  */
 public class UnitProducingBuilding extends Building {
 
+
+
     public UnitProducingBuilding(Point coordinate, int sizeX, int sizeY, BuildingType buildingType, int health)
     {
         this.setCoordinate(coordinate);
@@ -23,27 +25,26 @@ public class UnitProducingBuilding extends Building {
         this.setHealth(health);
     }
 
-    public Unit produceUnit(int unitId, UnitType unittype){
-        Point point = new Point( (int)this.getCoordinate().getX(), (int)this.getCoordinate().getY() - 1);
-        if (unittype == UnitType.Knight)
-        {
-            return new OffensiveUnit(unitId, point, UnitType.Knight, 100, 1, 1, 10, 1, false);
+    public Unit produceUnit(int unitId, UnitType unittype, Map map){
+        Point point = new Point(getCoordinate().x,getCoordinate().y - 1);
+        Unit unit;
+        switch (unittype) {
+            case Knight:
+                unit = new OffensiveUnit(unitId, point, UnitType.Knight, 100, 1, 1, 10, 1, true, map);
+                break;
+            case PikeMan:
+                unit = new OffensiveUnit(unitId, point, UnitType.PikeMan, 80, 1, 1, 8, 1, true, map);
+                break;
+            case Archer:
+                unit = new OffensiveUnit(unitId, point, UnitType.Archer, 60, 1, 1, 8, 4, true, map);
+                break;
+            case Builder:
+                unit = new OffensiveUnit(unitId, point, UnitType.Builder, 50, 1, 0, 0, 0, false, map);
+                break;
+            default:
+                throw new IllegalArgumentException("default switchcase reached in unitProducing building : produceUnit");
         }
-        else if (unittype == UnitType.PikeMan)
-        {
-            return new OffensiveUnit(unitId, point, UnitType.PikeMan, 80, 1, 1, 8, 1, false);
-        }
-        else if (unittype == UnitType.Archer)
-        {
-            return new OffensiveUnit(unitId, point, UnitType.Archer, 60, 1, 1, 8, 4, false);
-        }
-        else if (unittype == UnitType.Builder)
-        {
-             return new OffensiveUnit(unitId, point, UnitType.Builder, 50, 1, 0, 0, 0, false);
-        }
-        else
-        {
-            return null;
-        }
+        map.getTileFromCord(point).setUnit(unit);
+        return unit;
     }
 }

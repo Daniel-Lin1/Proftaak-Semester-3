@@ -107,7 +107,6 @@ public class Map {
         }
     }
     public void render(Batch batch){
-        //todo render resources
         for (ArrayList<Tile> tiles : tiles){
             for (Tile tile : tiles) {
                 tile.render(batch, sizeY);
@@ -115,13 +114,14 @@ public class Map {
         }
     }
 
-    public Tile getTileFromCord(int x, int y){
-        if(x == 150){x = 149;} //op een hele cheez manier een glitch van die laatste rij (buiten de map clicken) gefixed. :)
-        return tiles.get(x).get((-1* (((y)+1) - tiles.get(0).size())));
+    //todo make this accept Point, instead of 2 intergers.
+    public Tile getTileFromCord(Point coords){
+        if(coords.x == 150){coords.x = 149;} //op een hele cheez manier een glitch van die laatste rij (buiten de map clicken) gefixed. :)
+        return tiles.get(coords.x).get((-1* (((coords.y)+1) - tiles.get(0).size())));
     }
 
     public boolean checkTileIfWalkable(Point point){
-        Tile tile = getTileFromCord(point.x, point.y);
+        Tile tile = getTileFromCord(point);
         if(tile.isOccupied() || tile.getResource() != null || !tile.isWalkable()){
             return false;
         }
@@ -131,7 +131,7 @@ public class Map {
     public boolean checkBuildingPossible(Building building){
         for(int i=0; i<building.getSizeX(); i++){
             for(int j=0; j<building.getSizeY(); j++){
-                Tile tile = getTileFromCord(building.getCoordinate().x + i, building.getCoordinate().y + j);
+                Tile tile = getTileFromCord(new Point(building.getCoordinate().x + i, building.getCoordinate().y + j));
                 if(!tile.isBuildable() || tile.isOccupied() || tile.getResource() != null){
                     return false;
                 }
@@ -145,9 +145,9 @@ public class Map {
         for(int i=0; i<building.getSizeX(); i++){
             tiles.add(i, new ArrayList<Tile>());
             for(int j=0; j<building.getSizeY(); j++){
-                //Tile tile = getTileFromCord(building.getCoordinate().x + i, building.getCoordinate().y + j);
-                getTileFromCord(building.getCoordinate().x + i, building.getCoordinate().y + j).setBuilding(building);
-                tiles.get(i).add(getTileFromCord(building.getCoordinate().x, building.getCoordinate().y));
+                Point point = new Point(building.getCoordinate().x, building.getCoordinate().y);
+                getTileFromCord(new Point(point.x + i, point.y + j)).setBuilding(building);
+                tiles.get(i).add(getTileFromCord(point));
             }
         }
         building.setTiles(tiles);

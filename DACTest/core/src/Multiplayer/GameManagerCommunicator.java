@@ -49,8 +49,7 @@ public class GameManagerCommunicator
     public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
 
         String property = evt.getPropertyName();
-        Unit unit = (Unit) evt.getNewValue();
-        gameManagerClient.requestUnitAction(property, unit, (Unit) evt.getOldValue());
+        gameManagerClient.requestUnitAction(property, (Unit) evt.getOldValue() , (ObjectIdentifier) evt.getNewValue() );
     }
 
 

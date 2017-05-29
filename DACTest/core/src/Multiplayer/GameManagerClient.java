@@ -42,7 +42,7 @@ public class GameManagerClient {
     }
 
     // Broadcast draw event to other white boards
-    public void broadcastSetUnit(String property, Unit oldUnit, Unit newUnit) {
+    public void broadcastSetUnit(String property, Unit oldUnit, ObjectIdentifier newUnit) {
         communicator.broadcast(property, oldUnit, newUnit);
     }
 
@@ -83,24 +83,29 @@ public class GameManagerClient {
         }).start();
     }
 
-    public void requestUnitAction(String property, Unit newUnit, Unit oldUnit) {
+    public void requestUnitAction(String property, Unit oldUnit, ObjectIdentifier objectIdentifier) {
         new Thread(() -> {
+            Unit newUnit = (Unit) objectIdentifier.getObject();
             newUnit.setSelected(false);
+
             Gdx.app.postRunnable(new Runnable() {
                 @Override
                 public void run() {
                     boolean found = false;
 
+
                     for(Player player : gameManager.getPlayers()){
-                        for(Unit unit : player.getUnits()){
-                            if(unit.getId() == oldUnit.getId()){
-                                player.getUnits().set(player.getUnits().indexOf(unit), newUnit);
-                                found = true;
+
+                            for(Unit unit : player.getUnits()){
+                                if(unit.getId() == oldUnit.getId()){
+                                    player.getUnits().set(player.getUnits().indexOf(unit),newUnit);
+                                    found = true;
+                                }
                             }
-                        }
+
                     }
                     if(found == false){
-                        gameManager.getOwnPlayer().getUnits().add(newUnit);
+                        gameManager.getPlayers().get(objectIdentifier.getPlayerId()).getUnits().add(newUnit);
                     }
                 }
             });

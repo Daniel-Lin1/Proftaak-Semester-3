@@ -5,12 +5,11 @@ package Enums;
  */
 public enum BuildingType {
     Barracks,
-    Towncenter,
+    TownCenter,
     Archery,
     Farm,
     Stable,
     Lumberjack,
-    Miningcamp,
-    Tower,
-    ResourceBuilding
+    MiningCamp,
+    Tower
 }
