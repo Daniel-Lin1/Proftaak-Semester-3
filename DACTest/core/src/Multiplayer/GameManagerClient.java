@@ -95,18 +95,14 @@ public class GameManagerClient {
 
 
                     for(Player player : gameManager.getPlayers()){
-                        if(player.getUnits().isEmpty() == false){
+
                             for(Unit unit : player.getUnits()){
                                 if(unit.getId() == oldUnit.getId()){
                                     player.getUnits().set(player.getUnits().indexOf(unit),newUnit);
-
-
-                                    //player.getUnits().set(objectIdentifier.getPlayer().getUnits().indexOf(newUnit), newUnit);
-                                    //objectIdentifier.getPlayer().getUnits().set(player.getUnits().indexOf(newUnit), newUnit);
                                     found = true;
                                 }
                             }
-                        }
+
                     }
                     if(found == false){
                         gameManager.getPlayers().get(objectIdentifier.getPlayerId()).getUnits().add(newUnit);
