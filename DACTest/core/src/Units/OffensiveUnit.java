@@ -2,7 +2,6 @@ package Units;
 
 import Enums.UnitType;
 import Game.Map.Map;
-import Game.Map.Tile;
 import Interfaces.Damage;
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setPath(new ArrayList<Point>());
     }
 
-    //zou moeten werken maar nog niet getest -Nick
     @Override
     public void attack(Unit target) {
         if ((this.getPosition().getX() + (this.getRange()) >= target.getPosition().getX()) &&
@@ -34,20 +32,10 @@ public class OffensiveUnit extends Unit implements Damage{
             (this.getPosition().getY() + (this.getRange()) >= target.getPosition().getY()) &&
             (this.getPosition().getY() - (this.getRange()) <= target.getPosition().getY()))
         {
-            this.battle(target);
+            target.setHealth(target.getHealth() - this.getHitDamage());
+            if (target.isWillReturnFire()) {
+                target.setInBattleWith(this);
+            }
         }
-    }
-
-    private void battle(Unit target) {
-//        target.setHealth(target.getHealth() - this.getHitDamage());
-//        if (target.isWillReturnFire()) {
-//            this.setHealth(this.getHealth() - target.getHitDamage());
-//        }
-//        if (this.getHealth() <= 0) {
-//
-//        }
-//        if (this.getHealth() > 0 && target.getHealth() > 0) {
-//            this.battle(target);
-//        }
     }
 }

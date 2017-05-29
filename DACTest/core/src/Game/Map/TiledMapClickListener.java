@@ -41,7 +41,7 @@ public class TiledMapClickListener extends ClickListener {
                     if(gameManager.getOwnPlayer().getSelectedUnits().get(i) instanceof OffensiveUnit){
                         //todo check if unit is an opponent before attacking.
                         OffensiveUnit attackingUnit = (OffensiveUnit) gameManager.getOwnPlayer().getSelectedUnits().get(i);
-                        attackingUnit.attack(tile.getUnit());
+                        attackingUnit.setInBattleWith(tile.getUnit());
                     }
                 }
             }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_2)){

@@ -30,9 +30,11 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     private int hitPerSecond;
     private int hitDamage;
     private int range;
+    private Unit inBattleWith;
     private boolean willReturnFire;
     private boolean selected;
     private float deltaMoveTime;
+    private float deltaBattleTime;
     private Tile tile;
 
     public Texture getSprite()
@@ -114,6 +116,14 @@ public abstract class Unit extends Observable implements Movement, Serializable 
 
     public void setPosition(Point position) {
         this.position = position;
+    }
+
+    public Unit getInBattleWith() {
+        return inBattleWith;
+    }
+
+    public void setInBattleWith(Unit unit) {
+        this.inBattleWith = unit;
     }
 
     public UnitType getUnitType() {
@@ -208,6 +218,14 @@ public abstract class Unit extends Observable implements Movement, Serializable 
 
     public void setDeltaMoveTime(float deltaMoveTime) {
         this.deltaMoveTime = deltaMoveTime;
+    }
+
+    public float getDeltaBattleTime() {
+        return deltaBattleTime;
+    }
+
+    public void setDeltaBattleTime(float BattleTime) {
+        this.deltaBattleTime = BattleTime;
     }
 
     public Tile getTile() {

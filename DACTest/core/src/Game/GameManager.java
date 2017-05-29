@@ -8,6 +8,7 @@ import Enums.State;
 import Game.UserInterface.UIManager;
 import Multiplayer.GameManagerClient;
 import Player.Player;
+import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -137,7 +138,21 @@ public class GameManager implements Observer{
                     units.get(i).move(map);
                     units.get(i).setDeltaMoveTime(0);
                 }
+                if (units.get(i).getInBattleWith() != null && units.get(i).getDeltaBattleTime() > 1) {
+                    OffensiveUnit unit = (OffensiveUnit)units.get(i);
+                    for (int x = 0; x < units.get(i).getHitPerSecond(); x++) {
+                        unit.attack(unit.getInBattleWith());
+                        if (unit.getHealth() <= 0) {
+                            player.removeUnit(units.get(i));
+                        }
+                        if (unit.getInBattleWith().getHealth() <= 0) {
+                            player.removeUnit(units.get(i).getInBattleWith());
+                        }
+                    }
+                    units.get(i).setDeltaBattleTime(0);
+                }
                 units.get(i).setDeltaMoveTime(units.get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
+                units.get(i).setDeltaBattleTime(units.get(i).getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
             }
         }
 

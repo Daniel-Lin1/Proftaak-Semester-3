@@ -42,6 +42,18 @@ public class Player implements Serializable {
 
     public void addUnit(Unit unit) { this.units.add(unit);}
 
+    public void removeUnit(Unit unit) {
+        int count = -1;
+        for(int i = 0 ; i < units.size(); ++i) {
+            if(units.get(i).equals(unit)) {
+                count = i;
+            }
+        }
+        if (count != -1) {
+            units.remove(units.get(count));
+        }
+    }
+
     public ArrayList<Building> getBuildings() {
         return buildings;
     }
