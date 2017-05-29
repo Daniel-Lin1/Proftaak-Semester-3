@@ -2,10 +2,12 @@ package Game;
 
 import Enums.ResourceEnum;
 
+import java.io.Serializable;
+
 /**
  * Created by Daniel on 26-3-2017.
  */
-public class Resource {
+public class Resource implements Serializable{
     private ResourceEnum resourceEnum;
     private int amount;
 

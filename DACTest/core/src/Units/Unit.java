@@ -3,6 +3,7 @@ package Units;
 import Enums.UnitType;
 import Game.Map.Map;
 import Game.Map.PathFinding;
+import Game.Map.Tile;
 import Game.TextureVault;
 import Interfaces.Movement;
 import com.badlogic.gdx.graphics.Texture;
@@ -29,22 +30,18 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     private int hitPerSecond;
     private int hitDamage;
     private int range;
+    private Unit inBattleWith;
     private boolean willReturnFire;
     private boolean selected;
+    private float deltaMoveTime;
+    private float deltaBattleTime;
+    private Tile tile;
 
     public Texture getSprite()
     {
         if (unitType == UnitType.Knight)
         {
-            if (this.getHealth() <= 75 && this.getHealth() > 50) {
-                return TextureVault.knight75;
-            }
-            else if (this.getHealth() <= 50) {
-                return TextureVault.knight50;
-            }
-            else {
-                return TextureVault.knight;
-            }
+            return TextureVault.knight;
         }
         else if (unitType == UnitType.PikeMan)
         {
@@ -52,6 +49,9 @@ public abstract class Unit extends Observable implements Movement, Serializable 
         }
         else if (unitType == UnitType.Archer) {
             return TextureVault.archer;
+        }
+        else if (unitType == UnitType.Builder) {
+            return TextureVault.builder;
         }
         else
         {
@@ -67,34 +67,11 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     public void moveTo(Point destination, Map map) {
         this.setChanged();
         notifyObservers(this);
-//        this.destination = destination;
-//        int[][] grid;
-//        int count = 0;
-//        //grid = new int[][]{};
-//        for (int x=0; x<map.getSizeX(); x++) {
-//            for (int y=0; y<map.getSizeY(); y++) {
-//                if (!map.checkTileIfWalkable(new Point(x, y))){
-//                    count++;
-//                }
-//            }
-//        }
-//        grid = new int[count][2];
-//        count = 0;
-//        for (int x=0; x<map.getSizeX(); x++) {
-//            for (int y=0; y<map.getSizeY(); y++) {
-//                if (!map.checkTileIfWalkable(new Point(x, y))){
-//                    grid[count][0] = x;
-//                    grid[count][1] = y;
-//                    count++;
-//                }
-//            }
-//        }
-
         this.destination = destination;
         ArrayList<int[]> grid = new ArrayList<int[]>();
         for (int x=0; x<map.getSizeX(); x++) {
             for (int y=0; y<map.getSizeY(); y++) {
-                if (!map.checkTileIfWalkable(new Point(x, y))){
+                if (!map.checkTileIfWalkable(new Point(x, y)) && !(x == position.x && y == position.y)){
                     int[] point = new int[2];
                     point[0] = x;
                     point[1] = y;
@@ -103,13 +80,19 @@ public abstract class Unit extends Observable implements Movement, Serializable 
             }
         }
         //grid
-        path = PathFinding.test(map.getSizeX(), map.getSizeY(), destination.x, destination.y, position.x, position.y, grid);
+        path = PathFinding.findPath(map.getSizeX(), map.getSizeY(), destination.x, destination.y, position.x, position.y, grid);
     }
 
-    public void move() {
+    public void move(Map map) {
         if(path.size() > 0){
-            this.position = path.get(0);
-            path.remove(0);
+            Tile tileToMove = map.getTileFromCord(path.get(0));
+            if(tileToMove.isWalkable() && !tileToMove.isOccupied()){
+                map.getTileFromCord(position).setUnit(null);
+                this.position = path.get(0);
+                map.getTileFromCord(position).setUnit(this);
+                this.tile = map.getTileFromCord(position);
+                path.remove(0);
+            }
         }
     }
 
@@ -133,6 +116,14 @@ public abstract class Unit extends Observable implements Movement, Serializable 
 
     public void setPosition(Point position) {
         this.position = position;
+    }
+
+    public Unit getInBattleWith() {
+        return inBattleWith;
+    }
+
+    public void setInBattleWith(Unit unit) {
+        this.inBattleWith = unit;
     }
 
     public UnitType getUnitType() {
@@ -219,6 +210,30 @@ public abstract class Unit extends Observable implements Movement, Serializable 
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public float getDeltaMoveTime() {
+        return deltaMoveTime;
+    }
+
+    public void setDeltaMoveTime(float deltaMoveTime) {
+        this.deltaMoveTime = deltaMoveTime;
+    }
+
+    public float getDeltaBattleTime() {
+        return deltaBattleTime;
+    }
+
+    public void setDeltaBattleTime(float BattleTime) {
+        this.deltaBattleTime = BattleTime;
+    }
+
+    public Tile getTile() {
+        return tile;
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
     }
 
     public String getUIInfo(){

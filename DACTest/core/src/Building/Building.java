@@ -1,7 +1,6 @@
 package Building;
 
 import Enums.BuildingType;
-import Game.Map.Map;
 import Game.Map.Tile;
 import Game.TextureVault;
 import com.badlogic.gdx.graphics.Texture;
@@ -27,13 +26,18 @@ public abstract class Building extends Observable implements Serializable {
 
     public Texture getSprite()
     {
-        if (buildingtype == buildingtype.Towncenter)
-        {
-            return TextureVault.townCenter;
-        }
-        else
-        {
-            return null;
+        switch (buildingtype) {
+            case TownCenter: return TextureVault.townCenter;
+            case Barracks: return null;
+            case Archery: return null;
+            case Farm: return null;
+            case Stable: return null;
+            case Lumberjack:  return null;
+            case MiningCamp:  return null;
+            case Tower:  return null;
+            default:
+                System.out.println("missing texture for building :" + buildingtype.toString());
+                return null;
         }
     }
 

@@ -7,11 +7,12 @@ import Game.TextureVault;
 import Units.Unit;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import java.awt.*;
+import java.io.Serializable;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
-public class Tile {
+public class Tile implements Serializable {
     private int id;
     private boolean isWalkable;
     private boolean isBuildable;

@@ -51,38 +51,32 @@ public class UIManager {
         UIBatch.draw(TextureVault.uiBar,350, 0 ,1570, 200);
         UIBatch.draw(TextureVault.uiBox,0,0,350,250);
         drawResources();
-        for(Unit unit : gameManager.getOwnPlayer().getUnits())
+        for(Unit unit : gameManager.getOwnPlayer().getSelectedUnits())
         {
-            if(unit.getSelected() == true)
-            {
-                UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
-                font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
+            UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
+            font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
 
-                switch(unit.getUnitType())
-                {
-                    case Knight:
-                        renderAttacker();
-                        break;
-                    case Archer:
-                        renderAttacker();
-                        break;
-                    case PikeMan:
-                        renderAttacker();
-                        break;
-                    case Builder:
-                        renderBuilder();
-                        break;
-                }
+            switch(unit.getUnitType())
+            {
+                case Knight:
+                    renderAttacker();
+                    break;
+                case Archer:
+                    renderAttacker();
+                    break;
+                case PikeMan:
+                    renderAttacker();
+                    break;
+                case Builder:
+                    renderBuilder();
+                    break;
             }
         }
-        for(Building building : gameManager.getOwnPlayer().getBuildings())
-        {
-            if(building.getSelected() == true)
-            {
-                font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
-                UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
-                renderTownCenter();
-            }
+        Building building = gameManager.getOwnPlayer().getSelectedBuilding();
+        if(building != null){
+            font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
+            UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
+            renderTownCenter();
         }
         drawAbilitiesKeys();
         UIBatch.end();
@@ -90,10 +84,11 @@ public class UIManager {
 
     private void renderTownCenter()
     {
-        amountOfAbilities = 3;
+        amountOfAbilities = 4;
         UIBatch.draw(TextureVault.knight, 400, 40, 140, 140);
         UIBatch.draw(TextureVault.pikeMan, 600, 40, 140, 140);
         UIBatch.draw(TextureVault.archer, 800, 40, 140, 140);
+        UIBatch.draw(TextureVault.builder, 1000, 40, 140, 140);
     }
 
     private void renderAttacker(){
@@ -102,9 +97,8 @@ public class UIManager {
     }
 
     private void renderBuilder(){
-        amountOfAbilities = 3;
-        UIBatch.draw(TextureVault.townCenter, 400, 40, 140, 140);
-        UIBatch.draw(TextureVault.gatherResource, 600, 40, 140, 140);
+        amountOfAbilities = 1;
+        UIBatch.draw(TextureVault.gatherResource, 400, 40, 140, 140);
     }
 
     private void drawAbilitiesKeys(){

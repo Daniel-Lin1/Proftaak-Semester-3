@@ -1,7 +1,10 @@
 package Player;
 
 import Building.Building;
+import Game.TextureVault;
 import Units.Unit;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,7 +21,8 @@ public class Player implements Serializable {
     private int amountStone;
     private ArrayList<Unit> units;
     private ArrayList<Building>buildings;
-
+    private ArrayList<Unit> selectedUnits;
+    private Building selectedBuilding;
 
     public int getPlayerID() {
         return playerID;
@@ -37,6 +41,18 @@ public class Player implements Serializable {
     }
 
     public void addUnit(Unit unit) { this.units.add(unit);}
+
+    public void removeUnit(Unit unit) {
+        int count = -1;
+        for(int i = 0 ; i < units.size(); ++i) {
+            if(units.get(i).equals(unit)) {
+                count = i;
+            }
+        }
+        if (count != -1) {
+            units.remove(units.get(count));
+        }
+    }
 
     public ArrayList<Building> getBuildings() {
         return buildings;
@@ -78,6 +94,27 @@ public class Player implements Serializable {
         this.amountStone = amountStone;
     }
 
+
+    public ArrayList<Unit> getSelectedUnits() {
+        return selectedUnits;
+    }
+
+    public void setSelectedUnits(ArrayList<Unit> selectedUnits) {
+        this.selectedUnits = selectedUnits;
+    }
+
+    public Building getSelectedBuilding() {
+        return selectedBuilding;
+    }
+
+    public void setSelectedBuilding(Building selectedBuilding) {
+        this.selectedBuilding = selectedBuilding;
+    }
+
+    public void addUnitToSelectedUnits(Unit unit){
+        this.selectedUnits.add(unit);
+    }
+
     public Player(int playerID, String nickName) {
         this.playerID = playerID;
         this.nickName = nickName;
@@ -87,6 +124,7 @@ public class Player implements Serializable {
         this.amountStone = 500;
         this.units =  new ArrayList<Unit>();
         this.buildings = new ArrayList<Building>();
+        this.selectedUnits = new ArrayList<Unit>();
     }
 
     public void command(){
@@ -137,7 +175,7 @@ public class Player implements Serializable {
         boolean canBuy = false;
         switch(building.getBuildingType())
         {
-            case Towncenter:
+            case TownCenter:
                 if(amountGold - 1000 >= 0 && amountFood - 1000 >= 0 && amountStone - 1000 >= 0){
                     canBuy = true;
                     amountGold -= 1000;
@@ -159,5 +197,38 @@ public class Player implements Serializable {
             buildings.add(building);
         }
         return canBuy;
+    }
+
+    public void render(Batch batch){
+        //render units
+        for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
+            batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x *16, units.get(i).getPosition().y*16, 16, 16);
+        }
+        //render selected units
+        for (int i = 0; i < selectedUnits.size(); i++) {
+            batch.draw(selectedUnits.get(i).getSelectedSprite(), selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
+
+            if (selectedUnits.get(i).getHealth() > 75) {
+                batch.draw(TextureVault.Health100, selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
+            }
+            if (selectedUnits.get(i).getHealth() <= 75 && selectedUnits.get(i).getHealth() > 50) {
+                batch.draw(TextureVault.Health75, selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
+            }
+            if (selectedUnits.get(i).getHealth() <= 50 && selectedUnits.get(i).getHealth() > 25) {
+                batch.draw(TextureVault.Health50, selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
+            }
+            if (selectedUnits.get(i).getHealth() <= 25) {
+                batch.draw(TextureVault.Health25, selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
+            }
+        }
+
+        //render buildings
+        for (int i = 0; i < buildings.size() && !buildings.isEmpty(); i++) {
+            batch.draw(buildings.get(i).getSprite(), buildings.get(i).getCoordinate().x*16, buildings.get(i).getCoordinate().y*16, buildings.get(i).getSizeX()*16, buildings.get(i).getSizeY()*16);
+        }
+        //render selected building
+        if(selectedBuilding != null){
+            batch.draw(selectedBuilding.getSelectedSprite(), selectedBuilding.getCoordinate().x*16, selectedBuilding.getCoordinate().y*16, selectedBuilding.getSizeX() *16, selectedBuilding.getSizeY()*16);
+        }
     }
 }

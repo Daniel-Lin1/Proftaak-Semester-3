@@ -8,6 +8,7 @@ import Enums.State;
 import Game.UserInterface.UIManager;
 import Multiplayer.GameManagerClient;
 import Player.Player;
+import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -41,6 +42,7 @@ public class GameManager implements Observer{
     private Stage stage;
     private OrthographicCamera orthographicCamera;
     private GameManagerClient gmc;
+    private float oldTime;
 
     private int OwnPlayerid;
     private int highestUnitID;
@@ -97,12 +99,12 @@ public class GameManager implements Observer{
 
     public GameManagerClient getGmc() {return gmc;}
 
-    public GameManager(State gamestate, int lobbyID, String password, ArrayList<Player> players, int ownPlayerid) {
-        this.gamestate = gamestate;
+    public GameManager(State gameState, int lobbyID, String password, ArrayList<Player> players, int ownPlayerId) {
+        this.gamestate = gameState;
         this.lobbyID = lobbyID;
         this.password = password;
         this.players = players;
-        this.OwnPlayerid = ownPlayerid;
+        this.OwnPlayerid = ownPlayerId;
         this.gmc = new GameManagerClient(this);
     }
 
@@ -127,37 +129,45 @@ public class GameManager implements Observer{
     }
 
     public void render() {
+        for (Player player : players) {
+            //todo zet de move van units ergens anders. dit hoord niet in de render methoden.
+            ArrayList<Unit> units = player.getUnits();
+            for (int i = 0; i < units.size(); i++) {
+                if (player.getUnits().get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
+                {
+                    units.get(i).move(map);
+                    units.get(i).setDeltaMoveTime(0);
+                }
+                if (units.get(i).getInBattleWith() != null && units.get(i).getDeltaBattleTime() > 1) {
+                    OffensiveUnit unit = (OffensiveUnit)units.get(i);
+                    for (int x = 0; x < units.get(i).getHitPerSecond(); x++) {
+                        unit.attack(unit.getInBattleWith());
+                        if (unit.getHealth() <= 0) {
+                            player.removeUnit(units.get(i));
+                        }
+                        if (unit.getInBattleWith().getHealth() <= 0) {
+                            player.removeUnit(units.get(i).getInBattleWith());
+                        }
+                    }
+                    units.get(i).setDeltaBattleTime(0);
+                }
+                units.get(i).setDeltaMoveTime(units.get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
+                units.get(i).setDeltaBattleTime(units.get(i).getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
+            }
+        }
+
+
         renderCameraAndTiledMap();
         batch.begin();
         map.render(batch);
         for (Player player : players) {
-            renderUnits(player);
-            renderBuildings(player);
+            player.render(batch);
         }
         batch.end();
     }
 
     public Player getOwnPlayer() {
         return getPlayers().get(OwnPlayerid);
-    }
-
-    private void renderUnits(Player player) {
-        for (int i = 0; i < player.getUnits().size() && !player.getUnits().isEmpty(); i++) {
-            player.getUnits().get(i).move();
-            batch.draw(player.getUnits().get(i).getSprite(), player.getUnits().get(i).getPosition().x *16, player.getUnits().get(i).getPosition().y*16, 16, 16);
-            if (player.getUnits().get(i).getSelected() == true) {
-                batch.draw(player.getUnits().get(i).getSelectedSprite(), player.getUnits().get(i).getPosition().x*16, player.getUnits().get(i).getPosition().y*16, 16, 16);
-            }
-        }
-    }
-
-    private void renderBuildings(Player player) {
-        for (int i = 0; i < player.getBuildings().size() && !player.getBuildings().isEmpty(); i++) {
-            batch.draw(player.getBuildings().get(i).getSprite(), player.getBuildings().get(i).getCoordinate().x*16, player.getBuildings().get(i).getCoordinate().y*16, player.getBuildings().get(i).getSizeX()*16, player.getBuildings().get(i).getSizeY()*16);
-            if (player.getBuildings().get(i).getSelected()) {
-                batch.draw(player.getBuildings().get(i).getSelectedSprite(), player.getBuildings().get(i).getCoordinate().x*16, player.getBuildings().get(i).getCoordinate().y*16, player.getBuildings().get(i).getSizeX() *16, player.getBuildings().get(i).getSizeY()*16);
-            }
-        }
     }
 
     private void renderCameraAndTiledMap() {
@@ -182,8 +192,8 @@ public class GameManager implements Observer{
     private void createTownCenters(){
         for(int i=0; i<getPlayers().size(); i++){
             Point spawnPoint = map.getSpawnPoints().get(i);
-            Point cord = map.getTileFromCord(spawnPoint.x, spawnPoint.y).getCoordinate();
-            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.Towncenter, 1000);
+            Point cord = map.getTileFromCord(spawnPoint).getCoordinate();
+            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.TownCenter, 1000, map);
 			townCenter.addObserver(this);
             if(map.checkBuildingPossible(townCenter)){
                 map.setBuildingsTiles(townCenter);
@@ -192,7 +202,7 @@ public class GameManager implements Observer{
         }
     }
 
-    public int getHighestUnitID(){
+    public int getHighestUnitId(){
         highestUnitID = 0;
         for(Player player: getPlayers())
         {
@@ -201,7 +211,7 @@ public class GameManager implements Observer{
         return this.highestUnitID;
     }
 
-    public int getHighestBuildingID(){
+    public int getHighestBuildingId(){
         highestBuildingID = 0;
         for(Player player: getPlayers())
         {
