@@ -51,6 +51,7 @@ public class Player implements Serializable {
         }
         if (count != -1) {
             units.remove(units.get(count));
+            unit.getTile().setUnit(null);
         }
     }
 
