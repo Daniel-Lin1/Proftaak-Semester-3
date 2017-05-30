@@ -1,10 +1,9 @@
 package Units;
-import Enums.BuildingType;
 import Building.Building;
+import Enums.BuildingType;
 import Enums.ResourceEnum;
 import Enums.UnitType;
 import Game.Map.Map;
-import Game.Map.PathFinding;
 import Game.Map.Tile;
 import Game.Resource;
 
@@ -91,7 +90,6 @@ public class BuilderUnit extends Unit {
             amountResource = amountResource + mineAmount;
         }else if(resource.getAmount() > 0){
             amountResource = amountResource + resource.getAmount();
-            resource = null;
         }
     }
 

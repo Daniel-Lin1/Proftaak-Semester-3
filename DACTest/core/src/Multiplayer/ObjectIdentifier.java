@@ -1,8 +1,5 @@
 package Multiplayer;
 
-import Player.Player;
-import Units.Unit;
-
 import java.io.Serializable;
 
 /**

@@ -37,7 +37,7 @@ public class GameManagerCommunicator
 
     // Thread pool
     private final int nrThreads = 10;
-    private ExecutorService threadPool = null;
+    private transient ExecutorService threadPool = null;//SQ - Suggested serializable/transient, should work since this doesn't get passed/serialized
 
     public GameManagerCommunicator(GameManagerClient gameManagerClient) throws RemoteException {
         this.gameManagerClient = gameManagerClient;
@@ -118,7 +118,7 @@ public class GameManagerCommunicator
         }
     }
 
-    public void broadcast(final String property, Object oldObject, Object newObject) {
+    public void broadcast(final String property, final Object oldObject, final Object newObject) {
         if (connected) {
             threadPool.execute(new Runnable() {
                 @Override

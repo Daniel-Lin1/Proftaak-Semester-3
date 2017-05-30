@@ -1,15 +1,14 @@
 package Game.UserInterface;
 
 import Building.Building;
-import Units.Unit;
 import Game.GameManager;
 import Game.TextureVault;
+import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.mygdx.game.DistressAndConflict;
 
 import java.awt.*;
 
@@ -79,7 +78,6 @@ public class UIManager {
         }
         Building building = gameManager.getOwnPlayer().getSelectedBuilding();
         if(building != null && UIRendered == false){
-            UIRendered = true;
             font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
             UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
             renderTownCenter();
