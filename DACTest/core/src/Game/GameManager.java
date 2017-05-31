@@ -113,8 +113,7 @@ public class GameManager implements Observer{
         orthographicCamera = new OrthographicCamera();
         orthographicCamera.setToOrtho(false, 1920, 1080);
         orthographicCamera.update();
-        tiledMap = new TmxMapLoader().load("assets/TestMap3.tmx");
-        map = new Map(tiledMap, "tmpNaam");
+
         gamecamera = new OrthographicCameraControlClass(800, tiledMap);
 
         //sets map
