@@ -18,20 +18,9 @@ import java.util.logging.Logger;
 
 public class DistressAndConflict extends ApplicationAdapter {
 	private Account user;
-
-
 	private GameManager gameManager;
 	private UIManager uiManager;
 	private int OldFps = 0;
-
-
-	public UIManager getUiManager() {
-		return uiManager;
-	}
-
-	public GameManager getGameManager() {
-		return gameManager;
-	}
 
 	public DistressAndConflict(Account account)  {
 		this.user = account;

@@ -97,6 +97,18 @@ public abstract class Building extends Observable implements Serializable {
 
     public boolean getSelected() { return selected; }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public BuildingType getBuildingtype() {
+        return buildingtype;
+    }
+
+    public void setBuildingtype(BuildingType buildingtype) {
+        this.buildingtype = buildingtype;
+    }
+
     public ArrayList<ArrayList<Tile>> getTiles() {
         return tiles;
     }

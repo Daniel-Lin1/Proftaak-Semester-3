@@ -63,7 +63,7 @@ public class GameManagerCommunicator
 
     public void connectToPublisher() {
         try {
-            Registry registry = LocateRegistry.getRegistry("192.168.41.1", portNumber);
+            Registry registry = LocateRegistry.getRegistry("localhost", portNumber);
             publisherForDomain = (IRemotePublisherForDomain) registry.lookup(bindingName);
             publisherForListener = (IRemotePublisherForListener) registry.lookup(bindingName);
             connected = true;
