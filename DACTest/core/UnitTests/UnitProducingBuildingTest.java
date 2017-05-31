@@ -20,7 +20,7 @@ class UnitProducingBuildingTest {
     ArrayList<Player> players = new ArrayList<Player>();
     GameManager gm =  new GameManager(State.Started, 1, "", players, 0);
     Point p = new Point(16,16);
-    UnitProducingBuilding upb = new UnitProducingBuilding(p, 16, 16, BuildingType.Archery,500, gm.getMap());
+    //UnitProducingBuilding upb = new UnitProducingBuilding(p, 16, 16, BuildingType.Archery,500, gm.getMap());
 /*
     @Test
     void produceUnit() {
