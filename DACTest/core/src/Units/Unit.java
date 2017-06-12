@@ -18,15 +18,16 @@ import java.util.Observer;
 /**
  * Created by Daniel on 26-3-2017.
  */
-public abstract class Unit extends Observable implements Movement, Serializable {
+public abstract class Unit implements Movement, Serializable {
 
     private Point position;
     private Point destination;
     private ArrayList<Point> path;
     private UnitType unitType;
     private int id;
+    private int maxhealth;
     private int health;
-    private int speed;
+    private double speed;
     private int hitPerSecond;
     private int hitDamage;
     private int range;
@@ -41,16 +42,20 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     {
         if (unitType == UnitType.Knight)
         {
+            maxhealth = 100;
             return TextureVault.knight;
         }
         else if (unitType == UnitType.PikeMan)
         {
+            maxhealth = 80;
             return TextureVault.pikeMan;
         }
         else if (unitType == UnitType.Archer) {
+            maxhealth = 60;
             return TextureVault.archer;
         }
         else if (unitType == UnitType.Builder) {
+            maxhealth = 50;
             return TextureVault.builder;
         }
         else
@@ -65,8 +70,6 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     }
 
     public void moveTo(Point destination, Map map) {
-        this.setChanged();
-        notifyObservers(this);
         this.destination = destination;
 
 
@@ -117,6 +120,10 @@ public abstract class Unit extends Observable implements Movement, Serializable 
         return position;
     }
 
+    public int getMaxhealth() {
+        return maxhealth;
+    }
+
     public void setPosition(Point position) {
         this.position = position;
     }
@@ -145,11 +152,11 @@ public abstract class Unit extends Observable implements Movement, Serializable 
         this.health = health;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 

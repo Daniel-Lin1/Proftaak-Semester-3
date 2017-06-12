@@ -11,7 +11,7 @@ import java.util.ArrayList;
  */
 public class OffensiveUnit extends Unit implements Damage{
 
-    public OffensiveUnit(int unitid, Point position, UnitType unitType, int health, int speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire, Map map) {
+    public OffensiveUnit(int unitid, Point position, UnitType unitType, int health, double speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire, Map map) {
         this.setId(unitid);
         this.setPosition(position);
         this.setTile(map.getTileFromCord(position));

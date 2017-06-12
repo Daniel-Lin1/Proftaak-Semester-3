@@ -7,6 +7,7 @@ import Enums.State;
 
 import Game.UserInterface.UIManager;
 import Multiplayer.GameManagerClient;
+import Multiplayer.ObjectIdentifier;
 import Player.Player;
 import Units.BuilderUnit;
 import Units.OffensiveUnit;
@@ -32,7 +33,7 @@ import java.util.Observer;
  * Created by Daniel on 26-3-2017.
  */
 
-public class GameManager implements Observer{
+public class GameManager {
     private State gamestate;
     private int lobbyID;
     private String password;
@@ -43,7 +44,6 @@ public class GameManager implements Observer{
     private Stage stage;
     private OrthographicCamera orthographicCamera;
     private GameManagerClient gmc;
-    private float oldTime;
 
     private int OwnPlayerid;
     private int highestUnitID;
@@ -131,15 +131,15 @@ public class GameManager implements Observer{
 
     public void render() {
         //todo zet dit ergens anders. hoort op de tickrate te werken.
+        Unit toRemove = null;
         for (Player player : players) {
             ArrayList<Unit> units = player.getUnits();
             for (Unit unit : units) {
-                if (unit.getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
+                if (unit.getDeltaMoveTime() > units.getSpeed())
                 {
                     unit.move(map);
                     unit.setDeltaMoveTime(0);
                 }
-
 
                 if(unit instanceof BuilderUnit){
                     //todo blame marc hiervoor
@@ -151,22 +151,46 @@ public class GameManager implements Observer{
                     }
                 }
 
-                if(unit instanceof OffensiveUnit){
-                    OffensiveUnit offunit = (OffensiveUnit)unit;
+                if(unit instanceof OffensiveUnit) {
+                    Unit toRemoveUnit = null;
+                    OffensiveUnit offunit = (OffensiveUnit) unit;
                     if (offunit.getInBattleWith() != null && offunit.getDeltaBattleTime() > 1) {
+                        offunit.setDeltaBattleTime(0);
                         for (int x = 0; x < offunit.getHitPerSecond(); x++) {
                             offunit.attack(unit.getInBattleWith());
                             if (offunit.getHealth() <= 0) {
-                                player.removeUnit(offunit);
+                                toRemoveUnit = offunit;
+                                //player.removeUnit(offunit);
                             }
                             if (offunit.getInBattleWith().getHealth() <= 0) {
-                                player.removeUnit(offunit.getInBattleWith());
+                                toRemoveUnit = offunit;
+                                //player.removeUnit(offunit.getInBattleWith());
                             }
                         }
-                        offunit.setDeltaBattleTime(0);
                     }
+                    player.removeUnit(offunit);
                 }
 
+
+//                if (units.get(i).getInBattleWith() != null && units.get(i).getDeltaBattleTime() > 1) {
+//                    OffensiveUnit unit = (OffensiveUnit)units.get(i);
+//                    units.get(i).setDeltaBattleTime(0);
+//                    for (int x = 0; x < units.get(i).getHitPerSecond(); x++) {
+//                        unit.attack(unit.getInBattleWith());
+//                        if (unit.getHealth() <= 0) {
+//                            toRemove = units.get(i);
+//                        }
+//                        if (unit.getInBattleWith().getHealth() <= 0) {
+//                            toRemove = units.get(i).getInBattleWith();
+//>>>>>>> origin/master
+//                        }
+//                        offunit.setDeltaBattleTime(0);
+//                    }
+//                }
+                player.removeUnit(toRemove);
+                ArrayList<Unit> selectedUnits = player.getSelectedUnits();
+                selectedUnits.remove(toRemove);
+                player.setSelectedUnits(selectedUnits);
                 unit.setDeltaMoveTime(unit.getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
                 unit.setDeltaBattleTime(unit.getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
                 map.setHostiles(unit);
@@ -238,7 +262,6 @@ public class GameManager implements Observer{
             Point spawnPoint = map.getSpawnPoints().get(i);
             Point cord = map.getTileFromCord(spawnPoint).getCoordinate();
             Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.TownCenter, 1000);
-			townCenter.addObserver(this);
             if(map.checkBuildingPossible(townCenter)){
                 map.setBuildingsTiles(townCenter);
                 getPlayers().get(i).getBuildings().add(townCenter);
@@ -262,10 +285,5 @@ public class GameManager implements Observer{
             highestBuildingID = highestBuildingID + player.getBuildings().size();
         }
         return this.highestBuildingID;
-    }
-
-    @Override
-    public void update(Observable observable, Object o) {
-        //todo hier update code voor multiplayer
     }
 }
