@@ -35,7 +35,6 @@ public abstract class Unit implements Movement, Serializable {
     private boolean willReturnFire;
     private boolean selected;
     private float deltaMoveTime;
-    private float deltaBattleTime;
     private Tile tile;
 
     public Texture getSprite()
@@ -228,14 +227,6 @@ public abstract class Unit implements Movement, Serializable {
 
     public void setDeltaMoveTime(float deltaMoveTime) {
         this.deltaMoveTime = deltaMoveTime;
-    }
-
-    public float getDeltaBattleTime() {
-        return deltaBattleTime;
-    }
-
-    public void setDeltaBattleTime(float BattleTime) {
-        this.deltaBattleTime = BattleTime;
     }
 
     public Tile getTile() {

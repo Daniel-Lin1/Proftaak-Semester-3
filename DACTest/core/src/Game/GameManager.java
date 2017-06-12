@@ -165,9 +165,9 @@ public class GameManager {
                             }
                         }
                     }
+                    offunit.setDeltaBattleTime(offunit.getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
                 }
                 unit.setDeltaMoveTime(unit.getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
-                unit.setDeltaBattleTime(unit.getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
                 map.setHostiles(unit);
             }
             player.removeUnit(toRemoveUnit);

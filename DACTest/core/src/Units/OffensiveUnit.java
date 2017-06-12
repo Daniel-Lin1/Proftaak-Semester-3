@@ -11,6 +11,16 @@ import java.util.ArrayList;
  */
 public class OffensiveUnit extends Unit implements Damage{
 
+    private float deltaBattleTime;
+
+    public float getDeltaBattleTime() {
+        return deltaBattleTime;
+    }
+
+    public void setDeltaBattleTime(float BattleTime) {
+        this.deltaBattleTime = BattleTime;
+    }
+
     public OffensiveUnit(int unitid, Point position, UnitType unitType, int health, double speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire, Map map) {
         this.setId(unitid);
         this.setPosition(position);
