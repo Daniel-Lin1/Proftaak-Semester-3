@@ -8,6 +8,7 @@ import Enums.State;
 import Game.UserInterface.UIManager;
 import Multiplayer.GameManagerClient;
 import Player.Player;
+import Units.BuilderUnit;
 import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
@@ -129,32 +130,74 @@ public class GameManager implements Observer{
     }
 
     public void render() {
+        //todo zet dit ergens anders. hoort op de tickrate te werken.
         for (Player player : players) {
-            //todo zet de move van units ergens anders. dit hoord niet in de render methoden.
             ArrayList<Unit> units = player.getUnits();
-            for (int i = 0; i < units.size(); i++) {
-                if (player.getUnits().get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
+            for (Unit unit : units) {
+                if (unit.getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
                 {
-                    units.get(i).move(map);
-                    units.get(i).setDeltaMoveTime(0);
+                    unit.move(map);
+                    unit.setDeltaMoveTime(0);
                 }
-                if (units.get(i).getInBattleWith() != null && units.get(i).getDeltaBattleTime() > 1) {
-                    OffensiveUnit unit = (OffensiveUnit)units.get(i);
-                    for (int x = 0; x < units.get(i).getHitPerSecond(); x++) {
-                        unit.attack(unit.getInBattleWith());
-                        if (unit.getHealth() <= 0) {
-                            player.removeUnit(units.get(i));
-                        }
-                        if (unit.getInBattleWith().getHealth() <= 0) {
-                            player.removeUnit(units.get(i).getInBattleWith());
-                        }
+
+
+                if(unit instanceof BuilderUnit){
+                    //todo blame marc hiervoor
+                    BuilderUnit bUnit = (BuilderUnit) unit;
+                    if(bUnit.getPath().size() == 0){
+//                        if (bUnit.mineResource(bUnit.getResourceTile().getResource())){
+//
+//                        }
                     }
-                    units.get(i).setDeltaBattleTime(0);
                 }
-                units.get(i).setDeltaMoveTime(units.get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
-                units.get(i).setDeltaBattleTime(units.get(i).getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
-                map.setHostiles(units.get(i));
+
+                if(unit instanceof OffensiveUnit){
+                    OffensiveUnit offunit = (OffensiveUnit)unit;
+                    if (offunit.getInBattleWith() != null && offunit.getDeltaBattleTime() > 1) {
+                        for (int x = 0; x < offunit.getHitPerSecond(); x++) {
+                            offunit.attack(unit.getInBattleWith());
+                            if (offunit.getHealth() <= 0) {
+                                player.removeUnit(offunit);
+                            }
+                            if (offunit.getInBattleWith().getHealth() <= 0) {
+                                player.removeUnit(offunit.getInBattleWith());
+                            }
+                        }
+                        offunit.setDeltaBattleTime(0);
+                    }
+                }
+
+                unit.setDeltaMoveTime(unit.getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
+                unit.setDeltaBattleTime(unit.getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
+                map.setHostiles(unit);
             }
+//            for (int i = 0; i < units.size(); i++) {
+//                if(units.get(i))
+//
+//
+//
+//                if (player.getUnits().get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
+//                {
+//                    units.get(i).move(map);
+//                    units.get(i).setDeltaMoveTime(0);
+//                }
+//                if (units.get(i).getInBattleWith() != null && units.get(i).getDeltaBattleTime() > 1) {
+//                    OffensiveUnit unit = (OffensiveUnit)units.get(i);
+//                    for (int x = 0; x < units.get(i).getHitPerSecond(); x++) {
+//                        unit.attack(unit.getInBattleWith());
+//                        if (unit.getHealth() <= 0) {
+//                            player.removeUnit(units.get(i));
+//                        }
+//                        if (unit.getInBattleWith().getHealth() <= 0) {
+//                            player.removeUnit(units.get(i).getInBattleWith());
+//                        }
+//                    }
+//                    units.get(i).setDeltaBattleTime(0);
+//                }
+//                units.get(i).setDeltaMoveTime(units.get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
+//                units.get(i).setDeltaBattleTime(units.get(i).getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
+//                map.setHostiles(units.get(i));
+//            }
         }
 
 

@@ -135,7 +135,6 @@ public class Map {
         }
     }
 
-    //todo make this accept Point, instead of 2 intergers.
     public Tile getTileFromCord(Point coords){
         if(coords.x == 150){coords.x = 149;} //op een hele cheez manier een glitch van die laatste rij (buiten de map clicken) gefixed. :)
         return tiles.get(coords.x).get((-1* (((coords.y)+1) - tiles.get(0).size())));
@@ -159,6 +158,21 @@ public class Map {
             }
         }
         return true;
+    }
+
+    public ArrayList<int[]> getFlatMapForPathFinding(Point position){
+        ArrayList<int[]> grid = new ArrayList<int[]>();
+        for (int x=0; x<getSizeX(); x++) {
+            for (int y=0; y<getSizeY(); y++) {
+                if (!checkTileIfWalkable(new Point(x, y)) && !(x == position.x && y == position.y)){
+                    int[] point = new int[2];
+                    point[0] = x;
+                    point[1] = y;
+                    grid.add(point);
+                }
+            }
+        }
+        return grid;
     }
 
     public void setBuildingsTiles(Building building){

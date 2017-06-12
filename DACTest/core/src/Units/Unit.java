@@ -68,18 +68,21 @@ public abstract class Unit extends Observable implements Movement, Serializable 
         this.setChanged();
         notifyObservers(this);
         this.destination = destination;
-        ArrayList<int[]> grid = new ArrayList<int[]>();
-        for (int x=0; x<map.getSizeX(); x++) {
-            for (int y=0; y<map.getSizeY(); y++) {
-                if (!map.checkTileIfWalkable(new Point(x, y)) && !(x == position.x && y == position.y)){
-                    int[] point = new int[2];
-                    point[0] = x;
-                    point[1] = y;
-                    grid.add(point);
-                }
-            }
-        }
-        //grid
+
+
+        ArrayList<int[]> grid = map.getFlatMapForPathFinding(position);
+//        ArrayList<int[]> grid = new ArrayList<int[]>();
+//        for (int x=0; x<map.getSizeX(); x++) {
+//            for (int y=0; y<map.getSizeY(); y++) {
+//                if (!map.checkTileIfWalkable(new Point(x, y)) && !(x == position.x && y == position.y)){
+//                    int[] point = new int[2];
+//                    point[0] = x;
+//                    point[1] = y;
+//                    grid.add(point);
+//                }
+//            }
+//        }
+//        //grid
         path = PathFinding.findPath(map.getSizeX(), map.getSizeY(), destination.x, destination.y, position.x, position.y, grid);
     }
 

@@ -48,6 +48,9 @@ public class Player implements Serializable {
             if(units.get(i).equals(unit)) {
                 count = i;
             }
+            if(units.get(i).getInBattleWith().equals(unit)){
+                units.get(i).setInBattleWith(null);
+            }
         }
         if (count != -1) {
             units.remove(units.get(count));
