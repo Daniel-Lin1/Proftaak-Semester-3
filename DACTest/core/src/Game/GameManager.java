@@ -172,7 +172,7 @@ public class GameManager {
         }
         for (Player player : players)
         {
-            ArrayList<Unit> selectedUnits = player.getSelectedUnits();
+            ArrayList<Unit> selectedUnits = (ArrayList<Unit>) player.getSelectedUnits();
             for (Unit unit : toRemoveUnits)
             {
                 player.removeUnit(unit);
