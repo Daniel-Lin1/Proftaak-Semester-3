@@ -18,7 +18,7 @@ import java.util.Observer;
 /**
  * Created by Daniel on 26-3-2017.
  */
-public abstract class Unit extends Observable implements Movement, Serializable {
+public abstract class Unit implements Movement, Serializable {
 
     private Point position;
     private Point destination;
@@ -27,7 +27,7 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     private int id;
     private int maxhealth;
     private int health;
-    private int speed;
+    private double speed;
     private int hitPerSecond;
     private int hitDamage;
     private int range;
@@ -70,8 +70,6 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     }
 
     public void moveTo(Point destination, Map map) {
-        this.setChanged();
-        notifyObservers(this);
         this.destination = destination;
         ArrayList<int[]> grid = new ArrayList<int[]>();
         for (int x=0; x<map.getSizeX(); x++) {
@@ -151,11 +149,11 @@ public abstract class Unit extends Observable implements Movement, Serializable 
         this.health = health;
     }
 
-    public int getSpeed() {
+    public double getSpeed() {
         return speed;
     }
 
-    public void setSpeed(int speed) {
+    public void setSpeed(double speed) {
         this.speed = speed;
     }
 

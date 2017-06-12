@@ -32,7 +32,7 @@ import java.util.Observer;
  * Created by Daniel on 26-3-2017.
  */
 
-public class GameManager implements Observer{
+public class GameManager {
     private State gamestate;
     private int lobbyID;
     private String password;
@@ -134,7 +134,7 @@ public class GameManager implements Observer{
             //todo zet de move van units ergens anders. dit hoord niet in de render methoden.
             ArrayList<Unit> units = player.getUnits();
             for (int i = 0; i < units.size(); i++) {
-                if (player.getUnits().get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
+                if (player.getUnits().get(i).getDeltaMoveTime() > player.getUnits().get(i).getSpeed())
                 {
                     units.get(i).move(map);
                     units.get(i).setDeltaMoveTime(0);
@@ -206,7 +206,6 @@ public class GameManager implements Observer{
             Point spawnPoint = map.getSpawnPoints().get(i);
             Point cord = map.getTileFromCord(spawnPoint).getCoordinate();
             Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.TownCenter, 1000);
-			townCenter.addObserver(this);
             if(map.checkBuildingPossible(townCenter)){
                 map.setBuildingsTiles(townCenter);
                 getPlayers().get(i).getBuildings().add(townCenter);
@@ -230,10 +229,5 @@ public class GameManager implements Observer{
             highestBuildingID = highestBuildingID + player.getBuildings().size();
         }
         return this.highestBuildingID;
-    }
-
-    @Override
-    public void update(Observable observable, Object o) {
-        //todo hier update code voor multiplayer
     }
 }
