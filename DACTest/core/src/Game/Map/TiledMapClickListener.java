@@ -1,8 +1,8 @@
 package Game.Map;
 
-import Building.UnitProducingBuilding;
+import building.UnitProducingBuilding;
 import Enums.UnitType;
-import Multiplayer.ObjectIdentifier;
+import multiplayer.ObjectIdentifier;
 import Units.OffensiveUnit;
 import Units.Unit;
 import com.badlogic.gdx.Application;

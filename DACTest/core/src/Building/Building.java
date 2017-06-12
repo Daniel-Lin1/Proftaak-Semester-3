@@ -1,4 +1,4 @@
-package Building;
+package building;
 
 import Enums.BuildingType;
 import Game.Map.Tile;
@@ -39,7 +39,7 @@ public abstract class Building extends Observable implements Serializable {
             case MiningCamp:  return null;
             case Tower:  return null;
             default:
-                LOGGER.fine("Missing texture for building: " + buildingtype.toString());
+                LOGGER.fine("Missing texture for building");
                 return null;
         }
     }
@@ -104,14 +104,6 @@ public abstract class Building extends Observable implements Serializable {
         return selected;
     }
 
-    public BuildingType getBuildingtype() {
-        return buildingtype;
-    }
-
-    public void setBuildingtype(BuildingType buildingtype) {
-        this.buildingtype = buildingtype;
-    }
-
     public ArrayList<ArrayList<Tile>> getTiles() {
         return tiles;
     }
@@ -121,7 +113,7 @@ public abstract class Building extends Observable implements Serializable {
     }
 
     public String getUIInfo(){
-        return "Building Type : " + buildingtype + "\n" +
+        return "building Type : " + buildingtype + "\n" +
                 "Health : " + health;
     }
 }

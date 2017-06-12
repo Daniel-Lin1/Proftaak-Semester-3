@@ -1,6 +1,6 @@
 package Game.UserInterface;
 
-import Building.Building;
+import building.Building;
 import Game.GameManager;
 import Game.TextureVault;
 import Units.Unit;
@@ -17,8 +17,6 @@ import java.awt.*;
  */
 public class UIManager {
 
-    //Skin en spritebatch voor UI inladen
-    private Skin UISkin;
     private SpriteBatch UIBatch;
     private GameManager gameManager;
     private BitmapFont font;
@@ -35,7 +33,7 @@ public class UIManager {
 
     public void create(){
         //UI inladen van bestanden
-        UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
+        Skin UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
         UISkin.addRegions(new TextureAtlas(Gdx.files.internal("assets/UI/medieval.atlas")));
         UIBatch = new SpriteBatch();
         font = new BitmapFont();
@@ -45,7 +43,7 @@ public class UIManager {
 
     public void render()
     {
-        Boolean UIRendered = false;
+        Boolean uiRendered = false;
         amountOfAbilities = 0;
         UIBatch.begin();
         UIBatch.draw(TextureVault.uiBar,350, 0 ,1570, 200);
@@ -53,9 +51,9 @@ public class UIManager {
         drawResources();
         for(Unit unit : gameManager.getOwnPlayer().getSelectedUnits())
         {
-            if (UIRendered == false)
+            if (uiRendered == false)
             {
-                UIRendered = true;
+                uiRendered = true;
                 UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
                 font.draw(UIBatch, unit.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
 
@@ -77,7 +75,7 @@ public class UIManager {
             }
         }
         Building building = gameManager.getOwnPlayer().getSelectedBuilding();
-        if(building != null && UIRendered == false){
+        if(building != null && uiRendered == false){
             font.draw(UIBatch, building.getUIInfo(), SelectedObjectInfoLocation.x, SelectedObjectInfoLocation.y);
             UIBatch.draw(building.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 100, 100);
             renderTownCenter();

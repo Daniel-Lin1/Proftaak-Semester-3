@@ -74,11 +74,11 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package Game.Map;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import Building.Building;
-<i>4</i>&nbsp;import Building.UnitProducingBuilding;
+<i>3</i>&nbsp;import building.building;
+<i>4</i>&nbsp;import building.UnitProducingBuilding;
 <i>5</i>&nbsp;import Enums.UnitType;
 <i>6</i>&nbsp;import Game.GameManager;
-<i>7</i>&nbsp;import Units.Unit;
+<i>7</i>&nbsp;import Units.unit;
 <i>8</i>&nbsp;import com.badlogic.gdx.scenes.scene2d.Actor;
 <i>9</i>&nbsp;import com.badlogic.gdx.scenes.scene2d.InputEvent;
 <i>10</i>&nbsp;import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
@@ -94,8 +94,8 @@
 <i>20</i>&nbsp;    private TiledMapStage stage;
 <i>21</i>&nbsp;
 <i>22</i>&nbsp;    //toDo alle data uit gamemanager halen en in deze lists zetten
-<b class="nc"><i>23</i>&nbsp;    private ArrayList&lt;Unit&gt; units = new ArrayList&lt;Unit&gt;();</b>
-<b class="nc"><i>24</i>&nbsp;    private ArrayList&lt;Building&gt; buildings = new ArrayList&lt;Building&gt;();</b>
+<b class="nc"><i>23</i>&nbsp;    private ArrayList&lt;unit&gt; units = new ArrayList&lt;unit&gt;();</b>
+<b class="nc"><i>24</i>&nbsp;    private ArrayList&lt;building&gt; buildings = new ArrayList&lt;building&gt;();</b>
 <i>25</i>&nbsp;
 <b class="nc"><i>26</i>&nbsp;    public TiledMapClickListener(TiledMapActor actor, TiledMapStage stage) {</b>
 <b class="nc"><i>27</i>&nbsp;        this.actor = actor;</b>
@@ -108,8 +108,8 @@
 <i>34</i>&nbsp;    public void clicked(InputEvent event, float x, float y) {
 <i>35</i>&nbsp;        //stage.createUnit(actor); //om units te spawnen om te testen pas dit aan
 <i>36</i>&nbsp;
-<b class="nc"><i>37</i>&nbsp;        ArrayList&lt;Unit&gt; units = GameManager.units;</b>
-<b class="nc"><i>38</i>&nbsp;        ArrayList&lt;Building&gt; buildings = GameManager.buildings;</b>
+<b class="nc"><i>37</i>&nbsp;        ArrayList&lt;unit&gt; units = GameManager.units;</b>
+<b class="nc"><i>38</i>&nbsp;        ArrayList&lt;building&gt; buildings = GameManager.buildings;</b>
 <b class="nc"><i>39</i>&nbsp;        for (int i = 0; i &lt; units.size() &amp;&amp; units.size() != 0; i++) {</b>
 <b class="nc"><i>40</i>&nbsp;            if (units.get(i).getSelected() == true)</b>
 <i>41</i>&nbsp;            {

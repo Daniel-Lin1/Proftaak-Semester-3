@@ -1,6 +1,6 @@
 package Game.Map;
 
-        import Building.Building;
+        import building.Building;
         import Enums.GroundType;
         import Enums.ResourceEnum;
         import Game.Resource;
@@ -13,7 +13,7 @@ package Game.Map;
         import com.badlogic.gdx.graphics.Color;
 
         import java.awt.*;
-        import java.util.ArrayList;
+        import java.util.*;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -160,8 +160,8 @@ public class Map {
         return true;
     }
 
-    public ArrayList<int[]> getFlatMapForPathFinding(Point position){
-        ArrayList<int[]> grid = new ArrayList<int[]>();
+    public java.util.List<int[]> getFlatMapForPathFinding(Point position){
+        ArrayList<int[]> grid = new ArrayList<>();
         for (int x=0; x<getSizeX(); x++) {
             for (int y=0; y<getSizeY(); y++) {
                 if (!checkTileIfWalkable(new Point(x, y)) && !(x == position.x && y == position.y)){
@@ -176,15 +176,15 @@ public class Map {
     }
 
     public void setBuildingsTiles(Building building){
-        ArrayList<ArrayList<Tile>> tiles = new ArrayList<ArrayList<Tile>>();
+        ArrayList<ArrayList<Tile>> tilesList = new ArrayList<>();
         for(int i=0; i<building.getSizeX(); i++){
-            tiles.add(i, new ArrayList<Tile>());
+            tilesList.add(i, new ArrayList<Tile>());
             for(int j=0; j<building.getSizeY(); j++){
                 Point point = new Point(building.getCoordinate().x, building.getCoordinate().y);
                 getTileFromCord(new Point(point.x + i, point.y + j)).setBuilding(building);
-                tiles.get(i).add(getTileFromCord(point));
+                tilesList.get(i).add(getTileFromCord(point));
             }
         }
-        building.setTiles(tiles);
+        building.setTiles(tilesList);
     }
 }

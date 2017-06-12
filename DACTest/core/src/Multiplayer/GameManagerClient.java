@@ -1,6 +1,6 @@
-package Multiplayer;
+package multiplayer;
 
-import Building.Building;
+import building.Building;
 import Game.GameManager;
 import Player.Player;
 import Units.Unit;
@@ -61,24 +61,21 @@ public class GameManagerClient {
     public void requestBuildingAction(Building newBuilding, Building oldBuilding){
         new Thread(() -> {
             newBuilding.setSelected(false);
-            Gdx.app.postRunnable(new Runnable() {
-                @Override
-                public void run() {
-                  boolean found = false;
+            Gdx.app.postRunnable(() -> {
+              boolean found = false;
 
-                  for(Player player : gameManager.getPlayers()){
-                      for(Building building : player.getBuildings()){
-                          if(building.getID() == oldBuilding.getID()){
-                              player.getBuildings().set(player.getBuildings().indexOf(building), newBuilding);
-                              found = true;
-                          }
+              for(Player player : gameManager.getPlayers()){
+                  for(Building building : player.getBuildings()){
+                      if(building.getID() == oldBuilding.getID()){
+                          player.getBuildings().set(player.getBuildings().indexOf(building), newBuilding);
+                          found = true;
                       }
                   }
-                  if (found == false)
-                  {
-                      gameManager.getOwnPlayer().getBuildings().add(newBuilding);
-                  }
-                }
+              }
+              if (!found)
+              {
+                  gameManager.getOwnPlayer().getBuildings().add(newBuilding);
+              }
             });
         }).start();
     }
@@ -88,25 +85,21 @@ public class GameManagerClient {
             Unit newUnit = (Unit) objectIdentifier.getObject();
             newUnit.setSelected(false);
 
-            Gdx.app.postRunnable(new Runnable() {
-                @Override
-                public void run() {
-                    boolean found = false;
+            Gdx.app.postRunnable(() -> {
+                boolean found = false;
 
+                for(Player player : gameManager.getPlayers()){
 
-                    for(Player player : gameManager.getPlayers()){
-
-                            for(Unit unit : player.getUnits()){
-                                if(unit.getId() == oldUnit.getId()){
-                                    player.getUnits().set(player.getUnits().indexOf(unit),newUnit);
-                                    found = true;
-                                }
+                        for(Unit unit : player.getUnits()){
+                            if(unit.getId() == oldUnit.getId()){
+                                player.getUnits().set(player.getUnits().indexOf(unit),newUnit);
+                                found = true;
                             }
+                        }
 
-                    }
-                    if(found == false){
-                        gameManager.getPlayers().get(objectIdentifier.getPlayerId()).getUnits().add(newUnit);
-                    }
+                }
+                if(!found){
+                    gameManager.getPlayers().get(objectIdentifier.getPlayerId()).getUnits().add(newUnit);
                 }
             });
         }).start();

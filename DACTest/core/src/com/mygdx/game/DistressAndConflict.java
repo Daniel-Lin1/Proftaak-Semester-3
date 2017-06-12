@@ -3,18 +3,13 @@ package com.mygdx.game;
 import Enums.State;
 import Game.GameManager;
 import Game.UserInterface.UIManager;
-import Multiplayer.GameManagerClient;
 import Player.Account;
 import Player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
-import sun.rmi.runtime.Log;
 
-import java.rmi.RemoteException;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class DistressAndConflict extends ApplicationAdapter {
 	private Account user;
