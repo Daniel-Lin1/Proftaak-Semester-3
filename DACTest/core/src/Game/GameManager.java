@@ -143,9 +143,12 @@ public class GameManager {
                     //todo blame marc hiervoor
                     BuilderUnit bUnit = (BuilderUnit) unit;
                     if(bUnit.getPath().size() == 0){
-//                        if (bUnit.mineResource(bUnit.getResourceTile().getResource())){
-//
-//                        }
+                        if (bUnit.mineResource(bUnit.getResourceTile().getResource())){
+                            //er word gemined
+                        }else{
+                            //er word niet gemined
+
+                        }
                     }
                 }
                 if(unit instanceof OffensiveUnit) {
