@@ -4,10 +4,10 @@ import Building.Building;
 import Building.UnitProducingBuilding;
 import Enums.BuildingType;
 import Enums.State;
-
+import Game.Map.Map;
+import Game.Map.TiledMapStage;
 import Game.UserInterface.UIManager;
 import Multiplayer.GameManagerClient;
-import Multiplayer.ObjectIdentifier;
 import Player.Player;
 import Units.BuilderUnit;
 import Units.OffensiveUnit;
@@ -21,11 +21,9 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.OrthographicCameraControlClass;
-import Game.Map.Map;
-import Game.Map.TiledMapStage;
 
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.*;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -44,8 +42,6 @@ public class GameManager {
     private GameManagerClient gmc;
 
     private int OwnPlayerid;
-    private int highestUnitID;
-    private int highestBuildingID;
     private UIManager uiManager;
 
     private OrthographicCameraControlClass gamecamera;
@@ -98,11 +94,11 @@ public class GameManager {
 
     public GameManagerClient getGmc() {return gmc;}
 
-    public GameManager(State gameState, int lobbyID, String password, ArrayList<Player> players, int ownPlayerId) {
+    public GameManager(State gameState, int lobbyID, String password, java.util.List<Player> players, int ownPlayerId) {
         this.gamestate = gameState;
         this.lobbyID = lobbyID;
         this.password = password;
-        this.players = players;
+        this.players = (ArrayList<Player>) players;
         this.OwnPlayerid = ownPlayerId;
         this.gmc = new GameManagerClient(this);
     }
@@ -129,6 +125,7 @@ public class GameManager {
 
     public void render() {
         //todo zet dit ergens anders. hoort op de tickrate te werken.
+        //Yeah this shit needs fixing
 
         for (Player player : players) {
             ArrayList<Unit> units = player.getUnits();
@@ -144,11 +141,10 @@ public class GameManager {
                     //todo blame marc hiervoor
                     BuilderUnit bUnit = (BuilderUnit) unit;
                     if(bUnit.getPath().size() == 0){
-//                        if (bUnit.mineResource(bUnit.getResourceTile().getResource())){
-//
-//                        }
+
                     }
                 }
+                //TODO Fix this mess
                 if(unit instanceof OffensiveUnit) {
                     OffensiveUnit offunit = (OffensiveUnit) unit;
                     if (offunit.getInBattleWith() != null && offunit.getDeltaBattleTime() > 1) {
@@ -220,20 +216,20 @@ public class GameManager {
     }
 
     public int getHighestUnitId(){
-        highestUnitID = 0;
+        int highestUnitID = 0;
         for(Player player: getPlayers())
         {
             highestUnitID = highestUnitID + player.getUnits().size();
         }
-        return this.highestUnitID;
+        return highestUnitID;
     }
 
     public int getHighestBuildingId(){
-        highestBuildingID = 0;
+        int highestBuildingID = 0;
         for(Player player: getPlayers())
         {
             highestBuildingID = highestBuildingID + player.getBuildings().size();
         }
-        return this.highestBuildingID;
+        return highestBuildingID;
     }
 }

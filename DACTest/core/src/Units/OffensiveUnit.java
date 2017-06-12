@@ -3,8 +3,8 @@ package Units;
 import Enums.UnitType;
 import Game.Map.Map;
 import Interfaces.Damage;
+
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -12,15 +12,7 @@ import java.util.ArrayList;
 public class OffensiveUnit extends Unit implements Damage{
 
     private float deltaBattleTime;
-
-    public float getDeltaBattleTime() {
-        return deltaBattleTime;
-    }
-
-    public void setDeltaBattleTime(float BattleTime) {
-        this.deltaBattleTime = BattleTime;
-    }
-
+    //TODO Fix it so that this constructor doesn't have so much parameters
     public OffensiveUnit(int unitid, Point position, UnitType unitType, int health, double speed, int hitPerSecond, int hitDamage, int range, boolean willReturnFire, Map map) {
         this.setId(unitid);
         this.setPosition(position);
@@ -32,7 +24,15 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setHitDamage(hitDamage);
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
-        this.setPath(new ArrayList<Point>());
+        //this.setPath(new ArrayList<Point>());
+    }
+
+    public float getDeltaBattleTime() {
+        return deltaBattleTime;
+    }
+
+    public void setDeltaBattleTime(float battleTime) {
+        this.deltaBattleTime = battleTime;
     }
 
     @Override

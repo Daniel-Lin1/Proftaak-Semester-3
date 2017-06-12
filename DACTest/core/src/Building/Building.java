@@ -39,7 +39,7 @@ public abstract class Building extends Observable implements Serializable {
             case MiningCamp:  return null;
             case Tower:  return null;
             default:
-                LOGGER.fine("Missing texture for building: " + buildingtype.toString());
+                LOGGER.fine("Missing texture for building");
                 return null;
         }
     }
@@ -102,14 +102,6 @@ public abstract class Building extends Observable implements Serializable {
 
     public boolean isSelected() {
         return selected;
-    }
-
-    public BuildingType getBuildingtype() {
-        return buildingtype;
-    }
-
-    public void setBuildingtype(BuildingType buildingtype) {
-        this.buildingtype = buildingtype;
     }
 
     public ArrayList<ArrayList<Tile>> getTiles() {

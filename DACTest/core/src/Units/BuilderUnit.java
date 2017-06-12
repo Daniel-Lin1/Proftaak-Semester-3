@@ -20,6 +20,16 @@ public class BuilderUnit extends Unit {
     private int mineAmount = 10;
     private float deltaMineTime;
 
+    public BuilderUnit(int unitid, Point position, UnitType unitType, int health, int speed, Map map)
+    {
+        this.setId(unitid);
+        this.setPosition(position);
+        this.setUnitType(unitType);
+        this.setHealth(health);
+        this.setSpeed(speed);
+        this.setPath(new ArrayList<Point>());
+    }
+
     public int getAmountResource() {
         return amountResource;
     }
@@ -52,47 +62,14 @@ public class BuilderUnit extends Unit {
         this.mineAmount = mineAmount;
     }
 
-    public BuilderUnit(int unitid, Point position, UnitType unitType, int health, int speed, Map map)
-    {
-        this.setId(unitid);
-        this.setPosition(position);
-        this.setUnitType(unitType);
-        this.setHealth(health);
-        this.setSpeed(speed);
-        this.setPath(new ArrayList<Point>());
-    }
-
     public void setCollectResourceTile(Tile tile, Map map){
         resourceTile = tile;
-        ArrayList<Point> path = PathFinding.findPath(map.getSizeX(), map.getSizeY(), this.getTile().getCoordinate().x, this.getTile().getCoordinate().y, tile.getCoordinate().x, tile.getCoordinate().y, map.getFlatMapForPathFinding(this.getPosition()));
+        ArrayList<Point> path = PathFinding.findPath(map.getSizeX(), map.getSizeY(), this.getTile().getCoordinate().x, this.getTile().getCoordinate().y, tile.getCoordinate().x, tile.getCoordinate().y, (ArrayList<int[]>) map.getFlatMapForPathFinding(this.getPosition()));
         if(path.size() > 0){
             path.remove(path.size()-1);
             setPath(path);
         }
     }
-
-
-//    public void doshit(){
-//        Point pos = getTile().getCoordinate();
-//        if(pos == tileLeft || pos == tileRight || pos == tileAbove || pos == tileUnder){
-//            if(tile.getResource() != null && !(amountResource > maxAmountResource)){
-//                mineResource(tile.getResource());
-//            }
-//
-//            //keep mining till full or resource empty
-//            //if full go back resource diliver point,
-//            //if resource empty, collectResource(closest tile from here with same resource)
-//        }
-//
-//        //get amount from resource to inventory of builder
-//
-//        //move to closest resource deliver point
-//
-//        //move to resource
-//              //if resource is null, find closest same resource.
-//
-//        //repeat
-//    }
 
     public boolean mineResource(Resource resource){
         if(resource.getAmount() - mineAmount > 0){
