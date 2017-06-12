@@ -19,7 +19,7 @@ public class Tile implements Serializable {
     private GroundType groundType;
     private Resource resource;
     private Point coordinate;
-    private Unit unit;
+    private Unit unit = null;
     private Building building;
 
     public int getId() {
