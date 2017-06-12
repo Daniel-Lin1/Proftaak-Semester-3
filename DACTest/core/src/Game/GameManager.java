@@ -131,11 +131,12 @@ public class GameManager {
 
     public void render() {
         //todo zet dit ergens anders. hoort op de tickrate te werken.
-        Unit toRemove = null;
+
         for (Player player : players) {
             ArrayList<Unit> units = player.getUnits();
+            Unit toRemoveUnit = null;
             for (Unit unit : units) {
-                if (unit.getDeltaMoveTime() > units.getSpeed())
+                if (unit.getDeltaMoveTime() > unit.getSpeed())
                 {
                     unit.move(map);
                     unit.setDeltaMoveTime(0);
@@ -150,9 +151,7 @@ public class GameManager {
 //                        }
                     }
                 }
-
                 if(unit instanceof OffensiveUnit) {
-                    Unit toRemoveUnit = null;
                     OffensiveUnit offunit = (OffensiveUnit) unit;
                     if (offunit.getInBattleWith() != null && offunit.getDeltaBattleTime() > 1) {
                         offunit.setDeltaBattleTime(0);
@@ -160,68 +159,21 @@ public class GameManager {
                             offunit.attack(unit.getInBattleWith());
                             if (offunit.getHealth() <= 0) {
                                 toRemoveUnit = offunit;
-                                //player.removeUnit(offunit);
                             }
                             if (offunit.getInBattleWith().getHealth() <= 0) {
-                                toRemoveUnit = offunit;
-                                //player.removeUnit(offunit.getInBattleWith());
+                                toRemoveUnit = offunit.getInBattleWith();
                             }
                         }
                     }
-                    player.removeUnit(offunit);
                 }
-
-
-//                if (units.get(i).getInBattleWith() != null && units.get(i).getDeltaBattleTime() > 1) {
-//                    OffensiveUnit unit = (OffensiveUnit)units.get(i);
-//                    units.get(i).setDeltaBattleTime(0);
-//                    for (int x = 0; x < units.get(i).getHitPerSecond(); x++) {
-//                        unit.attack(unit.getInBattleWith());
-//                        if (unit.getHealth() <= 0) {
-//                            toRemove = units.get(i);
-//                        }
-//                        if (unit.getInBattleWith().getHealth() <= 0) {
-//                            toRemove = units.get(i).getInBattleWith();
-//>>>>>>> origin/master
-//                        }
-//                        offunit.setDeltaBattleTime(0);
-//                    }
-//                }
-                player.removeUnit(toRemove);
-                ArrayList<Unit> selectedUnits = player.getSelectedUnits();
-                selectedUnits.remove(toRemove);
-                player.setSelectedUnits(selectedUnits);
                 unit.setDeltaMoveTime(unit.getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
                 unit.setDeltaBattleTime(unit.getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
                 map.setHostiles(unit);
             }
-//            for (int i = 0; i < units.size(); i++) {
-//                if(units.get(i))
-//
-//
-//
-//                if (player.getUnits().get(i).getDeltaMoveTime() > 0.5) //0.5 is movementspeed voor alle units
-//                {
-//                    units.get(i).move(map);
-//                    units.get(i).setDeltaMoveTime(0);
-//                }
-//                if (units.get(i).getInBattleWith() != null && units.get(i).getDeltaBattleTime() > 1) {
-//                    OffensiveUnit unit = (OffensiveUnit)units.get(i);
-//                    for (int x = 0; x < units.get(i).getHitPerSecond(); x++) {
-//                        unit.attack(unit.getInBattleWith());
-//                        if (unit.getHealth() <= 0) {
-//                            player.removeUnit(units.get(i));
-//                        }
-//                        if (unit.getInBattleWith().getHealth() <= 0) {
-//                            player.removeUnit(units.get(i).getInBattleWith());
-//                        }
-//                    }
-//                    units.get(i).setDeltaBattleTime(0);
-//                }
-//                units.get(i).setDeltaMoveTime(units.get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
-//                units.get(i).setDeltaBattleTime(units.get(i).getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
-//                map.setHostiles(units.get(i));
-//            }
+            player.removeUnit(toRemoveUnit);
+            ArrayList<Unit> selectedUnits = player.getSelectedUnits();
+            selectedUnits.remove(toRemoveUnit);
+            player.setSelectedUnits(selectedUnits);
         }
 
 

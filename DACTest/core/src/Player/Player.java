@@ -43,18 +43,21 @@ public class Player implements Serializable {
     public void addUnit(Unit unit) { this.units.add(unit);}
 
     public void removeUnit(Unit unit) {
-        int count = -1;
-        for(int i = 0 ; i < units.size(); ++i) {
-            if(units.get(i).equals(unit)) {
-                count = i;
+        if (unit != null)
+        {
+            int count = -1;
+            for(int i = 0 ; i < units.size(); ++i) {
+                if(units.get(i).equals(unit)) {
+                    count = i;
+                }
+                if(units.get(i) != null && units.get(i).getInBattleWith().equals(unit)){
+                    units.get(i).setInBattleWith(null);
+                }
             }
-            if(units.get(i).getInBattleWith().equals(unit)){
-                units.get(i).setInBattleWith(null);
+            if (count != -1) {
+                units.remove(units.get(count));
+                unit.getTile().setUnit(null);
             }
-        }
-        if (count != -1) {
-            units.remove(units.get(count));
-            unit.getTile().setUnit(null);
         }
     }
 
