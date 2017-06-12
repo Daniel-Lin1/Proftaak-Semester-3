@@ -129,10 +129,9 @@ public class GameManager {
 
     public void render() {
         //todo zet dit ergens anders. hoort op de tickrate te werken.
-
+        ArrayList<Unit> toRemoveUnits = new ArrayList<Unit>();
         for (Player player : players) {
             ArrayList<Unit> units = player.getUnits();
-            Unit toRemoveUnit = null;
             for (Unit unit : units) {
                 if (unit.getDeltaMoveTime() > unit.getSpeed())
                 {
@@ -156,10 +155,10 @@ public class GameManager {
                         for (int x = 0; x < offunit.getHitPerSecond(); x++) {
                             offunit.attack(unit.getInBattleWith());
                             if (offunit.getHealth() <= 0) {
-                                toRemoveUnit = offunit;
+                                toRemoveUnits.add(offunit);
                             }
                             if (offunit.getInBattleWith().getHealth() <= 0) {
-                                toRemoveUnit = offunit.getInBattleWith();
+                                toRemoveUnits.add(offunit.getInBattleWith());
                             }
                         }
                     }
@@ -168,12 +167,17 @@ public class GameManager {
                 unit.setDeltaMoveTime(unit.getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
                 map.setHostiles(unit);
             }
-            player.removeUnit(toRemoveUnit);
+        }
+        for (Player player : players)
+        {
             ArrayList<Unit> selectedUnits = player.getSelectedUnits();
-            selectedUnits.remove(toRemoveUnit);
+            for (Unit unit : toRemoveUnits)
+            {
+                player.removeUnit(unit);
+                selectedUnits.remove(unit);
+            }
             player.setSelectedUnits(selectedUnits);
         }
-
 
         renderCameraAndTiledMap();
         batch.begin();
