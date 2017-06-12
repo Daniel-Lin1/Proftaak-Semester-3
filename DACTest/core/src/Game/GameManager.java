@@ -26,8 +26,6 @@ import Game.Map.TiledMapStage;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by Daniel on 26-3-2017.
