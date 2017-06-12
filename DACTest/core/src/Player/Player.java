@@ -204,23 +204,22 @@ public class Player implements Serializable {
         //render units
         for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
             batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x *16, units.get(i).getPosition().y*16, 16, 16);
+            if (units.get(i).getHealth() > (int)(units.get(i).getMaxhealth()*(75.0f/100.0f))) {
+                batch.draw(TextureVault.Health100, units.get(i).getPosition().x*16, units.get(i).getPosition().y*16, 16, 16);
+            }
+            if (units.get(i).getHealth() <= (int)(units.get(i).getMaxhealth()*(75.0f/100.0f)) && units.get(i).getHealth() > (int)(units.get(i).getMaxhealth()*(50.0f/100.0f))) {
+                batch.draw(TextureVault.Health75, units.get(i).getPosition().x*16, units.get(i).getPosition().y*16, 16, 16);
+            }
+            if (units.get(i).getHealth() <= (int)(units.get(i).getMaxhealth()*(50.0f/100.0f)) && units.get(i).getHealth() > (int)(units.get(i).getMaxhealth()*(25.0f/100.0f))) {
+                batch.draw(TextureVault.Health50, units.get(i).getPosition().x*16, units.get(i).getPosition().y*16, 16, 16);
+            }
+            if (units.get(i).getHealth() <= (int)(units.get(i).getMaxhealth()*(25.0f/100.0f))) {
+                batch.draw(TextureVault.Health25, units.get(i).getPosition().x*16, units.get(i).getPosition().y*16, 16, 16);
+            }
         }
         //render selected units
         for (int i = 0; i < selectedUnits.size(); i++) {
             batch.draw(selectedUnits.get(i).getSelectedSprite(), selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
-
-            if (selectedUnits.get(i).getHealth() > 75) {
-                batch.draw(TextureVault.Health100, selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
-            }
-            if (selectedUnits.get(i).getHealth() <= 75 && selectedUnits.get(i).getHealth() > 50) {
-                batch.draw(TextureVault.Health75, selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
-            }
-            if (selectedUnits.get(i).getHealth() <= 50 && selectedUnits.get(i).getHealth() > 25) {
-                batch.draw(TextureVault.Health50, selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
-            }
-            if (selectedUnits.get(i).getHealth() <= 25) {
-                batch.draw(TextureVault.Health25, selectedUnits.get(i).getPosition().x*16, selectedUnits.get(i).getPosition().y*16, 16, 16);
-            }
         }
 
         //render buildings
