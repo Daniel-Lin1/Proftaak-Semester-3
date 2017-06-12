@@ -6,6 +6,7 @@ import Game.Map.Map;
 import Game.Map.PathFinding;
 import Game.Map.Tile;
 import Game.Resource;
+import com.badlogic.gdx.Gdx;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -72,13 +73,21 @@ public class BuilderUnit extends Unit {
     }
 
     public boolean mineResource(Resource resource){
-        if(resource.getAmount() - mineAmount > 0){
-            resource.setAmount(resource.getAmount() - mineAmount);
-            amountResource = amountResource + mineAmount;
-        }else if(resource.getAmount() > 0){
-            amountResource = amountResource + resource.getAmount();
+        if(deltaMineTime > 1){
+            if(resource.getAmount() - mineAmount > 0){
+                resource.setAmount(resource.getAmount() - mineAmount);
+                amountResource = amountResource + mineAmount;
+            }else if(resource.getAmount() > 0){
+                amountResource = amountResource + resource.getAmount();
+            }
+            deltaMineTime = 0;
+            return true;
+        }else
+        {
+            deltaMineTime = deltaMineTime + Gdx.graphics.getDeltaTime();
+            return false;
         }
-        return true;
+
     }
 
     public Building build(BuildingType buildingtype){
