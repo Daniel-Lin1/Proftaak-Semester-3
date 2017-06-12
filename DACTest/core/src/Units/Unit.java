@@ -11,9 +11,6 @@ import com.badlogic.gdx.graphics.Texture;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * Created by Daniel on 26-3-2017.

@@ -9,6 +9,7 @@ import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.logging.Logger;
 
 
 /**
@@ -24,6 +25,8 @@ public abstract class Building extends Observable implements Serializable {
     private boolean selected;
     private ArrayList<ArrayList<Tile>> tiles;
 
+    private static final Logger LOGGER = Logger.getLogger(Building.class.getName());
+
     public Texture getSprite()
     {
         switch (buildingtype) {
@@ -36,7 +39,7 @@ public abstract class Building extends Observable implements Serializable {
             case MiningCamp:  return null;
             case Tower:  return null;
             default:
-                System.out.println("missing texture for building :" + buildingtype.toString());
+                LOGGER.fine("Missing texture for building: " + buildingtype.toString());
                 return null;
         }
     }
@@ -79,7 +82,7 @@ public abstract class Building extends Observable implements Serializable {
         return buildingtype;
     }
 
-    public void getBuildingType(BuildingType buildingtype) {
+    public void setBuildingType(BuildingType buildingtype) {
         this.buildingtype = buildingtype;
     }
 
