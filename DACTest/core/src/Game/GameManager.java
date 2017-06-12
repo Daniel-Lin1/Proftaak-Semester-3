@@ -7,6 +7,7 @@ import Enums.State;
 
 import Game.UserInterface.UIManager;
 import Multiplayer.GameManagerClient;
+import Multiplayer.ObjectIdentifier;
 import Player.Player;
 import Units.OffensiveUnit;
 import Units.Unit;
@@ -42,7 +43,6 @@ public class GameManager implements Observer{
     private Stage stage;
     private OrthographicCamera orthographicCamera;
     private GameManagerClient gmc;
-    private float oldTime;
 
     private int OwnPlayerid;
     private int highestUnitID;
@@ -129,6 +129,7 @@ public class GameManager implements Observer{
     }
 
     public void render() {
+        Unit toRemove = null;
         for (Player player : players) {
             //todo zet de move van units ergens anders. dit hoord niet in de render methoden.
             ArrayList<Unit> units = player.getUnits();
@@ -138,21 +139,29 @@ public class GameManager implements Observer{
                     units.get(i).move(map);
                     units.get(i).setDeltaMoveTime(0);
                 }
-                if (units.get(i).getInBattleWith() != null && units.get(i).getDeltaBattleTime() > 1) {
-                    OffensiveUnit unit = (OffensiveUnit)units.get(i);
-                    for (int x = 0; x < units.get(i).getHitPerSecond(); x++) {
-                        unit.attack(unit.getInBattleWith());
-                        if (unit.getHealth() <= 0) {
-                            player.removeUnit(units.get(i));
-                        }
-                        if (unit.getInBattleWith().getHealth() <= 0) {
-                            player.removeUnit(units.get(i).getInBattleWith());
-                        }
-                    }
-                    units.get(i).setDeltaBattleTime(0);
-                }
                 units.get(i).setDeltaMoveTime(units.get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
                 units.get(i).setDeltaBattleTime(units.get(i).getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
+                if (units.get(i).getInBattleWith() != null && units.get(i).getDeltaBattleTime() > 1) {
+                    OffensiveUnit unit = (OffensiveUnit)units.get(i);
+                    units.get(i).setDeltaBattleTime(0);
+                    for (int x = 0; x < units.get(i).getHitPerSecond(); x++) {
+                        Unit oldUnit = unit.getInBattleWith();
+                        unit.attack(unit.getInBattleWith());
+                        Unit newUnit = unit.getInBattleWith();
+                        //todo unit damage sync werkt niet
+                        //gmc.broadcastSetUnit("unit", oldUnit, new ObjectIdentifier(player.getPlayerID(), newUnit));
+                        if (unit.getHealth() <= 0) {
+                            toRemove = units.get(i);
+                        }
+                        if (unit.getInBattleWith().getHealth() <= 0) {
+                            toRemove = units.get(i).getInBattleWith();
+                        }
+                    }
+                }
+                player.removeUnit(toRemove);
+                ArrayList<Unit> selectedUnits = player.getSelectedUnits();
+                selectedUnits.remove(toRemove);
+                player.setSelectedUnits(selectedUnits);
             }
         }
 
