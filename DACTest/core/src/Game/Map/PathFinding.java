@@ -11,6 +11,7 @@ package Game.Map;
  */
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public abstract class PathFinding {
     public static final int DIAGONAL_COST = 14;
@@ -134,7 +135,7 @@ public abstract class PathFinding {
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public static ArrayList<Point> findPath(int x, int y, int si, int sj, int ei, int ej, ArrayList<int[]> blocked){
+    public static List<Point> findPath(int x, int y, int si, int sj, int ei, int ej, ArrayList<int[]> blocked){
         //Reset
         grid = new Cell[x][y];
         closed = new boolean[x][y];
@@ -167,52 +168,19 @@ public abstract class PathFinding {
             setBlocked(blocked.get(i)[0],blocked.get(i)[1]);
         }
 
-        //Display initial map
-        //debugging purposes
-//        System.out.println("Grid: ");
-//        for(int i=0;i<x;++i){
-//            for(int j=0;j<y;++j){
-//                if(i==si&&j==sj)System.out.print("SO  "); //Source
-//                else if(i==ei && j==ej)System.out.print("DE  ");  //Destination
-//                else if(grid[i][j]!=null)System.out.printf("%-3d ", 0);
-//                else System.out.print("BL  ");
-//            }
-//            System.out.println();
-//        }
-//        System.out.println();
-
         AStar();
-        //debugging purposes
-//        System.out.println("\nScores for cells: ");
-//        for(int i=0;i<x;++i){
-//            for(int j=0;j<x;++j){
-//                if(grid[i][j]!=null)System.out.printf("%-3d ", grid[i][j].finalCost);
-//                else System.out.print("BL  ");
-//            }
-//            System.out.println();
-//        }
-//        System.out.println();
-
-
-        //printlines in deze if laat het calculated path zien.
-        // debugging pupposes
         if(closed[endI][endJ]){
             ArrayList<Point> path = new ArrayList<Point>();
             //Trace back the path
-            //System.out.println("Path: ");
             Cell current = grid[endI][endJ];
-            //System.out.print(current);
             while(current.parent!=null){
-
-                //System.out.print(" -> "+current.parent);
                 current = current.parent;
                 path.add(new Point(current.i,current.j));
             }
-            //System.out.println();
             return path;
         }else {
             System.out.println("No possible path");
-            return new ArrayList<Point>();
+            return new ArrayList<>();
         }
     }
 }

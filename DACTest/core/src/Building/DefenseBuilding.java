@@ -1,4 +1,4 @@
-package Building;
+package building;
 
 import Enums.BuildingType;
 import Interfaces.Damage;

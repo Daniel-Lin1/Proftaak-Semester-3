@@ -1,13 +1,15 @@
 package Game.Map;
 
-import Building.Building;
 import Enums.GroundType;
 import Game.Resource;
 import Game.TextureVault;
 import Units.Unit;
+import building.Building;
 import com.badlogic.gdx.graphics.g2d.Batch;
+
 import java.awt.*;
 import java.io.Serializable;
+import java.util.logging.Logger;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -21,6 +23,8 @@ public class Tile implements Serializable {
     private Point coordinate;
     private Unit unit = null;
     private Building building;
+
+    private static final Logger LOGGER = Logger.getLogger(Game.Map.Tile.class.getName());
 
     public int getId() {
         return id;
@@ -115,6 +119,9 @@ public class Tile implements Serializable {
                     break;
                 case Wood:
                     batch.draw(TextureVault.tree, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
+                    break;
+                default:
+                    LOGGER.info("Default case");
                     break;
             }
         }

@@ -1,4 +1,4 @@
-package Building;
+package building;
 
 import Enums.BuildingType;
 import Game.Map.Tile;
@@ -113,7 +113,7 @@ public abstract class Building extends Observable implements Serializable {
     }
 
     public String getUIInfo(){
-        return "Building Type : " + buildingtype + "\n" +
+        return "building Type : " + buildingtype + "\n" +
                 "Health : " + health;
     }
 }

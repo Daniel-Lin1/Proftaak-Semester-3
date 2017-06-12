@@ -74,8 +74,8 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package Game;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import Building.Building;
-<i>4</i>&nbsp;import Units.Unit;
+<i>3</i>&nbsp;import building.building;
+<i>4</i>&nbsp;import Units.unit;
 <i>5</i>&nbsp;import com.badlogic.gdx.Gdx;
 <i>6</i>&nbsp;import com.badlogic.gdx.graphics.Texture;
 <i>7</i>&nbsp;import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -126,7 +126,7 @@
 <i>52</i>&nbsp;
 <i>53</i>&nbsp;        //UIBatch.draw( Knight1, SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 150, 150);
 <i>54</i>&nbsp;
-<b class="nc"><i>55</i>&nbsp;        for(Unit unit : manager.getUnits())</b>
+<b class="nc"><i>55</i>&nbsp;        for(unit unit : manager.getUnits())</b>
 <i>56</i>&nbsp;        {
 <b class="nc"><i>57</i>&nbsp;            if(unit.getSelected() == true)</b>
 <i>58</i>&nbsp;            {
@@ -134,7 +134,7 @@
 <b class="nc"><i>60</i>&nbsp;                UIBatch.draw(unit.getSprite(), SelectedObjectImgLocation.x, SelectedObjectImgLocation.y, 180, 180);</b>
 <i>61</i>&nbsp;            }
 <b class="nc"><i>62</i>&nbsp;        }</b>
-<b class="nc"><i>63</i>&nbsp;        for(Building building : manager.getBuildings())</b>
+<b class="nc"><i>63</i>&nbsp;        for(building building : manager.getBuildings())</b>
 <i>64</i>&nbsp;        {
 <b class="nc"><i>65</i>&nbsp;            if(building.getSelected() == true)</b>
 <i>66</i>&nbsp;            {

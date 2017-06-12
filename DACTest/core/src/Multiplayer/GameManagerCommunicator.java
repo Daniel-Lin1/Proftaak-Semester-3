@@ -1,4 +1,4 @@
-package Multiplayer;/*
+package multiplayer;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -51,15 +51,6 @@ public class GameManagerCommunicator
         String property = evt.getPropertyName();
         gameManagerClient.requestUnitAction(property, (Unit) evt.getOldValue() , (ObjectIdentifier) evt.getNewValue() );
     }
-
-
-    /* public void propertyChange(PropertyChangeEvent evt) throws RemoteException {
-
-        gameManagerClient.requestSetUnits((Unit)evt.getOldValue(),(Unit)evt.getNewValue());
-        System.out.println(evt.getPropertyName());
-
-    }*/
-
 
     public void connectToPublisher() {
         try {

@@ -74,8 +74,8 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package Game;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import Building.Building;
-<i>4</i>&nbsp;import Building.UnitProducingBuilding;
+<i>3</i>&nbsp;import building.building;
+<i>4</i>&nbsp;import building.UnitProducingBuilding;
 <i>5</i>&nbsp;import Enums.BuildingType;
 <i>6</i>&nbsp;import Enums.State;
 <i>7</i>&nbsp;import Enums.UnitType;
@@ -84,7 +84,7 @@
 <i>10</i>&nbsp;import Game.Map.TiledMapStage;
 <i>11</i>&nbsp;import Player.Player;
 <i>12</i>&nbsp;import Units.OffensiveUnit;
-<i>13</i>&nbsp;import Units.Unit;
+<i>13</i>&nbsp;import Units.unit;
 <i>14</i>&nbsp;import com.badlogic.gdx.Gdx;
 <i>15</i>&nbsp;import com.badlogic.gdx.graphics.OrthographicCamera;
 <i>16</i>&nbsp;import com.badlogic.gdx.graphics.Texture;
@@ -166,11 +166,11 @@
 <b class="fc"><i>92</i>&nbsp;        this.dac = dac;</b>
 <b class="fc"><i>93</i>&nbsp;    }</b>
 <i>94</i>&nbsp;
-<i>95</i>&nbsp;    public static void setUnits(ArrayList&lt;Unit&gt; units) {
+<i>95</i>&nbsp;    public static void setUnits(ArrayList&lt;unit&gt; units) {
 <b class="fc"><i>96</i>&nbsp;        GameManager.units = units;</b>
 <b class="fc"><i>97</i>&nbsp;    }</b>
 <i>98</i>&nbsp;
-<i>99</i>&nbsp;    public static void setBuildings(ArrayList&lt;Building&gt; buildings) {
+<i>99</i>&nbsp;    public static void setBuildings(ArrayList&lt;building&gt; buildings) {
 <b class="fc"><i>100</i>&nbsp;        GameManager.buildings = buildings;</b>
 <b class="fc"><i>101</i>&nbsp;    }</b>
 <i>102</i>&nbsp;
@@ -202,8 +202,8 @@
 <i>128</i>&nbsp;    private OrthographicCamera orthographicCamera;
 <i>129</i>&nbsp;    private DistressAndConflict dac;
 <i>130</i>&nbsp;
-<b class="fc"><i>131</i>&nbsp;    public static ArrayList&lt;Unit&gt; units = new ArrayList&lt;Unit&gt;();</b>
-<b class="fc"><i>132</i>&nbsp;    public static ArrayList&lt;Building&gt; buildings = new ArrayList&lt;Building&gt;();</b>
+<b class="fc"><i>131</i>&nbsp;    public static ArrayList&lt;unit&gt; units = new ArrayList&lt;unit&gt;();</b>
+<b class="fc"><i>132</i>&nbsp;    public static ArrayList&lt;building&gt; buildings = new ArrayList&lt;building&gt;();</b>
 <i>133</i>&nbsp;    private OrthographicCameraControlClass gamecamera;
 <i>134</i>&nbsp;    //Stage en Skin voor UI inladen
 <i>135</i>&nbsp;    private SpriteBatch batch;
@@ -338,11 +338,11 @@
 <b class="nc"><i>264</i>&nbsp;		units.add(new OffensiveUnit(new Point(x, y), UnitType.Knight, 10, 10, 10, 10, 10, true));</b>
 <b class="nc"><i>265</i>&nbsp;	}</b>
 <i>266</i>&nbsp;
-<i>267</i>&nbsp;    public ArrayList&lt;Unit&gt; getUnits() {
+<i>267</i>&nbsp;    public ArrayList&lt;unit&gt; getUnits() {
 <b class="fc"><i>268</i>&nbsp;        return units;</b>
 <i>269</i>&nbsp;    }
 <i>270</i>&nbsp;
-<i>271</i>&nbsp;    public ArrayList&lt;Building&gt; getBuildings() {
+<i>271</i>&nbsp;    public ArrayList&lt;building&gt; getBuildings() {
 <b class="fc"><i>272</i>&nbsp;        return buildings;</b>
 <i>273</i>&nbsp;    }
 <i>274</i>&nbsp;}

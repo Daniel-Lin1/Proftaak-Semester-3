@@ -1,13 +1,13 @@
 package Player;
 
-import Building.Building;
 import Game.TextureVault;
 import Units.Unit;
-import com.badlogic.gdx.Gdx;
+import building.Building;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -102,12 +102,12 @@ public class Player implements Serializable {
     }
 
 
-    public ArrayList<Unit> getSelectedUnits() {
+    public List<Unit> getSelectedUnits() {
         return selectedUnits;
     }
 
-    public void setSelectedUnits(ArrayList<Unit> selectedUnits) {
-        this.selectedUnits = selectedUnits;
+    public void setSelectedUnits(List<Unit> selectedUnits) {
+        this.selectedUnits = (ArrayList<Unit>) selectedUnits;
     }
 
     public Building getSelectedBuilding() {
@@ -129,9 +129,9 @@ public class Player implements Serializable {
         this.amountWood = 500;
         this.amountFood = 500;
         this.amountStone = 500;
-        this.units =  new ArrayList<Unit>();
-        this.buildings = new ArrayList<Building>();
-        this.selectedUnits = new ArrayList<Unit>();
+        this.units =  new ArrayList<>();
+        this.buildings = new ArrayList<>();
+        this.selectedUnits = new ArrayList<>();
     }
 
     public void command(){
@@ -207,6 +207,7 @@ public class Player implements Serializable {
     }
 
     public void render(Batch batch){
+        //TODO Check if this could be easier/more readable
         //render units
         for (int i = 0; i < units.size() && !units.isEmpty(); i++) {
             batch.draw(units.get(i).getSprite(), units.get(i).getPosition().x *16, units.get(i).getPosition().y*16, 16, 16);

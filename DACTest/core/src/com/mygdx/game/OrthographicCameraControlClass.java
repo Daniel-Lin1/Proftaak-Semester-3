@@ -4,9 +4,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-
-import java.awt.event.MouseWheelEvent;
 
 /**
  * Created by Marc-Antoine on 4/10/2017.
@@ -21,6 +18,7 @@ public class OrthographicCameraControlClass {
     }
 
     public OrthographicCamera render(OrthographicCamera orthographicCamera){
+        //TODO Might use a switch here?
         //Map scroll
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
             if (orthographicCamera.position.x <= orthographicCamera.viewportWidth/2 * orthographicCamera.zoom){

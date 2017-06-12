@@ -24,7 +24,6 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setHitDamage(hitDamage);
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
-        //this.setPath(new ArrayList<Point>());
     }
 
     public float getDeltaBattleTime() {
@@ -37,10 +36,10 @@ public class OffensiveUnit extends Unit implements Damage{
 
     @Override
     public void attack(Unit target) {
-        if ((this.getPosition().getX() + (this.getRange()) >= target.getPosition().getX()) &&
-            (this.getPosition().getX() - (this.getRange()) <= target.getPosition().getX()) &&
-            (this.getPosition().getY() + (this.getRange()) >= target.getPosition().getY()) &&
-            (this.getPosition().getY() - (this.getRange()) <= target.getPosition().getY()))
+        if (((this.getPosition().getX() + (this.getRange())) >= target.getPosition().getX()) &&
+                ((this.getPosition().getX() - (this.getRange())) <= target.getPosition().getX()) &&
+                ((this.getPosition().getY() + (this.getRange())) >= target.getPosition().getY()) &&
+                ((this.getPosition().getY() - (this.getRange())) <= target.getPosition().getY()))
         {
             target.setHealth(target.getHealth() - this.getHitDamage());
             if (target.isWillReturnFire()) {

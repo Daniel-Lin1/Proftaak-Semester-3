@@ -1,13 +1,13 @@
 package Game;
 
-import Building.Building;
-import Building.UnitProducingBuilding;
+import building.Building;
+import building.UnitProducingBuilding;
 import Enums.BuildingType;
 import Enums.State;
 import Game.Map.Map;
 import Game.Map.TiledMapStage;
 import Game.UserInterface.UIManager;
-import Multiplayer.GameManagerClient;
+import multiplayer.GameManagerClient;
 import Player.Player;
 import Units.BuilderUnit;
 import Units.OffensiveUnit;
@@ -165,7 +165,7 @@ public class GameManager {
                 map.setHostiles(unit);
             }
             player.removeUnit(toRemoveUnit);
-            ArrayList<Unit> selectedUnits = player.getSelectedUnits();
+            ArrayList<Unit> selectedUnits = (ArrayList<Unit>) player.getSelectedUnits();
             selectedUnits.remove(toRemoveUnit);
             player.setSelectedUnits(selectedUnits);
         }

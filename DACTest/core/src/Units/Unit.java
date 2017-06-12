@@ -69,24 +69,12 @@ public abstract class Unit implements Movement, Serializable {
         this.destination = destination;
 
 
-        ArrayList<int[]> grid = map.getFlatMapForPathFinding(position);
-//        ArrayList<int[]> grid = new ArrayList<int[]>();
-//        for (int x=0; x<map.getSizeX(); x++) {
-//            for (int y=0; y<map.getSizeY(); y++) {
-//                if (!map.checkTileIfWalkable(new Point(x, y)) && !(x == position.x && y == position.y)){
-//                    int[] point = new int[2];
-//                    point[0] = x;
-//                    point[1] = y;
-//                    grid.add(point);
-//                }
-//            }
-//        }
-//        //grid
-        path = PathFinding.findPath(map.getSizeX(), map.getSizeY(), destination.x, destination.y, position.x, position.y, grid);
+        ArrayList<int[]> grid = (ArrayList<int[]>) map.getFlatMapForPathFinding(position);
+        path = (ArrayList<Point>) PathFinding.findPath(map.getSizeX(), map.getSizeY(), destination.x, destination.y, position.x, position.y, grid);
     }
 
     public void move(Map map) {
-        if(path.size() > 0){
+        if(!path.isEmpty()){
             Tile tileToMove = map.getTileFromCord(path.get(0));
             if(tileToMove.isWalkable() && !tileToMove.isOccupied()){
                 map.getTileFromCord(position).setUnit(null);

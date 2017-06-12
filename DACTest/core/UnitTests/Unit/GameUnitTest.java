@@ -1,4 +1,4 @@
-package Unit;
+package unit;
 
 import Enums.UnitType;
 import Game.Map.Map;

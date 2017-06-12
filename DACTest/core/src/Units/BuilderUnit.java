@@ -1,5 +1,5 @@
 package Units;
-import Building.Building;
+import building.Building;
 import Enums.BuildingType;
 import Enums.UnitType;
 import Game.Map.Map;
@@ -64,8 +64,8 @@ public class BuilderUnit extends Unit {
 
     public void setCollectResourceTile(Tile tile, Map map){
         resourceTile = tile;
-        ArrayList<Point> path = PathFinding.findPath(map.getSizeX(), map.getSizeY(), this.getTile().getCoordinate().x, this.getTile().getCoordinate().y, tile.getCoordinate().x, tile.getCoordinate().y, (ArrayList<int[]>) map.getFlatMapForPathFinding(this.getPosition()));
-        if(path.size() > 0){
+        ArrayList<Point> path = (ArrayList<Point>) PathFinding.findPath(map.getSizeX(), map.getSizeY(), this.getTile().getCoordinate().x, this.getTile().getCoordinate().y, tile.getCoordinate().x, tile.getCoordinate().y, (ArrayList<int[]>) map.getFlatMapForPathFinding(this.getPosition()));
+        if(!path.isEmpty()){
             path.remove(path.size()-1);
             setPath(path);
         }

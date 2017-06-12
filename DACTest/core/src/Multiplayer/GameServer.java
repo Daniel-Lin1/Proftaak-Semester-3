@@ -1,4 +1,4 @@
-package Multiplayer;/*
+package multiplayer;/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -21,7 +21,7 @@ public class GameServer {
 
     private static int portNumber = 1099;
     private static String bindingName = "publisher";
-    private static final Logger LOGGER = Logger.getLogger(Multiplayer.GameServer.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(multiplayer.GameServer.class.getName());
     private static final String IP_PROPERTY = "java.rmi.server.hostname";
 
     public static void main(String[] args) throws RemoteException, UnknownHostException, NotBoundException {

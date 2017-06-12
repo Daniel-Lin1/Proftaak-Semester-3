@@ -1,4 +1,4 @@
-package Building;
+package building;
 
 import Enums.State;
 import Game.GameManager;
@@ -18,8 +18,8 @@ class UnitProducingBuildingTest {
 /*
     @Test
     void produceUnit() {
-        Unit knight = upb.produceUnit(1, UnitType.Knight);
-        Unit unit = new OffensiveUnit(1, p, UnitType.Knight, 100, 1, 1, 10, 1, false, gm.getMap());
+        unit knight = upb.produceUnit(1, UnitType.Knight);
+        unit unit = new OffensiveUnit(1, p, UnitType.Knight, 100, 1, 1, 10, 1, false, gm.getMap());
         assertEquals(unit, knight);
     }
 */
