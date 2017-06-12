@@ -25,6 +25,7 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     private ArrayList<Point> path;
     private UnitType unitType;
     private int id;
+    private int maxhealth;
     private int health;
     private int speed;
     private int hitPerSecond;
@@ -41,16 +42,20 @@ public abstract class Unit extends Observable implements Movement, Serializable 
     {
         if (unitType == UnitType.Knight)
         {
+            maxhealth = 100;
             return TextureVault.knight;
         }
         else if (unitType == UnitType.PikeMan)
         {
+            maxhealth = 80;
             return TextureVault.pikeMan;
         }
         else if (unitType == UnitType.Archer) {
+            maxhealth = 60;
             return TextureVault.archer;
         }
         else if (unitType == UnitType.Builder) {
+            maxhealth = 50;
             return TextureVault.builder;
         }
         else
@@ -112,6 +117,10 @@ public abstract class Unit extends Observable implements Movement, Serializable 
 
     public Point getPosition() {
         return position;
+    }
+
+    public int getMaxhealth() {
+        return maxhealth;
     }
 
     public void setPosition(Point position) {

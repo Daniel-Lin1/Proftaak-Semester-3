@@ -1,18 +1,19 @@
 package Game.Map;
 
-import Building.Building;
-import Enums.GroundType;
-import Enums.ResourceEnum;
-import Game.Resource;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.graphics.Color;
+        import Building.Building;
+        import Enums.GroundType;
+        import Enums.ResourceEnum;
+        import Game.Resource;
+        import Units.Unit;
+        import com.badlogic.gdx.Gdx;
+        import com.badlogic.gdx.graphics.Pixmap;
+        import com.badlogic.gdx.graphics.g2d.Batch;
+        import com.badlogic.gdx.maps.tiled.TiledMap;
+        import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
+        import com.badlogic.gdx.graphics.Color;
 
-import java.awt.*;
-import java.util.ArrayList;
+        import java.awt.*;
+        import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -59,6 +60,26 @@ public class Map {
         CreateMapFromTiledMap(tiledMap);
         this.sizeX = tiles.size();
         this.sizeY = tiles.get(0).size();
+    }
+
+    public void setHostiles(Unit unit) {
+        Point tileAbove = new Point(unit.getPosition().x, unit.getPosition().y + 1);
+        Point tileUnder = new Point(unit.getPosition().x, unit.getPosition().y - 1);
+        Point tileLeft = new Point(unit.getPosition().x - 1, unit.getPosition().y);
+        Point tileRight = new Point(unit.getPosition().x + 1, unit.getPosition().y);
+
+        if (this.getTileFromCord(tileAbove).getUnit() != null) {
+            unit.setInBattleWith(this.getTileFromCord(tileAbove).getUnit());
+        }
+        if (this.getTileFromCord(tileUnder).getUnit() != null) {
+            unit.setInBattleWith(this.getTileFromCord(tileUnder).getUnit());
+        }
+        if (this.getTileFromCord(tileLeft).getUnit() != null) {
+            unit.setInBattleWith(this.getTileFromCord(tileLeft).getUnit());
+        }
+        if (this.getTileFromCord(tileRight).getUnit() != null) {
+            unit.setInBattleWith(this.getTileFromCord(tileRight).getUnit());
+        }
     }
 
     public void CreateMapFromTiledMap(TiledMap tiledMap){

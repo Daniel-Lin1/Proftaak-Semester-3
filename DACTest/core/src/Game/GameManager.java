@@ -162,6 +162,9 @@ public class GameManager implements Observer{
                 ArrayList<Unit> selectedUnits = player.getSelectedUnits();
                 selectedUnits.remove(toRemove);
                 player.setSelectedUnits(selectedUnits);
+                units.get(i).setDeltaMoveTime(units.get(i).getDeltaMoveTime() + Gdx.graphics.getDeltaTime());
+                units.get(i).setDeltaBattleTime(units.get(i).getDeltaBattleTime() + Gdx.graphics.getDeltaTime());
+                map.setHostiles(units.get(i));
             }
         }
 
