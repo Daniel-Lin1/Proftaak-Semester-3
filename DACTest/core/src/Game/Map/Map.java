@@ -1,9 +1,9 @@
-package Game.Map;
+package game.map;
 
         import building.Building;
         import Enums.GroundType;
         import Enums.ResourceEnum;
-        import Game.Resource;
+        import game.Resource;
         import Units.Unit;
         import com.badlogic.gdx.Gdx;
         import com.badlogic.gdx.graphics.Pixmap;
@@ -14,6 +14,7 @@ package Game.Map;
 
         import java.awt.*;
         import java.util.*;
+        import java.util.List;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -33,7 +34,7 @@ public class Map {
         return mapName;
     }
 
-    public ArrayList<Point> getSpawnPoints() {
+    public List<Point> getSpawnPoints() {
         return spawnPoints;
     }
 
@@ -128,15 +129,17 @@ public class Map {
         }
     }
     public void render(Batch batch){
-        for (ArrayList<Tile> tiles : tiles){
-            for (Tile tile : tiles) {
+        for (ArrayList<Tile> moreTiles : tiles){
+            for (Tile tile : moreTiles) {
                 tile.render(batch, sizeY);
             }
         }
     }
 
     public Tile getTileFromCord(Point coords){
-        if(coords.x == 150){coords.x = 149;} //op een hele cheez manier een glitch van die laatste rij (buiten de map clicken) gefixed. :)
+        if(coords.x == 150){
+            coords.x = 149;
+        } //op een hele cheez manier een glitch van die laatste rij (buiten de map clicken) gefixed. :)
         return tiles.get(coords.x).get((-1* (((coords.y)+1) - tiles.get(0).size())));
     }
 

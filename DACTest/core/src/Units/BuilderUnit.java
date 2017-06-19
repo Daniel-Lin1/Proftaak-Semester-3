@@ -2,10 +2,10 @@ package Units;
 import building.Building;
 import Enums.BuildingType;
 import Enums.UnitType;
-import Game.Map.Map;
-import Game.Map.PathFinding;
-import Game.Map.Tile;
-import Game.Resource;
+import game.map.Map;
+import game.map.PathFinding;
+import game.map.Tile;
+import game.Resource;
 import com.badlogic.gdx.Gdx;
 
 import java.awt.*;

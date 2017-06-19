@@ -1,19 +1,16 @@
-package Game.Map;
+package game.map;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.TiledMapImageLayer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.mygdx.game.DistressAndConflict;
-import Game.GameManager;
+import game.GameManager;
 
-import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Imre on 4-4-2017.
@@ -24,6 +21,8 @@ public class TiledMapStage extends Stage {
     private Group background = new Group();
     private Group foreground = new Group();
     private GameManager gameManager;
+
+    Logger LOGGER = Logger.getLogger(TiledMapStage.class.getName());
 
     public TiledMapStage(TiledMap tiledMap, GameManager gameManager) {
         this.tiledMap = tiledMap;
@@ -38,8 +37,7 @@ public class TiledMapStage extends Stage {
         try{
             createActorsForLayer((TiledMapTileLayer)tiledMap.getLayers().get(0));
         }catch (ClassCastException ex){
-            System.out.println(ex.toString());
-            System.out.println("dit word veroorzaakt doordat de map niet goed is opgebouwed. zorg dat layer 1 in het .tmx bestand een TiledMapTileLayer is. GR marc-a");
+            LOGGER.log(Level.SEVERE, "dit word veroorzaakt doordat de map niet goed is opgebouwed. zorg dat layer 1 in het .tmx bestand een TiledMapTileLayer is. GR marc-a", ex);
         }
     }
 

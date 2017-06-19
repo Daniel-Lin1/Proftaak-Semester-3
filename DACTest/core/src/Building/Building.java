@@ -1,8 +1,8 @@
 package building;
 
 import Enums.BuildingType;
-import Game.Map.Tile;
-import Game.TextureVault;
+import game.map.Tile;
+import game.TextureVault;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;

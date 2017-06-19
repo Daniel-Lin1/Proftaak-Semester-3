@@ -1,7 +1,7 @@
 package building;
 
 import Enums.State;
-import Game.GameManager;
+import game.GameManager;
 import Player.Player;
 
 import java.awt.*;

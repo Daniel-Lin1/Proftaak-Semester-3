@@ -1,7 +1,7 @@
 package unit;
 
 import Enums.UnitType;
-import Game.Map.Map;
+import game.map.Map;
 import Player.Account;
 import Player.Player;
 import Units.OffensiveUnit;

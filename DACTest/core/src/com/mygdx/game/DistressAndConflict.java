@@ -1,9 +1,8 @@
 package com.mygdx.game;
 
 import Enums.State;
-import Game.GameManager;
-import Game.UserInterface.UIManager;
-import Player.Account;
+import game.GameManager;
+import game.UserInterface.UIManager;
 import Player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
@@ -12,14 +11,12 @@ import com.badlogic.gdx.graphics.GL20;
 import java.util.ArrayList;
 
 public class DistressAndConflict extends ApplicationAdapter {
-	private Account user;
 	private GameManager gameManager;
 	private UIManager uiManager;
 	private int OldFps = 0;
 
-	public DistressAndConflict(Account account)  {
-		this.user = account;
-		ArrayList<Player> players = new ArrayList<Player>();
+	public DistressAndConflict()  {
+		ArrayList<Player> players = new ArrayList<>();
 		players.add(new Player(0, "player1"));
 		players.add(new Player(1, "player2"));
 		players.add(new Player(2, "player3"));

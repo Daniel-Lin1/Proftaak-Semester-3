@@ -1,8 +1,8 @@
-package Game.UserInterface;
+package game.UserInterface;
 
 import building.Building;
-import Game.GameManager;
-import Game.TextureVault;
+import game.GameManager;
+import game.TextureVault;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -33,8 +33,8 @@ public class UIManager {
 
     public void create(){
         //UI inladen van bestanden
-        Skin UISkin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
-        UISkin.addRegions(new TextureAtlas(Gdx.files.internal("assets/UI/medieval.atlas")));
+        Skin uiskin = new Skin(Gdx.files.internal("assets/UI/medieval.json"));
+        uiskin.addRegions(new TextureAtlas(Gdx.files.internal("assets/UI/medieval.atlas")));
         UIBatch = new SpriteBatch();
         font = new BitmapFont();
         abilityFont = new BitmapFont();

@@ -1,7 +1,7 @@
 package Units;
 
 import Enums.UnitType;
-import Game.Map.Map;
+import game.map.Map;
 import Interfaces.Damage;
 
 import java.awt.*;
