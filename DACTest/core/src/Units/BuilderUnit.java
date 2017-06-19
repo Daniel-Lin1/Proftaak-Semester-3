@@ -1,7 +1,7 @@
-package Units;
+package units;
 import building.Building;
-import Enums.BuildingType;
-import Enums.UnitType;
+import enums.BuildingType;
+import enums.UnitType;
 import game.map.Map;
 import game.map.PathFinding;
 import game.map.Tile;
@@ -28,7 +28,7 @@ public class BuilderUnit extends Unit {
         this.setUnitType(unitType);
         this.setHealth(health);
         this.setSpeed(speed);
-        this.setPath(new ArrayList<Point>());
+        this.setPath(new ArrayList<>());
     }
 
     public int getAmountResource() {

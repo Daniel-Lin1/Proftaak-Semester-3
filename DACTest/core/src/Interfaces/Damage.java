@@ -1,6 +1,6 @@
-package Interfaces;
+package interfaces;
 
-import Units.Unit;
+import units.Unit;
 
 /**
  * Created by Daniel on 26-3-2017.

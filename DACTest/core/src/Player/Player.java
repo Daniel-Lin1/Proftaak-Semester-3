@@ -1,7 +1,7 @@
-package Player;
+package player;
 
 import game.TextureVault;
-import Units.Unit;
+import units.Unit;
 import building.Building;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
@@ -25,7 +25,7 @@ public class Player implements Serializable {
     private ArrayList<Unit> selectedUnits;
     private Building selectedBuilding;
 
-    Logger LOGGER = Logger.getLogger(Player.class.getName());
+    transient Logger logger = Logger.getLogger(Player.class.getName());
 
     public Player(int playerID, String nickName) {
         this.playerID = playerID;
@@ -138,22 +138,18 @@ public class Player implements Serializable {
         this.selectedUnits.add(unit);
     }
 
-    public void command(){
-
-    }
-
     public boolean buyUnit(Unit unit){
         boolean canBuy = false;
         switch(unit.getUnitType())
         {
-            case Knight:
+            case KNIGHT:
                 if(amountGold - 100 >= 0 && amountFood - 50 >= 0){
                     canBuy = true;
                     amountGold -= 100;
                     amountFood -= 50;
                 }
                 break;
-            case Archer:
+            case ARCHER:
                 if(amountGold - 50 >= 0 && amountFood - 35 >= 0 && amountWood - 25 >=0 ){
                     canBuy = true;
                     amountGold -= 50;
@@ -161,7 +157,7 @@ public class Player implements Serializable {
                     amountWood -= 25;
                 }
                 break;
-            case PikeMan:
+            case PIKE_MAN:
                 if(amountGold - 20 >= 0 && amountFood - 50 >= 0 && amountWood - 25 >=0 ){
                     canBuy = true;
                     amountGold -= 20;
@@ -169,11 +165,12 @@ public class Player implements Serializable {
                     amountWood -= 25;
                 }
                 break;
-            case Builder:
+            case BUILDER:
                 if(amountFood - 100 >= 0){
                     canBuy = true;
                     amountFood -= 100;
                 }
+                break;
             default:
                 return false;
         }
@@ -188,7 +185,7 @@ public class Player implements Serializable {
         boolean canBuy = false;
         switch(building.getBuildingType())
         {
-            case TownCenter:
+            case TOWN_CENTER:
                 if(amountGold - 1000 >= 0 && amountFood - 1000 >= 0 && amountStone - 1000 >= 0){
                     canBuy = true;
                     amountGold -= 1000;
@@ -196,7 +193,7 @@ public class Player implements Serializable {
                     amountStone -= 1000;
                 }
                 break;
-            case Archery:
+            case ARCHERY:
                 if(amountWood - 500 >= 0 && amountStone - 500 >=0 ){
                     canBuy = true;
                     amountStone -= 500;
@@ -208,7 +205,7 @@ public class Player implements Serializable {
         }
 
         if(canBuy){
-            LOGGER.info("Can buy.");
+            logger.info("Can buy.");
             buildings.add(building);
         }
         return canBuy;

@@ -1,8 +1,8 @@
-package Units;
+package units;
 
-import Enums.UnitType;
+import enums.UnitType;
 import game.map.Map;
-import Interfaces.Damage;
+import interfaces.Damage;
 
 import java.awt.*;
 import java.util.ArrayList;

@@ -1,6 +1,6 @@
 package building;
 
-import Enums.BuildingType;
+import enums.BuildingType;
 import game.map.Tile;
 import game.TextureVault;
 import com.badlogic.gdx.graphics.Texture;
@@ -17,12 +17,16 @@ import java.util.logging.Logger;
  */
 public abstract class Building extends Observable implements Serializable {
     private int buildingID;
+    private Point position;
     private Point coordinate;
     private int sizeX;
     private int sizeY;
     private BuildingType buildingtype;
     private int health;
     private boolean selected;
+    private int hitPerSecond;
+    private int hitDamage;
+    private int range;
     private ArrayList<ArrayList<Tile>> tiles;
 
     private static final Logger LOGGER = Logger.getLogger(Building.class.getName());
@@ -30,14 +34,14 @@ public abstract class Building extends Observable implements Serializable {
     public Texture getSprite()
     {
         switch (buildingtype) {
-            case TownCenter: return TextureVault.townCenter;
-            case Barracks: return null;
-            case Archery: return null;
-            case Farm: return null;
-            case Stable: return null;
-            case Lumberjack:  return null;
-            case MiningCamp:  return null;
-            case Tower:  return null;
+            case TOWN_CENTER: return TextureVault.townCenter;
+            case BARRACKS: return null;
+            case ARCHERY: return null;
+            case FARM: return null;
+            case STABLE: return null;
+            case LUMBERJACK:  return null;
+            case MINING_CAMP:  return null;
+            case TOWER:  return null;
             default:
                 LOGGER.fine("Missing texture for building");
                 return null;
@@ -48,6 +52,12 @@ public abstract class Building extends Observable implements Serializable {
     {
         return this.buildingID;
     }
+
+    public Point getPosition() {
+        return position;
+    }
+
+    public void setPosition(Point position){ this.position = position;}
 
     public Texture getSelectedSprite()
     {
@@ -102,6 +112,30 @@ public abstract class Building extends Observable implements Serializable {
 
     public boolean isSelected() {
         return selected;
+    }
+
+    public int getHitPerSecond() {
+        return hitPerSecond;
+    }
+
+    public void setHitPerSecond(int hitPerSecond) {
+        this.hitPerSecond = hitPerSecond;
+    }
+
+    public int getHitDamage() {
+        return hitDamage;
+    }
+
+    public void setHitDamage(int hitDamage) {
+        this.hitDamage = hitDamage;
+    }
+
+    public int getRange() {
+        return range;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
     }
 
     public ArrayList<ArrayList<Tile>> getTiles() {

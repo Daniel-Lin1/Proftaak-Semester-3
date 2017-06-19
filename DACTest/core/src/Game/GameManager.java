@@ -2,16 +2,16 @@ package game;
 
 import building.Building;
 import building.UnitProducingBuilding;
-import Enums.BuildingType;
-import Enums.State;
+import enums.BuildingType;
+import enums.State;
 import game.map.Map;
 import game.map.TiledMapStage;
-import game.UserInterface.UIManager;
+import game.userinterface.UIManager;
 import multiplayer.GameManagerClient;
-import Player.Player;
-import Units.BuilderUnit;
-import Units.OffensiveUnit;
-import Units.Unit;
+import player.Player;
+import units.BuilderUnit;
+import units.OffensiveUnit;
+import units.Unit;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -218,7 +218,7 @@ public class GameManager {
         for(int i=0; i<getPlayers().size(); i++){
             Point spawnPoint = map.getSpawnPoints().get(i);
             Point cord = map.getTileFromCord(spawnPoint).getCoordinate();
-            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.TownCenter, 1000);
+            Building townCenter = new UnitProducingBuilding(cord, 4, 4, BuildingType.TOWN_CENTER, 1000);
             if(map.checkBuildingPossible(townCenter)){
                 map.setBuildingsTiles(townCenter);
                 getPlayers().get(i).getBuildings().add(townCenter);

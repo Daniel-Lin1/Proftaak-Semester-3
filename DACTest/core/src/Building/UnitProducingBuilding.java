@@ -1,10 +1,10 @@
 package building;
 
-import Enums.BuildingType;
-import Enums.UnitType;
+import enums.BuildingType;
+import enums.UnitType;
 import game.map.Map;
-import Units.OffensiveUnit;
-import Units.Unit;
+import units.OffensiveUnit;
+import units.Unit;
 
 import java.awt.*;
 
@@ -28,17 +28,17 @@ public class UnitProducingBuilding extends Building {
         Point point = new Point(getCoordinate().x,getCoordinate().y - 1);
         Unit unit;
         switch (unittype) {
-            case Knight:
-                unit = new OffensiveUnit(unitId, point, UnitType.Knight, 100, 1.5, 1, 10, 1, true, map);
+            case KNIGHT:
+                unit = new OffensiveUnit(unitId, point, UnitType.KNIGHT, 100, 1.5, 1, 10, 1, true, map);
                 break;
-            case PikeMan:
-                unit = new OffensiveUnit(unitId, point, UnitType.PikeMan, 80, 1.3, 1, 8, 1, true, map);
+            case PIKE_MAN:
+                unit = new OffensiveUnit(unitId, point, UnitType.PIKE_MAN, 80, 1.3, 1, 8, 1, true, map);
                 break;
-            case Archer:
-                unit = new OffensiveUnit(unitId, point, UnitType.Archer, 60, 1, 1, 8, 4, true, map);
+            case ARCHER:
+                unit = new OffensiveUnit(unitId, point, UnitType.ARCHER, 60, 1, 1, 8, 4, true, map);
                 break;
-            case Builder:
-                unit = new OffensiveUnit(unitId, point, UnitType.Builder, 50, 1.2, 0, 0, 0, false, map);
+            case BUILDER:
+                unit = new OffensiveUnit(unitId, point, UnitType.BUILDER, 50, 1.2, 0, 0, 0, false, map);
                 break;
             default:
                 throw new IllegalArgumentException("default switchcase reached in unitProducing building : produceUnit");

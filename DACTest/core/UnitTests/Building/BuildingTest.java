@@ -1,6 +1,6 @@
 package building;
 
-import Enums.BuildingType;
+import enums.BuildingType;
 import org.junit.jupiter.api.Test;
 
 import java.awt.*;

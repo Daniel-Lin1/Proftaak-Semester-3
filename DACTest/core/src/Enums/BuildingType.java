@@ -1,15 +1,15 @@
-package Enums;
+package enums;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
 public enum BuildingType {
-    Barracks,
-    TownCenter,
-    Archery,
-    Farm,
-    Stable,
-    Lumberjack,
-    MiningCamp,
-    Tower
+    BARRACKS,
+    TOWN_CENTER,
+    ARCHERY,
+    FARM,
+    STABLE,
+    LUMBERJACK,
+    MINING_CAMP,
+    TOWER
 }

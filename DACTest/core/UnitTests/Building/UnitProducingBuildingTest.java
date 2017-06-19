@@ -1,8 +1,8 @@
 package building;
 
-import Enums.State;
+import enums.State;
 import game.GameManager;
-import Player.Player;
+import player.Player;
 
 import java.awt.*;
 import java.util.ArrayList;

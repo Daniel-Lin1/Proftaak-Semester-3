@@ -1,6 +1,6 @@
 package game;
 
-import Enums.ResourceEnum;
+import enums.ResourceEnum;
 
 import java.io.Serializable;
 
@@ -10,6 +10,11 @@ import java.io.Serializable;
 public class Resource implements Serializable{
     private ResourceEnum resourceEnum;
     private int amount;
+
+    public Resource(ResourceEnum resourceEnum, int amount) {
+        this.resourceEnum = resourceEnum;
+        this.amount = amount;
+    }
 
     public ResourceEnum getResourceEnum() {
         return resourceEnum;
@@ -24,11 +29,6 @@ public class Resource implements Serializable{
     }
 
     public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public Resource(ResourceEnum resourceEnum, int amount) {
-        this.resourceEnum = resourceEnum;
         this.amount = amount;
     }
 

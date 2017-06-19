@@ -1,10 +1,10 @@
 package game.map;
 
         import building.Building;
-        import Enums.GroundType;
-        import Enums.ResourceEnum;
+        import enums.GroundType;
+        import enums.ResourceEnum;
         import game.Resource;
-        import Units.Unit;
+        import units.Unit;
         import com.badlogic.gdx.Gdx;
         import com.badlogic.gdx.graphics.Pixmap;
         import com.badlogic.gdx.graphics.g2d.Batch;
@@ -15,6 +15,8 @@ package game.map;
         import java.awt.*;
         import java.util.*;
         import java.util.List;
+        import java.util.logging.Level;
+        import java.util.logging.Logger;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -23,10 +25,21 @@ public class Map {
     private int sizeX;
     private int sizeY;
     private String mapName;
-    private ArrayList<ArrayList<Tile>> tiles;
-    private ArrayList<Point> spawnPoints;
+    private List<ArrayList<Tile>> tiles;
+    private List<Point> spawnPoints;
 
-    public ArrayList<ArrayList<Tile>> getTiles() {
+    Logger logger = Logger.getLogger(Map.class.getName());
+
+    public Map(TiledMap tiledMap, String mapName){
+        this.mapName = mapName;
+        this.tiles = new ArrayList<>();
+        this.spawnPoints = new ArrayList<>();
+        createMapFromTiledMap(tiledMap);
+        this.sizeX = tiles.size();
+        this.sizeY = tiles.get(0).size();
+    }
+
+    public List<ArrayList<Tile>> getTiles() {
         return tiles;
     }
 
@@ -54,15 +67,6 @@ public class Map {
         this.sizeY = sizeY;
     }
 
-    public Map(TiledMap tiledMap, String mapName){
-        this.mapName = mapName;
-        this.tiles = new ArrayList<ArrayList<Tile>>();
-        this.spawnPoints = new ArrayList<Point>();
-        CreateMapFromTiledMap(tiledMap);
-        this.sizeX = tiles.size();
-        this.sizeY = tiles.get(0).size();
-    }
-
     public void setHostiles(Unit unit) {
         Point tileAbove = new Point(unit.getPosition().x, unit.getPosition().y + 1);
         Point tileUnder = new Point(unit.getPosition().x, unit.getPosition().y - 1);
@@ -83,7 +87,7 @@ public class Map {
         }
     }
 
-    public void CreateMapFromTiledMap(TiledMap tiledMap){
+    public void createMapFromTiledMap(TiledMap tiledMap){
         TiledMapTileLayer tiledMapTileLayer = (TiledMapTileLayer)tiledMap.getLayers().get(0);
         this.sizeX = tiledMapTileLayer.getWidth();
         this.sizeY = tiledMapTileLayer.getHeight();
@@ -97,30 +101,29 @@ public class Map {
 
                 int val = mapenzoPNG.getPixel(x, y);
                 Color.rgba8888ToColor(color, val);
-                int R = (int)(color.r * 255f);
-                int G = (int)(color.g * 255f);
-                int B = (int)(color.b * 255f);
+                int r = (int)(color.r * 255f);
+                int g = (int)(color.g * 255f);
+                int b = (int)(color.b * 255f);
                 Tile tile;
 
-                if(R == 237 && G == 28 && B == 36){ //rood
-                    tile = new Tile(tileID,true, true, GroundType.Grass, null);
+                if(r == 237 && g == 28 && b == 36){ //rood
+                    tile = new Tile(tileID,true, true, GroundType.GRASS, null);
                     spawnPoints.add(new Point(x,y));
-                }else if(R == 255 && G == 242 && B == 0){ //geel
-                    tile = new Tile(tileID,true, true, GroundType.Grass, new Resource(ResourceEnum.Gold, 500));
-                }else if(R == 195 && G == 195 && B == 195){ //grijs
-                    tile = new Tile(tileID, true, true, GroundType.Grass, new Resource(ResourceEnum.Stone, 600));
-                }else if(R == 255 && G == 255 && B == 255){ //wit
-                    tile = new Tile(tileID, true, true, GroundType.Grass, null);
-                }else if(R == 153 && G == 217 && B == 234){ //blauw
-                    tile = new Tile(tileID, false, false, GroundType.Water, null);
-                }else if(R == 181 && G == 230 && B == 29){ //groen
-                    tile = new Tile(tileID, true, true, GroundType.Grass, new Resource(ResourceEnum.Wood, 100));
-                }else if(R == 255 && G == 174 && B == 201){ //roze
-                    tile = new Tile(tileID,true, true, GroundType.Grass, new Resource(ResourceEnum.Food, 100) );
+                }else if(r == 255 && g == 242 && b == 0){ //geel
+                    tile = new Tile(tileID,true, true, GroundType.GRASS, new Resource(ResourceEnum.GOLD, 500));
+                }else if(r == 195 && g == 195 && b == 195){ //grijs
+                    tile = new Tile(tileID, true, true, GroundType.GRASS, new Resource(ResourceEnum.STONE, 600));
+                }else if(r == 255 && g == 255 && b == 255){ //wit
+                    tile = new Tile(tileID, true, true, GroundType.GRASS, null);
+                }else if(r == 153 && g == 217 && b == 234){ //blauw
+                    tile = new Tile(tileID, false, false, GroundType.WATER, null);
+                }else if(r == 181 && g == 230 && b == 29){ //groen
+                    tile = new Tile(tileID, true, true, GroundType.GRASS, new Resource(ResourceEnum.WOOD, 100));
+                }else if(r == 255 && g == 174 && b == 201){ //roze
+                    tile = new Tile(tileID,true, true, GroundType.GRASS, new Resource(ResourceEnum.FOOD, 100) );
                 }else{
-                    tile = new Tile(tileID,true, true, GroundType.Grass, null);
-                    System.out.println("unassighned color in texture (load map from pixmap). replaced with an empty grass tile.");
-                    System.out.println("r :" + R +" g :" + G +" b :"+ B);
+                    tile = new Tile(tileID,true, true, GroundType.GRASS, null);
+                    logger.log(Level.INFO, "unassighned color in texture (load map from pixmap). replaced with an empty grass tile.");
                 }
                 tile.setCoordinate(new Point(x, y));
                 tiles.get(x).add(tile);

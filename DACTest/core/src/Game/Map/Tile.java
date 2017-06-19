@@ -1,9 +1,9 @@
 package game.map;
 
-import Enums.GroundType;
+import enums.GroundType;
 import game.Resource;
 import game.TextureVault;
-import Units.Unit;
+import units.Unit;
 import building.Building;
 import com.badlogic.gdx.graphics.g2d.Batch;
 
@@ -23,6 +23,17 @@ public class Tile implements Serializable {
     private Point coordinate;
     private Unit unit = null;
     private Building building;
+
+    public Tile(int id, boolean isWalkable, boolean isBuildable, GroundType groundType, Resource resource) {
+        this.id = id;
+        this.isWalkable = isWalkable;
+        this.isBuildable = isBuildable;
+        this.groundType = groundType;
+        this.resource = resource;
+        this.coordinate = new Point();
+        this.unit = null;
+        this.building = null;
+    }
 
     private static final Logger LOGGER = Logger.getLogger(game.map.Tile.class.getName());
 
@@ -94,30 +105,19 @@ public class Tile implements Serializable {
         this.building = building;
     }
 
-    public Tile(int id, boolean isWalkable, boolean isBuildable, GroundType groundType, Resource resource) {
-        this.id = id;
-        this.isWalkable = isWalkable;
-        this.isBuildable = isBuildable;
-        this.groundType = groundType;
-        this.resource = resource;
-        this.coordinate = new Point();
-        this.unit = null;
-        this.building = null;
-    }
-
     public void render(Batch batch, int mapHight){
         if(resource != null){
             switch (this.resource.getResourceEnum()){
-                case Stone:
+                case STONE:
                     batch.draw(TextureVault.stone, coordinate.x *16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
-                case Gold:
+                case GOLD:
                     batch.draw(TextureVault.gold, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
-                case Food:
+                case FOOD:
                     batch.draw(TextureVault.berries, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
-                case Wood:
+                case WOOD:
                     batch.draw(TextureVault.tree, coordinate.x*16, (-1* (((coordinate.y)+1) - mapHight) * 16), 16, 16);
                     break;
                 default:

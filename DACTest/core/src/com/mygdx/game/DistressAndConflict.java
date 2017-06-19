@@ -1,19 +1,23 @@
 package com.mygdx.game;
 
-import Enums.State;
+import enums.State;
 import game.GameManager;
-import game.UserInterface.UIManager;
-import Player.Player;
+import game.userinterface.UIManager;
+import player.Player;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DistressAndConflict extends ApplicationAdapter {
 	private GameManager gameManager;
 	private UIManager uiManager;
-	private int OldFps = 0;
+	private int oldFps = 0;
+
+	Logger logger = Logger.getLogger(DistressAndConflict.class.getName());
 
 	public DistressAndConflict()  {
 		ArrayList<Player> players = new ArrayList<>();
@@ -22,16 +26,9 @@ public class DistressAndConflict extends ApplicationAdapter {
 		players.add(new Player(2, "player3"));
 		players.add(new Player(3, "player4"));
 
-		this.gameManager = new GameManager(State.Started, 1, "", players, 0);
+		this.gameManager = new GameManager(State.STARTED, 1, "", players, 0);
 		this.uiManager = new UIManager(this.gameManager);
 		gameManager.setUiManager(this.uiManager);
-	}
-
-	public void host(){
-
-	}
-	public void join(){
-
 	}
 	
 	@Override
@@ -51,10 +48,10 @@ public class DistressAndConflict extends ApplicationAdapter {
 	}
 
 	public void showFPS(){
-		int CurFPS = Gdx.graphics.getFramesPerSecond();
-		if (CurFPS != OldFps){
-			OldFps = CurFPS;
-			System.out.println("FPS: " + CurFPS);
+		int curFPS = Gdx.graphics.getFramesPerSecond();
+		if (curFPS != oldFps){
+			oldFps = curFPS;
+			logger.log(Level.INFO, "FPS: " + curFPS);
 		}
 	}
 }

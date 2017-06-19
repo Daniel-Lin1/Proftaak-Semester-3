@@ -1,11 +1,11 @@
-package Units;
+package units;
 
-import Enums.UnitType;
+import enums.UnitType;
 import game.map.Map;
 import game.map.PathFinding;
 import game.map.Tile;
 import game.TextureVault;
-import Interfaces.Movement;
+import interfaces.Movement;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;
@@ -37,21 +37,21 @@ public abstract class Unit implements Movement, Serializable {
 
     public Texture getSprite()
     {
-        if (unitType == UnitType.Knight)
+        if (unitType == UnitType.KNIGHT)
         {
             maxhealth = 100;
             return TextureVault.knight;
         }
-        else if (unitType == UnitType.PikeMan)
+        else if (unitType == UnitType.PIKE_MAN)
         {
             maxhealth = 80;
             return TextureVault.pikeMan;
         }
-        else if (unitType == UnitType.Archer) {
+        else if (unitType == UnitType.ARCHER) {
             maxhealth = 60;
             return TextureVault.archer;
         }
-        else if (unitType == UnitType.Builder) {
+        else if (unitType == UnitType.BUILDER) {
             maxhealth = 50;
             return TextureVault.builder;
         }

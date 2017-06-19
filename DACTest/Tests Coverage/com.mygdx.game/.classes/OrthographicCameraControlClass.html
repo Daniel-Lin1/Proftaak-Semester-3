@@ -84,12 +84,12 @@
 <i>10</i>&nbsp; * Created by Marc-Antoine on 4/10/2017.
 <i>11</i>&nbsp; */
 <i>12</i>&nbsp;public class OrthographicCameraControlClass {
-<b class="nc"><i>13</i>&nbsp;    private int SCROLL_SPEED = 10;</b>
+<b class="nc"><i>13</i>&nbsp;    private int scrollSpeed = 10;</b>
 <i>14</i>&nbsp;    private TiledMap tiledMap;
 <i>15</i>&nbsp;    private TiledMapTileLayer tiledMapTileLayer;
 <i>16</i>&nbsp;
-<b class="nc"><i>17</i>&nbsp;    public OrthographicCameraControlClass(int SCROLL_SPEED, TiledMap tiledMap) {</b>
-<b class="nc"><i>18</i>&nbsp;        this.SCROLL_SPEED = SCROLL_SPEED;</b>
+<b class="nc"><i>17</i>&nbsp;    public OrthographicCameraControlClass(int scrollSpeed, TiledMap tiledMap) {</b>
+<b class="nc"><i>18</i>&nbsp;        this.scrollSpeed = scrollSpeed;</b>
 <b class="nc"><i>19</i>&nbsp;        this.tiledMap = tiledMap;</b>
 <b class="nc"><i>20</i>&nbsp;        this.tiledMapTileLayer = (TiledMapTileLayer) tiledMap.getLayers().get(0);</b>
 <b class="nc"><i>21</i>&nbsp;    }</b>
@@ -99,26 +99,26 @@
 <b class="nc"><i>25</i>&nbsp;        if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){</b>
 <b class="nc"><i>26</i>&nbsp;            if (orthographicCamera.position.x &lt;= orthographicCamera.viewportWidth/2){</b>
 <i>27</i>&nbsp;            }else{
-<b class="nc"><i>28</i>&nbsp;                orthographicCamera.translate(-SCROLL_SPEED * Gdx.graphics.getDeltaTime(), 0);</b>
+<b class="nc"><i>28</i>&nbsp;                orthographicCamera.translate(-scrollSpeed * Gdx.graphics.getDeltaTime(), 0);</b>
 <i>29</i>&nbsp;            }
 <i>30</i>&nbsp;        }
 <b class="nc"><i>31</i>&nbsp;        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)){</b>
 <b class="nc"><i>32</i>&nbsp;            if (orthographicCamera.position.x &gt;= tiledMap.getLayers().get(0).getProperties().get(&quot;width&quot;, Integer.class) - (orthographicCamera.viewportWidth/2)){</b>
 <i>33</i>&nbsp;            }else {
-<b class="nc"><i>34</i>&nbsp;                orthographicCamera.translate(SCROLL_SPEED * Gdx.graphics.getDeltaTime(), 0);</b>
+<b class="nc"><i>34</i>&nbsp;                orthographicCamera.translate(scrollSpeed * Gdx.graphics.getDeltaTime(), 0);</b>
 <i>35</i>&nbsp;            }
 <i>36</i>&nbsp;        }
 <b class="nc"><i>37</i>&nbsp;        if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)){</b>
 <b class="nc"><i>38</i>&nbsp;            if (orthographicCamera.position.y &gt;= tiledMap.getLayers().get(0).getProperties().get(&quot;height&quot;, Integer.class) - (orthographicCamera.viewportHeight/2)){</b>
 <i>39</i>&nbsp;            }else {
-<b class="nc"><i>40</i>&nbsp;                orthographicCamera.translate(0, SCROLL_SPEED * Gdx.graphics.getDeltaTime());</b>
+<b class="nc"><i>40</i>&nbsp;                orthographicCamera.translate(0, scrollSpeed * Gdx.graphics.getDeltaTime());</b>
 <i>41</i>&nbsp;            }
 <i>42</i>&nbsp;        }
 <b class="nc"><i>43</i>&nbsp;        if (Gdx.input.isKeyPressed(Input.Keys.DOWN)|| Gdx.input.isKeyPressed(Input.Keys.S)){</b>
 <b class="nc"><i>44</i>&nbsp;            if (orthographicCamera.position.y &lt;= orthographicCamera.viewportHeight/2 - 250){</b>
 <i>45</i>&nbsp;
 <i>46</i>&nbsp;            }else{
-<b class="nc"><i>47</i>&nbsp;                orthographicCamera.translate(0, - SCROLL_SPEED * Gdx.graphics.getDeltaTime());</b>
+<b class="nc"><i>47</i>&nbsp;                orthographicCamera.translate(0, - scrollSpeed * Gdx.graphics.getDeltaTime());</b>
 <i>48</i>&nbsp;            }
 <i>49</i>&nbsp;        }
 <b class="nc"><i>50</i>&nbsp;        return orthographicCamera;</b>

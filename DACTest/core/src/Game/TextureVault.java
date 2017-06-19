@@ -7,8 +7,12 @@ import com.badlogic.gdx.graphics.Texture;
  */
 public class TextureVault {
 
+    private TextureVault() {
+        throw new IllegalStateException("Utility class");
+    }
+
     public static final Texture selected = new Texture(Gdx.files.internal("assets/Selected.png"));
-    public static final Texture townCenter = new Texture(Gdx.files.internal("assets/TownCenter.png"));
+    public static final Texture townCenter = new Texture(Gdx.files.internal("assets/TOWN_CENTER.png"));
     public static final Texture knight = new Texture(Gdx.files.internal("assets/Knight1.png"));
     public static final Texture archer = new Texture(Gdx.files.internal("assets/Archer1.png"));
     public static final Texture pikeMan = new Texture(Gdx.files.internal("assets/PikeMan1.png"));
@@ -19,10 +23,10 @@ public class TextureVault {
     public static final Texture uiElementAttack = new Texture(Gdx.files.internal("assets/uiElementAttack.png"));
     public static final Texture gatherResource = new Texture(Gdx.files.internal("assets/GatherResource.png"));
     public static final Texture tree = new Texture(Gdx.files.internal("assets/Tree.png"));
-    public static final Texture gold = new Texture(Gdx.files.internal("assets/Gold.png"));
-    public static final Texture stone = new Texture(Gdx.files.internal("assets/Stone.png"));
+    public static final Texture gold = new Texture(Gdx.files.internal("assets/GOLD.png"));
+    public static final Texture stone = new Texture(Gdx.files.internal("assets/STONE.png"));
     public static final Texture berries = new Texture(Gdx.files.internal("assets/Berries.png"));
     public static final Texture uiBar = new Texture(Gdx.files.internal("assets/UI/UIBar.png"));
     public static final Texture uiBox = new Texture(Gdx.files.internal("assets/UI/UIBox.png"));
-    public static final Texture builder = new Texture(Gdx.files.internal("assets/Builder.png"));
+    public static final Texture builder = new Texture(Gdx.files.internal("assets/BUILDER.png"));
 }

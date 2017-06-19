@@ -1,15 +1,15 @@
-package Enums;
+package enums;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
 public enum UnitType {
-    SwordMan,
-    PikeMan,
-    Slinger,
-    Archer,
-    Builder,
-    HorseArcher,
-    Knight
+    SWORD_MAN,
+    PIKE_MAN,
+    SLINGER,
+    ARCHER,
+    BUILDER,
+    HORSE_ARCHER,
+    KNIGHT
 
 }

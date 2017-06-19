@@ -1,10 +1,10 @@
 package unit;
 
-import Enums.UnitType;
+import enums.UnitType;
 import game.map.Map;
-import Player.Account;
-import Player.Player;
-import Units.OffensiveUnit;
+import player.Account;
+import player.Player;
+import units.OffensiveUnit;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.mygdx.game.DistressAndConflict;

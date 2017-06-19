@@ -6,7 +6,6 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.scenes.scene2d.EventListener;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.mygdx.game.DistressAndConflict;
 import game.GameManager;
 
 import java.util.logging.Level;
@@ -16,13 +15,12 @@ import java.util.logging.Logger;
  * Created by Imre on 4-4-2017.
  */
 public class TiledMapStage extends Stage {
-    private DistressAndConflict dac;
     private TiledMap tiledMap;
     private Group background = new Group();
     private Group foreground = new Group();
     private GameManager gameManager;
 
-    Logger LOGGER = Logger.getLogger(TiledMapStage.class.getName());
+    Logger logger = Logger.getLogger(TiledMapStage.class.getName());
 
     public TiledMapStage(TiledMap tiledMap, GameManager gameManager) {
         this.tiledMap = tiledMap;
@@ -37,7 +35,7 @@ public class TiledMapStage extends Stage {
         try{
             createActorsForLayer((TiledMapTileLayer)tiledMap.getLayers().get(0));
         }catch (ClassCastException ex){
-            LOGGER.log(Level.SEVERE, "dit word veroorzaakt doordat de map niet goed is opgebouwed. zorg dat layer 1 in het .tmx bestand een TiledMapTileLayer is. GR marc-a", ex);
+            logger.log(Level.SEVERE, "dit word veroorzaakt doordat de map niet goed is opgebouwed. zorg dat layer 1 in het .tmx bestand een TiledMapTileLayer is. GR marc-a", ex);
         }
     }
 
@@ -48,7 +46,7 @@ public class TiledMapStage extends Stage {
                 TiledMapActor actor = new TiledMapActor(tiledMap, tiledLayer, cell);
                 actor.setBounds(x * tiledLayer.getTileWidth(), y * tiledLayer.getTileHeight(), tiledLayer.getTileWidth(), tiledLayer.getTileHeight());
                 addActor(actor);
-                EventListener eventListener = new TiledMapClickListener(actor, this, gameManager);
+                EventListener eventListener = new TiledMapClickListener(actor, gameManager);
                 actor.addListener(eventListener);
             }
         }

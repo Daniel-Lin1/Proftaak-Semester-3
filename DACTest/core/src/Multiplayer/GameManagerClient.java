@@ -2,8 +2,8 @@ package multiplayer;
 
 import building.Building;
 import game.GameManager;
-import Player.Player;
-import Units.Unit;
+import player.Player;
+import units.Unit;
 import com.badlogic.gdx.Gdx;
 import javafx.stage.Stage;
 

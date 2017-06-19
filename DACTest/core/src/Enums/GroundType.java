@@ -1,10 +1,10 @@
-package Enums;
+package enums;
 
 /**
  * Created by Daniel on 26-3-2017.
  */
 public enum GroundType {
-    Grass,
-    Water,
-    Stone
+    GRASS,
+    WATER,
+    STONE
 }

@@ -4,7 +4,7 @@ package multiplayer;/*
  * and open the template in the editor.
  */
 
-import Units.Unit;
+import units.Unit;
 import fontyspublisher.IRemotePropertyListener;
 import fontyspublisher.IRemotePublisherForDomain;
 import fontyspublisher.IRemotePublisherForListener;

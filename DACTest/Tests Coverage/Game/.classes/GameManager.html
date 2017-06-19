@@ -76,15 +76,15 @@
 <i>2</i>&nbsp;
 <i>3</i>&nbsp;import building.building;
 <i>4</i>&nbsp;import building.UnitProducingBuilding;
-<i>5</i>&nbsp;import Enums.BuildingType;
-<i>6</i>&nbsp;import Enums.State;
-<i>7</i>&nbsp;import Enums.UnitType;
+<i>5</i>&nbsp;import enums.BuildingType;
+<i>6</i>&nbsp;import enums.State;
+<i>7</i>&nbsp;import enums.UnitType;
 <i>8</i>&nbsp;import game.map.Map;
 <i>9</i>&nbsp;import game.map.Tile;
 <i>10</i>&nbsp;import game.map.TiledMapStage;
-<i>11</i>&nbsp;import Player.Player;
-<i>12</i>&nbsp;import Units.OffensiveUnit;
-<i>13</i>&nbsp;import Units.unit;
+<i>11</i>&nbsp;import player.player;
+<i>12</i>&nbsp;import units.OffensiveUnit;
+<i>13</i>&nbsp;import units.unit;
 <i>14</i>&nbsp;import com.badlogic.gdx.Gdx;
 <i>15</i>&nbsp;import com.badlogic.gdx.graphics.OrthographicCamera;
 <i>16</i>&nbsp;import com.badlogic.gdx.graphics.Texture;
@@ -138,11 +138,11 @@
 <b class="fc"><i>64</i>&nbsp;        this.map = map;</b>
 <b class="fc"><i>65</i>&nbsp;    }</b>
 <i>66</i>&nbsp;
-<i>67</i>&nbsp;    public ArrayList&lt;Player&gt; getPlayers() {
+<i>67</i>&nbsp;    public ArrayList&lt;player&gt; getPlayers() {
 <b class="fc"><i>68</i>&nbsp;        return this.players;</b>
 <i>69</i>&nbsp;    }
 <i>70</i>&nbsp;
-<i>71</i>&nbsp;    public void setPlayers(ArrayList&lt;Player&gt; players) {
+<i>71</i>&nbsp;    public void setPlayers(ArrayList&lt;player&gt; players) {
 <b class="fc"><i>72</i>&nbsp;        this.players = players;</b>
 <b class="fc"><i>73</i>&nbsp;    }</b>
 <i>74</i>&nbsp;
@@ -195,7 +195,7 @@
 <i>121</i>&nbsp;    private int lobbyID;
 <i>122</i>&nbsp;    private String password;
 <i>123</i>&nbsp;    private Map map;
-<i>124</i>&nbsp;    private ArrayList&lt;Player&gt; players;
+<i>124</i>&nbsp;    private ArrayList&lt;player&gt; players;
 <i>125</i>&nbsp;    private TiledMap tiledMap;
 <i>126</i>&nbsp;    private TiledMapRenderer tiledMapRenderer;
 <i>127</i>&nbsp;    private Stage stage;
@@ -208,7 +208,7 @@
 <i>134</i>&nbsp;    //Stage en Skin voor UI inladen
 <i>135</i>&nbsp;    private SpriteBatch batch;
 <i>136</i>&nbsp;
-<b class="fc"><i>137</i>&nbsp;    public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList&lt;Player&gt; participants) {</b>
+<b class="fc"><i>137</i>&nbsp;    public GameManager(DistressAndConflict dac, State gamestate, int lobbyID, String password, ArrayList&lt;player&gt; participants) {</b>
 <b class="fc"><i>138</i>&nbsp;        this.gamestate = gamestate;</b>
 <b class="fc"><i>139</i>&nbsp;        this.lobbyID = lobbyID;</b>
 <b class="fc"><i>140</i>&nbsp;        this.password = password;</b>

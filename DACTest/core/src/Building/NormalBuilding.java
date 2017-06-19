@@ -1,6 +1,6 @@
 package building;
 
-import Enums.BuildingType;
+import enums.BuildingType;
 
 import java.awt.*;
 

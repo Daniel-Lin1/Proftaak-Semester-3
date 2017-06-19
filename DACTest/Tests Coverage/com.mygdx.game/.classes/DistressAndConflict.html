@@ -74,11 +74,11 @@
 
 <div class="sourceCode"><i>1</i>&nbsp;package com.mygdx.game;
 <i>2</i>&nbsp;
-<i>3</i>&nbsp;import Enums.State;
+<i>3</i>&nbsp;import enums.State;
 <i>4</i>&nbsp;import game.GameManager;
 <i>5</i>&nbsp;import game.UIManager;
-<i>6</i>&nbsp;import Player.Account;
-<i>7</i>&nbsp;import Player.Player;
+<i>6</i>&nbsp;import player.Account;
+<i>7</i>&nbsp;import player.player;
 <i>8</i>&nbsp;import com.badlogic.gdx.ApplicationAdapter;
 <i>9</i>&nbsp;import com.badlogic.gdx.Gdx;
 <i>10</i>&nbsp;import com.badlogic.gdx.graphics.GL20;
@@ -102,7 +102,7 @@
 <i>28</i>&nbsp;
 <b class="fc"><i>29</i>&nbsp;	public DistressAndConflict() {</b>
 <b class="fc"><i>30</i>&nbsp;		this.user = new Account();</b>
-<b class="fc"><i>31</i>&nbsp;		this.gameManager = new GameManager(this, State.Finished, 1, &quot;lel&quot;, new ArrayList&lt;Player&gt;());</b>
+<b class="fc"><i>31</i>&nbsp;		this.gameManager = new GameManager(this, State.Finished, 1, &quot;lel&quot;, new ArrayList&lt;player&gt;());</b>
 <b class="fc"><i>32</i>&nbsp;		this.uiManager = new UIManager(this, this.gameManager);</b>
 <b class="fc"><i>33</i>&nbsp;	}</b>
 <i>34</i>&nbsp;
