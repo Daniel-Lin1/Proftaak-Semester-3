@@ -75,7 +75,7 @@ public abstract class Unit implements Movement, Serializable {
     }
 
     public void move(Map map) {
-        if(!path.isEmpty()){
+        if(path != null && !path.isEmpty()){
             Tile tileToMove = map.getTileFromCord(path.get(0));
             if(tileToMove.isWalkable() && !tileToMove.isOccupied()){
                 map.getTileFromCord(position).setUnit(null);

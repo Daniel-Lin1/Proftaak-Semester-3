@@ -5,6 +5,7 @@ import game.map.Map;
 import Interfaces.Damage;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -24,6 +25,7 @@ public class OffensiveUnit extends Unit implements Damage{
         this.setHitDamage(hitDamage);
         this.setRange(range);
         this.setWillReturnFire(willReturnFire);
+        this.setPath(new ArrayList<>());
     }
 
     public float getDeltaBattleTime() {
