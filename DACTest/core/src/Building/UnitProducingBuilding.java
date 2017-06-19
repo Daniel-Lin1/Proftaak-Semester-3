@@ -2,7 +2,7 @@ package building;
 
 import Enums.BuildingType;
 import Enums.UnitType;
-import Game.Map.Map;
+import game.map.Map;
 import Units.OffensiveUnit;
 import Units.Unit;
 

@@ -1,6 +1,6 @@
 package Player;
 
-import Game.TextureVault;
+import game.TextureVault;
 import Units.Unit;
 import building.Building;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -24,6 +25,21 @@ public class Player implements Serializable {
     private ArrayList<Unit> selectedUnits;
     private Building selectedBuilding;
 
+    Logger LOGGER = Logger.getLogger(Player.class.getName());
+
+    public Player(int playerID, String nickName) {
+        this.playerID = playerID;
+        this.nickName = nickName;
+        this.amountGold = 500;
+        this.amountWood = 500;
+        this.amountFood = 500;
+        this.amountStone = 500;
+        this.units =  new ArrayList<>();
+        this.buildings = new ArrayList<>();
+        this.selectedUnits = new ArrayList<>();
+    }
+
+
     public int getPlayerID() {
         return playerID;
     }
@@ -32,12 +48,12 @@ public class Player implements Serializable {
         this.playerID = playerID;
     }
 
-    public ArrayList<Unit> getUnits() {
+    public List<Unit> getUnits() {
         return units;
     }
 
-    public void setUnits(ArrayList<Unit> units) {
-        this.units = units;
+    public void setUnits(List<Unit> units) {
+        this.units = (ArrayList<Unit>) units;
     }
 
     public void addUnit(Unit unit) { this.units.add(unit);}
@@ -61,12 +77,12 @@ public class Player implements Serializable {
         }
     }
 
-    public ArrayList<Building> getBuildings() {
+    public List<Building> getBuildings() {
         return buildings;
     }
 
-    public void setBuildings(ArrayList<Building> buildings) {
-        this.buildings = buildings;
+    public void setBuildings(List<Building> buildings) {
+        this.buildings = (ArrayList<Building>) buildings;
     }
 
     public int getAmountGold() {
@@ -122,23 +138,11 @@ public class Player implements Serializable {
         this.selectedUnits.add(unit);
     }
 
-    public Player(int playerID, String nickName) {
-        this.playerID = playerID;
-        this.nickName = nickName;
-        this.amountGold = 500;
-        this.amountWood = 500;
-        this.amountFood = 500;
-        this.amountStone = 500;
-        this.units =  new ArrayList<>();
-        this.buildings = new ArrayList<>();
-        this.selectedUnits = new ArrayList<>();
-    }
-
     public void command(){
 
     }
 
-    public boolean BuyUnit(Unit unit){
+    public boolean buyUnit(Unit unit){
         boolean canBuy = false;
         switch(unit.getUnitType())
         {
@@ -170,6 +174,8 @@ public class Player implements Serializable {
                     canBuy = true;
                     amountFood -= 100;
                 }
+            default:
+                return false;
         }
 
         if(canBuy){
@@ -178,7 +184,7 @@ public class Player implements Serializable {
         return canBuy;
     }
 
-    public boolean BuyBuilding(Building building){
+    public boolean buyBuilding(Building building){
         boolean canBuy = false;
         switch(building.getBuildingType())
         {
@@ -197,10 +203,12 @@ public class Player implements Serializable {
                     amountWood -= 500;
                 }
                 break;
+            default:
+                return false;
         }
 
         if(canBuy){
-            System.out.println("canbuy");
+            LOGGER.info("Can buy.");
             buildings.add(building);
         }
         return canBuy;

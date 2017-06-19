@@ -1,4 +1,4 @@
-package Game.Map;
+package game.map;
 
 import building.UnitProducingBuilding;
 import Enums.UnitType;
@@ -11,7 +11,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Input.Buttons;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import Game.GameManager;
+import game.GameManager;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -72,22 +72,22 @@ public class TiledMapClickListener extends ClickListener {
             if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_1)){
                 //produce knight
                 Unit unit = uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Knight, gameManager.getMap());
-                gameManager.getOwnPlayer().BuyUnit(unit);
+                gameManager.getOwnPlayer().buyUnit(unit);
                 gameManager.getGmc().broadcastSetUnit("unit", unit, new ObjectIdentifier(gameManager.getOwnPlayer().getPlayerID(), unit));
             }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_2)){
                 //produce pikeman
                 Unit unit = uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.PikeMan, gameManager.getMap());
-                gameManager.getOwnPlayer().BuyUnit(unit);
+                gameManager.getOwnPlayer().buyUnit(unit);
                 gameManager.getGmc().broadcastSetUnit("unit", unit, new ObjectIdentifier(gameManager.getOwnPlayer().getPlayerID(), unit));
             }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_3)){
                 //produce archer
                 Unit unit = uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Archer, gameManager.getMap());
-                gameManager.getOwnPlayer().BuyUnit(unit);
+                gameManager.getOwnPlayer().buyUnit(unit);
                 gameManager.getGmc().broadcastSetUnit("unit", unit, new ObjectIdentifier(gameManager.getOwnPlayer().getPlayerID(), unit));
             }else if(button == Buttons.RIGHT && Gdx.input.isKeyPressed(Input.Keys.NUM_4)) {
                 //produce builder unit
                 Unit unit = uPB.produceUnit(gameManager.getHighestUnitId(), UnitType.Builder, gameManager.getMap());
-                gameManager.getOwnPlayer().BuyUnit(unit);
+                gameManager.getOwnPlayer().buyUnit(unit);
                 gameManager.getGmc().broadcastSetUnit("unit", unit, new ObjectIdentifier(gameManager.getOwnPlayer().getPlayerID(), unit));
             }else{
                 //no unit created.

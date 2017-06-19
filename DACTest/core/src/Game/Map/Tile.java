@@ -1,8 +1,8 @@
-package Game.Map;
+package game.map;
 
 import Enums.GroundType;
-import Game.Resource;
-import Game.TextureVault;
+import game.Resource;
+import game.TextureVault;
 import Units.Unit;
 import building.Building;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -24,7 +24,7 @@ public class Tile implements Serializable {
     private Unit unit = null;
     private Building building;
 
-    private static final Logger LOGGER = Logger.getLogger(Game.Map.Tile.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(game.map.Tile.class.getName());
 
     public int getId() {
         return id;

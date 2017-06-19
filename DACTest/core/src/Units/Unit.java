@@ -1,16 +1,17 @@
 package Units;
 
 import Enums.UnitType;
-import Game.Map.Map;
-import Game.Map.PathFinding;
-import Game.Map.Tile;
-import Game.TextureVault;
+import game.map.Map;
+import game.map.PathFinding;
+import game.map.Tile;
+import game.TextureVault;
 import Interfaces.Movement;
 import com.badlogic.gdx.graphics.Texture;
 
 import java.awt.*;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.*;
+import java.util.List;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -89,7 +90,7 @@ public abstract class Unit implements Movement, Serializable {
     @Override
     public void cancelMove() {
         destination = null;
-        this.path = new ArrayList<Point>();
+        this.path = new ArrayList<>();
     }
 
     public Point getDestination() {
@@ -190,12 +191,12 @@ public abstract class Unit implements Movement, Serializable {
         return selected;
     }
 
-    public ArrayList<Point> getPath() {
+    public java.util.List<Point> getPath() {
         return path;
     }
 
-    public void setPath(ArrayList<Point> path) {
-        this.path = path;
+    public void setPath(List<Point> path) {
+        this.path = (ArrayList<Point>) path;
     }
 
     public int getId() {

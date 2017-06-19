@@ -19,7 +19,7 @@ public class OrthographicCameraControlClass {
 
     public OrthographicCamera render(OrthographicCamera orthographicCamera){
         //TODO Might use a switch here?
-        //Map scroll
+        //map scroll
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)){
             if (orthographicCamera.position.x <= orthographicCamera.viewportWidth/2 * orthographicCamera.zoom){
             }else{

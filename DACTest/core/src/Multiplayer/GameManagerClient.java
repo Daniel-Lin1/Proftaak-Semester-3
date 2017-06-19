@@ -1,7 +1,7 @@
 package multiplayer;
 
 import building.Building;
-import Game.GameManager;
+import game.GameManager;
 import Player.Player;
 import Units.Unit;
 import com.badlogic.gdx.Gdx;

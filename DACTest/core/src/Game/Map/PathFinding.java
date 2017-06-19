@@ -1,4 +1,4 @@
-package Game.Map;
+package game.map;
 
 /**
  * Created by Marc-Antoine on 5/17/2017.
@@ -9,18 +9,23 @@ package Game.Map;
  * Site :
  * http://www.codebytes.in/2015/02/a-shortest-path-finding-algorithm.html
  */
+
 import java.awt.*;
 import java.util.*;
 import java.util.List;
+import java.util.logging.Logger;
 
 public abstract class PathFinding {
     public static final int DIAGONAL_COST = 14;
     public static final int V_H_COST = 10;
 
+    private static final Logger LOGGER = Logger.getLogger(Map.class.getName());
+
     static class Cell{
         int heuristicCost = 0; //Heuristic cost
         int finalCost = 0; //G+H
-        int i, j;
+        int i;
+        int j;
         Cell parent;
 
         Cell(int i, int j){
@@ -40,8 +45,10 @@ public abstract class PathFinding {
     static PriorityQueue<Cell> open;
 
     static boolean closed[][];
-    static int startI, startJ;
-    static int endI, endJ;
+    static int startI;
+    static int startJ;
+    static int endI;
+    static int endJ;
 
     public static void setBlocked(int i, int j){
         grid[i][j] = null;
@@ -58,18 +65,22 @@ public abstract class PathFinding {
     }
 
     static void checkAndUpdateCost(Cell current, Cell t, int cost){
-        if(t == null || closed[t.i][t.j])return;
-        int t_final_cost = t.heuristicCost+cost;
+        if(t == null || closed[t.i][t.j]){
+            return;
+        }
+        int tFinalCost = t.heuristicCost+cost;
 
         boolean inOpen = open.contains(t);
-        if(!inOpen || t_final_cost<t.finalCost){
-            t.finalCost = t_final_cost;
+        if(!inOpen || tFinalCost<t.finalCost){
+            t.finalCost = tFinalCost;
             t.parent = current;
-            if(!inOpen)open.add(t);
+            if(!inOpen){
+                open.add(t);
+            }
         }
     }
 
-    public static void AStar(){
+    public static void aStar(){
 
         //add the start location to open list.
         open.add(grid[startI][startJ]);
@@ -78,7 +89,9 @@ public abstract class PathFinding {
 
         while(true){
             current = open.poll();
-            if(current==null)break;
+            if(current==null){
+                break;
+            }
             closed[current.i][current.j]=true;
 
             if(current.equals(grid[endI][endJ])){
@@ -135,7 +148,7 @@ public abstract class PathFinding {
     ei, ej = end location's x and y coordinates
     int[][] blocked = array containing inaccessible cell coordinates
     */
-    public static List<Point> findPath(int x, int y, int si, int sj, int ei, int ej, ArrayList<int[]> blocked){
+    public static List<Point> findPath(int x, int y, int si, int sj, int ei, int ej, List<int[]> blocked){
         //Reset
         grid = new Cell[x][y];
         closed = new boolean[x][y];
@@ -168,9 +181,9 @@ public abstract class PathFinding {
             setBlocked(blocked.get(i)[0],blocked.get(i)[1]);
         }
 
-        AStar();
+        aStar();
         if(closed[endI][endJ]){
-            ArrayList<Point> path = new ArrayList<Point>();
+            ArrayList<Point> path = new ArrayList<>();
             //Trace back the path
             Cell current = grid[endI][endJ];
             while(current.parent!=null){
@@ -179,7 +192,7 @@ public abstract class PathFinding {
             }
             return path;
         }else {
-            System.out.println("No possible path");
+            LOGGER.info("No possible path!");
             return new ArrayList<>();
         }
     }

@@ -1,6 +1,6 @@
 package Interfaces;
 
-import Game.Map.Map;
+import game.map.Map;
 
 import java.awt.*;
 

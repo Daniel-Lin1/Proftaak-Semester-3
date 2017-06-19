@@ -1,12 +1,12 @@
-package Game;
+package game;
 
 import building.Building;
 import building.UnitProducingBuilding;
 import Enums.BuildingType;
 import Enums.State;
-import Game.Map.Map;
-import Game.Map.TiledMapStage;
-import Game.UserInterface.UIManager;
+import game.map.Map;
+import game.map.TiledMapStage;
+import game.UserInterface.UIManager;
 import multiplayer.GameManagerClient;
 import Player.Player;
 import Units.BuilderUnit;
@@ -24,6 +24,7 @@ import com.mygdx.game.OrthographicCameraControlClass;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 /**
  * Created by Daniel on 26-3-2017.
@@ -41,12 +42,21 @@ public class GameManager {
     private OrthographicCamera orthographicCamera;
     private GameManagerClient gmc;
 
-    private int OwnPlayerid;
+    private int ownPlayerid;
     private UIManager uiManager;
 
     private OrthographicCameraControlClass gamecamera;
     //Stage en Skin voor UI inladen
     private SpriteBatch batch;
+
+    public GameManager(State gameState, int lobbyID, String password, java.util.List<Player> players, int ownPlayerId) {
+        this.gamestate = gameState;
+        this.lobbyID = lobbyID;
+        this.password = password;
+        this.players = (ArrayList<Player>) players;
+        this.ownPlayerid = ownPlayerId;
+        this.gmc = new GameManagerClient(this);
+    }
 
     public State getGamestate() {
         return this.gamestate;
@@ -80,7 +90,7 @@ public class GameManager {
         this.map = map;
     }
 
-    public ArrayList<Player> getPlayers() {
+    public List<Player> getPlayers() {
         return players;
     }
 
@@ -93,15 +103,6 @@ public class GameManager {
     }
 
     public GameManagerClient getGmc() {return gmc;}
-
-    public GameManager(State gameState, int lobbyID, String password, java.util.List<Player> players, int ownPlayerId) {
-        this.gamestate = gameState;
-        this.lobbyID = lobbyID;
-        this.password = password;
-        this.players = (ArrayList<Player>) players;
-        this.OwnPlayerid = ownPlayerId;
-        this.gmc = new GameManagerClient(this);
-    }
 
     public void create() {
         // set camera
@@ -126,10 +127,10 @@ public class GameManager {
     public void render() {
         //todo zet dit ergens anders. hoort op de tickrate te werken.
         //Yeah this shit needs fixing
-        ArrayList<Unit> toRemoveUnits = new ArrayList<Unit>();
+        ArrayList<Unit> toRemoveUnits = new ArrayList<>();
       
         for (Player player : players) {
-            ArrayList<Unit> units = player.getUnits();
+            List<Unit> units = player.getUnits();
             for (Unit unit : units) {
                 if (unit.getDeltaMoveTime() > unit.getSpeed())
                 {
@@ -191,7 +192,7 @@ public class GameManager {
     }
 
     public Player getOwnPlayer() {
-        return getPlayers().get(OwnPlayerid);
+        return getPlayers().get(ownPlayerid);
     }
 
     private void renderCameraAndTiledMap() {
