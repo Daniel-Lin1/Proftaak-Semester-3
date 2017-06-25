@@ -25,7 +25,7 @@ public class Player implements Serializable {
     private ArrayList<Unit> selectedUnits;
     private Building selectedBuilding;
 
-    Logger LOGGER = Logger.getLogger(Player.class.getName());
+    transient Logger LOGGER = Logger.getLogger(Player.class.getName());
 
     public Player(int playerID, String nickName) {
         this.playerID = playerID;
@@ -174,6 +174,7 @@ public class Player implements Serializable {
                     canBuy = true;
                     amountFood -= 100;
                 }
+                break;
             default:
                 return false;
         }

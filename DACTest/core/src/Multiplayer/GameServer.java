@@ -4,8 +4,6 @@ package multiplayer;/*
  * and open the template in the editor.
  */
 
-import fontyspublisher.IRemotePublisherForDomain;
-import fontyspublisher.IRemotePublisherForListener;
 import fontyspublisher.RemotePublisher;
 
 import java.net.InetAddress;
@@ -26,7 +24,7 @@ public class GameServer {
 
     public static void main(String[] args) throws RemoteException, UnknownHostException, NotBoundException {
         // Create an instance of RemotePublisher
-        RemotePublisher remotePublisher = null;
+        RemotePublisher remotePublisher;
         try {
             remotePublisher = new RemotePublisher();
             Registry registry = LocateRegistry.createRegistry(portNumber);
@@ -36,12 +34,7 @@ public class GameServer {
             LOGGER.info(String.valueOf(e));
         }
 
-        String ip =  System.setProperty(IP_PROPERTY, String.valueOf(InetAddress.getLocalHost().getHostAddress()));
-
         System.setProperty(IP_PROPERTY, String.valueOf(InetAddress.getLocalHost().getHostAddress()));
-        Registry registry = LocateRegistry.getRegistry(ip, portNumber);
-        IRemotePublisherForDomain publisherForDomain = (IRemotePublisherForDomain) registry.lookup(bindingName);
-        IRemotePublisherForListener publisherForListener = (IRemotePublisherForListener) registry.lookup(bindingName);
 
 
         // Remote publisher registered
